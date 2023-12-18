@@ -33,7 +33,7 @@ require_relative 'aws-sdk-eks/customizations'
 # structure.
 #
 #     eks = Aws::EKS::Client.new
-#     resp = eks.associate_encryption_config(params)
+#     resp = eks.associate_access_policy(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-eks/customizations'
 # @!group service
 module Aws::EKS
 
-  GEM_VERSION = '1.95.0'
+  GEM_VERSION = '1.96.0'
 
 end

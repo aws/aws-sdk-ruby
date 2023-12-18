@@ -1772,8 +1772,8 @@ module Aws::QuickSight
 
     # Use the `CreateGroup` operation to create a group in Amazon
     # QuickSight. You can create up to 10,000 groups in a namespace. If you
-    # want to create more than 10,000 groups in a namespace, contact AWS
-    # Support.
+    # want to create more than 10,000 groups in a namespace, contact Amazon
+    # Web Services Support.
     #
     # The permissions resource is
     # `arn:aws:quicksight:<your-region>:<relevant-aws-account-id>:group/default/<group-name>
@@ -13531,7 +13531,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

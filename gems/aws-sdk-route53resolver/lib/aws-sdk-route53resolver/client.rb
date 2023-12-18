@@ -541,9 +541,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -913,7 +915,7 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Creates an Route 53 Resolver on an Outpost.
+    # Creates a Route 53 Resolver on an Outpost.
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -1027,6 +1029,19 @@ module Aws::Route53Resolver
     #   from (for outbound endpoints) or that you forward DNS queries to (for
     #   inbound endpoints). The subnet ID uniquely identifies a VPC.
     #
+    #   <note markdown="1"> Even though the minimum is 1, Route 53 requires that you create at
+    #   least two.
+    #
+    #    </note>
+    #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #
+    # @option params [String] :preferred_instance_type
+    #   The instance type. If you specify this, you must also specify a value
+    #   for the `OutpostArn`.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of the tag keys and values that you want to associate with the
     #   endpoint.
@@ -1036,13 +1051,33 @@ module Aws::Route53Resolver
     #   A dual-stack endpoint means that it will resolve via both IPv4 and
     #   IPv6. This endpoint type is applied to all IP addresses.
     #
-    # @option params [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
-    #   you must also specify a value for the `PreferredInstanceType`.
+    # @option params [Array<String>] :protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is applicable
+    #   for inbound endpoints only.
     #
-    # @option params [String] :preferred_instance_type
-    #   The instance type. If you specify this, you must also specify a value
-    #   for the `OutpostArn`.
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
     #
     # @return [Types::CreateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1062,6 +1097,8 @@ module Aws::Route53Resolver
     #         ipv_6: "Ipv6",
     #       },
     #     ],
+    #     outpost_arn: "OutpostArn",
+    #     preferred_instance_type: "OutpostInstanceType",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1069,8 +1106,7 @@ module Aws::Route53Resolver
     #       },
     #     ],
     #     resolver_endpoint_type: "IPV6", # accepts IPV6, IPV4, DUALSTACK
-    #     outpost_arn: "OutpostArn",
-    #     preferred_instance_type: "OutpostInstanceType",
+    #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
     #   })
     #
     # @example Response structure
@@ -1088,9 +1124,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpoint AWS API Documentation
     #
@@ -1230,7 +1268,7 @@ module Aws::Route53Resolver
     #   Currently, only Resolver can create rules that have a value of
     #   `RECURSIVE` for `RuleType`.
     #
-    # @option params [required, String] :domain_name
+    # @option params [String] :domain_name
     #   DNS queries for this domain name are forwarded to the IP addresses
     #   that you specify in `TargetIps`. If a query matches multiple Resolver
     #   rules (example.com and www.example.com), outbound DNS queries are
@@ -1263,12 +1301,13 @@ module Aws::Route53Resolver
     #     creator_request_id: "CreatorRequestId", # required
     #     name: "Name",
     #     rule_type: "FORWARD", # required, accepts FORWARD, SYSTEM, RECURSIVE
-    #     domain_name: "DomainName", # required
+    #     domain_name: "DomainName",
     #     target_ips: [
     #       {
     #         ip: "Ip",
     #         port: 1,
     #         ipv_6: "Ipv6",
+    #         protocol: "DoH", # accepts DoH, Do53, DoH-FIPS
     #       },
     #     ],
     #     resolver_endpoint_id: "ResourceId",
@@ -1294,6 +1333,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -1505,9 +1545,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverEndpoint AWS API Documentation
     #
@@ -1612,6 +1654,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -1717,9 +1760,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -2145,9 +2190,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverEndpoint AWS API Documentation
     #
@@ -2298,6 +2345,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -3155,9 +3203,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoints[0].status_message #=> String
     #   resp.resolver_endpoints[0].creation_time #=> String
     #   resp.resolver_endpoints[0].modification_time #=> String
-    #   resp.resolver_endpoints[0].resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoints[0].outpost_arn #=> String
     #   resp.resolver_endpoints[0].preferred_instance_type #=> String
+    #   resp.resolver_endpoints[0].resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoints[0].protocols #=> Array
+    #   resp.resolver_endpoints[0].protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverEndpoints AWS API Documentation
     #
@@ -3589,6 +3639,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rules[0].target_ips[0].ip #=> String
     #   resp.resolver_rules[0].target_ips[0].port #=> Integer
     #   resp.resolver_rules[0].target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rules[0].target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rules[0].resolver_endpoint_id #=> String
     #   resp.resolver_rules[0].owner_id #=> String
     #   resp.resolver_rules[0].share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -4326,7 +4377,7 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Updates the name, or enpoint type for an inbound or an outbound
+    # Updates the name, or endpoint type for an inbound or an outbound
     # Resolver endpoint. You can only update between IPV4 and DUALSTACK,
     # IPV6 endpoint type can't be updated to other type.
     #
@@ -4347,6 +4398,42 @@ module Aws::Route53Resolver
     #   IPv4 to dual-stack. If you don't specify an IPv6 address, one will be
     #   automatically chosen from your subnet.
     #
+    # @option params [Array<String>] :protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is applicable
+    #   for inbound endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   You can't change the protocol of an inbound endpoint directly from
+    #   only Do53 to only DoH, or DoH-FIPS. This is to prevent a sudden
+    #   disruption to incoming traffic that relies on Do53. To change the
+    #   protocol from Do53 to DoH, or DoH-FIPS, you must first enable both
+    #   Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming
+    #   traffic has transferred to using the DoH protocol, or DoH-FIPS, and
+    #   then remove the Do53.
+    #
     # @return [Types::UpdateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverEndpointResponse#resolver_endpoint #resolver_endpoint} => Types::ResolverEndpoint
@@ -4363,6 +4450,7 @@ module Aws::Route53Resolver
     #         ipv_6: "Ipv6", # required
     #       },
     #     ],
+    #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
     #   })
     #
     # @example Response structure
@@ -4380,9 +4468,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpoint AWS API Documentation
     #
@@ -4418,6 +4508,7 @@ module Aws::Route53Resolver
     #           ip: "Ip",
     #           port: 1,
     #           ipv_6: "Ipv6",
+    #           protocol: "DoH", # accepts DoH, Do53, DoH-FIPS
     #         },
     #       ],
     #       resolver_endpoint_id: "ResourceId",
@@ -4438,6 +4529,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -4466,7 +4558,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

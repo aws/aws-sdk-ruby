@@ -14,7 +14,13 @@ module Aws::EKS
     include Seahorse::Model
 
     AMITypes = Shapes::StringShape.new(name: 'AMITypes')
+    AccessConfigResponse = Shapes::StructureShape.new(name: 'AccessConfigResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessEntry = Shapes::StructureShape.new(name: 'AccessEntry')
+    AccessPoliciesList = Shapes::ListShape.new(name: 'AccessPoliciesList')
+    AccessPolicy = Shapes::StructureShape.new(name: 'AccessPolicy')
+    AccessScope = Shapes::StructureShape.new(name: 'AccessScope')
+    AccessScopeType = Shapes::StringShape.new(name: 'AccessScopeType')
     Addon = Shapes::StructureShape.new(name: 'Addon')
     AddonHealth = Shapes::StructureShape.new(name: 'AddonHealth')
     AddonInfo = Shapes::StructureShape.new(name: 'AddonInfo')
@@ -25,10 +31,15 @@ module Aws::EKS
     AddonVersionInfo = Shapes::StructureShape.new(name: 'AddonVersionInfo')
     AddonVersionInfoList = Shapes::ListShape.new(name: 'AddonVersionInfoList')
     Addons = Shapes::ListShape.new(name: 'Addons')
+    AssociateAccessPolicyRequest = Shapes::StructureShape.new(name: 'AssociateAccessPolicyRequest')
+    AssociateAccessPolicyResponse = Shapes::StructureShape.new(name: 'AssociateAccessPolicyResponse')
     AssociateEncryptionConfigRequest = Shapes::StructureShape.new(name: 'AssociateEncryptionConfigRequest')
     AssociateEncryptionConfigResponse = Shapes::StructureShape.new(name: 'AssociateEncryptionConfigResponse')
     AssociateIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'AssociateIdentityProviderConfigRequest')
     AssociateIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'AssociateIdentityProviderConfigResponse')
+    AssociatedAccessPoliciesList = Shapes::ListShape.new(name: 'AssociatedAccessPoliciesList')
+    AssociatedAccessPolicy = Shapes::StructureShape.new(name: 'AssociatedAccessPolicy')
+    AuthenticationMode = Shapes::StringShape.new(name: 'AuthenticationMode')
     AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
     AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -53,6 +64,9 @@ module Aws::EKS
     ConnectorConfigResponse = Shapes::StructureShape.new(name: 'ConnectorConfigResponse')
     ControlPlanePlacementRequest = Shapes::StructureShape.new(name: 'ControlPlanePlacementRequest')
     ControlPlanePlacementResponse = Shapes::StructureShape.new(name: 'ControlPlanePlacementResponse')
+    CreateAccessConfigRequest = Shapes::StructureShape.new(name: 'CreateAccessConfigRequest')
+    CreateAccessEntryRequest = Shapes::StructureShape.new(name: 'CreateAccessEntryRequest')
+    CreateAccessEntryResponse = Shapes::StructureShape.new(name: 'CreateAccessEntryResponse')
     CreateAddonRequest = Shapes::StructureShape.new(name: 'CreateAddonRequest')
     CreateAddonResponse = Shapes::StructureShape.new(name: 'CreateAddonResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
@@ -65,6 +79,8 @@ module Aws::EKS
     CreateNodegroupResponse = Shapes::StructureShape.new(name: 'CreateNodegroupResponse')
     CreatePodIdentityAssociationRequest = Shapes::StructureShape.new(name: 'CreatePodIdentityAssociationRequest')
     CreatePodIdentityAssociationResponse = Shapes::StructureShape.new(name: 'CreatePodIdentityAssociationResponse')
+    DeleteAccessEntryRequest = Shapes::StructureShape.new(name: 'DeleteAccessEntryRequest')
+    DeleteAccessEntryResponse = Shapes::StructureShape.new(name: 'DeleteAccessEntryResponse')
     DeleteAddonRequest = Shapes::StructureShape.new(name: 'DeleteAddonRequest')
     DeleteAddonResponse = Shapes::StructureShape.new(name: 'DeleteAddonResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
@@ -79,6 +95,8 @@ module Aws::EKS
     DeletePodIdentityAssociationResponse = Shapes::StructureShape.new(name: 'DeletePodIdentityAssociationResponse')
     DeregisterClusterRequest = Shapes::StructureShape.new(name: 'DeregisterClusterRequest')
     DeregisterClusterResponse = Shapes::StructureShape.new(name: 'DeregisterClusterResponse')
+    DescribeAccessEntryRequest = Shapes::StructureShape.new(name: 'DescribeAccessEntryRequest')
+    DescribeAccessEntryResponse = Shapes::StructureShape.new(name: 'DescribeAccessEntryResponse')
     DescribeAddonConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAddonConfigurationRequest')
     DescribeAddonConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAddonConfigurationResponse')
     DescribeAddonRequest = Shapes::StructureShape.new(name: 'DescribeAddonRequest')
@@ -100,6 +118,8 @@ module Aws::EKS
     DescribePodIdentityAssociationResponse = Shapes::StructureShape.new(name: 'DescribePodIdentityAssociationResponse')
     DescribeUpdateRequest = Shapes::StructureShape.new(name: 'DescribeUpdateRequest')
     DescribeUpdateResponse = Shapes::StructureShape.new(name: 'DescribeUpdateResponse')
+    DisassociateAccessPolicyRequest = Shapes::StructureShape.new(name: 'DisassociateAccessPolicyRequest')
+    DisassociateAccessPolicyResponse = Shapes::StructureShape.new(name: 'DisassociateAccessPolicyResponse')
     DisassociateIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'DisassociateIdentityProviderConfigRequest')
     DisassociateIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'DisassociateIdentityProviderConfigResponse')
     EksAnywhereSubscription = Shapes::StructureShape.new(name: 'EksAnywhereSubscription')
@@ -135,9 +155,18 @@ module Aws::EKS
     KubernetesNetworkConfigRequest = Shapes::StructureShape.new(name: 'KubernetesNetworkConfigRequest')
     KubernetesNetworkConfigResponse = Shapes::StructureShape.new(name: 'KubernetesNetworkConfigResponse')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
+    ListAccessEntriesRequest = Shapes::StructureShape.new(name: 'ListAccessEntriesRequest')
+    ListAccessEntriesRequestMaxResults = Shapes::IntegerShape.new(name: 'ListAccessEntriesRequestMaxResults')
+    ListAccessEntriesResponse = Shapes::StructureShape.new(name: 'ListAccessEntriesResponse')
+    ListAccessPoliciesRequest = Shapes::StructureShape.new(name: 'ListAccessPoliciesRequest')
+    ListAccessPoliciesRequestMaxResults = Shapes::IntegerShape.new(name: 'ListAccessPoliciesRequestMaxResults')
+    ListAccessPoliciesResponse = Shapes::StructureShape.new(name: 'ListAccessPoliciesResponse')
     ListAddonsRequest = Shapes::StructureShape.new(name: 'ListAddonsRequest')
     ListAddonsRequestMaxResults = Shapes::IntegerShape.new(name: 'ListAddonsRequestMaxResults')
     ListAddonsResponse = Shapes::StructureShape.new(name: 'ListAddonsResponse')
+    ListAssociatedAccessPoliciesRequest = Shapes::StructureShape.new(name: 'ListAssociatedAccessPoliciesRequest')
+    ListAssociatedAccessPoliciesRequestMaxResults = Shapes::IntegerShape.new(name: 'ListAssociatedAccessPoliciesRequestMaxResults')
+    ListAssociatedAccessPoliciesResponse = Shapes::StructureShape.new(name: 'ListAssociatedAccessPoliciesResponse')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersRequestMaxResults = Shapes::IntegerShape.new(name: 'ListClustersRequestMaxResults')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
@@ -211,6 +240,9 @@ module Aws::EKS
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     Update = Shapes::StructureShape.new(name: 'Update')
+    UpdateAccessConfigRequest = Shapes::StructureShape.new(name: 'UpdateAccessConfigRequest')
+    UpdateAccessEntryRequest = Shapes::StructureShape.new(name: 'UpdateAccessEntryRequest')
+    UpdateAccessEntryResponse = Shapes::StructureShape.new(name: 'UpdateAccessEntryResponse')
     UpdateAddonRequest = Shapes::StructureShape.new(name: 'UpdateAddonRequest')
     UpdateAddonResponse = Shapes::StructureShape.new(name: 'UpdateAddonResponse')
     UpdateClusterConfigRequest = Shapes::StructureShape.new(name: 'UpdateClusterConfigRequest')
@@ -247,8 +279,33 @@ module Aws::EKS
     taintValue = Shapes::StringShape.new(name: 'taintValue')
     taintsList = Shapes::ListShape.new(name: 'taintsList')
 
+    AccessConfigResponse.add_member(:bootstrap_cluster_creator_admin_permissions, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bootstrapClusterCreatorAdminPermissions"))
+    AccessConfigResponse.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "authenticationMode"))
+    AccessConfigResponse.struct_class = Types::AccessConfigResponse
+
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccessEntry.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    AccessEntry.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "principalArn"))
+    AccessEntry.add_member(:kubernetes_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "kubernetesGroups"))
+    AccessEntry.add_member(:access_entry_arn, Shapes::ShapeRef.new(shape: String, location_name: "accessEntryArn"))
+    AccessEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    AccessEntry.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
+    AccessEntry.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    AccessEntry.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
+    AccessEntry.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    AccessEntry.struct_class = Types::AccessEntry
+
+    AccessPoliciesList.member = Shapes::ShapeRef.new(shape: AccessPolicy)
+
+    AccessPolicy.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    AccessPolicy.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    AccessPolicy.struct_class = Types::AccessPolicy
+
+    AccessScope.add_member(:type, Shapes::ShapeRef.new(shape: AccessScopeType, location_name: "type"))
+    AccessScope.add_member(:namespaces, Shapes::ShapeRef.new(shape: StringList, location_name: "namespaces"))
+    AccessScope.struct_class = Types::AccessScope
 
     Addon.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
     Addon.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, location_name: "clusterName"))
@@ -294,6 +351,17 @@ module Aws::EKS
 
     Addons.member = Shapes::ShapeRef.new(shape: AddonInfo)
 
+    AssociateAccessPolicyRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    AssociateAccessPolicyRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "principalArn"))
+    AssociateAccessPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policyArn"))
+    AssociateAccessPolicyRequest.add_member(:access_scope, Shapes::ShapeRef.new(shape: AccessScope, required: true, location_name: "accessScope"))
+    AssociateAccessPolicyRequest.struct_class = Types::AssociateAccessPolicyRequest
+
+    AssociateAccessPolicyResponse.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    AssociateAccessPolicyResponse.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "principalArn"))
+    AssociateAccessPolicyResponse.add_member(:associated_access_policy, Shapes::ShapeRef.new(shape: AssociatedAccessPolicy, location_name: "associatedAccessPolicy"))
+    AssociateAccessPolicyResponse.struct_class = Types::AssociateAccessPolicyResponse
+
     AssociateEncryptionConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     AssociateEncryptionConfigRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, required: true, location_name: "encryptionConfig"))
     AssociateEncryptionConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -311,6 +379,14 @@ module Aws::EKS
     AssociateIdentityProviderConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
     AssociateIdentityProviderConfigResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     AssociateIdentityProviderConfigResponse.struct_class = Types::AssociateIdentityProviderConfigResponse
+
+    AssociatedAccessPoliciesList.member = Shapes::ShapeRef.new(shape: AssociatedAccessPolicy)
+
+    AssociatedAccessPolicy.add_member(:policy_arn, Shapes::ShapeRef.new(shape: String, location_name: "policyArn"))
+    AssociatedAccessPolicy.add_member(:access_scope, Shapes::ShapeRef.new(shape: AccessScope, location_name: "accessScope"))
+    AssociatedAccessPolicy.add_member(:associated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associatedAt"))
+    AssociatedAccessPolicy.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
+    AssociatedAccessPolicy.struct_class = Types::AssociatedAccessPolicy
 
     AutoScalingGroup.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
@@ -350,6 +426,7 @@ module Aws::EKS
     Cluster.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Cluster.add_member(:health, Shapes::ShapeRef.new(shape: ClusterHealth, location_name: "health"))
     Cluster.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigResponse, location_name: "outpostConfig"))
+    Cluster.add_member(:access_config, Shapes::ShapeRef.new(shape: AccessConfigResponse, location_name: "accessConfig"))
     Cluster.struct_class = Types::Cluster
 
     ClusterHealth.add_member(:issues, Shapes::ShapeRef.new(shape: ClusterIssueList, location_name: "issues"))
@@ -386,6 +463,22 @@ module Aws::EKS
     ControlPlanePlacementResponse.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     ControlPlanePlacementResponse.struct_class = Types::ControlPlanePlacementResponse
 
+    CreateAccessConfigRequest.add_member(:bootstrap_cluster_creator_admin_permissions, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bootstrapClusterCreatorAdminPermissions"))
+    CreateAccessConfigRequest.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "authenticationMode"))
+    CreateAccessConfigRequest.struct_class = Types::CreateAccessConfigRequest
+
+    CreateAccessEntryRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    CreateAccessEntryRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "principalArn"))
+    CreateAccessEntryRequest.add_member(:kubernetes_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "kubernetesGroups"))
+    CreateAccessEntryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAccessEntryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessEntryRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
+    CreateAccessEntryRequest.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    CreateAccessEntryRequest.struct_class = Types::CreateAccessEntryRequest
+
+    CreateAccessEntryResponse.add_member(:access_entry, Shapes::ShapeRef.new(shape: AccessEntry, location_name: "accessEntry"))
+    CreateAccessEntryResponse.struct_class = Types::CreateAccessEntryResponse
+
     CreateAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     CreateAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "addonName"))
     CreateAddonRequest.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
@@ -409,6 +502,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateClusterRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
     CreateClusterRequest.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigRequest, location_name: "outpostConfig"))
+    CreateClusterRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: CreateAccessConfigRequest, location_name: "accessConfig"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -472,6 +566,12 @@ module Aws::EKS
     CreatePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))
     CreatePodIdentityAssociationResponse.struct_class = Types::CreatePodIdentityAssociationResponse
 
+    DeleteAccessEntryRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DeleteAccessEntryRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "principalArn"))
+    DeleteAccessEntryRequest.struct_class = Types::DeleteAccessEntryRequest
+
+    DeleteAccessEntryResponse.struct_class = Types::DeleteAccessEntryResponse
+
     DeleteAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     DeleteAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "addonName"))
     DeleteAddonRequest.add_member(:preserve, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "preserve"))
@@ -518,6 +618,13 @@ module Aws::EKS
 
     DeregisterClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DeregisterClusterResponse.struct_class = Types::DeregisterClusterResponse
+
+    DescribeAccessEntryRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DescribeAccessEntryRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "principalArn"))
+    DescribeAccessEntryRequest.struct_class = Types::DescribeAccessEntryRequest
+
+    DescribeAccessEntryResponse.add_member(:access_entry, Shapes::ShapeRef.new(shape: AccessEntry, location_name: "accessEntry"))
+    DescribeAccessEntryResponse.struct_class = Types::DescribeAccessEntryResponse
 
     DescribeAddonConfigurationRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "addonName"))
     DescribeAddonConfigurationRequest.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "addonVersion"))
@@ -596,6 +703,13 @@ module Aws::EKS
 
     DescribeUpdateResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
     DescribeUpdateResponse.struct_class = Types::DescribeUpdateResponse
+
+    DisassociateAccessPolicyRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DisassociateAccessPolicyRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "principalArn"))
+    DisassociateAccessPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "policyArn"))
+    DisassociateAccessPolicyRequest.struct_class = Types::DisassociateAccessPolicyRequest
+
+    DisassociateAccessPolicyResponse.struct_class = Types::DisassociateAccessPolicyResponse
 
     DisassociateIdentityProviderConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DisassociateIdentityProviderConfigRequest.add_member(:identity_provider_config, Shapes::ShapeRef.new(shape: IdentityProviderConfig, required: true, location_name: "identityProviderConfig"))
@@ -710,6 +824,24 @@ module Aws::EKS
     LaunchTemplateSpecification.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
 
+    ListAccessEntriesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListAccessEntriesRequest.add_member(:associated_policy_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "associatedPolicyArn"))
+    ListAccessEntriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAccessEntriesRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessEntriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListAccessEntriesRequest.struct_class = Types::ListAccessEntriesRequest
+
+    ListAccessEntriesResponse.add_member(:access_entries, Shapes::ShapeRef.new(shape: StringList, location_name: "accessEntries"))
+    ListAccessEntriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAccessEntriesResponse.struct_class = Types::ListAccessEntriesResponse
+
+    ListAccessPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAccessPoliciesRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListAccessPoliciesRequest.struct_class = Types::ListAccessPoliciesRequest
+
+    ListAccessPoliciesResponse.add_member(:access_policies, Shapes::ShapeRef.new(shape: AccessPoliciesList, location_name: "accessPolicies"))
+    ListAccessPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAccessPoliciesResponse.struct_class = Types::ListAccessPoliciesResponse
+
     ListAddonsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     ListAddonsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAddonsRequestMaxResults, location: "querystring", location_name: "maxResults"))
     ListAddonsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -718,6 +850,18 @@ module Aws::EKS
     ListAddonsResponse.add_member(:addons, Shapes::ShapeRef.new(shape: StringList, location_name: "addons"))
     ListAddonsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListAddonsResponse.struct_class = Types::ListAddonsResponse
+
+    ListAssociatedAccessPoliciesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListAssociatedAccessPoliciesRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "principalArn"))
+    ListAssociatedAccessPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAssociatedAccessPoliciesRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListAssociatedAccessPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListAssociatedAccessPoliciesRequest.struct_class = Types::ListAssociatedAccessPoliciesRequest
+
+    ListAssociatedAccessPoliciesResponse.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ListAssociatedAccessPoliciesResponse.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "principalArn"))
+    ListAssociatedAccessPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAssociatedAccessPoliciesResponse.add_member(:associated_access_policies, Shapes::ShapeRef.new(shape: AssociatedAccessPoliciesList, location_name: "associatedAccessPolicies"))
+    ListAssociatedAccessPoliciesResponse.struct_class = Types::ListAssociatedAccessPoliciesResponse
 
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListClustersRequestMaxResults, location: "querystring", location_name: "maxResults"))
     ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -995,6 +1139,19 @@ module Aws::EKS
     Update.add_member(:errors, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errors"))
     Update.struct_class = Types::Update
 
+    UpdateAccessConfigRequest.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "authenticationMode"))
+    UpdateAccessConfigRequest.struct_class = Types::UpdateAccessConfigRequest
+
+    UpdateAccessEntryRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    UpdateAccessEntryRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "principalArn"))
+    UpdateAccessEntryRequest.add_member(:kubernetes_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "kubernetesGroups"))
+    UpdateAccessEntryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAccessEntryRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
+    UpdateAccessEntryRequest.struct_class = Types::UpdateAccessEntryRequest
+
+    UpdateAccessEntryResponse.add_member(:access_entry, Shapes::ShapeRef.new(shape: AccessEntry, location_name: "accessEntry"))
+    UpdateAccessEntryResponse.struct_class = Types::UpdateAccessEntryResponse
+
     UpdateAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     UpdateAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "addonName"))
     UpdateAddonRequest.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
@@ -1011,6 +1168,7 @@ module Aws::EKS
     UpdateClusterConfigRequest.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigRequest, location_name: "resourcesVpcConfig"))
     UpdateClusterConfigRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     UpdateClusterConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateClusterConfigRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: UpdateAccessConfigRequest, location_name: "accessConfig"))
     UpdateClusterConfigRequest.struct_class = Types::UpdateClusterConfigRequest
 
     UpdateClusterConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1124,6 +1282,18 @@ module Aws::EKS
         "uid" => "eks-2017-11-01",
       }
 
+      api.add_operation(:associate_access_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateAccessPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/access-entries/{principalArn}/access-policies"
+        o.input = Shapes::ShapeRef.new(shape: AssociateAccessPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateAccessPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:associate_encryption_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateEncryptionConfig"
         o.http_method = "POST"
@@ -1150,6 +1320,20 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:create_access_entry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessEntry"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/access-entries"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessEntryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessEntryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:create_addon, Seahorse::Model::Operation.new.tap do |o|
@@ -1235,6 +1419,17 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_access_entry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessEntry"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/clusters/{name}/access-entries/{principalArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessEntryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccessEntryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:delete_addon, Seahorse::Model::Operation.new.tap do |o|
@@ -1325,6 +1520,17 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_access_entry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccessEntry"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/access-entries/{principalArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccessEntryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccessEntryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:describe_addon, Seahorse::Model::Operation.new.tap do |o|
@@ -1454,6 +1660,17 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:disassociate_access_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateAccessPolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/clusters/{name}/access-entries/{principalArn}/access-policies/{policyArn}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateAccessPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateAccessPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:disassociate_identity_provider_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateIdentityProviderConfig"
         o.http_method = "POST"
@@ -1468,6 +1685,39 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:list_access_entries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessEntries"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/access-entries"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessEntriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessEntriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_access_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessPolicies"
+        o.http_method = "GET"
+        o.http_request_uri = "/access-policies"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_addons, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAddons"
         o.http_method = "GET"
@@ -1479,6 +1729,23 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_associated_access_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssociatedAccessPolicies"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/access-entries/{principalArn}/access-policies"
+        o.input = Shapes::ShapeRef.new(shape: ListAssociatedAccessPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssociatedAccessPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1659,6 +1926,18 @@ module Aws::EKS
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:update_access_entry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccessEntry"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/access-entries/{principalArn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccessEntryRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccessEntryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_addon, Seahorse::Model::Operation.new.tap do |o|

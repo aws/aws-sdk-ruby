@@ -525,7 +525,22 @@ module Aws::Route53Resolver
     #   The subnets and IP addresses in your VPC that DNS queries originate
     #   from (for outbound endpoints) or that you forward DNS queries to
     #   (for inbound endpoints). The subnet ID uniquely identifies a VPC.
+    #
+    #   <note markdown="1"> Even though the minimum is 1, Route 53 requires that you create at
+    #   least two.
+    #
+    #    </note>
     #   @return [Array<Types::IpAddressRequest>]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_instance_type
+    #   The instance type. If you specify this, you must also specify a
+    #   value for the `OutpostArn`.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   A list of the tag keys and values that you want to associate with
@@ -539,15 +554,34 @@ module Aws::Route53Resolver
     #   addresses.
     #   @return [String]
     #
-    # @!attribute [rw] outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
-    #   you must also specify a value for the `PreferredInstanceType`.
-    #   @return [String]
+    # @!attribute [rw] protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is
+    #   applicable for inbound endpoints only.
     #
-    # @!attribute [rw] preferred_instance_type
-    #   The instance type. If you specify this, you must also specify a
-    #   value for the `OutpostArn`.
-    #   @return [String]
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpointRequest AWS API Documentation
     #
@@ -557,10 +591,11 @@ module Aws::Route53Resolver
       :security_group_ids,
       :direction,
       :ip_addresses,
+      :outpost_arn,
+      :preferred_instance_type,
       :tags,
       :resolver_endpoint_type,
-      :outpost_arn,
-      :preferred_instance_type)
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2933,7 +2968,8 @@ module Aws::Route53Resolver
     # @!attribute [rw] resolver_dnssec_configs
     #   An array that contains one [ResolverDnssecConfig][1] element for
     #   each configuration for DNSSEC validation that is associated with the
-    #   current Amazon Web Services account.
+    #   current Amazon Web Services account. It doesn't contain disabled
+    #   DNSSEC configurations for the resource.
     #
     #
     #
@@ -3957,10 +3993,6 @@ module Aws::Route53Resolver
     #   format and Coordinated Universal Time (UTC).
     #   @return [String]
     #
-    # @!attribute [rw] resolver_endpoint_type
-    #   The Resolver endpoint IP address type.
-    #   @return [String]
-    #
     # @!attribute [rw] outpost_arn
     #   The ARN (Amazon Resource Name) for the Outpost.
     #   @return [String]
@@ -3968,6 +4000,39 @@ module Aws::Route53Resolver
     # @!attribute [rw] preferred_instance_type
     #   The Amazon EC2 instance type.
     #   @return [String]
+    #
+    # @!attribute [rw] resolver_endpoint_type
+    #   The Resolver endpoint IP address type.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocols
+    #   Protocols used for the endpoint. DoH-FIPS is applicable for inbound
+    #   endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverEndpoint AWS API Documentation
     #
@@ -3984,9 +4049,10 @@ module Aws::Route53Resolver
       :status_message,
       :creation_time,
       :modification_time,
-      :resolver_endpoint_type,
       :outpost_arn,
-      :preferred_instance_type)
+      :preferred_instance_type,
+      :resolver_endpoint_type,
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4562,12 +4628,42 @@ module Aws::Route53Resolver
     #   One IPv6 address that you want to forward DNS queries to.
     #   @return [String]
     #
+    # @!attribute [rw] protocol
+    #   The protocols for the Resolver endpoints. DoH-FIPS is applicable for
+    #   inbound endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/TargetAddress AWS API Documentation
     #
     class TargetAddress < Struct.new(
       :ip,
       :port,
-      :ipv_6)
+      :ipv_6,
+      :protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5073,13 +5169,51 @@ module Aws::Route53Resolver
     #   will be automatically chosen from your subnet.
     #   @return [Array<Types::UpdateIpAddress>]
     #
+    # @!attribute [rw] protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is
+    #   applicable for inbound endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   You can't change the protocol of an inbound endpoint directly from
+    #   only Do53 to only DoH, or DoH-FIPS. This is to prevent a sudden
+    #   disruption to incoming traffic that relies on Do53. To change the
+    #   protocol from Do53 to DoH, or DoH-FIPS, you must first enable both
+    #   Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming
+    #   traffic has transferred to using the DoH protocol, or DoH-FIPS, and
+    #   then remove the Do53.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpointRequest AWS API Documentation
     #
     class UpdateResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id,
       :name,
       :resolver_endpoint_type,
-      :update_ip_addresses)
+      :update_ip_addresses,
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5125,8 +5259,9 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # You have provided an invalid command. Supported values are `ADD`,
-    # `REMOVE`, or `REPLACE` a domain.
+    # You have provided an invalid command. If you ran the
+    # `UpdateFirewallDomains` request. supported values are `ADD`, `REMOVE`,
+    # or `REPLACE` a domain.
     #
     # @!attribute [rw] message
     #   @return [String]

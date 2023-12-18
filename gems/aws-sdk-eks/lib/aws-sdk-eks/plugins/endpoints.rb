@@ -57,10 +57,14 @@ module Aws::EKS
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :associate_access_policy
+            Aws::EKS::Endpoints::AssociateAccessPolicy.build(context)
           when :associate_encryption_config
             Aws::EKS::Endpoints::AssociateEncryptionConfig.build(context)
           when :associate_identity_provider_config
             Aws::EKS::Endpoints::AssociateIdentityProviderConfig.build(context)
+          when :create_access_entry
+            Aws::EKS::Endpoints::CreateAccessEntry.build(context)
           when :create_addon
             Aws::EKS::Endpoints::CreateAddon.build(context)
           when :create_cluster
@@ -73,6 +77,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::CreateNodegroup.build(context)
           when :create_pod_identity_association
             Aws::EKS::Endpoints::CreatePodIdentityAssociation.build(context)
+          when :delete_access_entry
+            Aws::EKS::Endpoints::DeleteAccessEntry.build(context)
           when :delete_addon
             Aws::EKS::Endpoints::DeleteAddon.build(context)
           when :delete_cluster
@@ -87,6 +93,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::DeletePodIdentityAssociation.build(context)
           when :deregister_cluster
             Aws::EKS::Endpoints::DeregisterCluster.build(context)
+          when :describe_access_entry
+            Aws::EKS::Endpoints::DescribeAccessEntry.build(context)
           when :describe_addon
             Aws::EKS::Endpoints::DescribeAddon.build(context)
           when :describe_addon_configuration
@@ -107,10 +115,18 @@ module Aws::EKS
             Aws::EKS::Endpoints::DescribePodIdentityAssociation.build(context)
           when :describe_update
             Aws::EKS::Endpoints::DescribeUpdate.build(context)
+          when :disassociate_access_policy
+            Aws::EKS::Endpoints::DisassociateAccessPolicy.build(context)
           when :disassociate_identity_provider_config
             Aws::EKS::Endpoints::DisassociateIdentityProviderConfig.build(context)
+          when :list_access_entries
+            Aws::EKS::Endpoints::ListAccessEntries.build(context)
+          when :list_access_policies
+            Aws::EKS::Endpoints::ListAccessPolicies.build(context)
           when :list_addons
             Aws::EKS::Endpoints::ListAddons.build(context)
+          when :list_associated_access_policies
+            Aws::EKS::Endpoints::ListAssociatedAccessPolicies.build(context)
           when :list_clusters
             Aws::EKS::Endpoints::ListClusters.build(context)
           when :list_eks_anywhere_subscriptions
@@ -133,6 +149,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::EKS::Endpoints::UntagResource.build(context)
+          when :update_access_entry
+            Aws::EKS::Endpoints::UpdateAccessEntry.build(context)
           when :update_addon
             Aws::EKS::Endpoints::UpdateAddon.build(context)
           when :update_cluster_config

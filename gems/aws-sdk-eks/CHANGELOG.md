@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2023-12-18)
+------------------
+
+* Feature - Add support for EKS Cluster Access Management.
+
 1.95.0 (2023-11-28)
 ------------------
 
