@@ -2105,7 +2105,12 @@ module Aws::FSx
     #   the following conditions:
     #
     #   * The value of `ThroughputCapacity` and
-    #     `ThroughputCapacityPerHAPair` are not the same value
+    #     `ThroughputCapacityPerHAPair` are not the same value for file
+    #     systems with one HA pair.
+    #
+    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
+    #     pair (a value between 2 and 6).
     #
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
@@ -5004,13 +5009,21 @@ module Aws::FSx
     #   `NextToken` value left off.
     #   @return [String]
     #
+    # @!attribute [rw] include_shared
+    #   Set to `false` (default) if you want to only see the snapshots in
+    #   your Amazon Web Services account. Set to `true` if you want to see
+    #   the snapshots in your account and the ones shared with you from
+    #   another account.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshotsRequest AWS API Documentation
     #
     class DescribeSnapshotsRequest < Struct.new(
       :snapshot_ids,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :include_shared)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7439,6 +7452,32 @@ module Aws::FSx
     #   copied to the destination volume.
     #   @return [String]
     #
+    # @!attribute [rw] copy_strategy
+    #   Specifies the strategy used when copying data from the snapshot to
+    #   the new volume.
+    #
+    #   * `CLONE` - The new volume references the data in the origin
+    #     snapshot. Cloning a snapshot is faster than copying data from the
+    #     snapshot to a new volume and doesn't consume disk throughput.
+    #     However, the origin snapshot can't be deleted if there is a
+    #     volume using its copied data.
+    #
+    #   * `FULL_COPY` - Copies all data from the snapshot to the new volume.
+    #
+    #     Specify this option to create the volume from a snapshot on
+    #     another FSx for OpenZFS file system.
+    #
+    #   <note markdown="1"> The `INCREMENTAL_COPY` option is only for updating an existing
+    #   volume by using a snapshot from another FSx for OpenZFS file system.
+    #   For more information, see [CopySnapshotAndUpdateVolume][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSVolumeConfiguration AWS API Documentation
     #
     class OpenZFSVolumeConfiguration < Struct.new(
@@ -7458,7 +7497,8 @@ module Aws::FSx
       :delete_cloned_volumes,
       :delete_intermediate_data,
       :source_snapshot_arn,
-      :destination_snapshot)
+      :destination_snapshot,
+      :copy_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8935,10 +8975,15 @@ module Aws::FSx
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
     #
-    #   The value of `ThroughputCapacity` and `ThroughputCapacityPerHAPair`
-    #   are not the same value.
+    #   * The value of `ThroughputCapacity` and
+    #     `ThroughputCapacityPerHAPair` are not the same value for file
+    #     systems with one HA pair.
     #
-    #   The value of `ThroughputCapacityPerHAPair` is not a valid value.
+    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
+    #     pair (a value between 2 and 6).
+    #
+    #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation

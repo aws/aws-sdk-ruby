@@ -205,6 +205,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeDBProxyTargetGroups.build(context)
           when :describe_db_proxy_targets
             Aws::RDS::Endpoints::DescribeDBProxyTargets.build(context)
+          when :describe_db_recommendations
+            Aws::RDS::Endpoints::DescribeDBRecommendations.build(context)
           when :describe_db_security_groups
             Aws::RDS::Endpoints::DescribeDBSecurityGroups.build(context)
           when :describe_db_snapshot_attributes
@@ -283,6 +285,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::ModifyDBProxyEndpoint.build(context)
           when :modify_db_proxy_target_group
             Aws::RDS::Endpoints::ModifyDBProxyTargetGroup.build(context)
+          when :modify_db_recommendation
+            Aws::RDS::Endpoints::ModifyDBRecommendation.build(context)
           when :modify_db_snapshot
             Aws::RDS::Endpoints::ModifyDBSnapshot.build(context)
           when :modify_db_snapshot_attribute

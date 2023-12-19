@@ -57,6 +57,8 @@ module Aws::MarketplaceCatalog
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_describe_entities
+            Aws::MarketplaceCatalog::Endpoints::BatchDescribeEntities.build(context)
           when :cancel_change_set
             Aws::MarketplaceCatalog::Endpoints::CancelChangeSet.build(context)
           when :delete_resource_policy

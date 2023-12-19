@@ -74,6 +74,8 @@ module Aws::RDS
     ClusterPendingModifiedValues = Shapes::StructureShape.new(name: 'ClusterPendingModifiedValues')
     ConnectionPoolConfiguration = Shapes::StructureShape.new(name: 'ConnectionPoolConfiguration')
     ConnectionPoolConfigurationInfo = Shapes::StructureShape.new(name: 'ConnectionPoolConfigurationInfo')
+    ContextAttribute = Shapes::StructureShape.new(name: 'ContextAttribute')
+    ContextAttributeList = Shapes::ListShape.new(name: 'ContextAttributeList')
     CopyDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'CopyDBClusterParameterGroupMessage')
     CopyDBClusterParameterGroupResult = Shapes::StructureShape.new(name: 'CopyDBClusterParameterGroupResult')
     CopyDBClusterSnapshotMessage = Shapes::StructureShape.new(name: 'CopyDBClusterSnapshotMessage')
@@ -230,6 +232,10 @@ module Aws::RDS
     DBProxyTargetGroup = Shapes::StructureShape.new(name: 'DBProxyTargetGroup')
     DBProxyTargetGroupNotFoundFault = Shapes::StructureShape.new(name: 'DBProxyTargetGroupNotFoundFault')
     DBProxyTargetNotFoundFault = Shapes::StructureShape.new(name: 'DBProxyTargetNotFoundFault')
+    DBRecommendation = Shapes::StructureShape.new(name: 'DBRecommendation')
+    DBRecommendationList = Shapes::ListShape.new(name: 'DBRecommendationList')
+    DBRecommendationMessage = Shapes::StructureShape.new(name: 'DBRecommendationMessage')
+    DBRecommendationsMessage = Shapes::StructureShape.new(name: 'DBRecommendationsMessage')
     DBSecurityGroup = Shapes::StructureShape.new(name: 'DBSecurityGroup')
     DBSecurityGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBSecurityGroupAlreadyExistsFault')
     DBSecurityGroupMembership = Shapes::StructureShape.new(name: 'DBSecurityGroupMembership')
@@ -327,6 +333,7 @@ module Aws::RDS
     DescribeDBProxyTargetGroupsResponse = Shapes::StructureShape.new(name: 'DescribeDBProxyTargetGroupsResponse')
     DescribeDBProxyTargetsRequest = Shapes::StructureShape.new(name: 'DescribeDBProxyTargetsRequest')
     DescribeDBProxyTargetsResponse = Shapes::StructureShape.new(name: 'DescribeDBProxyTargetsResponse')
+    DescribeDBRecommendationsMessage = Shapes::StructureShape.new(name: 'DescribeDBRecommendationsMessage')
     DescribeDBSecurityGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBSecurityGroupsMessage')
     DescribeDBSnapshotAttributesMessage = Shapes::StructureShape.new(name: 'DescribeDBSnapshotAttributesMessage')
     DescribeDBSnapshotAttributesResult = Shapes::StructureShape.new(name: 'DescribeDBSnapshotAttributesResult')
@@ -355,6 +362,8 @@ module Aws::RDS
     DescribeValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsMessage')
     DescribeValidDBInstanceModificationsResult = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsResult')
     Description = Shapes::StringShape.new(name: 'Description')
+    DocLink = Shapes::StructureShape.new(name: 'DocLink')
+    DocLinkList = Shapes::ListShape.new(name: 'DocLinkList')
     DomainMembership = Shapes::StructureShape.new(name: 'DomainMembership')
     DomainMembershipList = Shapes::ListShape.new(name: 'DomainMembershipList')
     DomainNotFoundFault = Shapes::StructureShape.new(name: 'DomainNotFoundFault')
@@ -461,6 +470,7 @@ module Aws::RDS
     InvalidS3BucketFault = Shapes::StructureShape.new(name: 'InvalidS3BucketFault')
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
+    IssueDetails = Shapes::StructureShape.new(name: 'IssueDetails')
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KmsKeyIdOrArn = Shapes::StringShape.new(name: 'KmsKeyIdOrArn')
@@ -472,6 +482,11 @@ module Aws::RDS
     Marker = Shapes::StringShape.new(name: 'Marker')
     MasterUserSecret = Shapes::StructureShape.new(name: 'MasterUserSecret')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
+    Metric = Shapes::StructureShape.new(name: 'Metric')
+    MetricList = Shapes::ListShape.new(name: 'MetricList')
+    MetricQuery = Shapes::StructureShape.new(name: 'MetricQuery')
+    MetricReference = Shapes::StructureShape.new(name: 'MetricReference')
+    MetricReferenceList = Shapes::ListShape.new(name: 'MetricReferenceList')
     MinimumEngineVersionPerAllowedValue = Shapes::StructureShape.new(name: 'MinimumEngineVersionPerAllowedValue')
     MinimumEngineVersionPerAllowedValueList = Shapes::ListShape.new(name: 'MinimumEngineVersionPerAllowedValueList')
     ModifyActivityStreamRequest = Shapes::StructureShape.new(name: 'ModifyActivityStreamRequest')
@@ -495,6 +510,7 @@ module Aws::RDS
     ModifyDBProxyResponse = Shapes::StructureShape.new(name: 'ModifyDBProxyResponse')
     ModifyDBProxyTargetGroupRequest = Shapes::StructureShape.new(name: 'ModifyDBProxyTargetGroupRequest')
     ModifyDBProxyTargetGroupResponse = Shapes::StructureShape.new(name: 'ModifyDBProxyTargetGroupResponse')
+    ModifyDBRecommendationMessage = Shapes::StructureShape.new(name: 'ModifyDBRecommendationMessage')
     ModifyDBSnapshotAttributeMessage = Shapes::StructureShape.new(name: 'ModifyDBSnapshotAttributeMessage')
     ModifyDBSnapshotAttributeResult = Shapes::StructureShape.new(name: 'ModifyDBSnapshotAttributeResult')
     ModifyDBSnapshotMessage = Shapes::StructureShape.new(name: 'ModifyDBSnapshotMessage')
@@ -547,6 +563,9 @@ module Aws::RDS
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
     PendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'PendingMaintenanceActionsMessage')
     PendingModifiedValues = Shapes::StructureShape.new(name: 'PendingModifiedValues')
+    PerformanceInsightsMetricDimensionGroup = Shapes::StructureShape.new(name: 'PerformanceInsightsMetricDimensionGroup')
+    PerformanceInsightsMetricQuery = Shapes::StructureShape.new(name: 'PerformanceInsightsMetricQuery')
+    PerformanceIssueDetails = Shapes::StructureShape.new(name: 'PerformanceIssueDetails')
     PointInTimeRestoreNotEnabledFault = Shapes::StructureShape.new(name: 'PointInTimeRestoreNotEnabledFault')
     ProcessorFeature = Shapes::StructureShape.new(name: 'ProcessorFeature')
     ProcessorFeatureList = Shapes::ListShape.new(name: 'ProcessorFeatureList')
@@ -568,8 +587,15 @@ module Aws::RDS
     RebootDBClusterResult = Shapes::StructureShape.new(name: 'RebootDBClusterResult')
     RebootDBInstanceMessage = Shapes::StructureShape.new(name: 'RebootDBInstanceMessage')
     RebootDBInstanceResult = Shapes::StructureShape.new(name: 'RebootDBInstanceResult')
+    RecommendedAction = Shapes::StructureShape.new(name: 'RecommendedAction')
+    RecommendedActionList = Shapes::ListShape.new(name: 'RecommendedActionList')
+    RecommendedActionParameter = Shapes::StructureShape.new(name: 'RecommendedActionParameter')
+    RecommendedActionParameterList = Shapes::ListShape.new(name: 'RecommendedActionParameterList')
+    RecommendedActionUpdate = Shapes::StructureShape.new(name: 'RecommendedActionUpdate')
+    RecommendedActionUpdateList = Shapes::ListShape.new(name: 'RecommendedActionUpdateList')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
+    ReferenceDetails = Shapes::StructureShape.new(name: 'ReferenceDetails')
     RegisterDBProxyTargetsRequest = Shapes::StructureShape.new(name: 'RegisterDBProxyTargetsRequest')
     RegisterDBProxyTargetsResponse = Shapes::StructureShape.new(name: 'RegisterDBProxyTargetsResponse')
     RemoveFromGlobalClusterMessage = Shapes::StructureShape.new(name: 'RemoveFromGlobalClusterMessage')
@@ -612,6 +638,7 @@ module Aws::RDS
     SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault')
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault')
     SNSTopicArnNotFoundFault = Shapes::StructureShape.new(name: 'SNSTopicArnNotFoundFault')
+    ScalarReferenceDetails = Shapes::StructureShape.new(name: 'ScalarReferenceDetails')
     ScalingConfiguration = Shapes::StructureShape.new(name: 'ScalingConfiguration')
     ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ScalingConfigurationInfo')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
@@ -874,6 +901,12 @@ module Aws::RDS
     ConnectionPoolConfigurationInfo.add_member(:session_pinning_filters, Shapes::ShapeRef.new(shape: StringList, location_name: "SessionPinningFilters"))
     ConnectionPoolConfigurationInfo.add_member(:init_query, Shapes::ShapeRef.new(shape: String, location_name: "InitQuery"))
     ConnectionPoolConfigurationInfo.struct_class = Types::ConnectionPoolConfigurationInfo
+
+    ContextAttribute.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
+    ContextAttribute.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    ContextAttribute.struct_class = Types::ContextAttribute
+
+    ContextAttributeList.member = Shapes::ShapeRef.new(shape: ContextAttribute)
 
     CopyDBClusterParameterGroupMessage.add_member(:source_db_cluster_parameter_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceDBClusterParameterGroupIdentifier"))
     CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetDBClusterParameterGroupIdentifier"))
@@ -1870,6 +1903,37 @@ module Aws::RDS
 
     DBProxyTargetNotFoundFault.struct_class = Types::DBProxyTargetNotFoundFault
 
+    DBRecommendation.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "RecommendationId"))
+    DBRecommendation.add_member(:type_id, Shapes::ShapeRef.new(shape: String, location_name: "TypeId"))
+    DBRecommendation.add_member(:severity, Shapes::ShapeRef.new(shape: String, location_name: "Severity"))
+    DBRecommendation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    DBRecommendation.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    DBRecommendation.add_member(:created_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedTime"))
+    DBRecommendation.add_member(:updated_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdatedTime"))
+    DBRecommendation.add_member(:detection, Shapes::ShapeRef.new(shape: String, location_name: "Detection"))
+    DBRecommendation.add_member(:recommendation, Shapes::ShapeRef.new(shape: String, location_name: "Recommendation"))
+    DBRecommendation.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    DBRecommendation.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "Reason"))
+    DBRecommendation.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActionList, location_name: "RecommendedActions"))
+    DBRecommendation.add_member(:category, Shapes::ShapeRef.new(shape: String, location_name: "Category"))
+    DBRecommendation.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "Source"))
+    DBRecommendation.add_member(:type_detection, Shapes::ShapeRef.new(shape: String, location_name: "TypeDetection"))
+    DBRecommendation.add_member(:type_recommendation, Shapes::ShapeRef.new(shape: String, location_name: "TypeRecommendation"))
+    DBRecommendation.add_member(:impact, Shapes::ShapeRef.new(shape: String, location_name: "Impact"))
+    DBRecommendation.add_member(:additional_info, Shapes::ShapeRef.new(shape: String, location_name: "AdditionalInfo"))
+    DBRecommendation.add_member(:links, Shapes::ShapeRef.new(shape: DocLinkList, location_name: "Links"))
+    DBRecommendation.add_member(:issue_details, Shapes::ShapeRef.new(shape: IssueDetails, location_name: "IssueDetails"))
+    DBRecommendation.struct_class = Types::DBRecommendation
+
+    DBRecommendationList.member = Shapes::ShapeRef.new(shape: DBRecommendation)
+
+    DBRecommendationMessage.add_member(:db_recommendation, Shapes::ShapeRef.new(shape: DBRecommendation, location_name: "DBRecommendation"))
+    DBRecommendationMessage.struct_class = Types::DBRecommendationMessage
+
+    DBRecommendationsMessage.add_member(:db_recommendations, Shapes::ShapeRef.new(shape: DBRecommendationList, location_name: "DBRecommendations"))
+    DBRecommendationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DBRecommendationsMessage.struct_class = Types::DBRecommendationsMessage
+
     DBSecurityGroup.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "OwnerId"))
     DBSecurityGroup.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupName"))
     DBSecurityGroup.add_member(:db_security_group_description, Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupDescription"))
@@ -2305,6 +2369,14 @@ module Aws::RDS
     DescribeDBProxyTargetsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeDBProxyTargetsResponse.struct_class = Types::DescribeDBProxyTargetsResponse
 
+    DescribeDBRecommendationsMessage.add_member(:last_updated_after, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastUpdatedAfter"))
+    DescribeDBRecommendationsMessage.add_member(:last_updated_before, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastUpdatedBefore"))
+    DescribeDBRecommendationsMessage.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "Locale"))
+    DescribeDBRecommendationsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeDBRecommendationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeDBRecommendationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDBRecommendationsMessage.struct_class = Types::DescribeDBRecommendationsMessage
+
     DescribeDBSecurityGroupsMessage.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupName"))
     DescribeDBSecurityGroupsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeDBSecurityGroupsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -2480,6 +2552,12 @@ module Aws::RDS
 
     DescribeValidDBInstanceModificationsResult.add_member(:valid_db_instance_modifications_message, Shapes::ShapeRef.new(shape: ValidDBInstanceModificationsMessage, location_name: "ValidDBInstanceModificationsMessage"))
     DescribeValidDBInstanceModificationsResult.struct_class = Types::DescribeValidDBInstanceModificationsResult
+
+    DocLink.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    DocLink.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "Url"))
+    DocLink.struct_class = Types::DocLink
+
+    DocLinkList.member = Shapes::ShapeRef.new(shape: DocLink)
 
     DomainMembership.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     DomainMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
@@ -2779,6 +2857,9 @@ module Aws::RDS
 
     InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
 
+    IssueDetails.add_member(:performance_issue_details, Shapes::ShapeRef.new(shape: PerformanceIssueDetails, location_name: "PerformanceIssueDetails"))
+    IssueDetails.struct_class = Types::IssueDetails
+
     KMSKeyNotAccessibleFault.struct_class = Types::KMSKeyNotAccessibleFault
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
@@ -2793,6 +2874,23 @@ module Aws::RDS
     MasterUserSecret.add_member(:secret_status, Shapes::ShapeRef.new(shape: String, location_name: "SecretStatus"))
     MasterUserSecret.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     MasterUserSecret.struct_class = Types::MasterUserSecret
+
+    Metric.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    Metric.add_member(:references, Shapes::ShapeRef.new(shape: MetricReferenceList, location_name: "References"))
+    Metric.add_member(:statistics_details, Shapes::ShapeRef.new(shape: String, location_name: "StatisticsDetails"))
+    Metric.add_member(:metric_query, Shapes::ShapeRef.new(shape: MetricQuery, location_name: "MetricQuery"))
+    Metric.struct_class = Types::Metric
+
+    MetricList.member = Shapes::ShapeRef.new(shape: Metric)
+
+    MetricQuery.add_member(:performance_insights_metric_query, Shapes::ShapeRef.new(shape: PerformanceInsightsMetricQuery, location_name: "PerformanceInsightsMetricQuery"))
+    MetricQuery.struct_class = Types::MetricQuery
+
+    MetricReference.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    MetricReference.add_member(:reference_details, Shapes::ShapeRef.new(shape: ReferenceDetails, location_name: "ReferenceDetails"))
+    MetricReference.struct_class = Types::MetricReference
+
+    MetricReferenceList.member = Shapes::ShapeRef.new(shape: MetricReference)
 
     MinimumEngineVersionPerAllowedValue.add_member(:allowed_value, Shapes::ShapeRef.new(shape: String, location_name: "AllowedValue"))
     MinimumEngineVersionPerAllowedValue.add_member(:minimum_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MinimumEngineVersion"))
@@ -2996,6 +3094,12 @@ module Aws::RDS
 
     ModifyDBProxyTargetGroupResponse.add_member(:db_proxy_target_group, Shapes::ShapeRef.new(shape: DBProxyTargetGroup, location_name: "DBProxyTargetGroup"))
     ModifyDBProxyTargetGroupResponse.struct_class = Types::ModifyDBProxyTargetGroupResponse
+
+    ModifyDBRecommendationMessage.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RecommendationId"))
+    ModifyDBRecommendationMessage.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "Locale"))
+    ModifyDBRecommendationMessage.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ModifyDBRecommendationMessage.add_member(:recommended_action_updates, Shapes::ShapeRef.new(shape: RecommendedActionUpdateList, location_name: "RecommendedActionUpdates"))
+    ModifyDBRecommendationMessage.struct_class = Types::ModifyDBRecommendationMessage
 
     ModifyDBSnapshotAttributeMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
     ModifyDBSnapshotAttributeMessage.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AttributeName"))
@@ -3286,6 +3390,21 @@ module Aws::RDS
     PendingModifiedValues.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
+    PerformanceInsightsMetricDimensionGroup.add_member(:dimensions, Shapes::ShapeRef.new(shape: StringList, location_name: "Dimensions"))
+    PerformanceInsightsMetricDimensionGroup.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "Group"))
+    PerformanceInsightsMetricDimensionGroup.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "Limit"))
+    PerformanceInsightsMetricDimensionGroup.struct_class = Types::PerformanceInsightsMetricDimensionGroup
+
+    PerformanceInsightsMetricQuery.add_member(:group_by, Shapes::ShapeRef.new(shape: PerformanceInsightsMetricDimensionGroup, location_name: "GroupBy"))
+    PerformanceInsightsMetricQuery.add_member(:metric, Shapes::ShapeRef.new(shape: String, location_name: "Metric"))
+    PerformanceInsightsMetricQuery.struct_class = Types::PerformanceInsightsMetricQuery
+
+    PerformanceIssueDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
+    PerformanceIssueDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
+    PerformanceIssueDetails.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricList, location_name: "Metrics"))
+    PerformanceIssueDetails.add_member(:analysis, Shapes::ShapeRef.new(shape: String, location_name: "Analysis"))
+    PerformanceIssueDetails.struct_class = Types::PerformanceIssueDetails
+
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
 
     ProcessorFeature.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -3352,11 +3471,39 @@ module Aws::RDS
     RebootDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     RebootDBInstanceResult.struct_class = Types::RebootDBInstanceResult
 
+    RecommendedAction.add_member(:action_id, Shapes::ShapeRef.new(shape: String, location_name: "ActionId"))
+    RecommendedAction.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "Title"))
+    RecommendedAction.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    RecommendedAction.add_member(:operation, Shapes::ShapeRef.new(shape: String, location_name: "Operation"))
+    RecommendedAction.add_member(:parameters, Shapes::ShapeRef.new(shape: RecommendedActionParameterList, location_name: "Parameters"))
+    RecommendedAction.add_member(:apply_modes, Shapes::ShapeRef.new(shape: StringList, location_name: "ApplyModes"))
+    RecommendedAction.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    RecommendedAction.add_member(:issue_details, Shapes::ShapeRef.new(shape: IssueDetails, location_name: "IssueDetails"))
+    RecommendedAction.add_member(:context_attributes, Shapes::ShapeRef.new(shape: ContextAttributeList, location_name: "ContextAttributes"))
+    RecommendedAction.struct_class = Types::RecommendedAction
+
+    RecommendedActionList.member = Shapes::ShapeRef.new(shape: RecommendedAction)
+
+    RecommendedActionParameter.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
+    RecommendedActionParameter.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    RecommendedActionParameter.struct_class = Types::RecommendedActionParameter
+
+    RecommendedActionParameterList.member = Shapes::ShapeRef.new(shape: RecommendedActionParameter)
+
+    RecommendedActionUpdate.add_member(:action_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ActionId"))
+    RecommendedActionUpdate.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
+    RecommendedActionUpdate.struct_class = Types::RecommendedActionUpdate
+
+    RecommendedActionUpdateList.member = Shapes::ShapeRef.new(shape: RecommendedActionUpdate)
+
     RecurringCharge.add_member(:recurring_charge_amount, Shapes::ShapeRef.new(shape: Double, location_name: "RecurringChargeAmount"))
     RecurringCharge.add_member(:recurring_charge_frequency, Shapes::ShapeRef.new(shape: String, location_name: "RecurringChargeFrequency"))
     RecurringCharge.struct_class = Types::RecurringCharge
 
     RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge, location_name: "RecurringCharge")
+
+    ReferenceDetails.add_member(:scalar_reference_details, Shapes::ShapeRef.new(shape: ScalarReferenceDetails, location_name: "ScalarReferenceDetails"))
+    ReferenceDetails.struct_class = Types::ReferenceDetails
 
     RegisterDBProxyTargetsRequest.add_member(:db_proxy_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBProxyName"))
     RegisterDBProxyTargetsRequest.add_member(:target_group_name, Shapes::ShapeRef.new(shape: String, location_name: "TargetGroupName"))
@@ -3737,6 +3884,9 @@ module Aws::RDS
     SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
 
     SNSTopicArnNotFoundFault.struct_class = Types::SNSTopicArnNotFoundFault
+
+    ScalarReferenceDetails.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "Value"))
+    ScalarReferenceDetails.struct_class = Types::ScalarReferenceDetails
 
     ScalingConfiguration.add_member(:min_capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinCapacity"))
     ScalingConfiguration.add_member(:max_capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxCapacity"))
@@ -5024,6 +5174,20 @@ module Aws::RDS
         )
       end)
 
+      api.add_operation(:describe_db_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDBRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDBRecommendationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBRecommendationsMessage)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_db_security_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDBSecurityGroups"
         o.http_method = "POST"
@@ -5550,6 +5714,14 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
+      end)
+
+      api.add_operation(:modify_db_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyDBRecommendation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyDBRecommendationMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBRecommendationMessage)
       end)
 
       api.add_operation(:modify_db_snapshot, Seahorse::Model::Operation.new.tap do |o|

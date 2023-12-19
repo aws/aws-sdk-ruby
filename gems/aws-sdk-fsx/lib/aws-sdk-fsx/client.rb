@@ -831,6 +831,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -1075,6 +1076,7 @@ module Aws::FSx
     #   resp.backup.volume.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.backup.volume.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.backup.volume.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.backup.volume.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackup AWS API Documentation
     #
@@ -1344,6 +1346,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.administrative_actions[0].target_snapshot_values.name #=> String
@@ -1663,6 +1666,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -1907,6 +1911,7 @@ module Aws::FSx
     #   resp.backup.volume.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.backup.volume.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.backup.volume.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.backup.volume.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup AWS API Documentation
     #
@@ -3003,6 +3008,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -3541,6 +3547,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -3855,6 +3862,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #   resp.snapshot.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].remaining_transfer_bytes #=> Integer
@@ -4299,6 +4307,7 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.volume.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.volume.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.volume.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolume AWS API Documentation
     #
@@ -4586,6 +4595,7 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.volume.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.volume.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.volume.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeFromBackup AWS API Documentation
     #
@@ -5338,6 +5348,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -5582,6 +5593,7 @@ module Aws::FSx
     #   resp.backups[0].volume.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.backups[0].volume.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.backups[0].volume.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.backups[0].volume.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups AWS API Documentation
@@ -6197,6 +6209,7 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.name #=> String
@@ -6329,6 +6342,12 @@ module Aws::FSx
     #   continue processing the request, where the previous `NextToken` value
     #   left off.
     #
+    # @option params [Boolean] :include_shared
+    #   Set to `false` (default) if you want to only see the snapshots in your
+    #   Amazon Web Services account. Set to `true` if you want to see the
+    #   snapshots in your account and the ones shared with you from another
+    #   account.
+    #
     # @return [Types::DescribeSnapshotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSnapshotsResponse#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
@@ -6348,6 +6367,7 @@ module Aws::FSx
     #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     include_shared: false,
     #   })
     #
     # @example Response structure
@@ -6538,6 +6558,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.snapshots[0].administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #   resp.snapshots[0].administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshots[0].administrative_actions[0].remaining_transfer_bytes #=> Integer
@@ -6870,6 +6891,7 @@ module Aws::FSx
     #   resp.volumes[0].open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.volumes[0].open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.volumes[0].open_zfs_configuration.destination_snapshot #=> String
+    #   resp.volumes[0].open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeVolumes AWS API Documentation
@@ -7195,6 +7217,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -7480,6 +7503,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.administrative_actions[0].target_snapshot_values.name #=> String
@@ -7672,6 +7696,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -8422,6 +8447,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -8755,6 +8781,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #   resp.snapshot.administrative_actions[0].total_transfer_bytes #=> Integer
     #   resp.snapshot.administrative_actions[0].remaining_transfer_bytes #=> Integer
@@ -9147,6 +9174,7 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.delete_intermediate_data #=> Boolean
     #   resp.volume.open_zfs_configuration.source_snapshot_arn #=> String
     #   resp.volume.open_zfs_configuration.destination_snapshot #=> String
+    #   resp.volume.open_zfs_configuration.copy_strategy #=> String, one of "CLONE", "FULL_COPY", "INCREMENTAL_COPY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateVolume AWS API Documentation
     #
@@ -9170,7 +9198,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.210.0 (2023-12-19)
+------------------
+
+* Feature - RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation
+
 1.209.0 (2023-12-15)
 ------------------
 

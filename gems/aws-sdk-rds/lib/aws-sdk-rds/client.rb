@@ -13411,6 +13411,216 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describes the recommendations to resolve the issues for your DB
+    # instances, DB clusters, and DB parameter groups.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_updated_after
+    #   A filter to include only the recommendations that were updated after
+    #   this specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_updated_before
+    #   A filter to include only the recommendations that were updated before
+    #   this specified time.
+    #
+    # @option params [String] :locale
+    #   The language that you choose to return the list of recommendations.
+    #
+    #   Valid values:
+    #
+    #   * `en`
+    #
+    #   * `en_UK`
+    #
+    #   * `de`
+    #
+    #   * `es`
+    #
+    #   * `fr`
+    #
+    #   * `id`
+    #
+    #   * `it`
+    #
+    #   * `ja`
+    #
+    #   * `ko`
+    #
+    #   * `pt_BR`
+    #
+    #   * `zh_TW`
+    #
+    #   * `zh_CN`
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more recommendations to describe.
+    #
+    #   Supported Filters:
+    #
+    #   * `recommendation-id` - Accepts a list of recommendation identifiers.
+    #     The results list only includes the recommendations whose identifier
+    #     is one of the specified filter values.
+    #
+    #   * `status` - Accepts a list of recommendation statuses.
+    #
+    #     Valid values:
+    #
+    #     * `active` - The recommendations which are ready for you to apply.
+    #
+    #     * `pending` - The applied or scheduled recommendations which are in
+    #       progress.
+    #
+    #     * `resolved` - The recommendations which are completed.
+    #
+    #     * `dismissed` - The recommendations that you dismissed.
+    #
+    #     The results list only includes the recommendations whose status is
+    #     one of the specified filter values.
+    #
+    #   * `severity` - Accepts a list of recommendation severities. The
+    #     results list only includes the recommendations whose severity is one
+    #     of the specified filter values.
+    #
+    #     Valid values:
+    #
+    #     * `high`
+    #
+    #     * `medium`
+    #
+    #     * `low`
+    #
+    #     * `informational`
+    #
+    #   * `type-id` - Accepts a list of recommendation type identifiers. The
+    #     results list only includes the recommendations whose type is one of
+    #     the specified filter values.
+    #
+    #   * `dbi-resource-id` - Accepts a list of database resource identifiers.
+    #     The results list only includes the recommendations that generated
+    #     for the specified databases.
+    #
+    #   * `cluster-resource-id` - Accepts a list of cluster resource
+    #     identifiers. The results list only includes the recommendations that
+    #     generated for the specified clusters.
+    #
+    #   * `pg-arn` - Accepts a list of parameter group ARNs. The results list
+    #     only includes the recommendations that generated for the specified
+    #     parameter groups.
+    #
+    #   * `cluster-pg-arn` - Accepts a list of cluster parameter group ARNs.
+    #     The results list only includes the recommendations that generated
+    #     for the specified cluster parameter groups.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of recommendations to include in the response. If
+    #   more records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBRecommendations` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::DBRecommendationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBRecommendationsMessage#db_recommendations #db_recommendations} => Array&lt;Types::DBRecommendation&gt;
+    #   * {Types::DBRecommendationsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_recommendations({
+    #     last_updated_after: Time.now,
+    #     last_updated_before: Time.now,
+    #     locale: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_recommendations #=> Array
+    #   resp.db_recommendations[0].recommendation_id #=> String
+    #   resp.db_recommendations[0].type_id #=> String
+    #   resp.db_recommendations[0].severity #=> String
+    #   resp.db_recommendations[0].resource_arn #=> String
+    #   resp.db_recommendations[0].status #=> String
+    #   resp.db_recommendations[0].created_time #=> Time
+    #   resp.db_recommendations[0].updated_time #=> Time
+    #   resp.db_recommendations[0].detection #=> String
+    #   resp.db_recommendations[0].recommendation #=> String
+    #   resp.db_recommendations[0].description #=> String
+    #   resp.db_recommendations[0].reason #=> String
+    #   resp.db_recommendations[0].recommended_actions #=> Array
+    #   resp.db_recommendations[0].recommended_actions[0].action_id #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].title #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].description #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].operation #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].parameters #=> Array
+    #   resp.db_recommendations[0].recommended_actions[0].parameters[0].key #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].parameters[0].value #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].apply_modes #=> Array
+    #   resp.db_recommendations[0].recommended_actions[0].apply_modes[0] #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].status #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.start_time #=> Time
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.end_time #=> Time
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics #=> Array
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].name #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].references #=> Array
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].references[0].name #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].references[0].reference_details.scalar_reference_details.value #=> Float
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].statistics_details #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions #=> Array
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions[0] #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.group #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.limit #=> Integer
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.metric #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].issue_details.performance_issue_details.analysis #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].context_attributes #=> Array
+    #   resp.db_recommendations[0].recommended_actions[0].context_attributes[0].key #=> String
+    #   resp.db_recommendations[0].recommended_actions[0].context_attributes[0].value #=> String
+    #   resp.db_recommendations[0].category #=> String
+    #   resp.db_recommendations[0].source #=> String
+    #   resp.db_recommendations[0].type_detection #=> String
+    #   resp.db_recommendations[0].type_recommendation #=> String
+    #   resp.db_recommendations[0].impact #=> String
+    #   resp.db_recommendations[0].additional_info #=> String
+    #   resp.db_recommendations[0].links #=> Array
+    #   resp.db_recommendations[0].links[0].text #=> String
+    #   resp.db_recommendations[0].links[0].url #=> String
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.start_time #=> Time
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.end_time #=> Time
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics #=> Array
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].name #=> String
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].references #=> Array
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].references[0].name #=> String
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].references[0].reference_details.scalar_reference_details.value #=> Float
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].statistics_details #=> String
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions #=> Array
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions[0] #=> String
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.group #=> String
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.limit #=> Integer
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.metric #=> String
+    #   resp.db_recommendations[0].issue_details.performance_issue_details.analysis #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBRecommendations AWS API Documentation
+    #
+    # @overload describe_db_recommendations(params = {})
+    # @param [Hash] params ({})
+    def describe_db_recommendations(params = {}, options = {})
+      req = build_request(:describe_db_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns a list of `DBSecurityGroup` descriptions. If a
     # `DBSecurityGroupName` is specified, the list will contain only the
     # descriptions of the specified DB security group.
@@ -20553,6 +20763,120 @@ module Aws::RDS
     # @param [Hash] params ({})
     def modify_db_proxy_target_group(params = {}, options = {})
       req = build_request(:modify_db_proxy_target_group, params)
+      req.send_request(options)
+    end
+
+    # Updates the recommendation status and recommended action status for
+    # the specified recommendation.
+    #
+    # @option params [required, String] :recommendation_id
+    #   The identifier of the recommendation to update.
+    #
+    # @option params [String] :locale
+    #   The language of the modified recommendation.
+    #
+    # @option params [String] :status
+    #   The recommendation status to update.
+    #
+    #   Valid values:
+    #
+    #   * active
+    #
+    #   * dismissed
+    #
+    # @option params [Array<Types::RecommendedActionUpdate>] :recommended_action_updates
+    #   The list of recommended action status to update. You can update
+    #   multiple recommended actions at one time.
+    #
+    # @return [Types::DBRecommendationMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBRecommendationMessage#db_recommendation #db_recommendation} => Types::DBRecommendation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_recommendation({
+    #     recommendation_id: "String", # required
+    #     locale: "String",
+    #     status: "String",
+    #     recommended_action_updates: [
+    #       {
+    #         action_id: "String", # required
+    #         status: "String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_recommendation.recommendation_id #=> String
+    #   resp.db_recommendation.type_id #=> String
+    #   resp.db_recommendation.severity #=> String
+    #   resp.db_recommendation.resource_arn #=> String
+    #   resp.db_recommendation.status #=> String
+    #   resp.db_recommendation.created_time #=> Time
+    #   resp.db_recommendation.updated_time #=> Time
+    #   resp.db_recommendation.detection #=> String
+    #   resp.db_recommendation.recommendation #=> String
+    #   resp.db_recommendation.description #=> String
+    #   resp.db_recommendation.reason #=> String
+    #   resp.db_recommendation.recommended_actions #=> Array
+    #   resp.db_recommendation.recommended_actions[0].action_id #=> String
+    #   resp.db_recommendation.recommended_actions[0].title #=> String
+    #   resp.db_recommendation.recommended_actions[0].description #=> String
+    #   resp.db_recommendation.recommended_actions[0].operation #=> String
+    #   resp.db_recommendation.recommended_actions[0].parameters #=> Array
+    #   resp.db_recommendation.recommended_actions[0].parameters[0].key #=> String
+    #   resp.db_recommendation.recommended_actions[0].parameters[0].value #=> String
+    #   resp.db_recommendation.recommended_actions[0].apply_modes #=> Array
+    #   resp.db_recommendation.recommended_actions[0].apply_modes[0] #=> String
+    #   resp.db_recommendation.recommended_actions[0].status #=> String
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.start_time #=> Time
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.end_time #=> Time
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics #=> Array
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].name #=> String
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].references #=> Array
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].references[0].name #=> String
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].references[0].reference_details.scalar_reference_details.value #=> Float
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].statistics_details #=> String
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions #=> Array
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions[0] #=> String
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.group #=> String
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.limit #=> Integer
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.metric #=> String
+    #   resp.db_recommendation.recommended_actions[0].issue_details.performance_issue_details.analysis #=> String
+    #   resp.db_recommendation.recommended_actions[0].context_attributes #=> Array
+    #   resp.db_recommendation.recommended_actions[0].context_attributes[0].key #=> String
+    #   resp.db_recommendation.recommended_actions[0].context_attributes[0].value #=> String
+    #   resp.db_recommendation.category #=> String
+    #   resp.db_recommendation.source #=> String
+    #   resp.db_recommendation.type_detection #=> String
+    #   resp.db_recommendation.type_recommendation #=> String
+    #   resp.db_recommendation.impact #=> String
+    #   resp.db_recommendation.additional_info #=> String
+    #   resp.db_recommendation.links #=> Array
+    #   resp.db_recommendation.links[0].text #=> String
+    #   resp.db_recommendation.links[0].url #=> String
+    #   resp.db_recommendation.issue_details.performance_issue_details.start_time #=> Time
+    #   resp.db_recommendation.issue_details.performance_issue_details.end_time #=> Time
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics #=> Array
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].name #=> String
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].references #=> Array
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].references[0].name #=> String
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].references[0].reference_details.scalar_reference_details.value #=> Float
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].statistics_details #=> String
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions #=> Array
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.dimensions[0] #=> String
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.group #=> String
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.group_by.limit #=> Integer
+    #   resp.db_recommendation.issue_details.performance_issue_details.metrics[0].metric_query.performance_insights_metric_query.metric #=> String
+    #   resp.db_recommendation.issue_details.performance_issue_details.analysis #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBRecommendation AWS API Documentation
+    #
+    # @overload modify_db_recommendation(params = {})
+    # @param [Hash] params ({})
+    def modify_db_recommendation(params = {}, options = {})
+      req = build_request(:modify_db_recommendation, params)
       req.send_request(options)
     end
 
@@ -29538,7 +29862,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.209.0'
+      context[:gem_version] = '1.210.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

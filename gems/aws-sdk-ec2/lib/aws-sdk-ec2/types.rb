@@ -809,12 +809,39 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidrRequest AWS API Documentation
     #
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr,
       :asn,
-      :dry_run)
+      :dry_run,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3814,6 +3841,32 @@ module Aws::EC2
     #   The state of the address pool.
     #   @return [String]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ByoipCidr AWS API Documentation
     #
     class ByoipCidr < Struct.new(
@@ -3821,7 +3874,8 @@ module Aws::EC2
       :description,
       :asn_associations,
       :status_message,
-      :state)
+      :state,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39668,6 +39722,16 @@ module Aws::EC2
     #   network interface, not an existing one. You cannot specify more than
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -44053,21 +44117,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   Indicates whether IMDSv2 is `optional` or `required`.
+    #   Indicates whether IMDSv2 is required.
     #
-    #   `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #   instance metadata with or without a session token in your request.
-    #   If you retrieve the IAM role credentials without a token, the IMDSv1
-    #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid session token, the IMDSv2 role credentials
-    #   are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   `required` - When IMDSv2 is required, you must send a session token
-    #   with any instance metadata retrieval requests. In this state,
-    #   retrieving the IAM role credentials always returns IMDSv2
-    #   credentials; IMDSv1 credentials are not available.
-    #
-    #   Default: `optional`
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -44132,23 +44194,22 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -44222,6 +44283,16 @@ module Aws::EC2
     # @!attribute [rw] associate_public_ip_address
     #   Indicates whether to associate a public IPv4 address with eth0 for a
     #   new network interface.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -44372,6 +44443,16 @@ module Aws::EC2
     # @!attribute [rw] associate_public_ip_address
     #   Associates a public IPv4 address with eth0 for a new network
     #   interface.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -53401,6 +53482,32 @@ module Aws::EC2
     #   Reserved.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrRequest AWS API Documentation
     #
     class ProvisionByoipCidrRequest < Struct.new(
@@ -53410,7 +53517,8 @@ module Aws::EC2
       :description,
       :dry_run,
       :pool_tag_specifications,
-      :multi_region)
+      :multi_region,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55568,31 +55676,7 @@ module Aws::EC2
     #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the resources that are created during instance
-    #   launch.
-    #
-    #   You can specify tags for the following resources only:
-    #
-    #   * Instances
-    #
-    #   * Volumes
-    #
-    #   * Elastic graphics
-    #
-    #   * Spot Instance requests
-    #
-    #   * Network interfaces
-    #
-    #   To tag a resource after it has been created, see [CreateTags][1].
-    #
-    #   <note markdown="1"> To tag the launch template itself, you must use the
-    #   [TagSpecification][2] parameter.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
+    #   launch. These tags are not applied to the launch template.
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications

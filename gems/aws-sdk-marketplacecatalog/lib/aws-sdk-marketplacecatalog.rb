@@ -32,7 +32,7 @@ require_relative 'aws-sdk-marketplacecatalog/customizations'
 # structure.
 #
 #     marketplace_catalog = Aws::MarketplaceCatalog::Client.new
-#     resp = marketplace_catalog.cancel_change_set(params)
+#     resp = marketplace_catalog.batch_describe_entities(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-marketplacecatalog/customizations'
 # @!group service
 module Aws::MarketplaceCatalog
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end

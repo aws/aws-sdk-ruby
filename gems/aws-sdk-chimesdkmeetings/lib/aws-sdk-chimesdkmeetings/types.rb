@@ -49,6 +49,16 @@ module Aws::ChimeSDKMeetings
     #
     #   When using capabilities, be aware of these corner cases:
     #
+    #   * If you specify `MeetingFeatures:Video:MaxResolution:None` when you
+    #     create a meeting, all API requests that include `SendReceive`,
+    #     `Send`, or `Receive` for `AttendeeCapabilities:Video` will be
+    #     rejected with `ValidationError 400`.
+    #
+    #   * If you specify `MeetingFeatures:Content:MaxResolution:None` when
+    #     you create a meeting, all API requests that include `SendReceive`,
+    #     `Send`, or `Receive` for `AttendeeCapabilities:Content` will be
+    #     rejected with `ValidationError 400`.
+    #
     #   * You can't set `content` capabilities to `SendReceive` or
     #     `Receive` unless you also set `video` capabilities to
     #     `SendReceive` or `Receive`. If you don't set the `video`
@@ -82,12 +92,22 @@ module Aws::ChimeSDKMeetings
     # The media capabilities of an attendee: audio, video, or content.
     #
     # <note markdown="1"> You use the capabilities with a set of values that control what the
-    # capabilities can do, such as `SendReceive` data. For more information
-    # about those values, see .
+    # capabilities can do, such as `SendReceive` data. For more information,
+    # refer to and .
     #
     #  </note>
     #
     # When using capabilities, be aware of these corner cases:
+    #
+    # * If you specify `MeetingFeatures:Video:MaxResolution:None` when you
+    #   create a meeting, all API requests that include `SendReceive`,
+    #   `Send`, or `Receive` for `AttendeeCapabilities:Video` will be
+    #   rejected with `ValidationError 400`.
+    #
+    # * If you specify `MeetingFeatures:Content:MaxResolution:None` when you
+    #   create a meeting, all API requests that include `SendReceive`,
+    #   `Send`, or `Receive` for `AttendeeCapabilities:Content` will be
+    #   rejected with `ValidationError 400`.
     #
     # * You can't set `content` capabilities to `SendReceive` or `Receive`
     #   unless you also set `video` capabilities to `SendReceive` or
@@ -97,12 +117,11 @@ module Aws::ChimeSDKMeetings
     #   `content` capability to not receive.
     #
     # * When you change an `audio` capability from `None` or `Receive` to
-    #   `Send` or `SendReceive` , and if the attendee left their microphone
-    #   unmuted, audio will flow from the attendee to the other meeting
-    #   participants.
+    #   `Send` or `SendReceive` , and an attendee unmutes their microphone,
+    #   audio flows from the attendee to the other meeting participants.
     #
     # * When you change a `video` or `content` capability from `None` or
-    #   `Receive` to `Send` or `SendReceive` , and if the attendee turned on
+    #   `Receive` to `Send` or `SendReceive` , and the attendee turns on
     #   their video or content streams, remote attendees can receive those
     #   streams, but only after media renegotiation between the client and
     #   the Amazon Chime back-end server.
@@ -125,6 +144,26 @@ module Aws::ChimeSDKMeetings
       :audio,
       :video,
       :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists the maximum number of attendees allowed into the meeting.
+    #
+    # <note markdown="1"> If you specify `FHD` for `MeetingFeatures:Video:MaxResolution`, or if
+    # you specify `UHD` for `MeetingFeatures:Content:MaxResolution`, the
+    # maximum number of attendees changes from the default of `250` to `25`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] max_count
+    #   The maximum number of attendees allowed into the meeting.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/AttendeeFeatures AWS API Documentation
+    #
+    class AttendeeFeatures < Struct.new(
+      :max_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -265,6 +304,34 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # Lists the content (screen share) features for the meeting. Applies to
+    # all attendees.
+    #
+    # <note markdown="1"> If you specify `MeetingFeatures:Content:MaxResolution:None` when you
+    # create a meeting, all API requests that include `SendReceive`, `Send`,
+    # or `Receive` for `AttendeeCapabilities:Content` will be rejected with
+    # `ValidationError 400`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] max_resolution
+    #   The maximum resolution for the meeting content.
+    #
+    #   <note markdown="1"> Defaults to `FHD`. To use `UHD`, you must also provide a
+    #   `MeetingFeatures:Attendee:MaxCount` value and override the default
+    #   size limit of 250 attendees.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ContentFeatures AWS API Documentation
+    #
+    class ContentFeatures < Struct.new(
+      :max_resolution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The list of errors returned when errors are encountered during the
     # BatchCreateAttendee and CreateAttendee actions. This includes external
     # user IDs, error codes, and error messages.
@@ -323,6 +390,16 @@ module Aws::ChimeSDKMeetings
     #    </note>
     #
     #   When using capabilities, be aware of these corner cases:
+    #
+    #   * If you specify `MeetingFeatures:Video:MaxResolution:None` when you
+    #     create a meeting, all API requests that include `SendReceive`,
+    #     `Send`, or `Receive` for `AttendeeCapabilities:Video` will be
+    #     rejected with `ValidationError 400`.
+    #
+    #   * If you specify `MeetingFeatures:Content:MaxResolution:None` when
+    #     you create a meeting, all API requests that include `SendReceive`,
+    #     `Send`, or `Receive` for `AttendeeCapabilities:Content` will be
+    #     rejected with `ValidationError 400`.
     #
     #   * You can't set `content` capabilities to `SendReceive` or
     #     `Receive` unless you also set `video` capabilities to
@@ -408,8 +485,8 @@ module Aws::ChimeSDKMeetings
     #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
     #   `us-west-1`, `us-west-2`.
     #
-    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
-    #   `us-gov-west-1`.
+    #   Available values in Amazon Web Services GovCloud (US) Regions:
+    #   `us-gov-east-1`, `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] meeting_host_id
@@ -459,8 +536,8 @@ module Aws::ChimeSDKMeetings
     #   * Each resource can have up to 50 tags. For other limits, see [Tag
     #     Naming and Usage Conventions][2] in the *AWS General Reference*.
     #
-    #   * You can only tag resources that are located in the specified AWS
-    #     Region for the AWS account.
+    #   * You can only tag resources that are located in the specified
+    #     Amazon Web Services Region for the Amazon Web Services account.
     #
     #   * To add tags to a resource, you need the necessary permissions for
     #     the service that the resource belongs to as well as permissions
@@ -544,8 +621,8 @@ module Aws::ChimeSDKMeetings
     #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
     #   `us-west-1`, `us-west-2`.
     #
-    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
-    #   `us-gov-west-1`.
+    #   Available values in Amazon Web Services GovCloud (US) Regions:
+    #   `us-gov-east-1`, `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] meeting_host_id
@@ -680,8 +757,9 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region passed to Amazon Transcribe Medical. If you don't
-    #   specify a Region, Amazon Chime uses the meeting's Region.
+    #   The Amazon Web Services Region passed to Amazon Transcribe Medical.
+    #   If you don't specify a Region, Amazon Chime uses the meeting's
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] content_identification_type
@@ -762,7 +840,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region in which to use Amazon Transcribe.
+    #   The Amazon Web Services Region in which to use Amazon Transcribe.
     #
     #   If you don't specify a Region, then the [MediaRegion][1] of the
     #   meeting is used. However, if Amazon Transcribe is not available in
@@ -1116,18 +1194,30 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] turn_control_url
     #   The turn control URL.
+    #
+    #   **This parameter is deprecated and no longer used by the Amazon
+    #   Chime SDK.**
     #   @return [String]
     #
     # @!attribute [rw] screen_data_url
     #   The screen data URL.
+    #
+    #   **This parameter is deprecated and no longer used by the Amazon
+    #   Chime SDK.**
     #   @return [String]
     #
     # @!attribute [rw] screen_viewing_url
     #   The screen viewing URL.
+    #
+    #   **This parameter is deprecated and no longer used by the Amazon
+    #   Chime SDK.**
     #   @return [String]
     #
     # @!attribute [rw] screen_sharing_url
     #   The screen sharing URL.
+    #
+    #   **This parameter is deprecated and no longer used by the Amazon
+    #   Chime SDK.**
     #   @return [String]
     #
     # @!attribute [rw] event_ingestion_url
@@ -1175,8 +1265,8 @@ module Aws::ChimeSDKMeetings
     #   `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
     #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
     #
-    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
-    #   `us-gov-west-1`.
+    #   Available values in Amazon Web Services GovCloud (US) Regions:
+    #   `us-gov-east-1`, `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] media_placement
@@ -1223,10 +1313,28 @@ module Aws::ChimeSDKMeetings
     #   meeting.
     #   @return [Types::AudioFeatures]
     #
+    # @!attribute [rw] video
+    #   The configuration settings for the video features available to a
+    #   meeting.
+    #   @return [Types::VideoFeatures]
+    #
+    # @!attribute [rw] content
+    #   The configuration settings for the content features available to a
+    #   meeting.
+    #   @return [Types::ContentFeatures]
+    #
+    # @!attribute [rw] attendee
+    #   The configuration settings for the attendee features available to a
+    #   meeting.
+    #   @return [Types::AttendeeFeatures]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/MeetingFeaturesConfiguration AWS API Documentation
     #
     class MeetingFeaturesConfiguration < Struct.new(
-      :audio)
+      :audio,
+      :video,
+      :content,
+      :attendee)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1259,8 +1367,8 @@ module Aws::ChimeSDKMeetings
     # meeting and attendee events occur.
     #
     # @!attribute [rw] lambda_function_arn
-    #   The ARN of the AWS Lambda function in the notifications
-    #   configuration.
+    #   The ARN of the Amazon Web Services Lambda function in the
+    #   notifications configuration.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -1599,6 +1707,34 @@ module Aws::ChimeSDKMeetings
     #
     class UpdateAttendeeCapabilitiesResponse < Struct.new(
       :attendee)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The video features set for the meeting. Applies to all attendees.
+    #
+    # <note markdown="1"> If you specify `MeetingFeatures:Video:MaxResolution:None` when you
+    # create a meeting, all API requests that include `SendReceive`, `Send`,
+    # or `Receive` for `AttendeeCapabilities:Video` will be rejected with
+    # `ValidationError 400`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] max_resolution
+    #   The maximum video resolution for the meeting. Applies to all
+    #   attendees.
+    #
+    #   <note markdown="1"> Defaults to `HD`. To use `FHD`, you must also provide a
+    #   `MeetingFeatures:Attendee:MaxCount` value and override the default
+    #   size limit of 250 attendees.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/VideoFeatures AWS API Documentation
+    #
+    class VideoFeatures < Struct.new(
+      :max_resolution)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -388,6 +388,47 @@ module Aws::MarketplaceCatalog
 
     # @!group API Operations
 
+    # Returns metadata and content for multiple entities.
+    #
+    # @option params [required, Array<Types::EntityRequest>] :entity_request_list
+    #   List of entity IDs and the catalogs the entities are present in.
+    #
+    # @return [Types::BatchDescribeEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDescribeEntitiesResponse#entity_details #entity_details} => Hash&lt;String,Types::EntityDetail&gt;
+    #   * {Types::BatchDescribeEntitiesResponse#errors #errors} => Hash&lt;String,Types::BatchDescribeErrorDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_describe_entities({
+    #     entity_request_list: [ # required
+    #       {
+    #         catalog: "Catalog", # required
+    #         entity_id: "EntityId", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_details #=> Hash
+    #   resp.entity_details["EntityId"].entity_type #=> String
+    #   resp.entity_details["EntityId"].entity_arn #=> String
+    #   resp.entity_details["EntityId"].entity_identifier #=> String
+    #   resp.entity_details["EntityId"].last_modified_date #=> String
+    #   resp.errors #=> Hash
+    #   resp.errors["EntityId"].error_code #=> String
+    #   resp.errors["EntityId"].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/BatchDescribeEntities AWS API Documentation
+    #
+    # @overload batch_describe_entities(params = {})
+    # @param [Hash] params ({})
+    def batch_describe_entities(params = {}, options = {})
+      req = build_request(:batch_describe_entities, params)
+      req.send_request(options)
+    end
+
     # Used to cancel an open change request. Must be sent before the status
     # of the request changes to `APPLYING`, the final stage of completing
     # your change request. You can describe a change during the 60-day
@@ -662,10 +703,10 @@ module Aws::MarketplaceCatalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
     #
     # @option params [required, String] :entity_type
-    #   The type of entities to retrieve. Valid values are: `ServerProduct`,
-    #   `AmiProduct`, `ContainerProduct`, `DataProduct`, `SaaSProduct`,
-    #   `ProcurementPolicy`, `Experience`, `Audience`, `BrandingSettings`,
-    #   `Offer`, `Seller`, `ResaleAuthorization`.
+    #   The type of entities to retrieve. Valid values are: `AmiProduct`,
+    #   `ContainerProduct`, `DataProduct`, `SaaSProduct`, `ProcurementPolicy`,
+    #   `Experience`, `Audience`, `BrandingSettings`, `Offer`, `Seller`,
+    #   `ResaleAuthorization`.
     #
     # @option params [Array<Types::Filter>] :filter_list
     #   An array of filter objects. Each filter object contains two
@@ -1224,7 +1265,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

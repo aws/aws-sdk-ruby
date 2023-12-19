@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.431.0 (2023-12-19)
+------------------
+
+* Feature - Provision BYOIPv4 address ranges and advertise them by specifying the network border groups option in Los Angeles, Phoenix and Dallas AWS Local Zones.
+
 1.430.0 (2023-12-08)
 ------------------
 
