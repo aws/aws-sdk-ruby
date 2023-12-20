@@ -4,6 +4,15 @@ module AwsSdkCodeGenerator
   module Views
     module RBS
       class ClientClass < View
+        SKIP_MEMBERS = Set.new([
+          :context,
+          :data,
+          :error,
+          :checksum_validated,
+          :on,
+          :on_success,
+        ])
+
         def initialize(options)
           @options = options
           @service_name = options.fetch(:service_name)
@@ -31,7 +40,7 @@ module AwsSdkCodeGenerator
         def operations
           shapes = @api["shapes"]
           @api["operations"].map do |name, body|
-            method_name = Underscore.underscore(body.fetch("name"))
+            method_name = Underscore.underscore(name)
             indent = " " * (12 + method_name.length)
             input_shape_name = body.dig("input", "shape")
             arguments = nil
@@ -49,15 +58,37 @@ module AwsSdkCodeGenerator
             if AwsSdkCodeGenerator::Helper.operation_streaming?(body, @api)
               block = " ?{ (*untyped) -> void }"
             end
-            returns = body.dig("output", "shape")&.then { "Types::#{_1}" } || "::Aws::EmptyStructure"
+            if output_shape_name = body.dig("output", "shape")
+              output_shape = shapes[output_shape_name]
+              data = AwsSdkCodeGenerator::RBS.to_type(body.fetch( "output"), @api)
+              interface = "_#{name}ResponseSuccess"
+            else
+              output_shape = nil
+              data = "::Aws::EmptyStructure"
+              interface = empty_interface = "::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]"
+            end
+            returns_members = output_shape&.[]("members")&.inject([]) do |a, (member_name, member_ref)|
+              next if SKIP_MEMBERS.include?(member_name)
+              a << {
+                method_name: Underscore.underscore(member_name),
+                returns: AwsSdkCodeGenerator::RBS.to_type(member_ref, @api),
+              }
+            end
 
-            AwsSdkCodeGenerator::RBS::MethodSignature.new(
+            {
               method_name: method_name,
-              overloads: [
-                "(#{arguments})#{block} -> #{returns}",
-                "(\n#{indent}  #{include_required ? "" : "?"}Hash[Symbol, untyped] params,\n#{indent}  ?Hash[Symbol, untyped] options\n#{indent})#{block} -> #{returns}",
-              ],
-            )
+              signature: AwsSdkCodeGenerator::RBS::MethodSignature.new(
+                method_name: method_name,
+                overloads: [
+                  "(#{arguments})#{block} -> #{interface}",
+                  "(#{include_required ? "" : "?"}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options)#{block} -> #{interface}",
+                  "(#{include_required ? "" : "?"}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options)#{block} -> ::Seahorse::Client::_ResponseError",
+                ]).signature,
+              interface: interface,
+              data: data,
+              returns_members: returns_members,
+              empty_structure: output_shape.nil?
+            }
           end
         end
 

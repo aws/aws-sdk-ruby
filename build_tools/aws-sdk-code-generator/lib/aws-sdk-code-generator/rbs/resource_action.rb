@@ -17,7 +17,7 @@ module AwsSdkCodeGenerator
         returns = if action["resource"]
           resource = action["resource"]
           AwsSdkCodeGenerator::Api.plural?(resource) ? "#{resource["type"]}::Collection" : resource["type"]
-        elsif operation[:output]
+        elsif operation["output"]
           "Types::#{operation["output"]["shape"]}"
         else
           "::Aws::EmptyStructure"

@@ -16,9 +16,10 @@ module AwsSdkCodeGenerator
 
       def format(indent: '')
         members_str = struct_members(@shape, indent, [], keyword: true)
-        result = ['']
+        result = []
+        result << '' if newline
         result << members_str if !members_str.empty?
-        result << indent
+        result << indent if newline
         result.join(joint)
       end
 

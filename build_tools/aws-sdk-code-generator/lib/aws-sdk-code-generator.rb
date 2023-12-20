@@ -77,7 +77,7 @@ require_relative 'aws-sdk-code-generator/code_builder'
 require_relative 'aws-sdk-code-generator/gem_builder'
 
 # RBS
-if RUBY_PLATFORM == 'ruby' && RUBY_VERSION >= '3.2'
+if RUBY_VERSION >= '3.2'
   require_relative 'aws-sdk-code-generator/rbs'
   require_relative 'aws-sdk-code-generator/rbs/error_list'
   require_relative 'aws-sdk-code-generator/rbs/method_signature'

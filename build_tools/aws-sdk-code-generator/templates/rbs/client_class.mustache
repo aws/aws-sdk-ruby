@@ -10,6 +10,14 @@ module Aws
 
       {{#operations}}
 
+      {{^empty_structure}}
+      interface {{interface}}
+        include ::Seahorse::Client::_ResponseSuccess[{{data}}]
+        {{#returns_members}}
+        def {{method_name}}: () -> {{{returns}}}
+        {{/returns_members}}
+      end
+      {{/empty_structure}}
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Client.html#{{method_name}}-instance_method
       {{{signature}}}
       {{/operations}}
@@ -19,10 +27,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Client.html#wait_until-instance_method
       def wait_until: {{{client_overload_keyword_argument}}}
                     | {{{client_overload_positional_argument}}}
+                    | {{{client_overload_positional_argument_error}}}
       {{/waiters_first}}
       {{#waiters_others}}
                     | {{{client_overload_keyword_argument}}}
                     | {{{client_overload_positional_argument}}}
+                    | {{{client_overload_positional_argument_error}}}
       {{/waiters_others}}
       {{/waiters?}}
     end

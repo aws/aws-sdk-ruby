@@ -80,7 +80,7 @@ module BuildTools
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || [],
         deprecated: config['deprecated'],
-        support_rbs: RUBY_PLATFORM == 'ruby' && RUBY_VERSION >= '3.2',
+        support_rbs: RUBY_VERSION >= '3.2',
       )
     end
 

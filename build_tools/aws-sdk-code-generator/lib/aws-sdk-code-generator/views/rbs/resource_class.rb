@@ -37,8 +37,8 @@ module AwsSdkCodeGenerator
             AwsSdkCodeGenerator::RBS::MethodSignature.new(
               method_name: "wait_until_#{Underscore.underscore(waiter_name)}",
               overloads: [
-                "(?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) -> #{class_name}",
-                "(?Hash[Symbol, untyped]) -> #{class_name}",
+                "(?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> #{class_name}",
+                "(?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> #{class_name}",
               ],
             )
           end
@@ -64,7 +64,7 @@ module AwsSdkCodeGenerator
         end
 
         def load?
-          @resource[:load]
+          @resource["load"]
         end
 
         def load_or_shape?

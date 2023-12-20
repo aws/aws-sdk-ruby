@@ -8,47 +8,53 @@
 module Aws
   module Lambda
     module Waiters
+
       class FunctionActive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: ( function_name: ::String, ?qualifier: ::String ) -> Types::FunctionConfiguration
-                | (Hash[Symbol, untyped]) -> Types::FunctionConfiguration
+        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionConfigurationResponse
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponse
       end
+
       class FunctionActiveV2
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: ( function_name: ::String, ?qualifier: ::String ) -> Types::GetFunctionResponse
-                | (Hash[Symbol, untyped]) -> Types::GetFunctionResponse
+        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionResponse
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponse
       end
+
       class FunctionExists
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: ( function_name: ::String, ?qualifier: ::String ) -> Types::GetFunctionResponse
-                | (Hash[Symbol, untyped]) -> Types::GetFunctionResponse
+        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionResponse
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponse
       end
+
       class FunctionUpdated
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: ( function_name: ::String, ?qualifier: ::String ) -> Types::FunctionConfiguration
-                | (Hash[Symbol, untyped]) -> Types::FunctionConfiguration
+        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionConfigurationResponse
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponse
       end
+
       class FunctionUpdatedV2
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: ( function_name: ::String, ?qualifier: ::String ) -> Types::GetFunctionResponse
-                | (Hash[Symbol, untyped]) -> Types::GetFunctionResponse
+        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionResponse
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponse
       end
+
       class PublishedVersionActive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: ( function_name: ::String, ?qualifier: ::String ) -> Types::FunctionConfiguration
-                | (Hash[Symbol, untyped]) -> Types::FunctionConfiguration
+        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionConfigurationResponse
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponse
       end
     end
   end
