@@ -194,7 +194,6 @@ module AwsSdkCodeGenerator
             @union = options.fetch(:union)
             @members << StructMember.new(
               member_name: :unknown,
-              member_class_name: 'Unknown',
               returns: 'untyped' # FIXME
             ) if @union
             if @members.nil? || @members.empty?
