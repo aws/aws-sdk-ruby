@@ -27,9 +27,9 @@ module Aws
       @api_requests = []
 
       requests = @api_requests
-      stub_mutex = @stub_mutex
+      requests_mutex = Mutex.new
       self.handle do |context|
-        stub_mutex.synchronize do
+        requests_mutex.synchronize do
           requests << {
             operation_name: context.operation_name,
             params: context.params,
