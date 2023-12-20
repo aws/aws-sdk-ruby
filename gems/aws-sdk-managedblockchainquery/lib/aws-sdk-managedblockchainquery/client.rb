@@ -411,7 +411,7 @@ module Aws::ManagedBlockchainQuery
     #     get_token_balance_inputs: [
     #       {
     #         token_identifier: { # required
-    #           network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #           network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #           contract_address: "ChainAddress",
     #           token_id: "QueryTokenId",
     #         },
@@ -429,14 +429,14 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp.token_balances #=> Array
     #   resp.token_balances[0].owner_identifier.address #=> String
-    #   resp.token_balances[0].token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.token_balances[0].token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.token_balances[0].token_identifier.contract_address #=> String
     #   resp.token_balances[0].token_identifier.token_id #=> String
     #   resp.token_balances[0].balance #=> String
     #   resp.token_balances[0].at_blockchain_instant.time #=> Time
     #   resp.token_balances[0].last_updated_time.time #=> Time
     #   resp.errors #=> Array
-    #   resp.errors[0].token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.errors[0].token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.errors[0].token_identifier.contract_address #=> String
     #   resp.errors[0].token_identifier.token_id #=> String
     #   resp.errors[0].owner_identifier.address #=> String
@@ -479,14 +479,14 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp = client.get_asset_contract({
     #     contract_identifier: { # required
-    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #       contract_address: "ChainAddress", # required
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.contract_identifier.network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.contract_identifier.network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.contract_identifier.contract_address #=> String
     #   resp.token_standard #=> String, one of "ERC20", "ERC721", "ERC1155"
     #   resp.deployer_address #=> String
@@ -538,7 +538,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp = client.get_token_balance({
     #     token_identifier: { # required
-    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #       contract_address: "ChainAddress",
     #       token_id: "QueryTokenId",
     #     },
@@ -553,7 +553,7 @@ module Aws::ManagedBlockchainQuery
     # @example Response structure
     #
     #   resp.owner_identifier.address #=> String
-    #   resp.token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.token_identifier.contract_address #=> String
     #   resp.token_identifier.token_id #=> String
     #   resp.balance #=> String
@@ -586,12 +586,12 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp = client.get_transaction({
     #     transaction_hash: "QueryTransactionHash", # required
-    #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #   })
     #
     # @example Response structure
     #
-    #   resp.transaction.network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.transaction.network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.transaction.block_hash #=> String
     #   resp.transaction.transaction_hash #=> String
     #   resp.transaction.block_number #=> String
@@ -610,6 +610,8 @@ module Aws::ManagedBlockchainQuery
     #   resp.transaction.signature_s #=> String
     #   resp.transaction.transaction_fee #=> String
     #   resp.transaction.transaction_id #=> String
+    #   resp.transaction.confirmation_status #=> String, one of "FINAL"
+    #   resp.transaction.execution_status #=> String, one of "FAILED", "SUCCEEDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/GetTransaction AWS API Documentation
     #
@@ -646,7 +648,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp = client.list_asset_contracts({
     #     contract_filter: { # required
-    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #       token_standard: "ERC20", # required, accepts ERC20, ERC721, ERC1155
     #       deployer_address: "ChainAddress", # required
     #     },
@@ -657,7 +659,7 @@ module Aws::ManagedBlockchainQuery
     # @example Response structure
     #
     #   resp.contracts #=> Array
-    #   resp.contracts[0].contract_identifier.network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.contracts[0].contract_identifier.network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.contracts[0].contract_identifier.contract_address #=> String
     #   resp.contracts[0].token_standard #=> String, one of "ERC20", "ERC721", "ERC1155"
     #   resp.contracts[0].deployer_address #=> String
@@ -722,7 +724,7 @@ module Aws::ManagedBlockchainQuery
     #       address: "ChainAddress", # required
     #     },
     #     token_filter: { # required
-    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #       network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #       contract_address: "ChainAddress",
     #       token_id: "QueryTokenId",
     #     },
@@ -734,7 +736,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp.token_balances #=> Array
     #   resp.token_balances[0].owner_identifier.address #=> String
-    #   resp.token_balances[0].token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.token_balances[0].token_identifier.network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.token_balances[0].token_identifier.contract_address #=> String
     #   resp.token_balances[0].token_identifier.token_id #=> String
     #   resp.token_balances[0].balance #=> String
@@ -788,7 +790,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp = client.list_transaction_events({
     #     transaction_hash: "QueryTransactionHash", # required
-    #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -796,7 +798,7 @@ module Aws::ManagedBlockchainQuery
     # @example Response structure
     #
     #   resp.events #=> Array
-    #   resp.events[0].network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.events[0].network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.events[0].transaction_hash #=> String
     #   resp.events[0].event_type #=> String, one of "ERC20_TRANSFER", "ERC20_MINT", "ERC20_BURN", "ERC20_DEPOSIT", "ERC20_WITHDRAWAL", "ERC721_TRANSFER", "ERC1155_TRANSFER", "BITCOIN_VIN", "BITCOIN_VOUT", "INTERNAL_ETH_TRANSFER", "ETH_TRANSFER"
     #   resp.events[0].from #=> String
@@ -865,7 +867,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp = client.list_transactions({
     #     address: "ChainAddress", # required
-    #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, BITCOIN_MAINNET, BITCOIN_TESTNET, ETHEREUM_SEPOLIA_TESTNET
+    #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #     from_blockchain_instant: {
     #       time: Time.now,
     #     },
@@ -884,7 +886,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp.transactions #=> Array
     #   resp.transactions[0].transaction_hash #=> String
-    #   resp.transactions[0].network #=> String, one of "ETHEREUM_MAINNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET", "ETHEREUM_SEPOLIA_TESTNET"
+    #   resp.transactions[0].network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.transactions[0].transaction_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -910,7 +912,7 @@ module Aws::ManagedBlockchainQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchainquery'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

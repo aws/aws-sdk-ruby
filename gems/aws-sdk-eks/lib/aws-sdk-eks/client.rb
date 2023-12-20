@@ -629,12 +629,16 @@ module Aws::EKS
     #   than one access entry. This value can't be changed after access entry
     #   creation.
     #
-    #   [IAM best practices][1] recommend using IAM roles with temporary
-    #   credentials, rather than IAM users with long-term credentials.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-users-federation-idp
+    #   The valid principals differ depending on the type of the access entry
+    #   in the `type` field. The only valid ARN is IAM roles for the types of
+    #   access entries for nodes: ` . You can use every IAM principal type for
+    #   STANDARD access entries. You can't use the STS session principal type
+    #   with access entries because this is a temporary principal for each
+    #   session and not a permanent identity that can be assigned
+    #   permissions.</p>  IAM best practices recommend using IAM roles with
+    #   temporary credentials, rather than IAM users with long-term
+    #   credentials.
+    #   `
     #
     # @option params [Array<String>] :kubernetes_groups
     #   The value for `name` that you've specified for `kind: Group` as a
@@ -685,6 +689,9 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html#creating-access-entries
     #
     # @option params [String] :type
+    #   The type of the new access entry. Valid values are `Standard`,
+    #   `FARGATE_LINUX`, `EC2_LINUX`, and `EC2_WINDOWS`.
+    #
     #   If the `principalArn` is for an IAM role that's used for self-managed
     #   Amazon EC2 nodes, specify `EC2_LINUX` or `EC2_WINDOWS`. Amazon EKS
     #   grants the necessary permissions to the node for you. If the
@@ -2835,6 +2842,63 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns details about an insight that you specify using its ID.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster to describe the insight for.
+    #
+    # @option params [required, String] :id
+    #   The identity of the insight to describe.
+    #
+    # @return [Types::DescribeInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInsightResponse#insight #insight} => Types::Insight
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_insight({
+    #     cluster_name: "String", # required
+    #     id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight.id #=> String
+    #   resp.insight.name #=> String
+    #   resp.insight.category #=> String, one of "UPGRADE_READINESS"
+    #   resp.insight.kubernetes_version #=> String
+    #   resp.insight.last_refresh_time #=> Time
+    #   resp.insight.last_transition_time #=> Time
+    #   resp.insight.description #=> String
+    #   resp.insight.insight_status.status #=> String, one of "PASSING", "WARNING", "ERROR", "UNKNOWN"
+    #   resp.insight.insight_status.reason #=> String
+    #   resp.insight.recommendation #=> String
+    #   resp.insight.additional_info #=> Hash
+    #   resp.insight.additional_info["String"] #=> String
+    #   resp.insight.resources #=> Array
+    #   resp.insight.resources[0].insight_status.status #=> String, one of "PASSING", "WARNING", "ERROR", "UNKNOWN"
+    #   resp.insight.resources[0].insight_status.reason #=> String
+    #   resp.insight.resources[0].kubernetes_resource_uri #=> String
+    #   resp.insight.resources[0].arn #=> String
+    #   resp.insight.category_specific_summary.deprecation_details #=> Array
+    #   resp.insight.category_specific_summary.deprecation_details[0].usage #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].replaced_with #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].stop_serving_version #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].start_serving_replacement_version #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats #=> Array
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats[0].user_agent #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats[0].number_of_requests_last_30_days #=> Integer
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats[0].last_request_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsight AWS API Documentation
+    #
+    # @overload describe_insight(params = {})
+    # @param [Hash] params ({})
+    def describe_insight(params = {}, options = {})
+      req = build_request(:describe_insight, params)
+      req.send_request(options)
+    end
+
     # Describes a managed node group.
     #
     # @option params [required, String] :cluster_name
@@ -3620,6 +3684,78 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_identity_provider_configs(params = {}, options = {})
       req = build_request(:list_identity_provider_configs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all insights checked for against the specified
+    # cluster. You can filter which insights are returned by category,
+    # associated Kubernetes version, and status.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster associated with the insights.
+    #
+    # @option params [Types::InsightsFilter] :filter
+    #   The criteria to filter your list of insights for your cluster. You can
+    #   filter which insights are returned by category, associated Kubernetes
+    #   version, and status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of identity provider configurations returned by
+    #   `ListInsights` in paginated output. When you use this parameter,
+    #   `ListInsights` returns only `maxResults` results in a single page
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another `ListInsights`
+    #   request with the returned `nextToken` value. This value can be between
+    #   1 and 100. If you don't use this parameter, `ListInsights` returns up
+    #   to 100 results and a `nextToken` value, if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListInsights` request. When the results of a `ListInsights` request
+    #   exceed `maxResults`, you can use this value to retrieve the next page
+    #   of results. This value is `null` when there are no more results to
+    #   return.
+    #
+    # @return [Types::ListInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInsightsResponse#insights #insights} => Array&lt;Types::InsightSummary&gt;
+    #   * {Types::ListInsightsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_insights({
+    #     cluster_name: "String", # required
+    #     filter: {
+    #       categories: ["UPGRADE_READINESS"], # accepts UPGRADE_READINESS
+    #       kubernetes_versions: ["String"],
+    #       statuses: ["PASSING"], # accepts PASSING, WARNING, ERROR, UNKNOWN
+    #     },
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insights #=> Array
+    #   resp.insights[0].id #=> String
+    #   resp.insights[0].name #=> String
+    #   resp.insights[0].category #=> String, one of "UPGRADE_READINESS"
+    #   resp.insights[0].kubernetes_version #=> String
+    #   resp.insights[0].last_refresh_time #=> Time
+    #   resp.insights[0].last_transition_time #=> Time
+    #   resp.insights[0].description #=> String
+    #   resp.insights[0].insight_status.status #=> String, one of "PASSING", "WARNING", "ERROR", "UNKNOWN"
+    #   resp.insights[0].insight_status.reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListInsights AWS API Documentation
+    #
+    # @overload list_insights(params = {})
+    # @param [Hash] params ({})
+    def list_insights(params = {}, options = {})
+      req = build_request(:list_insights, params)
       req.send_request(options)
     end
 
@@ -4819,7 +4955,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

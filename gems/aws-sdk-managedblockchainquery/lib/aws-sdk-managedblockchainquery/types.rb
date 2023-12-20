@@ -963,6 +963,18 @@ module Aws::ManagedBlockchainQuery
     #
     # @!attribute [rw] status
     #   The status of the transaction.
+    #
+    #   This property is deprecated. You must use the `confirmationStatus`
+    #   and the `executionStatus` properties to determine if the `status` of
+    #   the transaction is `FINAL` or `FAILED`.
+    #
+    #    * Transactions with a `status` of `FINAL` will now have the
+    #     `confirmationStatus` set to `FINAL` and the `executionStatus` set
+    #     to `SUCCEEDED`.
+    #
+    #   * Transactions with a `status` of `FAILED` will now have the
+    #     `confirmationStatus` set to `FINAL` and the `executionStatus` set
+    #     to `FAILED`.
     #   @return [String]
     #
     # @!attribute [rw] to
@@ -1012,6 +1024,14 @@ module Aws::ManagedBlockchainQuery
     #   transaction is verified and added to the blockchain.
     #   @return [String]
     #
+    # @!attribute [rw] confirmation_status
+    #   Specifies whether the transaction has reached Finality.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   Identifies whether the transaction has succeeded or failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/Transaction AWS API Documentation
     #
     class Transaction < Struct.new(
@@ -1033,7 +1053,9 @@ module Aws::ManagedBlockchainQuery
       :signature_r,
       :signature_s,
       :transaction_fee,
-      :transaction_id)
+      :transaction_id,
+      :confirmation_status,
+      :execution_status)
       SENSITIVE = []
       include Aws::Structure
     end

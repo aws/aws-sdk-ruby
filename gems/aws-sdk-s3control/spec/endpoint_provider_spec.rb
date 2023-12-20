@@ -2824,7 +2824,7 @@ module Aws::S3Control
         resp = client.put_bucket_versioning(
           bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
           account_id: '123456789012',
-          versioning_configuration: {"status"=>"Enabled"},
+          versioning_configuration: {:status=>"Enabled"},
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)

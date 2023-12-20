@@ -1422,6 +1422,7 @@ module Aws::AppStream
 
     UserSetting.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
     UserSetting.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "Permission"))
+    UserSetting.add_member(:maximum_length, Shapes::ShapeRef.new(shape: Integer, location_name: "MaximumLength"))
     UserSetting.struct_class = Types::UserSetting
 
     UserSettingList.member = Shapes::ShapeRef.new(shape: UserSetting)
@@ -1691,6 +1692,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:create_streaming_url, Seahorse::Model::Operation.new.tap do |o|

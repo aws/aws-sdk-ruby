@@ -225,6 +225,7 @@ module Aws::GuardDuty
     GetMemberDetectorsResponse = Shapes::StructureShape.new(name: 'GetMemberDetectorsResponse')
     GetMembersRequest = Shapes::StructureShape.new(name: 'GetMembersRequest')
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
+    GetOrganizationStatisticsResponse = Shapes::StructureShape.new(name: 'GetOrganizationStatisticsResponse')
     GetRemainingFreeTrialDaysRequest = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysRequest')
     GetRemainingFreeTrialDaysResponse = Shapes::StructureShape.new(name: 'GetRemainingFreeTrialDaysResponse')
     GetThreatIntelSetRequest = Shapes::StructureShape.new(name: 'GetThreatIntelSetRequest')
@@ -335,10 +336,15 @@ module Aws::GuardDuty
     OrganizationAdditionalConfigurations = Shapes::ListShape.new(name: 'OrganizationAdditionalConfigurations')
     OrganizationDataSourceConfigurations = Shapes::StructureShape.new(name: 'OrganizationDataSourceConfigurations')
     OrganizationDataSourceConfigurationsResult = Shapes::StructureShape.new(name: 'OrganizationDataSourceConfigurationsResult')
+    OrganizationDetails = Shapes::StructureShape.new(name: 'OrganizationDetails')
     OrganizationEbsVolumes = Shapes::StructureShape.new(name: 'OrganizationEbsVolumes')
     OrganizationEbsVolumesResult = Shapes::StructureShape.new(name: 'OrganizationEbsVolumesResult')
     OrganizationFeatureConfiguration = Shapes::StructureShape.new(name: 'OrganizationFeatureConfiguration')
     OrganizationFeatureConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationFeatureConfigurationResult')
+    OrganizationFeatureStatistics = Shapes::StructureShape.new(name: 'OrganizationFeatureStatistics')
+    OrganizationFeatureStatisticsAdditionalConfiguration = Shapes::StructureShape.new(name: 'OrganizationFeatureStatisticsAdditionalConfiguration')
+    OrganizationFeatureStatisticsAdditionalConfigurations = Shapes::ListShape.new(name: 'OrganizationFeatureStatisticsAdditionalConfigurations')
+    OrganizationFeatureStatisticsResults = Shapes::ListShape.new(name: 'OrganizationFeatureStatisticsResults')
     OrganizationFeaturesConfigurations = Shapes::ListShape.new(name: 'OrganizationFeaturesConfigurations')
     OrganizationFeaturesConfigurationsResults = Shapes::ListShape.new(name: 'OrganizationFeaturesConfigurationsResults')
     OrganizationKubernetesAuditLogsConfiguration = Shapes::StructureShape.new(name: 'OrganizationKubernetesAuditLogsConfiguration')
@@ -351,6 +357,7 @@ module Aws::GuardDuty
     OrganizationS3LogsConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationS3LogsConfigurationResult')
     OrganizationScanEc2InstanceWithFindings = Shapes::StructureShape.new(name: 'OrganizationScanEc2InstanceWithFindings')
     OrganizationScanEc2InstanceWithFindingsResult = Shapes::StructureShape.new(name: 'OrganizationScanEc2InstanceWithFindingsResult')
+    OrganizationStatistics = Shapes::StructureShape.new(name: 'OrganizationStatistics')
     Owner = Shapes::StructureShape.new(name: 'Owner')
     PermissionConfiguration = Shapes::StructureShape.new(name: 'PermissionConfiguration')
     PortProbeAction = Shapes::StructureShape.new(name: 'PortProbeAction')
@@ -475,6 +482,10 @@ module Aws::GuardDuty
     UsageResourceResultList = Shapes::ListShape.new(name: 'UsageResourceResultList')
     UsageStatisticType = Shapes::StringShape.new(name: 'UsageStatisticType')
     UsageStatistics = Shapes::StructureShape.new(name: 'UsageStatistics')
+    UsageTopAccountResult = Shapes::StructureShape.new(name: 'UsageTopAccountResult')
+    UsageTopAccountsByFeatureList = Shapes::ListShape.new(name: 'UsageTopAccountsByFeatureList')
+    UsageTopAccountsResult = Shapes::StructureShape.new(name: 'UsageTopAccountsResult')
+    UsageTopAccountsResultList = Shapes::ListShape.new(name: 'UsageTopAccountsResultList')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     VolumeDetail = Shapes::StructureShape.new(name: 'VolumeDetail')
     VolumeDetails = Shapes::ListShape.new(name: 'VolumeDetails')
@@ -1228,6 +1239,9 @@ module Aws::GuardDuty
     GetMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, required: true, location_name: "unprocessedAccounts"))
     GetMembersResponse.struct_class = Types::GetMembersResponse
 
+    GetOrganizationStatisticsResponse.add_member(:organization_details, Shapes::ShapeRef.new(shape: OrganizationDetails, location_name: "organizationDetails"))
+    GetOrganizationStatisticsResponse.struct_class = Types::GetOrganizationStatisticsResponse
+
     GetRemainingFreeTrialDaysRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     GetRemainingFreeTrialDaysRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     GetRemainingFreeTrialDaysRequest.struct_class = Types::GetRemainingFreeTrialDaysRequest
@@ -1652,6 +1666,10 @@ module Aws::GuardDuty
     OrganizationDataSourceConfigurationsResult.add_member(:malware_protection, Shapes::ShapeRef.new(shape: OrganizationMalwareProtectionConfigurationResult, location_name: "malwareProtection"))
     OrganizationDataSourceConfigurationsResult.struct_class = Types::OrganizationDataSourceConfigurationsResult
 
+    OrganizationDetails.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    OrganizationDetails.add_member(:organization_statistics, Shapes::ShapeRef.new(shape: OrganizationStatistics, location_name: "organizationStatistics"))
+    OrganizationDetails.struct_class = Types::OrganizationDetails
+
     OrganizationEbsVolumes.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoEnable"))
     OrganizationEbsVolumes.struct_class = Types::OrganizationEbsVolumes
 
@@ -1667,6 +1685,19 @@ module Aws::GuardDuty
     OrganizationFeatureConfigurationResult.add_member(:auto_enable, Shapes::ShapeRef.new(shape: OrgFeatureStatus, location_name: "autoEnable"))
     OrganizationFeatureConfigurationResult.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: OrganizationAdditionalConfigurationResults, location_name: "additionalConfiguration"))
     OrganizationFeatureConfigurationResult.struct_class = Types::OrganizationFeatureConfigurationResult
+
+    OrganizationFeatureStatistics.add_member(:name, Shapes::ShapeRef.new(shape: OrgFeature, location_name: "name"))
+    OrganizationFeatureStatistics.add_member(:enabled_accounts_count, Shapes::ShapeRef.new(shape: Integer, location_name: "enabledAccountsCount"))
+    OrganizationFeatureStatistics.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: OrganizationFeatureStatisticsAdditionalConfigurations, location_name: "additionalConfiguration"))
+    OrganizationFeatureStatistics.struct_class = Types::OrganizationFeatureStatistics
+
+    OrganizationFeatureStatisticsAdditionalConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: OrgFeatureAdditionalConfiguration, location_name: "name"))
+    OrganizationFeatureStatisticsAdditionalConfiguration.add_member(:enabled_accounts_count, Shapes::ShapeRef.new(shape: Integer, location_name: "enabledAccountsCount"))
+    OrganizationFeatureStatisticsAdditionalConfiguration.struct_class = Types::OrganizationFeatureStatisticsAdditionalConfiguration
+
+    OrganizationFeatureStatisticsAdditionalConfigurations.member = Shapes::ShapeRef.new(shape: OrganizationFeatureStatisticsAdditionalConfiguration)
+
+    OrganizationFeatureStatisticsResults.member = Shapes::ShapeRef.new(shape: OrganizationFeatureStatistics)
 
     OrganizationFeaturesConfigurations.member = Shapes::ShapeRef.new(shape: OrganizationFeatureConfiguration)
 
@@ -1701,6 +1732,13 @@ module Aws::GuardDuty
 
     OrganizationScanEc2InstanceWithFindingsResult.add_member(:ebs_volumes, Shapes::ShapeRef.new(shape: OrganizationEbsVolumesResult, location_name: "ebsVolumes"))
     OrganizationScanEc2InstanceWithFindingsResult.struct_class = Types::OrganizationScanEc2InstanceWithFindingsResult
+
+    OrganizationStatistics.add_member(:total_accounts_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalAccountsCount"))
+    OrganizationStatistics.add_member(:member_accounts_count, Shapes::ShapeRef.new(shape: Integer, location_name: "memberAccountsCount"))
+    OrganizationStatistics.add_member(:active_accounts_count, Shapes::ShapeRef.new(shape: Integer, location_name: "activeAccountsCount"))
+    OrganizationStatistics.add_member(:enabled_accounts_count, Shapes::ShapeRef.new(shape: Integer, location_name: "enabledAccountsCount"))
+    OrganizationStatistics.add_member(:count_by_feature, Shapes::ShapeRef.new(shape: OrganizationFeatureStatisticsResults, location_name: "countByFeature"))
+    OrganizationStatistics.struct_class = Types::OrganizationStatistics
 
     Owner.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Owner.struct_class = Types::Owner
@@ -2154,11 +2192,24 @@ module Aws::GuardDuty
     UsageResourceResultList.member = Shapes::ShapeRef.new(shape: UsageResourceResult)
 
     UsageStatistics.add_member(:sum_by_account, Shapes::ShapeRef.new(shape: UsageAccountResultList, location_name: "sumByAccount"))
+    UsageStatistics.add_member(:top_accounts_by_feature, Shapes::ShapeRef.new(shape: UsageTopAccountsResultList, location_name: "topAccountsByFeature"))
     UsageStatistics.add_member(:sum_by_data_source, Shapes::ShapeRef.new(shape: UsageDataSourceResultList, location_name: "sumByDataSource"))
     UsageStatistics.add_member(:sum_by_resource, Shapes::ShapeRef.new(shape: UsageResourceResultList, location_name: "sumByResource"))
     UsageStatistics.add_member(:top_resources, Shapes::ShapeRef.new(shape: UsageResourceResultList, location_name: "topResources"))
     UsageStatistics.add_member(:sum_by_feature, Shapes::ShapeRef.new(shape: UsageFeatureResultList, location_name: "sumByFeature"))
     UsageStatistics.struct_class = Types::UsageStatistics
+
+    UsageTopAccountResult.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    UsageTopAccountResult.add_member(:total, Shapes::ShapeRef.new(shape: Total, location_name: "total"))
+    UsageTopAccountResult.struct_class = Types::UsageTopAccountResult
+
+    UsageTopAccountsByFeatureList.member = Shapes::ShapeRef.new(shape: UsageTopAccountResult)
+
+    UsageTopAccountsResult.add_member(:feature, Shapes::ShapeRef.new(shape: UsageFeature, location_name: "feature"))
+    UsageTopAccountsResult.add_member(:accounts, Shapes::ShapeRef.new(shape: UsageTopAccountsByFeatureList, location_name: "accounts"))
+    UsageTopAccountsResult.struct_class = Types::UsageTopAccountsResult
+
+    UsageTopAccountsResultList.member = Shapes::ShapeRef.new(shape: UsageTopAccountsResult)
 
     Volume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     Volume.add_member(:host_path, Shapes::ShapeRef.new(shape: HostPath, location_name: "hostPath"))
@@ -2597,6 +2648,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}/member/get"
         o.input = Shapes::ShapeRef.new(shape: GetMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_organization_statistics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOrganizationStatistics"
+        o.http_method = "GET"
+        o.http_request_uri = "/organization/statistics"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetOrganizationStatisticsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)

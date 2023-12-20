@@ -652,6 +652,32 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Details about clients using the deprecated resources.
+    #
+    # @!attribute [rw] user_agent
+    #   The user agent of the Kubernetes client using the deprecated
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_requests_last_30_days
+    #   The number of requests from the Kubernetes client seen over the last
+    #   30 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_request_time
+    #   The timestamp of the last request seen from the Kubernetes client.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClientStat AWS API Documentation
+    #
+    class ClientStat < Struct.new(
+      :user_agent,
+      :number_of_requests_last_30_days,
+      :last_request_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an Amazon EKS cluster.
     #
     # @!attribute [rw] name
@@ -999,12 +1025,16 @@ module Aws::EKS
     #   more than one access entry. This value can't be changed after
     #   access entry creation.
     #
-    #   [IAM best practices][1] recommend using IAM roles with temporary
-    #   credentials, rather than IAM users with long-term credentials.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-users-federation-idp
+    #   The valid principals differ depending on the type of the access
+    #   entry in the `type` field. The only valid ARN is IAM roles for the
+    #   types of access entries for nodes: ` . You can use every IAM
+    #   principal type for STANDARD access entries. You can't use the STS
+    #   session principal type with access entries because this is a
+    #   temporary principal for each session and not a permanent identity
+    #   that can be assigned permissions.</p>  IAM best practices recommend
+    #   using IAM roles with temporary credentials, rather than IAM users
+    #   with long-term credentials.
+    #   `
     #   @return [String]
     #
     # @!attribute [rw] kubernetes_groups
@@ -1062,6 +1092,9 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of the new access entry. Valid values are `Standard`,
+    #   `FARGATE_LINUX`, `EC2_LINUX`, and `EC2_WINDOWS`.
+    #
     #   If the `principalArn` is for an IAM role that's used for
     #   self-managed Amazon EC2 nodes, specify `EC2_LINUX` or `EC2_WINDOWS`.
     #   Amazon EKS grants the necessary permissions to the node for you. If
@@ -2035,6 +2068,43 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The summary information about deprecated resource usage for an insight
+    # check in the `UPGRADE_READINESS` category.
+    #
+    # @!attribute [rw] usage
+    #   The deprecated version of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] replaced_with
+    #   The newer version of the resource to migrate to if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] stop_serving_version
+    #   The version of the software where the deprecated resource version
+    #   will stop being served.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_serving_replacement_version
+    #   The version of the software where the newer resource version became
+    #   available to migrate to if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_stats
+    #   Details about Kubernetes clients using the deprecated resources.
+    #   @return [Array<Types::ClientStat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeprecationDetail AWS API Documentation
+    #
+    class DeprecationDetail < Struct.new(
+      :usage,
+      :replaced_with,
+      :stop_serving_version,
+      :start_serving_replacement_version,
+      :client_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the connected cluster to deregister.
     #   @return [String]
@@ -2375,6 +2445,35 @@ module Aws::EKS
     #
     class DescribeIdentityProviderConfigResponse < Struct.new(
       :identity_provider_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to describe the insight for.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identity of the insight to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsightRequest AWS API Documentation
+    #
+    class DescribeInsightRequest < Struct.new(
+      :cluster_name,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight
+    #   The full description of the insight.
+    #   @return [Types::Insight]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsightResponse AWS API Documentation
+    #
+    class DescribeInsightResponse < Struct.new(
+      :insight)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2858,6 +2957,222 @@ module Aws::EKS
     #
     class IdentityProviderConfigResponse < Struct.new(
       :oidc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A check that provides recommendations to remedy potential
+    # upgrade-impacting issues.
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_version
+    #   The Kubernetes minor version associated with an insight if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_refresh_time
+    #   The time Amazon EKS last successfully completed a refresh of this
+    #   insight check on the cluster.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_transition_time
+    #   The time the status of the insight last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the insight which includes alert criteria,
+    #   remediation recommendation, and additional resources (contains
+    #   Markdown).
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_status
+    #   An object containing more detail on the status of the insight
+    #   resource.
+    #   @return [Types::InsightStatus]
+    #
+    # @!attribute [rw] recommendation
+    #   A summary of how to remediate the finding of this insight if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_info
+    #   Links to sources that provide additional context on the insight.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resources
+    #   The details about each resource listed in the insight check result.
+    #   @return [Array<Types::InsightResourceDetail>]
+    #
+    # @!attribute [rw] category_specific_summary
+    #   Summary information that relates to the category of the insight.
+    #   Currently only returned with certain insights having category
+    #   `UPGRADE_READINESS`.
+    #   @return [Types::InsightCategorySpecificSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Insight AWS API Documentation
+    #
+    class Insight < Struct.new(
+      :id,
+      :name,
+      :category,
+      :kubernetes_version,
+      :last_refresh_time,
+      :last_transition_time,
+      :description,
+      :insight_status,
+      :recommendation,
+      :additional_info,
+      :resources,
+      :category_specific_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information that relates to the category of the insight.
+    # Currently only returned with certain insights having category
+    # `UPGRADE_READINESS`.
+    #
+    # @!attribute [rw] deprecation_details
+    #   The summary information about deprecated resource usage for an
+    #   insight check in the `UPGRADE_READINESS` category.
+    #   @return [Array<Types::DeprecationDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightCategorySpecificSummary AWS API Documentation
+    #
+    class InsightCategorySpecificSummary < Struct.new(
+      :deprecation_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the resource being evaluated.
+    #
+    # @!attribute [rw] insight_status
+    #   An object containing more detail on the status of the insight
+    #   resource.
+    #   @return [Types::InsightStatus]
+    #
+    # @!attribute [rw] kubernetes_resource_uri
+    #   The Kubernetes resource URI if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightResourceDetail AWS API Documentation
+    #
+    class InsightResourceDetail < Struct.new(
+      :insight_status,
+      :kubernetes_resource_uri,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the insight.
+    #
+    # @!attribute [rw] status
+    #   The status of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Explanation on the reasoning for the status of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightStatus AWS API Documentation
+    #
+    class InsightStatus < Struct.new(
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summarized description of the insight.
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_version
+    #   The Kubernetes minor version associated with an insight if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_refresh_time
+    #   The time Amazon EKS last successfully completed a refresh of this
+    #   insight check on the cluster.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_transition_time
+    #   The time the status of the insight last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the insight which includes alert criteria,
+    #   remediation recommendation, and additional resources (contains
+    #   Markdown).
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_status
+    #   An object containing more detail on the status of the insight.
+    #   @return [Types::InsightStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightSummary AWS API Documentation
+    #
+    class InsightSummary < Struct.new(
+      :id,
+      :name,
+      :category,
+      :kubernetes_version,
+      :last_refresh_time,
+      :last_transition_time,
+      :description,
+      :insight_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria to use for the insights.
+    #
+    # @!attribute [rw] categories
+    #   The categories to use to filter insights.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kubernetes_versions
+    #   The Kubernetes versions to use to filter the insights.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   The statuses to use to filter the insights.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightsFilter AWS API Documentation
+    #
+    class InsightsFilter < Struct.new(
+      :categories,
+      :kubernetes_versions,
+      :statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,12 +4025,78 @@ module Aws::EKS
     #   `ListIdentityProviderConfigsResponse` request exceed `maxResults`,
     #   you can use this value to retrieve the next page of results. This
     #   value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigsResponse AWS API Documentation
     #
     class ListIdentityProviderConfigsResponse < Struct.new(
       :identity_provider_configs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster associated with the insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The criteria to filter your list of insights for your cluster. You
+    #   can filter which insights are returned by category, associated
+    #   Kubernetes version, and status.
+    #   @return [Types::InsightsFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of identity provider configurations returned by
+    #   `ListInsights` in paginated output. When you use this parameter,
+    #   `ListInsights` returns only `maxResults` results in a single page
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another `ListInsights`
+    #   request with the returned `nextToken` value. This value can be
+    #   between 1 and 100. If you don't use this parameter, `ListInsights`
+    #   returns up to 100 results and a `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListInsights` request. When the results of a `ListInsights` request
+    #   exceed `maxResults`, you can use this value to retrieve the next
+    #   page of results. This value is `null` when there are no more results
+    #   to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListInsightsRequest AWS API Documentation
+    #
+    class ListInsightsRequest < Struct.new(
+      :cluster_name,
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insights
+    #   The returned list of insights.
+    #   @return [Array<Types::InsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListInsights` request.
+    #   When the results of a `ListInsights` request exceed `maxResults`,
+    #   you can use this value to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListInsightsResponse AWS API Documentation
+    #
+    class ListInsightsResponse < Struct.new(
+      :insights,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

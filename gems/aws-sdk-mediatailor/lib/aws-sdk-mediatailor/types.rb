@@ -614,6 +614,11 @@ module Aws::MediaTailor
     #   The tier of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration you want to associate to the
+    #   channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -622,7 +627,8 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -675,6 +681,10 @@ module Aws::MediaTailor
     #   The tier of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration assigned to the channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelResponse AWS API Documentation
     #
     class CreateChannelResponse < Struct.new(
@@ -687,7 +697,8 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1508,6 +1519,10 @@ module Aws::MediaTailor
     #   The channel's tier.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration for the channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -1521,7 +1536,8 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3867,6 +3883,22 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for time-shifted viewing.
+    #
+    # @!attribute [rw] max_time_delay_seconds
+    #   The maximum time delay for time-shifted viewing. The minimum allowed
+    #   maximum time delay is 0 seconds, and the maximum allowed maximum
+    #   time delay is 21600 seconds (6 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TimeShiftConfiguration AWS API Documentation
+    #
+    class TimeShiftConfiguration < Struct.new(
+      :max_time_delay_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SCTE-35 `time_signal` message can be sent with one or more
     # `segmentation_descriptor` messages. A `time_signal` message can be
     # sent only if a single `segmentation_descriptor` message is sent.
@@ -3978,12 +4010,18 @@ module Aws::MediaTailor
     #   The channel's output properties.
     #   @return [Array<Types::RequestOutputItem>]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration you want to associate to the
+    #   channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
       :channel_name,
       :filler_slate,
-      :outputs)
+      :outputs,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4044,6 +4082,10 @@ module Aws::MediaTailor
     #   The tier associated with this Channel.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration for the channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannelResponse AWS API Documentation
     #
     class UpdateChannelResponse < Struct.new(
@@ -4056,7 +4098,8 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

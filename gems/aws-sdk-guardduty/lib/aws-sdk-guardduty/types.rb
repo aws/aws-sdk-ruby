@@ -810,12 +810,17 @@ module Aws::GuardDuty
 
     # <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
     # your Amazon EC2 instances (currently in preview release) and is
-    # subject to change.
+    # subject to change. The use of this API is subject to Section 2 of the
+    # [Amazon Web Services Service Terms][1] ("Betas and Previews").
     #
     #  </note>
     #
     # Contains information about the Amazon EC2 instance runtime coverage
     # details.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/service-terms/
     #
     # @!attribute [rw] instance_id
     #   The Amazon EC2 instance ID.
@@ -845,7 +850,7 @@ module Aws::GuardDuty
     #     manage the GuardDuty security agent updates for this resource.
     #
     #   <note markdown="1"> The `DISABLED` status doesn't apply to Amazon EC2 instances and
-    #   Amazon EKS clusters that run on Amazon EC2 instances.
+    #   Amazon EKS clusters.
     #
     #    </note>
     #   @return [String]
@@ -1059,12 +1064,17 @@ module Aws::GuardDuty
     # @!attribute [rw] ec2_instance_details
     #   <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
     #   your Amazon EC2 instances (currently in preview release) and is
-    #   subject to change.
+    #   subject to change. The use of this API is subject to Section 2 of
+    #   the [Amazon Web Services Service Terms][1] ("Betas and Previews").
     #
     #    </note>
     #
     #   Information about the Amazon EC2 instance assessed for runtime
     #   coverage.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/service-terms/
     #   @return [Types::CoverageEc2InstanceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageResourceDetails AWS API Documentation
@@ -2798,12 +2808,12 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about AWS Fargate details associated with an
-    # Amazon ECS cluster.
+    # Contains information about Amazon Web Services Fargate details
+    # associated with an Amazon ECS cluster.
     #
     # @!attribute [rw] issues
-    #   Runtime coverage issues identified for the resource running on AWS
-    #   Fargate.
+    #   Runtime coverage issues identified for the resource running on
+    #   Amazon Web Services Fargate.
     #   @return [Array<String>]
     #
     # @!attribute [rw] management_type
@@ -2813,11 +2823,13 @@ module Aws::GuardDuty
     #   * `AUTO_MANAGED` indicates that GuardDuty deploys and manages
     #     updates for this resource.
     #
-    #   * `MANUAL` indicates that you are responsible to deploy, update, and
-    #     manage the GuardDuty security agent updates for this resource.
-    #
     #   * `DISABLED` indicates that the deployment of the GuardDuty security
     #     agent is disabled for this resource.
+    #
+    #   <note markdown="1"> The `MANUAL` status doesn't apply to the Amazon Web Services
+    #   Fargate (Amazon ECS only) woprkloads.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FargateDetails AWS API Documentation
@@ -3509,6 +3521,18 @@ module Aws::GuardDuty
     class GetMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_details
+    #   Information about the statistics report for your organization.
+    #   @return [Types::OrganizationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatisticsResponse AWS API Documentation
+    #
+    class GetOrganizationStatisticsResponse < Struct.new(
+      :organization_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5603,6 +5627,28 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about GuardDuty coverage statistics for members in your
+    # Amazon Web Services organization.
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the organization statistics was last updated.
+    #   This is in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] organization_statistics
+    #   Information about the GuardDuty coverage statistics for members in
+    #   your Amazon Web Services organization.
+    #   @return [Types::OrganizationStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDetails AWS API Documentation
+    #
+    class OrganizationDetails < Struct.new(
+      :updated_at,
+      :organization_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Organization-wide EBS volumes scan configuration.
     #
     # @!attribute [rw] auto_enable
@@ -5712,6 +5758,52 @@ module Aws::GuardDuty
       :name,
       :auto_enable,
       :additional_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the number of accounts that have enabled a specific
+    # feature.
+    #
+    # @!attribute [rw] name
+    #   Name of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_accounts_count
+    #   Total number of accounts that have enabled a specific feature.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_configuration
+    #   Name of the additional configuration.
+    #   @return [Array<Types::OrganizationFeatureStatisticsAdditionalConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationFeatureStatistics AWS API Documentation
+    #
+    class OrganizationFeatureStatistics < Struct.new(
+      :name,
+      :enabled_accounts_count,
+      :additional_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the coverage statistic for the additional
+    # configuration of the feature.
+    #
+    # @!attribute [rw] name
+    #   Name of the additional configuration within a feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_accounts_count
+    #   Total number of accounts that have enabled the additional
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationFeatureStatisticsAdditionalConfiguration AWS API Documentation
+    #
+    class OrganizationFeatureStatisticsAdditionalConfiguration < Struct.new(
+      :name,
+      :enabled_accounts_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5869,6 +5961,47 @@ module Aws::GuardDuty
     #
     class OrganizationScanEc2InstanceWithFindingsResult < Struct.new(
       :ebs_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the coverage statistics of the features for the
+    # entire Amazon Web Services organization.
+    #
+    # When you create a new Amazon Web Services organization, it might take
+    # up to 24 hours to generate the statistics summary for this
+    # organization.
+    #
+    # @!attribute [rw] total_accounts_count
+    #   Total number of accounts in your Amazon Web Services organization.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] member_accounts_count
+    #   Total number of accounts in your Amazon Web Services organization
+    #   that are associated with GuardDuty.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] active_accounts_count
+    #   Total number of active accounts in your Amazon Web Services
+    #   organization that are associated with GuardDuty.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled_accounts_count
+    #   Total number of accounts that have enabled GuardDuty.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count_by_feature
+    #   Retrieves the coverage statistics for each feature.
+    #   @return [Array<Types::OrganizationFeatureStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationStatistics AWS API Documentation
+    #
+    class OrganizationStatistics < Struct.new(
+      :total_accounts_count,
+      :member_accounts_count,
+      :active_accounts_count,
+      :enabled_accounts_count,
+      :count_by_feature)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7853,6 +7986,13 @@ module Aws::GuardDuty
     #   The usage statistic sum organized by account ID.
     #   @return [Array<Types::UsageAccountResult>]
     #
+    # @!attribute [rw] top_accounts_by_feature
+    #   Lists the top 50 accounts by feature that have generated the most
+    #   GuardDuty usage, in the order from most to least expensive.
+    #
+    #   Currently, this doesn't support `RDS_LOGIN_EVENTS`.
+    #   @return [Array<Types::UsageTopAccountsResult>]
+    #
     # @!attribute [rw] sum_by_data_source
     #   The usage statistic sum organized by on data source.
     #   @return [Array<Types::UsageDataSourceResult>]
@@ -7874,10 +8014,55 @@ module Aws::GuardDuty
     #
     class UsageStatistics < Struct.new(
       :sum_by_account,
+      :top_accounts_by_feature,
       :sum_by_data_source,
       :sum_by_resource,
       :top_resources,
       :sum_by_feature)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the total of usage based on the topmost 50
+    # account IDs.
+    #
+    # @!attribute [rw] account_id
+    #   The unique account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Contains the total usage with the corresponding currency unit for
+    #   that value.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageTopAccountResult AWS API Documentation
+    #
+    class UsageTopAccountResult < Struct.new(
+      :account_id,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the usage statistics, calculated by top accounts by
+    # feature.
+    #
+    # @!attribute [rw] feature
+    #   Features by which you can generate the usage statistics.
+    #
+    #   `RDS_LOGIN_EVENTS` is currently not supported with
+    #   `topAccountsByFeature`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts
+    #   The accounts that contributed to the total usage cost.
+    #   @return [Array<Types::UsageTopAccountResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageTopAccountsResult AWS API Documentation
+    #
+    class UsageTopAccountsResult < Struct.new(
+      :feature,
+      :accounts)
       SENSITIVE = []
       include Aws::Structure
     end

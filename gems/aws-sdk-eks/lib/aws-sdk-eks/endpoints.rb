@@ -376,6 +376,20 @@ module Aws::EKS
       end
     end
 
+    class DescribeInsight
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EKS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeNodegroup
       def self.build(context)
         unless context.config.regional_endpoint
@@ -545,6 +559,20 @@ module Aws::EKS
     end
 
     class ListIdentityProviderConfigs
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EKS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListInsights
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

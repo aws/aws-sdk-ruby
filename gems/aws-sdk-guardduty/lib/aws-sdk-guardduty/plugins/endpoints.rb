@@ -133,6 +133,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::GetMemberDetectors.build(context)
           when :get_members
             Aws::GuardDuty::Endpoints::GetMembers.build(context)
+          when :get_organization_statistics
+            Aws::GuardDuty::Endpoints::GetOrganizationStatistics.build(context)
           when :get_remaining_free_trial_days
             Aws::GuardDuty::Endpoints::GetRemainingFreeTrialDays.build(context)
           when :get_threat_intel_set

@@ -109,6 +109,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::DescribeFargateProfile.build(context)
           when :describe_identity_provider_config
             Aws::EKS::Endpoints::DescribeIdentityProviderConfig.build(context)
+          when :describe_insight
+            Aws::EKS::Endpoints::DescribeInsight.build(context)
           when :describe_nodegroup
             Aws::EKS::Endpoints::DescribeNodegroup.build(context)
           when :describe_pod_identity_association
@@ -135,6 +137,8 @@ module Aws::EKS
             Aws::EKS::Endpoints::ListFargateProfiles.build(context)
           when :list_identity_provider_configs
             Aws::EKS::Endpoints::ListIdentityProviderConfigs.build(context)
+          when :list_insights
+            Aws::EKS::Endpoints::ListInsights.build(context)
           when :list_nodegroups
             Aws::EKS::Endpoints::ListNodegroups.build(context)
           when :list_pod_identity_associations
