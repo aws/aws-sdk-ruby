@@ -34,8 +34,8 @@ module AwsSdkCodeGenerator
             params = AwsSdkCodeGenerator::RBS::KeywordArgumentBuilder.new(
               api: api,
               shape: input_shape_ref,
-              newline: false,
-            ).format
+              newline: true,
+            ).format(indent: ' ' * 18)
             returns = operation_ref.dig("output", "shape") ? "Client::_#{operation}ResponseSuccess" : "::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]"
             prefix = include_required ? "" : "?"
 

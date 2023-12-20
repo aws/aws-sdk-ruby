@@ -31,17 +31,17 @@ module AwsSdkCodeGenerator
         include_required = false
 
         if @input_shape
-          arguments = @input_shape["members"].filter_map { |member_name, member_ref|
-            next if @skip_params.include?(member_name)
-            required = @input_shape.fetch("required", []).include?(member_name)
-            include_required = true if required
-            type = RBS.to_type(member_ref, @api)
-            "#{required ? "" : "?"}#{Underscore.underscore(member_name)}: #{type}"
-          }.join(", ")
+          shape = Helper.deep_copy(@input_shape)
+          shape.fetch("members").reject! { |member_name, _| @skip_params.include?(member_name) }
+          arguments = KeywordArgumentBuilder.new(
+            api: @api,
+            shape: shape,
+            newline: true
+          ).format(indent: ' ' * (14 + method_name.length))
         end
 
         MethodSignature.new(
-          method_name:,
+          method_name: method_name,
           overloads: [
             "(#{arguments}) -> void",
             "(#{include_required ? "" : "?"}Hash[Symbol, untyped]) -> void",

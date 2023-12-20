@@ -22,7 +22,7 @@ module AwsSdkCodeGenerator
         end
 
         def client_option
-          @client_class.client_option
+          @client_class.client_option(indent: ' ' * 22)
         end
       end
     end

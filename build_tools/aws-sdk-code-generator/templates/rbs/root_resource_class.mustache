@@ -2,7 +2,8 @@
 module Aws
   module {{service_name}}
     class Resource
-      def initialize: (?client: Client, {{{client_option}}}) -> void
+      def initialize: (
+                        ?client: Client,{{{client_option}}}) -> void
                     | (?Hash[Symbol, untyped]) -> void
 
       def client: () -> Client

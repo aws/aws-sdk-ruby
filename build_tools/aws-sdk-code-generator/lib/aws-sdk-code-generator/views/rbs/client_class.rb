@@ -32,9 +32,13 @@ module AwsSdkCodeGenerator
           @service_name
         end
 
-        def client_option
+        def client_option(indent: ' ' * 20)
           plugin_options = documented_plugin_options(@plugins) + documented_plugin_options(@codegenerated_plugins)
-          build_keyword_arguments(plugin_options).join(", ")
+          [
+            '',
+            "#{indent}  #{build_keyword_arguments(plugin_options).join(",\n#{indent}  ")}",
+            indent,
+          ].join("\n")
         end
 
         def operations

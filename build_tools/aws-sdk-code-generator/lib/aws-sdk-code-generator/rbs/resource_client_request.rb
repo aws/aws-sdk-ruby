@@ -22,7 +22,7 @@ module AwsSdkCodeGenerator
         @arguments = if input_shape
           shape = deep_copy(input_shape)
           shape["members"].select! { |member_name, _| !skip.include?(member_name) }
-          KeywordArgumentBuilder.new(api: api, shape: shape, newline: false).format
+          KeywordArgumentBuilder.new(api: api, shape: shape, newline: true).format(indent: ' ' * (12 + method_name.length))
         end
       end
 
