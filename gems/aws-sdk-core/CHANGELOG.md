@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add mutex around stub api_requests.
+
 3.190.0 (2023-11-29)
 ------------------
 
