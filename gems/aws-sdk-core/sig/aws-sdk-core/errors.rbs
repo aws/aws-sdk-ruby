@@ -16,7 +16,7 @@ module Aws
 
       attr_reader data: untyped
 
-      attr_accessor self.code: String
+      attr_accessor self.code: String?
     end
   end
 end

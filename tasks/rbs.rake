@@ -12,7 +12,6 @@ namespace :rbs do
         all_gems.include?(d.name) && File.directory?("gems/#{d.name}/sig")
       end.map { |d| d.name }
 
-      puts "Validating gem `#{sdk_gem}` with deps #{deps}"
       sh("bundle exec rbs #{deps.map{"-I gems/#{_1}/sig"}.join(' ')} -I #{dir} validate") do |ok, _|
         failures << File.basename(File.dirname(dir)) unless ok
       end
@@ -24,6 +23,7 @@ namespace :rbs do
     failures = []
     # Just test s3 for most type coverage
     %w[
+      core
       s3
     ].each do |identifier|
       sdk_gem = "aws-sdk-#{identifier}"
@@ -31,11 +31,11 @@ namespace :rbs do
       env = {
         'RUBYOPT' => '-r bundler/setup -r rbs/test/setup',
         'RBS_TEST_RAISE' => 'true',
-        'RBS_TEST_LOGLEVEL' => 'warn',
+        'RBS_TEST_LOGLEVEL' => 'error',
         'RBS_TEST_OPT' => "-I gems/aws-sdk-core/sig -I gems/#{sdk_gem}/sig",
         'RBS_TEST_TARGET' => "\"Aws,Aws::*,Seahorse,Seahorse::*\"",
       }
-      sh(env, "bundle exec rspec gems/#{sdk_gem}/spec --tag '~rbs_test_skip'") do |ok, _|
+      sh(env, "bundle exec rspec gems/#{sdk_gem}/spec --tag '~rbs_test:skip'") do |ok, _|
         failures << File.basename(File.dirname("gems/#{sdk_gem}/sig")) unless ok
       end
     end
