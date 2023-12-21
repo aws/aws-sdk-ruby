@@ -7,10 +7,8 @@ module AwsSdkCodeGenerator
       :class_name,
       :client_overload_keyword_argument,
       :client_overload_positional_argument,
-      :client_overload_positional_argument_error,
       :waiter_overload_keyword_argument,
       :waiter_overload_positional_argument,
-      :waiter_overload_positional_argument_error,
       keyword_init: true
     )
       class << self
@@ -44,10 +42,8 @@ module AwsSdkCodeGenerator
               w.class_name = waiter_name
               w.client_overload_keyword_argument = "(#{name} waiter_name, #{params}) -> #{returns}"
               w.client_overload_positional_argument = "(#{name} waiter_name, #{prefix}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> #{returns}"
-              w.client_overload_positional_argument_error = "(#{name} waiter_name, #{prefix}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseError"
               w.waiter_overload_keyword_argument = "(#{params}) -> #{returns}"
               w.waiter_overload_positional_argument = "(#{prefix}Hash[Symbol, untyped]) -> #{returns}"
-              w.waiter_overload_positional_argument_error = "(#{prefix}Hash[Symbol, untyped]) -> ::Seahorse::Client::_ResponseError"
             end
           end.sort_by(&:name)
         end

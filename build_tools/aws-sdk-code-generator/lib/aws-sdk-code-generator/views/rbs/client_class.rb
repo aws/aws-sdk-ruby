@@ -86,7 +86,6 @@ module AwsSdkCodeGenerator
                 overloads: [
                   "(#{arguments})#{block} -> #{interface}",
                   "(#{include_required ? "" : "?"}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options)#{block} -> #{interface}",
-                  "(#{include_required ? "" : "?"}Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options)#{block} -> ::Seahorse::Client::_ResponseError",
                 ]).signature,
               interface: interface,
               data: data,
