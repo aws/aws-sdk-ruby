@@ -1,10 +1,13 @@
 {{generated_src_warning}}
 module Aws
   module {{service_name}}
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html
     class {{class_name}}
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#initialize-instance_method
       {{{initialize_signature}}}
       {{#identifiers}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#{{name}}-instance_method
       def {{name}}: () -> {{type}}
       {{#alias}}
       alias {{alias}} {{name}}
@@ -12,39 +15,48 @@ module Aws
       {{/identifiers}}
       {{#data_attributes}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#{{method_name}}-instance_method
       {{{signature}}}
       {{/data_attributes}}
 
       def client: () -> Client
 
       {{#load?}}
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#load-instance_method
       def load: () -> self
       alias reload load
       {{/load?}}
 
       {{#load_or_shape?}}
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#data-instance_method
       def data: () -> Types::{{shape}}
       {{/load_or_shape?}}
       {{^load_or_shape?}}
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#data-instance_method
       def data: () -> EmptyStructure
       {{/load_or_shape?}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#data_loaded?-instance_method
       def data_loaded?: () -> bool
 
       {{#exists_waiters}}
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#exists?-instance_method
       def exists?: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) -> bool
                  | (?Hash[Symbol, untyped]) -> bool
       {{/exists_waiters}}
       {{#waiters}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#{{method_name}}-instance_method
       {{{signature}}}
       {{/waiters}}
       {{#actions}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#{{method_name}}-instance_method
       {{{signature}}}
       {{/actions}}
       {{#associations}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/{{class_name}}.html#{{method_name}}-instance_method
       {{{signature}}}
       {{/associations}}
 

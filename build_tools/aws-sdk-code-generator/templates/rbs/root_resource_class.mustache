@@ -1,7 +1,9 @@
 {{generated_src_warning}}
 module Aws
   module {{service_name}}
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Resource.html
     class Resource
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Resource.html#initialize-instance_method
       def initialize: (
                         ?client: Client,{{{client_option}}}) -> void
                     | (?Hash[Symbol, untyped]) -> void
@@ -10,11 +12,13 @@ module Aws
 
       {{#actions}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Resource.html#{{method_name}}-instance_method
       {{{signature}}}
       {{/actions}}
 
       {{#associations}}
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/Resource.html#{{method_name}}-instance_method
       {{{signature}}}
       {{/associations}}
     end
