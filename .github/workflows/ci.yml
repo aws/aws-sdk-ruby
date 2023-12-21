@@ -36,8 +36,8 @@ jobs:
       - name: SDK Build
         run: bundle exec rake build
 
-      - name: rbs validate
-        run: bundle exec rake rbs:validate
+      - name: rbs testing
+        run: bundle exec rake rbs:test
 
   test:
     runs-on: ubuntu-latest
