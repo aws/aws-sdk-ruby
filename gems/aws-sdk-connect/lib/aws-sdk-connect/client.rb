@@ -1013,6 +1013,43 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # &gt;Associates a set of proficiencies with a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN of the instance).
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, Array<Types::UserProficiency>] :user_proficiencies
+    #   The proficiencies to associate with the user.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     user_proficiencies: [ # required
+    #       {
+    #         attribute_name: "PredefinedAttributeName", # required
+    #         attribute_value: "PredefinedAttributeStringValue", # required
+    #         level: 1.0, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateUserProficiencies AWS API Documentation
+    #
+    # @overload associate_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def associate_user_proficiencies(params = {}, options = {})
+      req = build_request(:associate_user_proficiencies, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -2130,6 +2167,40 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_persistent_contact_association(params = {}, options = {})
       req = build_request(:create_persistent_contact_association, params)
+      req.send_request(options)
+    end
+
+    # Creates a new predefined attribute for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @option params [required, Types::PredefinedAttributeValues] :values
+    #   The values of the predefined attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #     values: { # required
+    #       string_list: ["PredefinedAttributeStringValue"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePredefinedAttribute AWS API Documentation
+    #
+    # @overload create_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def create_predefined_attribute(params = {}, options = {})
+      req = build_request(:create_predefined_attribute, params)
       req.send_request(options)
     end
 
@@ -3650,6 +3721,34 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes a predefined attribute from the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePredefinedAttribute AWS API Documentation
+    #
+    # @overload delete_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def delete_predefined_attribute(params = {}, options = {})
+      req = build_request(:delete_predefined_attribute, params)
+      req.send_request(options)
+    end
+
     # Deletes a prompt.
     #
     # @option params [required, String] :instance_id
@@ -4214,6 +4313,8 @@ module Aws::Connect
     #   resp.contact.scheduled_timestamp #=> Time
     #   resp.contact.related_contact_id #=> String
     #   resp.contact.wisdom_info.session_arn #=> String
+    #   resp.contact.queue_time_adjustment_seconds #=> Integer
+    #   resp.contact.queue_priority #=> Integer
     #   resp.contact.tags #=> Hash
     #   resp.contact.tags["ContactTagKey"] #=> String
     #
@@ -4763,6 +4864,44 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_phone_number(params = {}, options = {})
       req = build_request(:describe_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Describes a predefined attribute for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @return [Types::DescribePredefinedAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePredefinedAttributeResponse#predefined_attribute #predefined_attribute} => Types::PredefinedAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predefined_attribute.name #=> String
+    #   resp.predefined_attribute.values.string_list #=> Array
+    #   resp.predefined_attribute.values.string_list[0] #=> String
+    #   resp.predefined_attribute.last_modified_time #=> Time
+    #   resp.predefined_attribute.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePredefinedAttribute AWS API Documentation
+    #
+    # @overload describe_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def describe_predefined_attribute(params = {}, options = {})
+      req = build_request(:describe_predefined_attribute, params)
       req.send_request(options)
     end
 
@@ -5896,6 +6035,42 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Disassociates a set of proficiencies from a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, Array<Types::UserProficiencyDisassociate>] :user_proficiencies
+    #   The proficiencies to disassociate from the user.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     user_proficiencies: [ # required
+    #       {
+    #         attribute_name: "PredefinedAttributeName", # required
+    #         attribute_value: "PredefinedAttributeStringValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateUserProficiencies AWS API Documentation
+    #
+    # @overload disassociate_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def disassociate_user_proficiencies(params = {}, options = {})
+      req = build_request(:disassociate_user_proficiencies, params)
+      req.send_request(options)
+    end
+
     # Dismisses contacts from an agent’s CCP and returns the agent to an
     # available state, which allows the agent to receive a new routed
     # contact. Contacts can only be dismissed if they are in a `MISSED`,
@@ -6172,8 +6347,9 @@ module Aws::Connect
     #       queues: ["QueueId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       routing_profiles: ["RoutingProfileId"],
+    #       routing_step_expressions: ["RoutingExpression"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION
     #     current_metrics: [ # required
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
@@ -6199,6 +6375,7 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.metric_results[0].dimensions.routing_profile.id #=> String
     #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
+    #   resp.metric_results[0].dimensions.routing_step_expression #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
@@ -6699,8 +6876,9 @@ module Aws::Connect
     #       queues: ["QueueId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       routing_profiles: ["RoutingProfileId"],
+    #       routing_step_expressions: ["RoutingExpression"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION
     #     historical_metrics: [ # required
     #       {
     #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
@@ -6725,6 +6903,7 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.metric_results[0].dimensions.routing_profile.id #=> String
     #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
+    #   resp.metric_results[0].dimensions.routing_step_expression #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
@@ -9129,6 +9308,52 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists predefined attributes for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListPredefinedAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPredefinedAttributesResponse#next_token #next_token} => String
+    #   * {Types::ListPredefinedAttributesResponse#predefined_attribute_summary_list #predefined_attribute_summary_list} => Array&lt;Types::PredefinedAttributeSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_predefined_attributes({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.predefined_attribute_summary_list #=> Array
+    #   resp.predefined_attribute_summary_list[0].name #=> String
+    #   resp.predefined_attribute_summary_list[0].last_modified_time #=> Time
+    #   resp.predefined_attribute_summary_list[0].last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPredefinedAttributes AWS API Documentation
+    #
+    # @overload list_predefined_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_predefined_attributes(params = {}, options = {})
+      req = build_request(:list_predefined_attributes, params)
+      req.send_request(options)
+    end
+
     # Provides information about the prompts for the specified Amazon
     # Connect instance.
     #
@@ -10227,6 +10452,60 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists proficiencies associated with a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListUserProficienciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUserProficienciesResponse#next_token #next_token} => String
+    #   * {Types::ListUserProficienciesResponse#user_proficiency_list #user_proficiency_list} => Array&lt;Types::UserProficiency&gt;
+    #   * {Types::ListUserProficienciesResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListUserProficienciesResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.user_proficiency_list #=> Array
+    #   resp.user_proficiency_list[0].attribute_name #=> String
+    #   resp.user_proficiency_list[0].attribute_value #=> String
+    #   resp.user_proficiency_list[0].level #=> Float
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserProficiencies AWS API Documentation
+    #
+    # @overload list_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def list_user_proficiencies(params = {}, options = {})
+      req = build_request(:list_user_proficiencies, params)
+      req.send_request(options)
+    end
+
     # Provides summary information about the users for the specified Amazon
     # Connect instance.
     #
@@ -10814,6 +11093,116 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Searches contacts in an Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of Amazon Connect instance. You can find the instance
+    #   ID in the Amazon Resource Name (ARN) of the instance
+    #
+    # @option params [required, Types::SearchContactsTimeRange] :time_range
+    #   Time range that you want to search results
+    #
+    # @option params [Types::SearchCriteria] :search_criteria
+    #   The search criteria to be used to return contacts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Types::Sort] :sort
+    #   Specifies a field to sort by and a sort order
+    #
+    # @return [Types::SearchContactsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchContactsResponse#contacts #contacts} => Array&lt;Types::ContactSearchSummary&gt;
+    #   * {Types::SearchContactsResponse#next_token #next_token} => String
+    #   * {Types::SearchContactsResponse#total_count #total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_contacts({
+    #     instance_id: "InstanceId", # required
+    #     time_range: { # required
+    #       type: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP
+    #       start_time: Time.now, # required
+    #       end_time: Time.now, # required
+    #     },
+    #     search_criteria: {
+    #       agent_ids: ["AgentResourceId"],
+    #       agent_hierarchy_groups: {
+    #         l1_ids: ["HierarchyGroupId"],
+    #         l2_ids: ["HierarchyGroupId"],
+    #         l3_ids: ["HierarchyGroupId"],
+    #         l4_ids: ["HierarchyGroupId"],
+    #         l5_ids: ["HierarchyGroupId"],
+    #       },
+    #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
+    #       contact_analysis: {
+    #         transcript: {
+    #           criteria: [ # required
+    #             {
+    #               participant_role: "AGENT", # required, accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT
+    #               search_text: ["SearchText"], # required
+    #               match_type: "MATCH_ALL", # required, accepts MATCH_ALL, MATCH_ANY
+    #             },
+    #           ],
+    #           match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY
+    #         },
+    #       },
+    #       initiation_methods: ["INBOUND"], # accepts INBOUND, OUTBOUND, TRANSFER, QUEUE_TRANSFER, CALLBACK, API, DISCONNECT, MONITOR, EXTERNAL_OUTBOUND
+    #       queue_ids: ["QueueId"],
+    #       searchable_contact_attributes: {
+    #         criteria: [ # required
+    #           {
+    #             key: "SearchableContactAttributeKey", # required
+    #             values: ["SearchableContactAttributeValue"], # required
+    #           },
+    #         ],
+    #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #     sort: {
+    #       field_name: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP, INITIATION_METHOD, CHANNEL
+    #       order: "ASCENDING", # required, accepts ASCENDING, DESCENDING
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contacts #=> Array
+    #   resp.contacts[0].arn #=> String
+    #   resp.contacts[0].id #=> String
+    #   resp.contacts[0].initial_contact_id #=> String
+    #   resp.contacts[0].previous_contact_id #=> String
+    #   resp.contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR", "EXTERNAL_OUTBOUND"
+    #   resp.contacts[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.contacts[0].queue_info.id #=> String
+    #   resp.contacts[0].queue_info.enqueue_timestamp #=> Time
+    #   resp.contacts[0].agent_info.id #=> String
+    #   resp.contacts[0].agent_info.connected_to_agent_timestamp #=> Time
+    #   resp.contacts[0].initiation_timestamp #=> Time
+    #   resp.contacts[0].disconnect_timestamp #=> Time
+    #   resp.contacts[0].scheduled_timestamp #=> Time
+    #   resp.next_token #=> String
+    #   resp.total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContacts AWS API Documentation
+    #
+    # @overload search_contacts(params = {})
+    # @param [Hash] params ({})
+    def search_contacts(params = {}, options = {})
+      req = build_request(:search_contacts, params)
+      req.send_request(options)
+    end
+
     # Searches the hours of operation in an Amazon Connect instance, with
     # optional filtering.
     #
@@ -10921,6 +11310,76 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_hours_of_operations(params = {}, options = {})
       req = build_request(:search_hours_of_operations, params)
+      req.send_request(options)
+    end
+
+    # Predefined attributes that meet certain criteria.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::PredefinedAttributeSearchCriteria] :search_criteria
+    #   The search criteria to be used to return predefined attributes.
+    #
+    # @return [Types::SearchPredefinedAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchPredefinedAttributesResponse#predefined_attributes #predefined_attributes} => Array&lt;Types::PredefinedAttribute&gt;
+    #   * {Types::SearchPredefinedAttributesResponse#next_token #next_token} => String
+    #   * {Types::SearchPredefinedAttributesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_predefined_attributes({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive PredefinedAttributeSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive PredefinedAttributeSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predefined_attributes #=> Array
+    #   resp.predefined_attributes[0].name #=> String
+    #   resp.predefined_attributes[0].values.string_list #=> Array
+    #   resp.predefined_attributes[0].values.string_list[0] #=> String
+    #   resp.predefined_attributes[0].last_modified_time #=> Time
+    #   resp.predefined_attributes[0].last_modified_region #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPredefinedAttributes AWS API Documentation
+    #
+    # @overload search_predefined_attributes(params = {})
+    # @param [Hash] params ({})
+    def search_predefined_attributes(params = {}, options = {})
+      req = build_request(:search_predefined_attributes, params)
       req.send_request(options)
     end
 
@@ -13651,6 +14110,68 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates routing priority and age on the contact (**QueuePriority** and
+    # **QueueTimeAdjustmentInSeconds**). These properties can be used to
+    # change a customer's position in the queue. For example, you can move
+    # a contact to the back of the queue by setting a lower routing priority
+    # relative to other contacts in queue; or you can move a contact to the
+    # front of the queue by increasing the routing age which will make the
+    # contact look artificially older and therefore higher up in the
+    # first-in-first-out routing order. Note that adjusting the routing age
+    # of a contact affects only its position in queue, and not its actual
+    # queue wait time as reported through metrics. These properties can also
+    # be updated by using [the Set routing priority / age flow block][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/change-routing-priority.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [Integer] :queue_time_adjustment_seconds
+    #   The number of seconds to add or subtract from the contact's routing
+    #   age. Contacts are routed to agents on a first-come, first-serve basis.
+    #   This means that changing their amount of time in queue compared to
+    #   others also changes their position in queue.
+    #
+    # @option params [Integer] :queue_priority
+    #   Priority of the contact in the queue. The default priority for new
+    #   contacts is 5. You can raise the priority of a contact compared to
+    #   other contacts in the queue by assigning them a higher priority, such
+    #   as 1 or 2.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_routing_data({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     queue_time_adjustment_seconds: 1,
+    #     queue_priority: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingData AWS API Documentation
+    #
+    # @overload update_contact_routing_data(params = {})
+    # @param [Hash] params ({})
+    def update_contact_routing_data(params = {}, options = {})
+      req = build_request(:update_contact_routing_data, params)
+      req.send_request(options)
+    end
+
     # Updates the scheduled time of a task contact that is already
     # scheduled.
     #
@@ -14202,6 +14723,40 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_phone_number_metadata(params = {}, options = {})
       req = build_request(:update_phone_number_metadata, params)
+      req.send_request(options)
+    end
+
+    # Updates a predefined attribute for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @option params [Types::PredefinedAttributeValues] :values
+    #   The values of the predefined attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #     values: {
+    #       string_list: ["PredefinedAttributeStringValue"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePredefinedAttribute AWS API Documentation
+    #
+    # @overload update_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def update_predefined_attribute(params = {}, options = {})
+      req = build_request(:update_predefined_attribute, params)
       req.send_request(options)
     end
 
@@ -15411,6 +15966,45 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the properties associated with the proficiencies of a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, Array<Types::UserProficiency>] :user_proficiencies
+    #   The proficiencies to be updated for the user. Proficiencies must first
+    #   be associated to the user. You can do this using
+    #   AssociateUserProficiencies API.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     user_proficiencies: [ # required
+    #       {
+    #         attribute_name: "PredefinedAttributeName", # required
+    #         attribute_value: "PredefinedAttributeStringValue", # required
+    #         level: 1.0, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserProficiencies AWS API Documentation
+    #
+    # @overload update_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def update_user_proficiencies(params = {}, options = {})
+      req = build_request(:update_user_proficiencies, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified routing profile to the specified user.
     #
     # @option params [required, String] :routing_profile_id
@@ -15601,7 +16195,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

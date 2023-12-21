@@ -65,6 +65,9 @@ module Aws::CodeCommit
     BatchGetCommitsErrorsList = Shapes::ListShape.new(name: 'BatchGetCommitsErrorsList')
     BatchGetCommitsInput = Shapes::StructureShape.new(name: 'BatchGetCommitsInput')
     BatchGetCommitsOutput = Shapes::StructureShape.new(name: 'BatchGetCommitsOutput')
+    BatchGetRepositoriesError = Shapes::StructureShape.new(name: 'BatchGetRepositoriesError')
+    BatchGetRepositoriesErrorCodeEnum = Shapes::StringShape.new(name: 'BatchGetRepositoriesErrorCodeEnum')
+    BatchGetRepositoriesErrorsList = Shapes::ListShape.new(name: 'BatchGetRepositoriesErrorsList')
     BatchGetRepositoriesInput = Shapes::StructureShape.new(name: 'BatchGetRepositoriesInput')
     BatchGetRepositoriesOutput = Shapes::StructureShape.new(name: 'BatchGetRepositoriesOutput')
     BeforeCommitIdAndAfterCommitIdAreSameException = Shapes::StructureShape.new(name: 'BeforeCommitIdAndAfterCommitIdAreSameException')
@@ -165,7 +168,10 @@ module Aws::CodeCommit
     EncryptionIntegrityChecksFailedException = Shapes::StructureShape.new(name: 'EncryptionIntegrityChecksFailedException')
     EncryptionKeyAccessDeniedException = Shapes::StructureShape.new(name: 'EncryptionKeyAccessDeniedException')
     EncryptionKeyDisabledException = Shapes::StructureShape.new(name: 'EncryptionKeyDisabledException')
+    EncryptionKeyInvalidIdException = Shapes::StructureShape.new(name: 'EncryptionKeyInvalidIdException')
+    EncryptionKeyInvalidUsageException = Shapes::StructureShape.new(name: 'EncryptionKeyInvalidUsageException')
     EncryptionKeyNotFoundException = Shapes::StructureShape.new(name: 'EncryptionKeyNotFoundException')
+    EncryptionKeyRequiredException = Shapes::StructureShape.new(name: 'EncryptionKeyRequiredException')
     EncryptionKeyUnavailableException = Shapes::StructureShape.new(name: 'EncryptionKeyUnavailableException')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -311,6 +317,7 @@ module Aws::CodeCommit
     IsMove = Shapes::BooleanShape.new(name: 'IsMove')
     IsObjectTypeConflict = Shapes::BooleanShape.new(name: 'IsObjectTypeConflict')
     KeepEmptyFolders = Shapes::BooleanShape.new(name: 'KeepEmptyFolders')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastModifiedDate = Shapes::TimestampShape.new(name: 'LastModifiedDate')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     LineNumber = Shapes::IntegerShape.new(name: 'LineNumber')
@@ -538,6 +545,8 @@ module Aws::CodeCommit
     UpdatePullRequestTitleInput = Shapes::StructureShape.new(name: 'UpdatePullRequestTitleInput')
     UpdatePullRequestTitleOutput = Shapes::StructureShape.new(name: 'UpdatePullRequestTitleOutput')
     UpdateRepositoryDescriptionInput = Shapes::StructureShape.new(name: 'UpdateRepositoryDescriptionInput')
+    UpdateRepositoryEncryptionKeyInput = Shapes::StructureShape.new(name: 'UpdateRepositoryEncryptionKeyInput')
+    UpdateRepositoryEncryptionKeyOutput = Shapes::StructureShape.new(name: 'UpdateRepositoryEncryptionKeyOutput')
     UpdateRepositoryNameInput = Shapes::StructureShape.new(name: 'UpdateRepositoryNameInput')
     UserInfo = Shapes::StructureShape.new(name: 'UserInfo')
     blob = Shapes::BlobShape.new(name: 'blob')
@@ -689,11 +698,20 @@ module Aws::CodeCommit
     BatchGetCommitsOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetCommitsErrorsList, location_name: "errors"))
     BatchGetCommitsOutput.struct_class = Types::BatchGetCommitsOutput
 
+    BatchGetRepositoriesError.add_member(:repository_id, Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
+    BatchGetRepositoriesError.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    BatchGetRepositoriesError.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchGetRepositoriesErrorCodeEnum, location_name: "errorCode"))
+    BatchGetRepositoriesError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    BatchGetRepositoriesError.struct_class = Types::BatchGetRepositoriesError
+
+    BatchGetRepositoriesErrorsList.member = Shapes::ShapeRef.new(shape: BatchGetRepositoriesError)
+
     BatchGetRepositoriesInput.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, required: true, location_name: "repositoryNames"))
     BatchGetRepositoriesInput.struct_class = Types::BatchGetRepositoriesInput
 
     BatchGetRepositoriesOutput.add_member(:repositories, Shapes::ShapeRef.new(shape: RepositoryMetadataList, location_name: "repositories"))
     BatchGetRepositoriesOutput.add_member(:repositories_not_found, Shapes::ShapeRef.new(shape: RepositoryNotFoundList, location_name: "repositoriesNotFound"))
+    BatchGetRepositoriesOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetRepositoriesErrorsList, location_name: "errors"))
     BatchGetRepositoriesOutput.struct_class = Types::BatchGetRepositoriesOutput
 
     BeforeCommitIdAndAfterCommitIdAreSameException.struct_class = Types::BeforeCommitIdAndAfterCommitIdAreSameException
@@ -884,6 +902,7 @@ module Aws::CodeCommit
     CreateRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryInput.add_member(:repository_description, Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "repositoryDescription"))
     CreateRepositoryInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateRepositoryInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateRepositoryInput.struct_class = Types::CreateRepositoryInput
 
     CreateRepositoryOutput.add_member(:repository_metadata, Shapes::ShapeRef.new(shape: RepositoryMetadata, location_name: "repositoryMetadata"))
@@ -1010,7 +1029,13 @@ module Aws::CodeCommit
 
     EncryptionKeyDisabledException.struct_class = Types::EncryptionKeyDisabledException
 
+    EncryptionKeyInvalidIdException.struct_class = Types::EncryptionKeyInvalidIdException
+
+    EncryptionKeyInvalidUsageException.struct_class = Types::EncryptionKeyInvalidUsageException
+
     EncryptionKeyNotFoundException.struct_class = Types::EncryptionKeyNotFoundException
+
+    EncryptionKeyRequiredException.struct_class = Types::EncryptionKeyRequiredException
 
     EncryptionKeyUnavailableException.struct_class = Types::EncryptionKeyUnavailableException
 
@@ -1864,6 +1889,7 @@ module Aws::CodeCommit
     RepositoryMetadata.add_member(:clone_url_http, Shapes::ShapeRef.new(shape: CloneUrlHttp, location_name: "cloneUrlHttp"))
     RepositoryMetadata.add_member(:clone_url_ssh, Shapes::ShapeRef.new(shape: CloneUrlSsh, location_name: "cloneUrlSsh"))
     RepositoryMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    RepositoryMetadata.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     RepositoryMetadata.struct_class = Types::RepositoryMetadata
 
     RepositoryMetadataList.member = Shapes::ShapeRef.new(shape: RepositoryMetadata)
@@ -2077,6 +2103,15 @@ module Aws::CodeCommit
     UpdateRepositoryDescriptionInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     UpdateRepositoryDescriptionInput.add_member(:repository_description, Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "repositoryDescription"))
     UpdateRepositoryDescriptionInput.struct_class = Types::UpdateRepositoryDescriptionInput
+
+    UpdateRepositoryEncryptionKeyInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    UpdateRepositoryEncryptionKeyInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "kmsKeyId"))
+    UpdateRepositoryEncryptionKeyInput.struct_class = Types::UpdateRepositoryEncryptionKeyInput
+
+    UpdateRepositoryEncryptionKeyOutput.add_member(:repository_id, Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
+    UpdateRepositoryEncryptionKeyOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    UpdateRepositoryEncryptionKeyOutput.add_member(:original_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "originalKmsKeyId"))
+    UpdateRepositoryEncryptionKeyOutput.struct_class = Types::UpdateRepositoryEncryptionKeyOutput
 
     UpdateRepositoryNameInput.add_member(:old_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "oldName"))
     UpdateRepositoryNameInput.add_member(:new_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "newName"))
@@ -2380,6 +2415,8 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyInvalidIdException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyInvalidUsageException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagsMapException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSystemTagUsageException)
@@ -3881,6 +3918,25 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryDescriptionException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:update_repository_encryption_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRepositoryEncryptionKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRepositoryEncryptionKeyInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRepositoryEncryptionKeyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyInvalidIdException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyInvalidUsageException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)

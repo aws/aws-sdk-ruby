@@ -2945,16 +2945,22 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters only
     #
     # @option params [Boolean] :enable_http_endpoint
-    #   Specifies whether to enable the HTTP endpoint for an Aurora Serverless
-    #   v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   Specifies whether to enable the HTTP endpoint for the DB cluster. By
+    #   default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    #   You can also query your database from inside the RDS console with the
+    #   API (RDS Data API) for running SQL queries on the DB cluster. You can
+    #   also query your database from inside the RDS console with the RDS
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   RDS Data API is supported with the following DB clusters:
+    #
+    #   * Aurora PostgreSQL Serverless v2 and provisioned
+    #
+    #   * Aurora PostgreSQL and Aurora MySQL Serverless v1
+    #
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -16758,6 +16764,51 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Disables the HTTP endpoint for the specified DB cluster. Disabling
+    # this endpoint disables RDS Data API.
+    #
+    # For more information, see [Using RDS Data API][1] in the *Amazon
+    # Aurora User Guide*.
+    #
+    # <note markdown="1"> This operation applies only to Aurora PostgreSQL Serverless v2 and
+    # provisioned DB clusters. To disable the HTTP endpoint for Aurora
+    # Serverless v1 DB clusters, use the `EnableHttpEndpoint` parameter of
+    # the `ModifyDBCluster` operation.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster.
+    #
+    # @return [Types::DisableHttpEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableHttpEndpointResponse#resource_arn #resource_arn} => String
+    #   * {Types::DisableHttpEndpointResponse#http_endpoint_enabled #http_endpoint_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_http_endpoint({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.http_endpoint_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DisableHttpEndpoint AWS API Documentation
+    #
+    # @overload disable_http_endpoint(params = {})
+    # @param [Hash] params ({})
+    def disable_http_endpoint(params = {}, options = {})
+      req = build_request(:disable_http_endpoint, params)
+      req.send_request(options)
+    end
+
     # Downloads all or a portion of the specified log file, up to 1 MB in
     # size.
     #
@@ -16850,6 +16901,56 @@ module Aws::RDS
     # @param [Hash] params ({})
     def download_db_log_file_portion(params = {}, options = {})
       req = build_request(:download_db_log_file_portion, params)
+      req.send_request(options)
+    end
+
+    # Enables the HTTP endpoint for the DB cluster. By default, the HTTP
+    # endpoint isn't enabled.
+    #
+    # When enabled, this endpoint provides a connectionless web service API
+    # (RDS Data API) for running SQL queries on the Aurora DB cluster. You
+    # can also query your database from inside the RDS console with the RDS
+    # query editor.
+    #
+    # For more information, see [Using RDS Data API][1] in the *Amazon
+    # Aurora User Guide*.
+    #
+    # <note markdown="1"> This operation applies only to Aurora PostgreSQL Serverless v2 and
+    # provisioned DB clusters. To enable the HTTP endpoint for Aurora
+    # Serverless v1 DB clusters, use the `EnableHttpEndpoint` parameter of
+    # the `ModifyDBCluster` operation.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster.
+    #
+    # @return [Types::EnableHttpEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableHttpEndpointResponse#resource_arn #resource_arn} => String
+    #   * {Types::EnableHttpEndpointResponse#http_endpoint_enabled #http_endpoint_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_http_endpoint({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.http_endpoint_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EnableHttpEndpoint AWS API Documentation
+    #
+    # @overload enable_http_endpoint(params = {})
+    # @param [Hash] params ({})
+    def enable_http_endpoint(params = {}, options = {})
+      req = build_request(:enable_http_endpoint, params)
       req.send_request(options)
     end
 
@@ -18073,15 +18174,22 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_http_endpoint
     #   Specifies whether to enable the HTTP endpoint for an Aurora Serverless
-    #   v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   v1 DB cluster. By default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    #   You can also query your database from inside the RDS console with the
-    #   query editor.
+    #   API (RDS Data API) for running SQL queries on the Aurora Serverless v1
+    #   DB cluster. You can also query your database from inside the RDS
+    #   console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #   <note markdown="1"> This parameter applies only to Aurora Serverless v1 DB clusters. To
+    #   enable or disable the HTTP endpoint for an Aurora PostgreSQL
+    #   Serverless v2 or provisioned DB cluster, use the `EnableHttpEndpoint`
+    #   and `DisableHttpEndpoint` operations.
+    #
+    #    </note>
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -29862,7 +29970,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.210.0'
+      context[:gem_version] = '1.211.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

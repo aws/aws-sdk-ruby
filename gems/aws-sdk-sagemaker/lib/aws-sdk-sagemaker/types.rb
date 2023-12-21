@@ -8936,6 +8936,17 @@ module Aws::SageMaker
     #   `InternalServerError`.
     #   @return [Types::RetryStrategy]
     #
+    # @!attribute [rw] remote_debug_config
+    #   Configuration for remote debugging. To learn more about the remote
+    #   debugging functionality of SageMaker, see [Access a training
+    #   container through Amazon Web Services Systems Manager (SSM) for
+    #   remote debugging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #   @return [Types::RemoteDebugConfig]
+    #
     # @!attribute [rw] infra_check_config
     #   Contains information about the infrastructure health check
     #   configuration for the training job.
@@ -8966,6 +8977,7 @@ module Aws::SageMaker
       :profiler_rule_configurations,
       :environment,
       :retry_strategy,
+      :remote_debug_config,
       :infra_check_config)
       SENSITIVE = []
       include Aws::Structure
@@ -16568,6 +16580,17 @@ module Aws::SageMaker
     #   `InternalServerError`.
     #   @return [Types::RetryStrategy]
     #
+    # @!attribute [rw] remote_debug_config
+    #   Configuration for remote debugging. To learn more about the remote
+    #   debugging functionality of SageMaker, see [Access a training
+    #   container through Amazon Web Services Systems Manager (SSM) for
+    #   remote debugging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #   @return [Types::RemoteDebugConfig]
+    #
     # @!attribute [rw] infra_check_config
     #   Contains information about the infrastructure health check
     #   configuration for the training job.
@@ -16617,6 +16640,7 @@ module Aws::SageMaker
       :profiling_status,
       :environment,
       :retry_strategy,
+      :remote_debug_config,
       :infra_check_config)
       SENSITIVE = []
       include Aws::Structure
@@ -36996,6 +37020,50 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration for remote debugging for the [CreateTrainingJob][1] API.
+    # To learn more about the remote debugging functionality of SageMaker,
+    # see [Access a training container through Amazon Web Services Systems
+    # Manager (SSM) for remote debugging][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #
+    # @!attribute [rw] enable_remote_debug
+    #   If set to True, enables remote debugging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoteDebugConfig AWS API Documentation
+    #
+    class RemoteDebugConfig < Struct.new(
+      :enable_remote_debug)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for remote debugging for the [UpdateTrainingJob][1] API.
+    # To learn more about the remote debugging functionality of SageMaker,
+    # see [Access a training container through Amazon Web Services Systems
+    # Manager (SSM) for remote debugging][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateTrainingJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #
+    # @!attribute [rw] enable_remote_debug
+    #   If set to True, enables remote debugging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoteDebugConfigForUpdate AWS API Documentation
+    #
+    class RemoteDebugConfigForUpdate < Struct.new(
+      :enable_remote_debug)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ui_template
     #   A `Template` object containing the worker UI template to render.
     #   @return [Types::UiTemplate]
@@ -38176,6 +38244,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html
     #   @return [String]
     #
+    # @!attribute [rw] visibility_conditions
+    #   Limits the results of your search request to the resources that you
+    #   can access.
+    #   @return [Array<Types::VisibilityConditions>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRequest AWS API Documentation
     #
     class SearchRequest < Struct.new(
@@ -38185,7 +38258,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      :cross_account_filter_option)
+      :cross_account_filter_option,
+      :visibility_conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38304,9 +38378,9 @@ module Aws::SageMaker
     #     * Preparing the instances for training.
     #
     #   Training
-    #   : * Downloading the training image.
+    #   : * Training image download completed. Training in progress.
     #
-    #     * Training image download completed. Training in progress.
+    #     ^
     #
     #   Status messages are subject to change. Therefore, we recommend not
     #   including them in code that programmatically initiates actions. For
@@ -43792,13 +43866,27 @@ module Aws::SageMaker
     #   length.
     #   @return [Types::ResourceConfigForUpdate]
     #
+    # @!attribute [rw] remote_debug_config
+    #   Configuration for remote debugging while the training job is
+    #   running. You can update the remote debugging configuration when the
+    #   `SecondaryStatus` of the job is `Downloading` or `Training`.To learn
+    #   more about the remote debugging functionality of SageMaker, see
+    #   [Access a training container through Amazon Web Services Systems
+    #   Manager (SSM) for remote debugging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #   @return [Types::RemoteDebugConfigForUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateTrainingJobRequest AWS API Documentation
     #
     class UpdateTrainingJobRequest < Struct.new(
       :training_job_name,
       :profiler_config,
       :profiler_rule_configurations,
-      :resource_config)
+      :resource_config,
+      :remote_debug_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44353,6 +44441,27 @@ module Aws::SageMaker
       :arn,
       :type,
       :lineage_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of key-value pairs that you specify for your resources.
+    #
+    # @!attribute [rw] key
+    #   The key for that specifies the tag that you're using to filter the
+    #   search results. The key must start with `Tags.`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the tag that you're using to filter the search
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VisibilityConditions AWS API Documentation
+    #
+    class VisibilityConditions < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

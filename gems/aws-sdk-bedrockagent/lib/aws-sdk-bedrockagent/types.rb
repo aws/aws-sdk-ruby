@@ -2646,6 +2646,69 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains the configurations to use RDS to store knowledge base data.
+    #
+    # @!attribute [rw] resource_arn
+    #   Arn of a RDS Resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_secret_arn
+    #   Arn of a SecretsManager Secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Name of the database within RDS
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Name of the table within RDS
+    #   @return [String]
+    #
+    # @!attribute [rw] field_mapping
+    #   A mapping of Bedrock Knowledge Base fields to RDS column names
+    #   @return [Types::RdsFieldMapping]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RdsConfiguration AWS API Documentation
+    #
+    class RdsConfiguration < Struct.new(
+      :resource_arn,
+      :credentials_secret_arn,
+      :database_name,
+      :table_name,
+      :field_mapping)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A mapping of Bedrock Knowledge Base fields to RDS column names
+    #
+    # @!attribute [rw] primary_key_field
+    #   Name of the column
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_field
+    #   Name of the column
+    #   @return [String]
+    #
+    # @!attribute [rw] text_field
+    #   Name of the column
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_field
+    #   Name of the column
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RdsFieldMapping AWS API Documentation
+    #
+    class RdsFieldMapping < Struct.new(
+      :primary_key_field,
+      :vector_field,
+      :text_field,
+      :metadata_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configurations to use Redis Enterprise Cloud to store
     # knowledge base data.
     #
@@ -2846,13 +2909,18 @@ module Aws::BedrockAgent
     #   knowledge base data.
     #   @return [Types::RedisEnterpriseCloudConfiguration]
     #
+    # @!attribute [rw] rds_configuration
+    #   Contains the configurations to use RDS to store knowledge base data.
+    #   @return [Types::RdsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StorageConfiguration AWS API Documentation
     #
     class StorageConfiguration < Struct.new(
       :type,
       :opensearch_serverless_configuration,
       :pinecone_configuration,
-      :redis_enterprise_cloud_configuration)
+      :redis_enterprise_cloud_configuration,
+      :rds_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -16,6 +16,7 @@ require_relative 'aws-sdk-neptunegraph/client_api'
 require_relative 'aws-sdk-neptunegraph/plugins/endpoints.rb'
 require_relative 'aws-sdk-neptunegraph/client'
 require_relative 'aws-sdk-neptunegraph/errors'
+require_relative 'aws-sdk-neptunegraph/waiters'
 require_relative 'aws-sdk-neptunegraph/resource'
 require_relative 'aws-sdk-neptunegraph/endpoint_parameters'
 require_relative 'aws-sdk-neptunegraph/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-neptunegraph/customizations'
 # @!group service
 module Aws::NeptuneGraph
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

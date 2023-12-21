@@ -131,6 +131,7 @@ module Aws::RDS
   # * {InvalidGlobalClusterStateFault}
   # * {InvalidIntegrationStateFault}
   # * {InvalidOptionGroupStateFault}
+  # * {InvalidResourceStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidS3BucketFault}
   # * {InvalidSubnet}
@@ -1207,6 +1208,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InvalidOptionGroupStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidResourceStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidResourceStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

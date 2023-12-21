@@ -155,6 +155,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A structure that defines agent hierarchy group levels which can be
+    # used to filter search results. Important: Agent hierarchy group level
+    # information in search result is a snapshot, it does not represent
+    # current agent hierarchy who handled the contact.
+    #
+    # @!attribute [rw] l1_ids
+    #   The identifiers for level 1 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l2_ids
+    #   The identifiers for level 2 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l3_ids
+    #   The identifiers for level 3 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l4_ids
+    #   The identifiers for level 4 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l5_ids
+    #   The identifiers for level 5 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentHierarchyGroups AWS API Documentation
+    #
+    class AgentHierarchyGroups < Struct.new(
+      :l1_ids,
+      :l2_ids,
+      :l3_ids,
+      :l4_ids,
+      :l5_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the agent who accepted the contact.
     #
     # @!attribute [rw] id
@@ -831,6 +868,29 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateTrafficDistributionGroupUserResponse AWS API Documentation
     #
     class AssociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN of the instance).
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiencies
+    #   The proficiencies to associate with the user.
+    #   @return [Array<Types::UserProficiency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateUserProficienciesRequest AWS API Documentation
+    #
+    class AssociateUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :user_proficiencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Information about a reference when the `referenceType` is
     # `ATTACHMENT`. Otherwise, null.
@@ -1583,6 +1643,21 @@ module Aws::Connect
     #   Information about Amazon Connect Wisdom.
     #   @return [Types::WisdomInfo]
     #
+    # @!attribute [rw] queue_time_adjustment_seconds
+    #   An integer that represents the queue time adjust to be applied to
+    #   the contact, in seconds (longer / larger queue time are routed
+    #   preferentially). Cannot be specified if the QueuePriority is
+    #   specified. Must be statically defined and a valid integer value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queue_priority
+    #   An integer that represents the queue priority to be applied to the
+    #   contact (lower priorities are routed preferentially). Cannot be
+    #   specified if the QueueTimeAdjustmentSeconds is specified. Must be
+    #   statically defined, must be larger than zero, and a valid integer
+    #   value. Default Value is 5.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the contact. This contains both Amazon Web
     #   Services generated and user-defined tags.
@@ -1611,7 +1686,25 @@ module Aws::Connect
       :scheduled_timestamp,
       :related_contact_id,
       :wisdom_info,
+      :queue_time_adjustment_seconds,
+      :queue_priority,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that defines filters can be used to search within outputs
+    # analyzed by Amazon Connect Contact Lens in a contact.
+    #
+    # @!attribute [rw] transcript
+    #   A structure that defines filters can be used to search with text
+    #   within an Amazon Connect Contact Lens analyzed transcript.
+    #   @return [Types::Transcript]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysis AWS API Documentation
+    #
+    class ContactAnalysis < Struct.new(
+      :transcript)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1893,6 +1986,120 @@ module Aws::Connect
     #
     class ContactNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information of returned contact.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   If this contact is related to other contacts, this is the ID of the
+    #   initial contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_contact_id
+    #   If this contact is not the first contact, this is the ID of the
+    #   previous contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_method
+    #   Indicates how the contact was initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   How the contact reached your contact center.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_info
+    #   If this contact was queued, this contains information about the
+    #   queue.
+    #   @return [Types::ContactSearchSummaryQueueInfo]
+    #
+    # @!attribute [rw] agent_info
+    #   Information about the agent who accepted the contact.
+    #   @return [Types::ContactSearchSummaryAgentInfo]
+    #
+    # @!attribute [rw] initiation_timestamp
+    #   The date and time this contact was initiated, in UTC time. For
+    #   INBOUND, this is when the contact arrived. For OUTBOUND, this is
+    #   when the agent began dialing. For CALLBACK, this is when the
+    #   callback contact was created. For TRANSFER and QUEUE\_TRANSFER, this
+    #   is when the transfer was initiated. For API, this is when the
+    #   request arrived. For EXTERNAL\_OUTBOUND, this is when the agent
+    #   started dialing the external participant. For MONITOR, this is when
+    #   the supervisor started listening to a contact.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disconnect_timestamp
+    #   The timestamp when the customer endpoint disconnected from Amazon
+    #   Connect.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scheduled_timestamp
+    #   The timestamp, in Unix epoch time format, at which to start running
+    #   the inbound flow.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummary AWS API Documentation
+    #
+    class ContactSearchSummary < Struct.new(
+      :arn,
+      :id,
+      :initial_contact_id,
+      :previous_contact_id,
+      :initiation_method,
+      :channel,
+      :queue_info,
+      :agent_info,
+      :initiation_timestamp,
+      :disconnect_timestamp,
+      :scheduled_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the agent who accepted the contact.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the agent who accepted the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_to_agent_timestamp
+    #   The timestamp when the contact was connected to the agent.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummaryAgentInfo AWS API Documentation
+    #
+    class ContactSearchSummaryAgentInfo < Struct.new(
+      :id,
+      :connected_to_agent_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If this contact was queued, this contains information about the queue.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] enqueue_timestamp
+    #   The timestamp when the contact was added to the queue.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummaryQueueInfo AWS API Documentation
+    #
+    class ContactSearchSummaryQueueInfo < Struct.new(
+      :id,
+      :enqueue_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2609,6 +2816,29 @@ module Aws::Connect
     #
     class CreatePersistentContactAssociationResponse < Struct.new(
       :continued_from_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the predefined attribute.
+    #   @return [Types::PredefinedAttributeValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePredefinedAttributeRequest AWS API Documentation
+    #
+    class CreatePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4011,6 +4241,24 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePredefinedAttributeRequest AWS API Documentation
+    #
+    class DeletePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -4724,6 +4972,36 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePredefinedAttributeRequest AWS API Documentation
+    #
+    class DescribePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predefined_attribute
+    #   Information about the predefined attribute.
+    #   @return [Types::PredefinedAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePredefinedAttributeResponse AWS API Documentation
+    #
+    class DescribePredefinedAttributeResponse < Struct.new(
+      :predefined_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -5147,12 +5425,17 @@ module Aws::Connect
     #   Information about the routing profile assigned to the user.
     #   @return [Types::RoutingProfileReference]
     #
+    # @!attribute [rw] routing_step_expression
+    #   The expression of a step in a routing criteria.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
     #
     class Dimensions < Struct.new(
       :queue,
       :channel,
-      :routing_profile)
+      :routing_profile,
+      :routing_step_expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5479,6 +5762,29 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateTrafficDistributionGroupUserResponse AWS API Documentation
     #
     class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiencies
+    #   The proficiencies to disassociate from the user.
+    #   @return [Array<Types::UserProficiencyDisassociate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateUserProficienciesRequest AWS API Documentation
+    #
+    class DisassociateUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :user_proficiencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains details about why a contact was disconnected. Only Amazon
     # Connect outbound campaigns can provide this field.
@@ -6658,12 +6964,18 @@ module Aws::Connect
     #   A list of up to 100 routing profile IDs or ARNs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] routing_step_expressions
+    #   A list of expressions as a filter, in which an expression is an
+    #   object of a step in a routing criteria.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters AWS API Documentation
     #
     class Filters < Struct.new(
       :queues,
       :channels,
-      :routing_profiles)
+      :routing_profiles,
+      :routing_step_expressions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10732,6 +11044,49 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPredefinedAttributesRequest AWS API Documentation
+    #
+    class ListPredefinedAttributesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] predefined_attribute_summary_list
+    #   Summary of the predefined attributes.
+    #   @return [Array<Types::PredefinedAttributeSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPredefinedAttributesResponse AWS API Documentation
+    #
+    class ListPredefinedAttributesResponse < Struct.new(
+      :next_token,
+      :predefined_attribute_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
@@ -11715,6 +12070,64 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserProficienciesRequest AWS API Documentation
+    #
+    class ListUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiency_list
+    #   Information about the user proficiencies.
+    #   @return [Array<Types::UserProficiency>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time that the user's proficiencies are were modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The region in which a user's proficiencies were last modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserProficienciesResponse AWS API Documentation
+    #
+    class ListUserProficienciesResponse < Struct.new(
+      :next_token,
+      :user_proficiency_list,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -12679,6 +13092,114 @@ module Aws::Connect
       :phone_number_country_code)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Information about a predefined attribute.
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the predefined attribute.
+    #   @return [Types::PredefinedAttributeValues]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Last modified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   Last modified region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttribute AWS API Documentation
+    #
+    class PredefinedAttribute < Struct.new(
+      :name,
+      :values,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return predefined attributes.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::PredefinedAttributeSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Array<Types::PredefinedAttributeSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    #   `description`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeSearchCriteria AWS API Documentation
+    #
+    class PredefinedAttributeSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a predefined attribute.
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Last modified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   Last modified region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeSummary AWS API Documentation
+    #
+    class PredefinedAttributeSummary < Struct.new(
+      :name,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about values of a predefined attribute.
+    #
+    # @note PredefinedAttributeValues is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PredefinedAttributeValues is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PredefinedAttributeValues corresponding to the set member.
+    #
+    # @!attribute [rw] string_list
+    #   Predefined attribute values of type string list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeValues AWS API Documentation
+    #
+    class PredefinedAttributeValues < Struct.new(
+      :string_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StringList < PredefinedAttributeValues; end
+      class Unknown < PredefinedAttributeValues; end
     end
 
     # Information about a problem detail.
@@ -14698,6 +15219,137 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of Amazon Connect instance. You can find the instance
+    #   ID in the Amazon Resource Name (ARN) of the instance
+    #   @return [String]
+    #
+    # @!attribute [rw] time_range
+    #   Time range that you want to search results
+    #   @return [Types::SearchContactsTimeRange]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return contacts.
+    #   @return [Types::SearchCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   Specifies a field to sort by and a sort order
+    #   @return [Types::Sort]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsRequest AWS API Documentation
+    #
+    class SearchContactsRequest < Struct.new(
+      :instance_id,
+      :time_range,
+      :search_criteria,
+      :max_results,
+      :next_token,
+      :sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contacts
+    #   Information about the contacts.
+    #   @return [Array<Types::ContactSearchSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of contacts which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsResponse AWS API Documentation
+    #
+    class SearchContactsResponse < Struct.new(
+      :contacts,
+      :next_token,
+      :total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure of time range that you want to search results
+    #
+    # @!attribute [rw] type
+    #   The type of timestamp to search
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the time range.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the time range.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsTimeRange AWS API Documentation
+    #
+    class SearchContactsTimeRange < Struct.new(
+      :type,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure of search criteria to be used to return contacts
+    #
+    # @!attribute [rw] agent_ids
+    #   The array of agent ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] agent_hierarchy_groups
+    #   The agent hierarchy groups
+    #   @return [Types::AgentHierarchyGroups]
+    #
+    # @!attribute [rw] channels
+    #   The array of channels
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] contact_analysis
+    #   The ContactAnalysis object used in search criteria
+    #   @return [Types::ContactAnalysis]
+    #
+    # @!attribute [rw] initiation_methods
+    #   The array of initiaton methods
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] queue_ids
+    #   The array of queue ids.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] searchable_contact_attributes
+    #   The SearchableContactAttributes object used in search criteria
+    #   @return [Types::SearchableContactAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchCriteria AWS API Documentation
+    #
+    class SearchCriteria < Struct.new(
+      :agent_ids,
+      :agent_hierarchy_groups,
+      :channels,
+      :contact_analysis,
+      :initiation_methods,
+      :queue_ids,
+      :searchable_contact_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -14754,6 +15406,61 @@ module Aws::Connect
     #
     class SearchHoursOfOperationsResponse < Struct.new(
       :hours_of_operations,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return predefined attributes.
+    #   @return [Types::PredefinedAttributeSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPredefinedAttributesRequest AWS API Documentation
+    #
+    class SearchPredefinedAttributesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predefined_attributes
+    #   Predefined attributes matched by the search criteria.
+    #   @return [Array<Types::PredefinedAttribute>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The approximate number of predefined attributes which matched your
+    #   search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPredefinedAttributesResponse AWS API Documentation
+    #
+    class SearchPredefinedAttributesResponse < Struct.new(
+      :predefined_attributes,
       :next_token,
       :approximate_total_count)
       SENSITIVE = []
@@ -15293,6 +16000,45 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A structure that defines searchable contact attributes which can be
+    # used to filter search results.
+    #
+    # @!attribute [rw] criteria
+    #   The array of searhale contact attribute criteria
+    #   @return [Array<Types::SearchableContactAttributesCriteria>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type of multiple searchable contact attributes criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableContactAttributes AWS API Documentation
+    #
+    class SearchableContactAttributes < Struct.new(
+      :criteria,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria of searchable contact attributes.
+    #
+    # @!attribute [rw] key
+    #   The searchable contact attribute key
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The array of contact attribute values used to filter search results.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableContactAttributesCriteria AWS API Documentation
+    #
+    class SearchableContactAttributesCriteria < Struct.new(
+      :key,
+      :values)
+      SENSITIVE = [:key]
+      include Aws::Structure
+    end
+
     # Configuration information of the security key.
     #
     # @!attribute [rw] association_id
@@ -15403,6 +16149,11 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    #   `description`.
+    #
+    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchCriteria AWS API Documentation
@@ -15710,6 +16461,25 @@ module Aws::Connect
       :category,
       :condition,
       :option_ref_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that defines the sort by and a sort order
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field on which to sort.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   An ascending or descending sort.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Sort AWS API Documentation
+    #
+    class Sort < Struct.new(
+      :field_name,
+      :order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16544,6 +17314,11 @@ module Aws::Connect
 
     # A leaf node condition which can be used to specify a string condition.
     #
+    # <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    # `description`.
+    #
+    #  </note>
+    #
     # @!attribute [rw] field_name
     #   The name of the field in the string condition.
     #   @return [String]
@@ -17268,6 +18043,49 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The transcript object used to search results.
+    #
+    # @!attribute [rw] criteria
+    #   The array of transcript search criteria
+    #   @return [Array<Types::TranscriptCriteria>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type of multiple transcript criteira
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Transcript AWS API Documentation
+    #
+    class Transcript < Struct.new(
+      :criteria,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The transcript criteria used to search
+    #
+    # @!attribute [rw] participant_role
+    #   The participant role in a transcript
+    #   @return [String]
+    #
+    # @!attribute [rw] search_text
+    #   The words or phrases used to search within a transcript.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type of search texts in a transcript criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TranscriptCriteria AWS API Documentation
+    #
+    class TranscriptCriteria < Struct.new(
+      :participant_role,
+      :search_text,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -17769,6 +18587,48 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_time_adjustment_seconds
+    #   The number of seconds to add or subtract from the contact's routing
+    #   age. Contacts are routed to agents on a first-come, first-serve
+    #   basis. This means that changing their amount of time in queue
+    #   compared to others also changes their position in queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queue_priority
+    #   Priority of the contact in the queue. The default priority for new
+    #   contacts is 5. You can raise the priority of a contact compared to
+    #   other contacts in the queue by assigning them a higher priority,
+    #   such as 1 or 2.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingDataRequest AWS API Documentation
+    #
+    class UpdateContactRoutingDataRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :queue_time_adjustment_seconds,
+      :queue_priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingDataResponse AWS API Documentation
+    #
+    class UpdateContactRoutingDataResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
     #   The identifier of the contact.
     #   @return [String]
     #
@@ -18134,6 +18994,29 @@ module Aws::Connect
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number_id,
       :phone_number_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the predefined attribute.
+    #   @return [Types::PredefinedAttributeValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePredefinedAttributeRequest AWS API Documentation
+    #
+    class UpdatePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18953,6 +19836,31 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiencies
+    #   The proficiencies to be updated for the user. Proficiencies must
+    #   first be associated to the user. You can do this using
+    #   AssociateUserProficiencies API.
+    #   @return [Array<Types::UserProficiency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserProficienciesRequest AWS API Documentation
+    #
+    class UpdateUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :user_proficiencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] routing_profile_id
     #   The identifier of the routing profile for the user.
     #   @return [String]
@@ -19411,6 +20319,51 @@ module Aws::Connect
       :auto_accept,
       :after_contact_work_time_limit,
       :desk_phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about proficiency of a user.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of user's proficiency. You must use name of predefined
+    #   attribute present in the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of user's proficiency. You must use value of predefined
+    #   attribute present in the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserProficiency AWS API Documentation
+    #
+    class UserProficiency < Struct.new(
+      :attribute_name,
+      :attribute_value,
+      :level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about proficiency to be disassociated from the user.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of user's proficiency.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of user's proficiency.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserProficiencyDisassociate AWS API Documentation
+    #
+    class UserProficiencyDisassociate < Struct.new(
+      :attribute_name,
+      :attribute_value)
       SENSITIVE = []
       include Aws::Structure
     end

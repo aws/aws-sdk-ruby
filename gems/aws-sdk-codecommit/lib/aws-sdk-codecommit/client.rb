@@ -722,6 +722,7 @@ module Aws::CodeCommit
     #
     #   * {Types::BatchGetRepositoriesOutput#repositories #repositories} => Array&lt;Types::RepositoryMetadata&gt;
     #   * {Types::BatchGetRepositoriesOutput#repositories_not_found #repositories_not_found} => Array&lt;String&gt;
+    #   * {Types::BatchGetRepositoriesOutput#errors #errors} => Array&lt;Types::BatchGetRepositoriesError&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -742,8 +743,14 @@ module Aws::CodeCommit
     #   resp.repositories[0].clone_url_http #=> String
     #   resp.repositories[0].clone_url_ssh #=> String
     #   resp.repositories[0].arn #=> String
+    #   resp.repositories[0].kms_key_id #=> String
     #   resp.repositories_not_found #=> Array
     #   resp.repositories_not_found[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].repository_id #=> String
+    #   resp.errors[0].repository_name #=> String
+    #   resp.errors[0].error_code #=> String, one of "EncryptionIntegrityChecksFailedException", "EncryptionKeyAccessDeniedException", "EncryptionKeyDisabledException", "EncryptionKeyNotFoundException", "EncryptionKeyUnavailableException", "RepositoryDoesNotExistException"
+    #   resp.errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositories AWS API Documentation
     #
@@ -1195,6 +1202,20 @@ module Aws::CodeCommit
     # @option params [Hash<String,String>] :tags
     #   One or more tag key-value pairs to use when tagging this repository.
     #
+    # @option params [String] :kms_key_id
+    #   The ID of the encryption key. You can view the ID of an encryption key
+    #   in the KMS console, or use the KMS APIs to programmatically retrieve a
+    #   key ID. For more information about acceptable values for kmsKeyID, see
+    #   [KeyId][1] in the Decrypt API description in the *Key Management
+    #   Service API Reference*.
+    #
+    #   If no key is specified, the default `aws/codecommit` Amazon Web
+    #   Services managed key is used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #
     # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryOutput#repository_metadata #repository_metadata} => Types::RepositoryMetadata
@@ -1207,6 +1228,7 @@ module Aws::CodeCommit
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1221,6 +1243,7 @@ module Aws::CodeCommit
     #   resp.repository_metadata.clone_url_http #=> String
     #   resp.repository_metadata.clone_url_ssh #=> String
     #   resp.repository_metadata.arn #=> String
+    #   resp.repository_metadata.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepository AWS API Documentation
     #
@@ -2878,6 +2901,7 @@ module Aws::CodeCommit
     #   resp.repository_metadata.clone_url_http #=> String
     #   resp.repository_metadata.clone_url_ssh #=> String
     #   resp.repository_metadata.arn #=> String
+    #   resp.repository_metadata.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepository AWS API Documentation
     #
@@ -5004,6 +5028,52 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Updates the Key Management Service encryption key used to encrypt and
+    # decrypt a CodeCommit repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository for which you want to update the KMS
+    #   encryption key used to encrypt and decrypt the repository.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The ID of the encryption key. You can view the ID of an encryption key
+    #   in the KMS console, or use the KMS APIs to programmatically retrieve a
+    #   key ID. For more information about acceptable values for keyID, see
+    #   [KeyId][1] in the Decrypt API description in the *Key Management
+    #   Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #
+    # @return [Types::UpdateRepositoryEncryptionKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRepositoryEncryptionKeyOutput#repository_id #repository_id} => String
+    #   * {Types::UpdateRepositoryEncryptionKeyOutput#kms_key_id #kms_key_id} => String
+    #   * {Types::UpdateRepositoryEncryptionKeyOutput#original_kms_key_id #original_kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_repository_encryption_key({
+    #     repository_name: "RepositoryName", # required
+    #     kms_key_id: "KmsKeyId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_id #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.original_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryEncryptionKey AWS API Documentation
+    #
+    # @overload update_repository_encryption_key(params = {})
+    # @param [Hash] params ({})
+    def update_repository_encryption_key(params = {}, options = {})
+      req = build_request(:update_repository_encryption_key, params)
+      req.send_request(options)
+    end
+
     # Renames a repository. The repository name must be unique across the
     # calling Amazon Web Services account. Repository names are limited to
     # 100 alphanumeric, dash, and underscore characters, and cannot include
@@ -5052,7 +5122,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

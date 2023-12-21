@@ -775,6 +775,7 @@ module Aws::SageMaker
     EnableCapture = Shapes::BooleanShape.new(name: 'EnableCapture')
     EnableInfraCheck = Shapes::BooleanShape.new(name: 'EnableInfraCheck')
     EnableIotRoleAlias = Shapes::BooleanShape.new(name: 'EnableIotRoleAlias')
+    EnableRemoteDebug = Shapes::BooleanShape.new(name: 'EnableRemoteDebug')
     EnableSagemakerServicecatalogPortfolioInput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioInput')
     EnableSagemakerServicecatalogPortfolioOutput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioOutput')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
@@ -1776,6 +1777,8 @@ module Aws::SageMaker
     RegisterDevicesRequest = Shapes::StructureShape.new(name: 'RegisterDevicesRequest')
     RegisterModelStepMetadata = Shapes::StructureShape.new(name: 'RegisterModelStepMetadata')
     ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
+    RemoteDebugConfig = Shapes::StructureShape.new(name: 'RemoteDebugConfig')
+    RemoteDebugConfigForUpdate = Shapes::StructureShape.new(name: 'RemoteDebugConfigForUpdate')
     RenderUiTemplateRequest = Shapes::StructureShape.new(name: 'RenderUiTemplateRequest')
     RenderUiTemplateResponse = Shapes::StructureShape.new(name: 'RenderUiTemplateResponse')
     RenderableTask = Shapes::StructureShape.new(name: 'RenderableTask')
@@ -2208,6 +2211,10 @@ module Aws::SageMaker
     VersionedArnOrName = Shapes::StringShape.new(name: 'VersionedArnOrName')
     Vertex = Shapes::StructureShape.new(name: 'Vertex')
     Vertices = Shapes::ListShape.new(name: 'Vertices')
+    VisibilityConditions = Shapes::StructureShape.new(name: 'VisibilityConditions')
+    VisibilityConditionsKey = Shapes::StringShape.new(name: 'VisibilityConditionsKey')
+    VisibilityConditionsList = Shapes::ListShape.new(name: 'VisibilityConditionsList')
+    VisibilityConditionsValue = Shapes::StringShape.new(name: 'VisibilityConditionsValue')
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -3584,6 +3591,7 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
     CreateTrainingJobRequest.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     CreateTrainingJobRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
+    CreateTrainingJobRequest.add_member(:remote_debug_config, Shapes::ShapeRef.new(shape: RemoteDebugConfig, location_name: "RemoteDebugConfig"))
     CreateTrainingJobRequest.add_member(:infra_check_config, Shapes::ShapeRef.new(shape: InfraCheckConfig, location_name: "InfraCheckConfig"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
 
@@ -5023,6 +5031,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:profiling_status, Shapes::ShapeRef.new(shape: ProfilingStatus, location_name: "ProfilingStatus"))
     DescribeTrainingJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     DescribeTrainingJobResponse.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
+    DescribeTrainingJobResponse.add_member(:remote_debug_config, Shapes::ShapeRef.new(shape: RemoteDebugConfig, location_name: "RemoteDebugConfig"))
     DescribeTrainingJobResponse.add_member(:infra_check_config, Shapes::ShapeRef.new(shape: InfraCheckConfig, location_name: "InfraCheckConfig"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
@@ -8569,6 +8578,12 @@ module Aws::SageMaker
     RegisterModelStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: String256, location_name: "Arn"))
     RegisterModelStepMetadata.struct_class = Types::RegisterModelStepMetadata
 
+    RemoteDebugConfig.add_member(:enable_remote_debug, Shapes::ShapeRef.new(shape: EnableRemoteDebug, location_name: "EnableRemoteDebug"))
+    RemoteDebugConfig.struct_class = Types::RemoteDebugConfig
+
+    RemoteDebugConfigForUpdate.add_member(:enable_remote_debug, Shapes::ShapeRef.new(shape: EnableRemoteDebug, location_name: "EnableRemoteDebug"))
+    RemoteDebugConfigForUpdate.struct_class = Types::RemoteDebugConfigForUpdate
+
     RenderUiTemplateRequest.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplate, location_name: "UiTemplate"))
     RenderUiTemplateRequest.add_member(:task, Shapes::ShapeRef.new(shape: RenderableTask, required: true, location_name: "Task"))
     RenderUiTemplateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
@@ -8734,6 +8749,7 @@ module Aws::SageMaker
     SearchRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     SearchRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     SearchRequest.add_member(:cross_account_filter_option, Shapes::ShapeRef.new(shape: CrossAccountFilterOption, location_name: "CrossAccountFilterOption"))
+    SearchRequest.add_member(:visibility_conditions, Shapes::ShapeRef.new(shape: VisibilityConditionsList, location_name: "VisibilityConditions"))
     SearchRequest.struct_class = Types::SearchRequest
 
     SearchResponse.add_member(:results, Shapes::ShapeRef.new(shape: SearchResultsList, location_name: "Results"))
@@ -9670,6 +9686,7 @@ module Aws::SageMaker
     UpdateTrainingJobRequest.add_member(:profiler_config, Shapes::ShapeRef.new(shape: ProfilerConfigForUpdate, location_name: "ProfilerConfig"))
     UpdateTrainingJobRequest.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
     UpdateTrainingJobRequest.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfigForUpdate, location_name: "ResourceConfig"))
+    UpdateTrainingJobRequest.add_member(:remote_debug_config, Shapes::ShapeRef.new(shape: RemoteDebugConfigForUpdate, location_name: "RemoteDebugConfig"))
     UpdateTrainingJobRequest.struct_class = Types::UpdateTrainingJobRequest
 
     UpdateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -9771,6 +9788,12 @@ module Aws::SageMaker
     Vertex.struct_class = Types::Vertex
 
     Vertices.member = Shapes::ShapeRef.new(shape: Vertex)
+
+    VisibilityConditions.add_member(:key, Shapes::ShapeRef.new(shape: VisibilityConditionsKey, location_name: "Key"))
+    VisibilityConditions.add_member(:value, Shapes::ShapeRef.new(shape: VisibilityConditionsValue, location_name: "Value"))
+    VisibilityConditions.struct_class = Types::VisibilityConditions
+
+    VisibilityConditionsList.member = Shapes::ShapeRef.new(shape: VisibilityConditions)
 
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))

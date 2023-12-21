@@ -251,8 +251,12 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeTenantDatabases.build(context)
           when :describe_valid_db_instance_modifications
             Aws::RDS::Endpoints::DescribeValidDBInstanceModifications.build(context)
+          when :disable_http_endpoint
+            Aws::RDS::Endpoints::DisableHttpEndpoint.build(context)
           when :download_db_log_file_portion
             Aws::RDS::Endpoints::DownloadDBLogFilePortion.build(context)
+          when :enable_http_endpoint
+            Aws::RDS::Endpoints::EnableHttpEndpoint.build(context)
           when :failover_db_cluster
             Aws::RDS::Endpoints::FailoverDBCluster.build(context)
           when :failover_global_cluster

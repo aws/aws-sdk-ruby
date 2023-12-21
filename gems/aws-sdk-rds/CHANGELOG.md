@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.211.0 (2023-12-21)
+------------------
+
+* Feature - This release adds support for using RDS Data API with Aurora PostgreSQL Serverless v2 and provisioned DB clusters.
+
 1.210.0 (2023-12-19)
 ------------------
 

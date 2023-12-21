@@ -59,6 +59,7 @@ module Aws::PrometheusService
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListRuleGroupsNamespacesRequest = Shapes::StructureShape.new(name: 'ListRuleGroupsNamespacesRequest')
     ListRuleGroupsNamespacesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRuleGroupsNamespacesRequestMaxResultsInteger')
     ListRuleGroupsNamespacesResponse = Shapes::StructureShape.new(name: 'ListRuleGroupsNamespacesResponse')
@@ -200,12 +201,14 @@ module Aws::PrometheusService
     CreateWorkspaceRequest.add_member(:alias, Shapes::ShapeRef.new(shape: WorkspaceAlias, location_name: "alias"))
     CreateWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateWorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorkspaceRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateWorkspaceRequest.struct_class = Types::CreateWorkspaceRequest
 
     CreateWorkspaceResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
     CreateWorkspaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WorkspaceArn, required: true, location_name: "arn"))
     CreateWorkspaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorkspaceStatus, required: true, location_name: "status"))
     CreateWorkspaceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorkspaceResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateWorkspaceResponse.struct_class = Types::CreateWorkspaceResponse
 
     DeleteAlertManagerDefinitionRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
@@ -491,6 +494,7 @@ module Aws::PrometheusService
     WorkspaceDescription.add_member(:prometheus_endpoint, Shapes::ShapeRef.new(shape: Uri, location_name: "prometheusEndpoint"))
     WorkspaceDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     WorkspaceDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    WorkspaceDescription.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     WorkspaceDescription.struct_class = Types::WorkspaceDescription
 
     WorkspaceStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: WorkspaceStatusCode, required: true, location_name: "statusCode"))
@@ -502,6 +506,7 @@ module Aws::PrometheusService
     WorkspaceSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkspaceStatus, required: true, location_name: "status"))
     WorkspaceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     WorkspaceSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    WorkspaceSummary.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     WorkspaceSummary.struct_class = Types::WorkspaceSummary
 
     WorkspaceSummaryList.member = Shapes::ShapeRef.new(shape: WorkspaceSummary)

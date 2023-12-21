@@ -208,6 +208,20 @@ module Aws::Connect
       end
     end
 
+    class AssociateUserProficiencies
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class BatchAssociateAnalyticsDataSet
       def self.build(context)
         unless context.config.regional_endpoint
@@ -391,6 +405,20 @@ module Aws::Connect
     end
 
     class CreatePersistentContactAssociation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreatePredefinedAttribute
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -699,6 +727,20 @@ module Aws::Connect
     end
 
     class DeleteIntegrationAssociation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeletePredefinedAttribute
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1062,6 +1104,20 @@ module Aws::Connect
       end
     end
 
+    class DescribePredefinedAttribute
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribePrompt
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1385,6 +1441,20 @@ module Aws::Connect
     end
 
     class DisassociateTrafficDistributionGroupUser
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DisassociateUserProficiencies
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1860,6 +1930,20 @@ module Aws::Connect
       end
     end
 
+    class ListPredefinedAttributes
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListPrompts
       def self.build(context)
         unless context.config.regional_endpoint
@@ -2112,6 +2196,20 @@ module Aws::Connect
       end
     end
 
+    class ListUserProficiencies
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListUsers
       def self.build(context)
         unless context.config.regional_endpoint
@@ -2266,7 +2364,35 @@ module Aws::Connect
       end
     end
 
+    class SearchContacts
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class SearchHoursOfOperations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class SearchPredefinedAttributes
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -2770,6 +2896,20 @@ module Aws::Connect
       end
     end
 
+    class UpdateContactRoutingData
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class UpdateContactSchedule
       def self.build(context)
         unless context.config.regional_endpoint
@@ -2869,6 +3009,20 @@ module Aws::Connect
     end
 
     class UpdatePhoneNumberMetadata
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdatePredefinedAttribute
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -3177,6 +3331,20 @@ module Aws::Connect
     end
 
     class UpdateUserPhoneConfig
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Connect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateUserProficiencies
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

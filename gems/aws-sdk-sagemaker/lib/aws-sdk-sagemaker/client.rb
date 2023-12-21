@@ -7900,6 +7900,16 @@ module Aws::SageMaker
     #   The number of times to retry the job when the job fails due to an
     #   `InternalServerError`.
     #
+    # @option params [Types::RemoteDebugConfig] :remote_debug_config
+    #   Configuration for remote debugging. To learn more about the remote
+    #   debugging functionality of SageMaker, see [Access a training container
+    #   through Amazon Web Services Systems Manager (SSM) for remote
+    #   debugging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #
     # @option params [Types::InfraCheckConfig] :infra_check_config
     #   Contains information about the infrastructure health check
     #   configuration for the training job.
@@ -8068,6 +8078,9 @@ module Aws::SageMaker
     #     },
     #     retry_strategy: {
     #       maximum_retry_attempts: 1, # required
+    #     },
+    #     remote_debug_config: {
+    #       enable_remote_debug: false,
     #     },
     #     infra_check_config: {
     #       enable_infra_check: false,
@@ -15026,6 +15039,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#profiling_status #profiling_status} => String
     #   * {Types::DescribeTrainingJobResponse#environment #environment} => Hash&lt;String,String&gt;
     #   * {Types::DescribeTrainingJobResponse#retry_strategy #retry_strategy} => Types::RetryStrategy
+    #   * {Types::DescribeTrainingJobResponse#remote_debug_config #remote_debug_config} => Types::RemoteDebugConfig
     #   * {Types::DescribeTrainingJobResponse#infra_check_config #infra_check_config} => Types::InfraCheckConfig
     #
     # @example Request syntax with placeholder values
@@ -15174,6 +15188,7 @@ module Aws::SageMaker
     #   resp.environment #=> Hash
     #   resp.environment["TrainingEnvironmentKey"] #=> String
     #   resp.retry_strategy.maximum_retry_attempts #=> Integer
+    #   resp.remote_debug_config.enable_remote_debug #=> Boolean
     #   resp.infra_check_config.enable_infra_check #=> Boolean
     #
     #
@@ -22248,6 +22263,10 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html
     #
+    # @option params [Array<Types::VisibilityConditions>] :visibility_conditions
+    #   Limits the results of your search request to the resources that you
+    #   can access.
+    #
     # @return [Types::SearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchResponse#results #results} => Array&lt;Types::SearchRecord&gt;
@@ -22291,6 +22310,12 @@ module Aws::SageMaker
     #     next_token: "NextToken",
     #     max_results: 1,
     #     cross_account_filter_option: "SameAccount", # accepts SameAccount, CrossAccount
+    #     visibility_conditions: [
+    #       {
+    #         key: "VisibilityConditionsKey",
+    #         value: "VisibilityConditionsValue",
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search AWS API Documentation
@@ -25203,6 +25228,18 @@ module Aws::SageMaker
     #   The training job `ResourceConfig` to update warm pool retention
     #   length.
     #
+    # @option params [Types::RemoteDebugConfigForUpdate] :remote_debug_config
+    #   Configuration for remote debugging while the training job is running.
+    #   You can update the remote debugging configuration when the
+    #   `SecondaryStatus` of the job is `Downloading` or `Training`.To learn
+    #   more about the remote debugging functionality of SageMaker, see
+    #   [Access a training container through Amazon Web Services Systems
+    #   Manager (SSM) for remote debugging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #
     # @return [Types::UpdateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTrainingJobResponse#training_job_arn #training_job_arn} => String
@@ -25234,6 +25271,9 @@ module Aws::SageMaker
     #     ],
     #     resource_config: {
     #       keep_alive_period_in_seconds: 1, # required
+    #     },
+    #     remote_debug_config: {
+    #       enable_remote_debug: false,
     #     },
     #   })
     #
@@ -25804,7 +25844,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.225.0'
+      context[:gem_version] = '1.226.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

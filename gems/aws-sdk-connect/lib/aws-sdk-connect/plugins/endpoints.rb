@@ -85,6 +85,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::AssociateSecurityKey.build(context)
           when :associate_traffic_distribution_group_user
             Aws::Connect::Endpoints::AssociateTrafficDistributionGroupUser.build(context)
+          when :associate_user_proficiencies
+            Aws::Connect::Endpoints::AssociateUserProficiencies.build(context)
           when :batch_associate_analytics_data_set
             Aws::Connect::Endpoints::BatchAssociateAnalyticsDataSet.build(context)
           when :batch_disassociate_analytics_data_set
@@ -113,6 +115,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateParticipant.build(context)
           when :create_persistent_contact_association
             Aws::Connect::Endpoints::CreatePersistentContactAssociation.build(context)
+          when :create_predefined_attribute
+            Aws::Connect::Endpoints::CreatePredefinedAttribute.build(context)
           when :create_prompt
             Aws::Connect::Endpoints::CreatePrompt.build(context)
           when :create_queue
@@ -157,6 +161,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DeleteInstance.build(context)
           when :delete_integration_association
             Aws::Connect::Endpoints::DeleteIntegrationAssociation.build(context)
+          when :delete_predefined_attribute
+            Aws::Connect::Endpoints::DeletePredefinedAttribute.build(context)
           when :delete_prompt
             Aws::Connect::Endpoints::DeletePrompt.build(context)
           when :delete_queue
@@ -207,6 +213,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DescribeInstanceStorageConfig.build(context)
           when :describe_phone_number
             Aws::Connect::Endpoints::DescribePhoneNumber.build(context)
+          when :describe_predefined_attribute
+            Aws::Connect::Endpoints::DescribePredefinedAttribute.build(context)
           when :describe_prompt
             Aws::Connect::Endpoints::DescribePrompt.build(context)
           when :describe_queue
@@ -255,6 +263,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DisassociateSecurityKey.build(context)
           when :disassociate_traffic_distribution_group_user
             Aws::Connect::Endpoints::DisassociateTrafficDistributionGroupUser.build(context)
+          when :disassociate_user_proficiencies
+            Aws::Connect::Endpoints::DisassociateUserProficiencies.build(context)
           when :dismiss_user_contact
             Aws::Connect::Endpoints::DismissUserContact.build(context)
           when :get_contact_attributes
@@ -321,6 +331,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListPhoneNumbers.build(context)
           when :list_phone_numbers_v2
             Aws::Connect::Endpoints::ListPhoneNumbersV2.build(context)
+          when :list_predefined_attributes
+            Aws::Connect::Endpoints::ListPredefinedAttributes.build(context)
           when :list_prompts
             Aws::Connect::Endpoints::ListPrompts.build(context)
           when :list_queue_quick_connects
@@ -357,6 +369,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListUseCases.build(context)
           when :list_user_hierarchy_groups
             Aws::Connect::Endpoints::ListUserHierarchyGroups.build(context)
+          when :list_user_proficiencies
+            Aws::Connect::Endpoints::ListUserProficiencies.build(context)
           when :list_users
             Aws::Connect::Endpoints::ListUsers.build(context)
           when :list_view_versions
@@ -379,8 +393,12 @@ module Aws::Connect
             Aws::Connect::Endpoints::ResumeContactRecording.build(context)
           when :search_available_phone_numbers
             Aws::Connect::Endpoints::SearchAvailablePhoneNumbers.build(context)
+          when :search_contacts
+            Aws::Connect::Endpoints::SearchContacts.build(context)
           when :search_hours_of_operations
             Aws::Connect::Endpoints::SearchHoursOfOperations.build(context)
+          when :search_predefined_attributes
+            Aws::Connect::Endpoints::SearchPredefinedAttributes.build(context)
           when :search_prompts
             Aws::Connect::Endpoints::SearchPrompts.build(context)
           when :search_queues
@@ -451,6 +469,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateContactFlowModuleMetadata.build(context)
           when :update_contact_flow_name
             Aws::Connect::Endpoints::UpdateContactFlowName.build(context)
+          when :update_contact_routing_data
+            Aws::Connect::Endpoints::UpdateContactRoutingData.build(context)
           when :update_contact_schedule
             Aws::Connect::Endpoints::UpdateContactSchedule.build(context)
           when :update_evaluation_form
@@ -467,6 +487,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdatePhoneNumber.build(context)
           when :update_phone_number_metadata
             Aws::Connect::Endpoints::UpdatePhoneNumberMetadata.build(context)
+          when :update_predefined_attribute
+            Aws::Connect::Endpoints::UpdatePredefinedAttribute.build(context)
           when :update_prompt
             Aws::Connect::Endpoints::UpdatePrompt.build(context)
           when :update_queue_hours_of_operation
@@ -511,6 +533,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateUserIdentityInfo.build(context)
           when :update_user_phone_config
             Aws::Connect::Endpoints::UpdateUserPhoneConfig.build(context)
+          when :update_user_proficiencies
+            Aws::Connect::Endpoints::UpdateUserProficiencies.build(context)
           when :update_user_routing_profile
             Aws::Connect::Endpoints::UpdateUserRoutingProfile.build(context)
           when :update_user_security_profiles

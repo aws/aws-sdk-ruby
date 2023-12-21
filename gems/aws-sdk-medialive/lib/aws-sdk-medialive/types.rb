@@ -4358,7 +4358,7 @@ module Aws::MediaLive
     #   @return [Types::ThumbnailConfiguration]
     #
     # @!attribute [rw] color_correction_settings
-    #   Color correction settings
+    #   Color Correction Settings
     #   @return [Types::ColorCorrectionSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EncoderSettings AWS API Documentation
@@ -6566,6 +6566,16 @@ module Aws::MediaLive
     #   parameter.
     #   @return [Types::InputDeviceMediaConnectConfigurableSettings]
     #
+    # @!attribute [rw] audio_channel_pairs
+    #   An array of eight audio configurations, one for each audio pair in
+    #   the source. Set up each audio configuration either to exclude the
+    #   pair, or to format it and include it in the output from the device.
+    #   This parameter applies only to UHD devices, and only when the device
+    #   is configured as the source for a MediaConnect flow. For an HD
+    #   device, you configure the audio by setting up audio selectors in the
+    #   channel configuration.
+    #   @return [Array<Types::InputDeviceConfigurableAudioChannelPairConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableSettings AWS API Documentation
     #
     class InputDeviceConfigurableSettings < Struct.new(
@@ -6573,7 +6583,8 @@ module Aws::MediaLive
       :max_bitrate,
       :latency_ms,
       :codec,
-      :mediaconnect_settings)
+      :mediaconnect_settings,
+      :audio_channel_pairs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6930,6 +6941,14 @@ module Aws::MediaLive
     #   Returned only if the outputType is MEDIACONNECT\_FLOW.
     #   @return [Types::InputDeviceMediaConnectSettings]
     #
+    # @!attribute [rw] audio_channel_pairs
+    #   An array of eight audio configurations, one for each audio pair in
+    #   the source. Each audio configuration specifies either to exclude the
+    #   pair, or to format it and include it in the output from the UHD
+    #   device. Applies only when the device is configured as the source for
+    #   a MediaConnect flow.
+    #   @return [Array<Types::InputDeviceUhdAudioChannelPairConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdSettings AWS API Documentation
     #
     class InputDeviceUhdSettings < Struct.new(
@@ -6943,7 +6962,8 @@ module Aws::MediaLive
       :width,
       :latency_ms,
       :codec,
-      :mediaconnect_settings)
+      :mediaconnect_settings,
+      :audio_channel_pairs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13178,6 +13198,55 @@ module Aws::MediaLive
     #
     class WebvttDestinationSettings < Struct.new(
       :style_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One audio configuration that specifies the format for one audio pair
+    # that the device produces as output.
+    #
+    # @!attribute [rw] id
+    #   The ID for one audio pair configuration, a value from 1 to 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The profile to set for one audio pair configuration. Choose an
+    #   enumeration value. Each value describes one audio configuration
+    #   using the format (rate control
+    #   algorithm)-(codec)\_(quality)-(bitrate in bytes). For example,
+    #   CBR-AAC\_HQ-192000. Or choose DISABLED, in which case the device
+    #   won't produce audio for this pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableAudioChannelPairConfig AWS API Documentation
+    #
+    class InputDeviceConfigurableAudioChannelPairConfig < Struct.new(
+      :id,
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One audio configuration that specifies the format for one audio pair
+    # that the device produces as output.
+    #
+    # @!attribute [rw] id
+    #   The ID for one audio pair configuration, a value from 1 to 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The profile for one audio pair configuration. This property
+    #   describes one audio configuration in the format (rate control
+    #   algorithm)-(codec)\_(quality)-(bitrate in bytes). For example,
+    #   CBR-AAC\_HQ-192000. Or DISABLED, in which case the device won't
+    #   produce audio for this pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdAudioChannelPairConfig AWS API Documentation
+    #
+    class InputDeviceUhdAudioChannelPairConfig < Struct.new(
+      :id,
+      :profile)
       SENSITIVE = []
       include Aws::Structure
     end

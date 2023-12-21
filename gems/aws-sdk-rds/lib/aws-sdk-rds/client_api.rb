@@ -362,6 +362,8 @@ module Aws::RDS
     DescribeValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsMessage')
     DescribeValidDBInstanceModificationsResult = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsResult')
     Description = Shapes::StringShape.new(name: 'Description')
+    DisableHttpEndpointRequest = Shapes::StructureShape.new(name: 'DisableHttpEndpointRequest')
+    DisableHttpEndpointResponse = Shapes::StructureShape.new(name: 'DisableHttpEndpointResponse')
     DocLink = Shapes::StructureShape.new(name: 'DocLink')
     DocLinkList = Shapes::ListShape.new(name: 'DocLinkList')
     DomainMembership = Shapes::StructureShape.new(name: 'DomainMembership')
@@ -376,6 +378,8 @@ module Aws::RDS
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
     EC2SecurityGroupList = Shapes::ListShape.new(name: 'EC2SecurityGroupList')
     Ec2ImagePropertiesNotSupportedFault = Shapes::StructureShape.new(name: 'Ec2ImagePropertiesNotSupportedFault')
+    EnableHttpEndpointRequest = Shapes::StructureShape.new(name: 'EnableHttpEndpointRequest')
+    EnableHttpEndpointResponse = Shapes::StructureShape.new(name: 'EnableHttpEndpointResponse')
     EncryptionContextMap = Shapes::MapShape.new(name: 'EncryptionContextMap')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EngineDefaults = Shapes::StructureShape.new(name: 'EngineDefaults')
@@ -466,6 +470,7 @@ module Aws::RDS
     InvalidGlobalClusterStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalClusterStateFault')
     InvalidIntegrationStateFault = Shapes::StructureShape.new(name: 'InvalidIntegrationStateFault')
     InvalidOptionGroupStateFault = Shapes::StructureShape.new(name: 'InvalidOptionGroupStateFault')
+    InvalidResourceStateFault = Shapes::StructureShape.new(name: 'InvalidResourceStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
     InvalidS3BucketFault = Shapes::StructureShape.new(name: 'InvalidS3BucketFault')
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
@@ -2553,6 +2558,13 @@ module Aws::RDS
     DescribeValidDBInstanceModificationsResult.add_member(:valid_db_instance_modifications_message, Shapes::ShapeRef.new(shape: ValidDBInstanceModificationsMessage, location_name: "ValidDBInstanceModificationsMessage"))
     DescribeValidDBInstanceModificationsResult.struct_class = Types::DescribeValidDBInstanceModificationsResult
 
+    DisableHttpEndpointRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    DisableHttpEndpointRequest.struct_class = Types::DisableHttpEndpointRequest
+
+    DisableHttpEndpointResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    DisableHttpEndpointResponse.add_member(:http_endpoint_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "HttpEndpointEnabled"))
+    DisableHttpEndpointResponse.struct_class = Types::DisableHttpEndpointResponse
+
     DocLink.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     DocLink.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "Url"))
     DocLink.struct_class = Types::DocLink
@@ -2598,6 +2610,13 @@ module Aws::RDS
     EC2SecurityGroupList.member = Shapes::ShapeRef.new(shape: EC2SecurityGroup, location_name: "EC2SecurityGroup")
 
     Ec2ImagePropertiesNotSupportedFault.struct_class = Types::Ec2ImagePropertiesNotSupportedFault
+
+    EnableHttpEndpointRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    EnableHttpEndpointRequest.struct_class = Types::EnableHttpEndpointRequest
+
+    EnableHttpEndpointResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    EnableHttpEndpointResponse.add_member(:http_endpoint_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "HttpEndpointEnabled"))
+    EnableHttpEndpointResponse.struct_class = Types::EnableHttpEndpointResponse
 
     EncryptionContextMap.key = Shapes::ShapeRef.new(shape: String)
     EncryptionContextMap.value = Shapes::ShapeRef.new(shape: String)
@@ -2848,6 +2867,8 @@ module Aws::RDS
     InvalidIntegrationStateFault.struct_class = Types::InvalidIntegrationStateFault
 
     InvalidOptionGroupStateFault.struct_class = Types::InvalidOptionGroupStateFault
+
+    InvalidResourceStateFault.struct_class = Types::InvalidResourceStateFault
 
     InvalidRestoreFault.struct_class = Types::InvalidRestoreFault
 
@@ -5488,6 +5509,16 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
+      api.add_operation(:disable_http_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableHttpEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableHttpEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableHttpEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
       api.add_operation(:download_db_log_file_portion, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DownloadDBLogFilePortion"
         o.http_method = "POST"
@@ -5503,6 +5534,16 @@ module Aws::RDS
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:enable_http_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableHttpEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableHttpEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableHttpEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:failover_db_cluster, Seahorse::Model::Operation.new.tap do |o|
