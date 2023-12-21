@@ -13,48 +13,66 @@ module Aws
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionConfigurationResponse
-                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponse
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponseSuccess
       end
 
       class FunctionActiveV2
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionResponse
-                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponse
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponseSuccess
       end
 
       class FunctionExists
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionResponse
-                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponse
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponseSuccess
       end
 
       class FunctionUpdated
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionConfigurationResponse
-                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponse
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponseSuccess
       end
 
       class FunctionUpdatedV2
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionResponse
-                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponse
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponseSuccess
       end
 
       class PublishedVersionActive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 
-        def wait: (function_name: ::String, ?qualifier: ::String) -> Client::_GetFunctionConfigurationResponse
-                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponse
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponseSuccess
       end
     end
   end
