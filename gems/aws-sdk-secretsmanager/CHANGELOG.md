@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-12-22)
+------------------
+
+* Feature - Update endpoint rules and examples.
+
 1.87.0 (2023-11-28)
 ------------------
 

@@ -1181,7 +1181,7 @@ module Aws::Omics
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] storage_capacity
-    #   A storage capacity for the workflow in gigabytes.
+    #   A storage capacity for the workflow in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags

@@ -8638,7 +8638,10 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A federation source failed, but the operation may be retried.
+    #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederationSourceRetryableException AWS API Documentation
@@ -11811,6 +11814,11 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
+    #   @return [String]
+    #
     # @!attribute [rw] catalog_id
     #   The catalog ID where the partition resides.
     #   @return [String]
@@ -11837,15 +11845,24 @@ module Aws::Glue
     #   (Required) A list of supported permission types.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #   @return [Types::QuerySessionContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionMetadataRequest AWS API Documentation
     #
     class GetUnfilteredPartitionMetadataRequest < Struct.new(
+      :region,
       :catalog_id,
       :database_name,
       :table_name,
       :partition_values,
       :audit_context,
-      :supported_permission_types)
+      :supported_permission_types,
+      :query_session_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11873,6 +11890,11 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
+    #   @return [String]
+    #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
     #   If none is provided, the AWS account ID is used by default.
@@ -11998,9 +12020,17 @@ module Aws::Glue
     #   The maximum number of partitions to return in a single response.
     #   @return [Integer]
     #
+    # @!attribute [rw] query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #   @return [Types::QuerySessionContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionsMetadataRequest AWS API Documentation
     #
     class GetUnfilteredPartitionsMetadataRequest < Struct.new(
+      :region,
       :catalog_id,
       :database_name,
       :table_name,
@@ -12009,7 +12039,8 @@ module Aws::Glue
       :supported_permission_types,
       :next_token,
       :segment,
-      :max_results)
+      :max_results,
+      :query_session_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12032,6 +12063,11 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
+    #   @return [String]
+    #
     # @!attribute [rw] catalog_id
     #   The catalog ID where the table resides.
     #   @return [String]
@@ -12053,14 +12089,35 @@ module Aws::Glue
     #   (Required) A list of supported permission types.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_dialect
+    #   A structure specifying the dialect and dialect version used by the
+    #   query engine.
+    #   @return [Types::SupportedDialect]
+    #
+    # @!attribute [rw] permissions
+    #   The Lake Formation data permissions of the caller on the table. Used
+    #   to authorize the call when no view context is found.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #   @return [Types::QuerySessionContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataRequest AWS API Documentation
     #
     class GetUnfilteredTableMetadataRequest < Struct.new(
+      :region,
       :catalog_id,
       :database_name,
       :name,
       :audit_context,
-      :supported_permission_types)
+      :supported_permission_types,
+      :supported_dialect,
+      :permissions,
+      :query_session_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12082,13 +12139,30 @@ module Aws::Glue
     #   A list of column row filters.
     #   @return [Array<Types::ColumnRowFilter>]
     #
+    # @!attribute [rw] query_authorization_id
+    #   A cryptographically generated query identifier generated by Glue or
+    #   Lake Formation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN of the parent resource extracted from the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The Lake Formation data permissions of the caller on the table. Used
+    #   to authorize the call when no view context is found.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataResponse AWS API Documentation
     #
     class GetUnfilteredTableMetadataResponse < Struct.new(
       :table,
       :authorized_columns,
       :is_registered_with_lake_formation,
-      :cell_filters)
+      :cell_filters,
+      :query_authorization_id,
+      :resource_arn,
+      :permissions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16956,6 +17030,44 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure used as a protocol between query engines and Lake
+    # Formation or Glue. Contains both a Lake Formation generated
+    # authorization identifier and information from the request's
+    # authorization context.
+    #
+    # @!attribute [rw] query_id
+    #   A unique identifier generated by the query engine for the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_start_time
+    #   A timestamp provided by the query engine for when the query started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cluster_id
+    #   An identifier string for the consumer cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_authorization_id
+    #   A cryptographically generated query identifier generated by Glue or
+    #   Lake Formation.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_context
+    #   An opaque string-string map passed by the query engine.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/QuerySessionContext AWS API Documentation
+    #
+    class QuerySessionContext < Struct.new(
+      :query_id,
+      :query_start_time,
+      :cluster_id,
+      :query_authorization_id,
+      :additional_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.
     #
     # @!attribute [rw] name
@@ -20581,6 +20693,26 @@ module Aws::Glue
       :average_length,
       :number_of_nulls,
       :number_of_distinct_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure specifying the dialect and dialect version used by the
+    # query engine.
+    #
+    # @!attribute [rw] dialect
+    #   The dialect of the query engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialect_version
+    #   The version of the dialect of the query engine. For example, 3.0.0.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SupportedDialect AWS API Documentation
+    #
+    class SupportedDialect < Struct.new(
+      :dialect,
+      :dialect_version)
       SENSITIVE = []
       include Aws::Structure
     end

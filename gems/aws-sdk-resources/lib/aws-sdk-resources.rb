@@ -260,6 +260,7 @@ module Aws
   autoload :Neptunedata, 'aws-sdk-neptunedata'
   autoload :NetworkFirewall, 'aws-sdk-networkfirewall'
   autoload :NetworkManager, 'aws-sdk-networkmanager'
+  autoload :NetworkMonitor, 'aws-sdk-networkmonitor'
   autoload :NimbleStudio, 'aws-sdk-nimblestudio'
   autoload :OAM, 'aws-sdk-oam'
   autoload :OSIS, 'aws-sdk-osis'

@@ -17,6 +17,7 @@ module Aws::Glue
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Action = Shapes::StructureShape.new(name: 'Action')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
+    AdditionalContextMap = Shapes::MapShape.new(name: 'AdditionalContextMap')
     AdditionalOptionKeys = Shapes::StringShape.new(name: 'AdditionalOptionKeys')
     AdditionalOptions = Shapes::MapShape.new(name: 'AdditionalOptions')
     AdditionalPlanOptionsMap = Shapes::MapShape.new(name: 'AdditionalPlanOptionsMap')
@@ -213,6 +214,8 @@ module Aws::Glue
     ConnectorDataSource = Shapes::StructureShape.new(name: 'ConnectorDataSource')
     ConnectorDataTarget = Shapes::StructureShape.new(name: 'ConnectorDataTarget')
     ConnectorOptions = Shapes::MapShape.new(name: 'ConnectorOptions')
+    ContextKey = Shapes::StringShape.new(name: 'ContextKey')
+    ContextValue = Shapes::StringShape.new(name: 'ContextValue')
     ContextWords = Shapes::ListShape.new(name: 'ContextWords')
     Crawl = Shapes::StructureShape.new(name: 'Crawl')
     CrawlId = Shapes::StringShape.new(name: 'CrawlId')
@@ -825,6 +828,7 @@ module Aws::Glue
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
+    NullableString = Shapes::StringShape.new(name: 'NullableString')
     OneInput = Shapes::ListShape.new(name: 'OneInput')
     OpenTableFormatInput = Shapes::StructureShape.new(name: 'OpenTableFormatInput')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
@@ -902,6 +906,7 @@ module Aws::Glue
     QuerySchemaVersionMetadataInput = Shapes::StructureShape.new(name: 'QuerySchemaVersionMetadataInput')
     QuerySchemaVersionMetadataMaxResults = Shapes::IntegerShape.new(name: 'QuerySchemaVersionMetadataMaxResults')
     QuerySchemaVersionMetadataResponse = Shapes::StructureShape.new(name: 'QuerySchemaVersionMetadataResponse')
+    QuerySessionContext = Shapes::StructureShape.new(name: 'QuerySessionContext')
     QuoteChar = Shapes::StringShape.new(name: 'QuoteChar')
     Recipe = Shapes::StructureShape.new(name: 'Recipe')
     RecipeReference = Shapes::StructureShape.new(name: 'RecipeReference')
@@ -1078,6 +1083,7 @@ module Aws::Glue
     StreamingDataPreviewOptions = Shapes::StructureShape.new(name: 'StreamingDataPreviewOptions')
     StringColumnStatisticsData = Shapes::StructureShape.new(name: 'StringColumnStatisticsData')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SupportedDialect = Shapes::StructureShape.new(name: 'SupportedDialect')
     Table = Shapes::StructureShape.new(name: 'Table')
     TableError = Shapes::StructureShape.new(name: 'TableError')
     TableErrors = Shapes::ListShape.new(name: 'TableErrors')
@@ -1212,6 +1218,8 @@ module Aws::Glue
     VersionMismatchException = Shapes::StructureShape.new(name: 'VersionMismatchException')
     VersionString = Shapes::StringShape.new(name: 'VersionString')
     VersionsString = Shapes::StringShape.new(name: 'VersionsString')
+    ViewDialect = Shapes::StringShape.new(name: 'ViewDialect')
+    ViewDialectVersionString = Shapes::StringShape.new(name: 'ViewDialectVersionString')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
     WorkerType = Shapes::StringShape.new(name: 'WorkerType')
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
@@ -1239,6 +1247,9 @@ module Aws::Glue
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
+
+    AdditionalContextMap.key = Shapes::ShapeRef.new(shape: ContextKey)
+    AdditionalContextMap.value = Shapes::ShapeRef.new(shape: ContextValue)
 
     AdditionalOptions.key = Shapes::ShapeRef.new(shape: EnclosedInStringProperty)
     AdditionalOptions.value = Shapes::ShapeRef.new(shape: EnclosedInStringProperty)
@@ -3618,12 +3629,14 @@ module Aws::Glue
     GetTriggersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetTriggersResponse.struct_class = Types::GetTriggersResponse
 
+    GetUnfilteredPartitionMetadataRequest.add_member(:region, Shapes::ShapeRef.new(shape: ValueString, location_name: "Region"))
     GetUnfilteredPartitionMetadataRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     GetUnfilteredPartitionMetadataRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetUnfilteredPartitionMetadataRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     GetUnfilteredPartitionMetadataRequest.add_member(:partition_values, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "PartitionValues"))
     GetUnfilteredPartitionMetadataRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
     GetUnfilteredPartitionMetadataRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, required: true, location_name: "SupportedPermissionTypes"))
+    GetUnfilteredPartitionMetadataRequest.add_member(:query_session_context, Shapes::ShapeRef.new(shape: QuerySessionContext, location_name: "QuerySessionContext"))
     GetUnfilteredPartitionMetadataRequest.struct_class = Types::GetUnfilteredPartitionMetadataRequest
 
     GetUnfilteredPartitionMetadataResponse.add_member(:partition, Shapes::ShapeRef.new(shape: Partition, location_name: "Partition"))
@@ -3631,6 +3644,7 @@ module Aws::Glue
     GetUnfilteredPartitionMetadataResponse.add_member(:is_registered_with_lake_formation, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRegisteredWithLakeFormation"))
     GetUnfilteredPartitionMetadataResponse.struct_class = Types::GetUnfilteredPartitionMetadataResponse
 
+    GetUnfilteredPartitionsMetadataRequest.add_member(:region, Shapes::ShapeRef.new(shape: ValueString, location_name: "Region"))
     GetUnfilteredPartitionsMetadataRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     GetUnfilteredPartitionsMetadataRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetUnfilteredPartitionsMetadataRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -3640,23 +3654,31 @@ module Aws::Glue
     GetUnfilteredPartitionsMetadataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetUnfilteredPartitionsMetadataRequest.add_member(:segment, Shapes::ShapeRef.new(shape: Segment, location_name: "Segment"))
     GetUnfilteredPartitionsMetadataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetUnfilteredPartitionsMetadataRequest.add_member(:query_session_context, Shapes::ShapeRef.new(shape: QuerySessionContext, location_name: "QuerySessionContext"))
     GetUnfilteredPartitionsMetadataRequest.struct_class = Types::GetUnfilteredPartitionsMetadataRequest
 
     GetUnfilteredPartitionsMetadataResponse.add_member(:unfiltered_partitions, Shapes::ShapeRef.new(shape: UnfilteredPartitionList, location_name: "UnfilteredPartitions"))
     GetUnfilteredPartitionsMetadataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetUnfilteredPartitionsMetadataResponse.struct_class = Types::GetUnfilteredPartitionsMetadataResponse
 
+    GetUnfilteredTableMetadataRequest.add_member(:region, Shapes::ShapeRef.new(shape: ValueString, location_name: "Region"))
     GetUnfilteredTableMetadataRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     GetUnfilteredTableMetadataRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetUnfilteredTableMetadataRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetUnfilteredTableMetadataRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
     GetUnfilteredTableMetadataRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, required: true, location_name: "SupportedPermissionTypes"))
+    GetUnfilteredTableMetadataRequest.add_member(:supported_dialect, Shapes::ShapeRef.new(shape: SupportedDialect, location_name: "SupportedDialect"))
+    GetUnfilteredTableMetadataRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
+    GetUnfilteredTableMetadataRequest.add_member(:query_session_context, Shapes::ShapeRef.new(shape: QuerySessionContext, location_name: "QuerySessionContext"))
     GetUnfilteredTableMetadataRequest.struct_class = Types::GetUnfilteredTableMetadataRequest
 
     GetUnfilteredTableMetadataResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
     GetUnfilteredTableMetadataResponse.add_member(:authorized_columns, Shapes::ShapeRef.new(shape: NameStringList, location_name: "AuthorizedColumns"))
     GetUnfilteredTableMetadataResponse.add_member(:is_registered_with_lake_formation, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRegisteredWithLakeFormation"))
     GetUnfilteredTableMetadataResponse.add_member(:cell_filters, Shapes::ShapeRef.new(shape: ColumnRowFilterList, location_name: "CellFilters"))
+    GetUnfilteredTableMetadataResponse.add_member(:query_authorization_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryAuthorizationId"))
+    GetUnfilteredTableMetadataResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "ResourceArn"))
+    GetUnfilteredTableMetadataResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     GetUnfilteredTableMetadataResponse.struct_class = Types::GetUnfilteredTableMetadataResponse
 
     GetUserDefinedFunctionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
@@ -4610,6 +4632,13 @@ module Aws::Glue
     QuerySchemaVersionMetadataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
     QuerySchemaVersionMetadataResponse.struct_class = Types::QuerySchemaVersionMetadataResponse
 
+    QuerySessionContext.add_member(:query_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryId"))
+    QuerySessionContext.add_member(:query_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryStartTime"))
+    QuerySessionContext.add_member(:cluster_id, Shapes::ShapeRef.new(shape: NullableString, location_name: "ClusterId"))
+    QuerySessionContext.add_member(:query_authorization_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryAuthorizationId"))
+    QuerySessionContext.add_member(:additional_context, Shapes::ShapeRef.new(shape: AdditionalContextMap, location_name: "AdditionalContext"))
+    QuerySessionContext.struct_class = Types::QuerySessionContext
+
     Recipe.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     Recipe.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
     Recipe.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, required: true, location_name: "RecipeReference"))
@@ -5333,6 +5362,10 @@ module Aws::Glue
     StringColumnStatisticsData.struct_class = Types::StringColumnStatisticsData
 
     StringList.member = Shapes::ShapeRef.new(shape: GenericString)
+
+    SupportedDialect.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
+    SupportedDialect.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
+    SupportedDialect.struct_class = Types::SupportedDialect
 
     Table.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Table.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))

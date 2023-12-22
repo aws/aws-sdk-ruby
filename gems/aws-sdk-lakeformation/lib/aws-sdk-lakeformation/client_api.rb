@@ -18,6 +18,7 @@ module Aws::LakeFormation
     AddLFTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddLFTagsToResourceRequest')
     AddLFTagsToResourceResponse = Shapes::StructureShape.new(name: 'AddLFTagsToResourceResponse')
     AddObjectInput = Shapes::StructureShape.new(name: 'AddObjectInput')
+    AdditionalContextMap = Shapes::MapShape.new(name: 'AdditionalContextMap')
     AllRowsWildcard = Shapes::StructureShape.new(name: 'AllRowsWildcard')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
@@ -48,6 +49,8 @@ module Aws::LakeFormation
     CommitTransactionResponse = Shapes::StructureShape.new(name: 'CommitTransactionResponse')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ContextKey = Shapes::StringShape.new(name: 'ContextKey')
+    ContextValue = Shapes::StringShape.new(name: 'ContextValue')
     CreateDataCellsFilterRequest = Shapes::StructureShape.new(name: 'CreateDataCellsFilterRequest')
     CreateDataCellsFilterResponse = Shapes::StructureShape.new(name: 'CreateDataCellsFilterResponse')
     CreateLFTagRequest = Shapes::StructureShape.new(name: 'CreateLFTagRequest')
@@ -137,6 +140,7 @@ module Aws::LakeFormation
     GlueEncryptionException = Shapes::StructureShape.new(name: 'GlueEncryptionException')
     GrantPermissionsRequest = Shapes::StructureShape.new(name: 'GrantPermissionsRequest')
     GrantPermissionsResponse = Shapes::StructureShape.new(name: 'GrantPermissionsResponse')
+    HashString = Shapes::StringShape.new(name: 'HashString')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     IAMSAMLProviderArn = Shapes::StringShape.new(name: 'IAMSAMLProviderArn')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
@@ -174,6 +178,7 @@ module Aws::LakeFormation
     MessageString = Shapes::StringShape.new(name: 'MessageString')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    NullableString = Shapes::StringShape.new(name: 'NullableString')
     NumberOfBytes = Shapes::IntegerShape.new(name: 'NumberOfBytes')
     NumberOfItems = Shapes::IntegerShape.new(name: 'NumberOfItems')
     NumberOfMilliseconds = Shapes::IntegerShape.new(name: 'NumberOfMilliseconds')
@@ -188,6 +193,8 @@ module Aws::LakeFormation
     PartitionValueString = Shapes::StringShape.new(name: 'PartitionValueString')
     PartitionValuesList = Shapes::ListShape.new(name: 'PartitionValuesList')
     PartitionedTableObjectsList = Shapes::ListShape.new(name: 'PartitionedTableObjectsList')
+    PathString = Shapes::StringShape.new(name: 'PathString')
+    PathStringList = Shapes::ListShape.new(name: 'PathStringList')
     Permission = Shapes::StringShape.new(name: 'Permission')
     PermissionList = Shapes::ListShape.new(name: 'PermissionList')
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
@@ -205,6 +212,7 @@ module Aws::LakeFormation
     QueryParameterMap = Shapes::MapShape.new(name: 'QueryParameterMap')
     QueryPlanningContext = Shapes::StructureShape.new(name: 'QueryPlanningContext')
     QueryPlanningContextDatabaseNameString = Shapes::StringShape.new(name: 'QueryPlanningContextDatabaseNameString')
+    QuerySessionContext = Shapes::StructureShape.new(name: 'QuerySessionContext')
     QueryStateString = Shapes::StringShape.new(name: 'QueryStateString')
     RAMResourceShareArn = Shapes::StringShape.new(name: 'RAMResourceShareArn')
     RegisterResourceRequest = Shapes::StructureShape.new(name: 'RegisterResourceRequest')
@@ -317,6 +325,9 @@ module Aws::LakeFormation
     AddObjectInput.add_member(:size, Shapes::ShapeRef.new(shape: ObjectSize, required: true, location_name: "Size"))
     AddObjectInput.add_member(:partition_values, Shapes::ShapeRef.new(shape: PartitionValuesList, location_name: "PartitionValues"))
     AddObjectInput.struct_class = Types::AddObjectInput
+
+    AdditionalContextMap.key = Shapes::ShapeRef.new(shape: ContextKey)
+    AdditionalContextMap.value = Shapes::ShapeRef.new(shape: ContextValue)
 
     AllRowsWildcard.struct_class = Types::AllRowsWildcard
 
@@ -660,12 +671,15 @@ module Aws::LakeFormation
     GetTemporaryGlueTableCredentialsRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CredentialTimeoutDurationSecondInteger, location_name: "DurationSeconds"))
     GetTemporaryGlueTableCredentialsRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
     GetTemporaryGlueTableCredentialsRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, location_name: "SupportedPermissionTypes"))
+    GetTemporaryGlueTableCredentialsRequest.add_member(:s3_path, Shapes::ShapeRef.new(shape: PathString, location_name: "S3Path"))
+    GetTemporaryGlueTableCredentialsRequest.add_member(:query_session_context, Shapes::ShapeRef.new(shape: QuerySessionContext, location_name: "QuerySessionContext"))
     GetTemporaryGlueTableCredentialsRequest.struct_class = Types::GetTemporaryGlueTableCredentialsRequest
 
     GetTemporaryGlueTableCredentialsResponse.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyIdString, location_name: "AccessKeyId"))
     GetTemporaryGlueTableCredentialsResponse.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKeyString, location_name: "SecretAccessKey"))
     GetTemporaryGlueTableCredentialsResponse.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionTokenString, location_name: "SessionToken"))
     GetTemporaryGlueTableCredentialsResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "Expiration"))
+    GetTemporaryGlueTableCredentialsResponse.add_member(:vended_s3_path, Shapes::ShapeRef.new(shape: PathStringList, location_name: "VendedS3Path"))
     GetTemporaryGlueTableCredentialsResponse.struct_class = Types::GetTemporaryGlueTableCredentialsResponse
 
     GetWorkUnitResultsRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: GetWorkUnitResultsRequestQueryIdString, required: true, location_name: "QueryId"))
@@ -831,6 +845,8 @@ module Aws::LakeFormation
 
     PartitionedTableObjectsList.member = Shapes::ShapeRef.new(shape: PartitionObjects)
 
+    PathStringList.member = Shapes::ShapeRef.new(shape: PathString)
+
     PermissionList.member = Shapes::ShapeRef.new(shape: Permission)
 
     PermissionTypeList.member = Shapes::ShapeRef.new(shape: PermissionType)
@@ -876,6 +892,13 @@ module Aws::LakeFormation
     QueryPlanningContext.add_member(:query_parameters, Shapes::ShapeRef.new(shape: QueryParameterMap, location_name: "QueryParameters"))
     QueryPlanningContext.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     QueryPlanningContext.struct_class = Types::QueryPlanningContext
+
+    QuerySessionContext.add_member(:query_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryId"))
+    QuerySessionContext.add_member(:query_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryStartTime"))
+    QuerySessionContext.add_member(:cluster_id, Shapes::ShapeRef.new(shape: NullableString, location_name: "ClusterId"))
+    QuerySessionContext.add_member(:query_authorization_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryAuthorizationId"))
+    QuerySessionContext.add_member(:additional_context, Shapes::ShapeRef.new(shape: AdditionalContextMap, location_name: "AdditionalContext"))
+    QuerySessionContext.struct_class = Types::QuerySessionContext
 
     RegisterResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     RegisterResourceRequest.add_member(:use_service_linked_role, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseServiceLinkedRole"))

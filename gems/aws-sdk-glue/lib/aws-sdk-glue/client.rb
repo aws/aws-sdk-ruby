@@ -2781,6 +2781,9 @@ module Aws::Glue
 
     # Creates a connection definition in the Data Catalog.
     #
+    # Connections used for creating federated resources require the IAM
+    # `glue:PassConnection` permission.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the connection. If none
     #   is provided, the Amazon Web Services account ID is used by default.
@@ -11402,6 +11405,10 @@ module Aws::Glue
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetPartition`.
     #
+    # @option params [String] :region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
+    #
     # @option params [required, String] :catalog_id
     #   The catalog ID where the partition resides.
     #
@@ -11421,6 +11428,12 @@ module Aws::Glue
     # @option params [required, Array<String>] :supported_permission_types
     #   (Required) A list of supported permission types.
     #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetUnfilteredPartitionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetUnfilteredPartitionMetadataResponse#partition #data.partition} => Types::Partition (This method conflicts with a method on Response, call it through the data member)
@@ -11430,6 +11443,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_unfiltered_partition_metadata({
+    #     region: "ValueString",
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
@@ -11440,6 +11454,15 @@ module Aws::Glue
     #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -11508,6 +11531,10 @@ module Aws::Glue
     #
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetPartitions`.
+    #
+    # @option params [String] :region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
@@ -11622,6 +11649,12 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of partitions to return in a single response.
     #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetUnfilteredPartitionsMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetUnfilteredPartitionsMetadataResponse#unfiltered_partitions #unfiltered_partitions} => Array&lt;Types::UnfilteredPartition&gt;
@@ -11632,6 +11665,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_unfiltered_partitions_metadata({
+    #     region: "ValueString",
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
@@ -11648,6 +11682,15 @@ module Aws::Glue
     #       total_segments: 1, # required
     #     },
     #     max_results: 1,
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -11719,6 +11762,10 @@ module Aws::Glue
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetTable`.
     #
+    # @option params [String] :region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
+    #
     # @option params [required, String] :catalog_id
     #   The catalog ID where the table resides.
     #
@@ -11735,16 +11782,34 @@ module Aws::Glue
     # @option params [required, Array<String>] :supported_permission_types
     #   (Required) A list of supported permission types.
     #
+    # @option params [Types::SupportedDialect] :supported_dialect
+    #   A structure specifying the dialect and dialect version used by the
+    #   query engine.
+    #
+    # @option params [Array<String>] :permissions
+    #   The Lake Formation data permissions of the caller on the table. Used
+    #   to authorize the call when no view context is found.
+    #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetUnfilteredTableMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetUnfilteredTableMetadataResponse#table #table} => Types::Table
     #   * {Types::GetUnfilteredTableMetadataResponse#authorized_columns #authorized_columns} => Array&lt;String&gt;
     #   * {Types::GetUnfilteredTableMetadataResponse#is_registered_with_lake_formation #is_registered_with_lake_formation} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#cell_filters #cell_filters} => Array&lt;Types::ColumnRowFilter&gt;
+    #   * {Types::GetUnfilteredTableMetadataResponse#query_authorization_id #query_authorization_id} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#permissions #permissions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_unfiltered_table_metadata({
+    #     region: "ValueString",
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     name: "NameString", # required
@@ -11754,6 +11819,20 @@ module Aws::Glue
     #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     supported_dialect: {
+    #       dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #       dialect_version: "ViewDialectVersionString",
+    #     },
+    #     permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -11831,6 +11910,10 @@ module Aws::Glue
     #   resp.cell_filters #=> Array
     #   resp.cell_filters[0].column_name #=> String
     #   resp.cell_filters[0].row_filter_expression #=> String
+    #   resp.query_authorization_id #=> String
+    #   resp.resource_arn #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadata AWS API Documentation
     #
@@ -16923,7 +17006,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

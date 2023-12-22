@@ -815,6 +815,9 @@
   "NetworkManager": {
     "models": "networkmanager/2019-07-05"
   },
+  "NetworkMonitor": {
+    "models": "networkmonitor/2023-08-01"
+  },
   "NimbleStudio": {
     "models": "nimble/2020-08-01"
   },

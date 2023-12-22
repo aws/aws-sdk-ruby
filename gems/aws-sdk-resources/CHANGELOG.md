@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.184.0 (2023-12-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-networkmonitor` gem.
+
 3.183.0 (2023-12-14)
 ------------------
 

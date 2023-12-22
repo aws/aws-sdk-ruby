@@ -1165,7 +1165,7 @@ module Aws::Omics
     #   A parameter template for the workflow.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the workflow in gigabytes.
+    #   A storage capacity for the workflow in gibibytes.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the workflow.
@@ -2835,7 +2835,9 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Lists all multipart read set uploads and their statuses.
+    # Lists multipart read set uploads and for in progress uploads. Once the
+    # upload is completed, a read set is created and the upload will no
+    # longer be returned in the respone.
     #
     # @option params [required, String] :sequence_store_id
     #   The Sequence Store ID used for the multipart uploads.
@@ -4630,7 +4632,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-12-22)
+------------------
+
+* Feature - Adding Claude 2.1 support to Bedrock Agents
+
 1.1.0 (2023-12-21)
 ------------------
 

@@ -270,6 +270,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-neptunedata', '~> 1')
   spec.add_dependency('aws-sdk-networkfirewall', '~> 1')
   spec.add_dependency('aws-sdk-networkmanager', '~> 1')
+  spec.add_dependency('aws-sdk-networkmonitor', '~> 1')
   spec.add_dependency('aws-sdk-nimblestudio', '~> 1')
   spec.add_dependency('aws-sdk-oam', '~> 1')
   spec.add_dependency('aws-sdk-osis', '~> 1')

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.873.0 (2023-12-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NetworkMonitor`.
+
 1.872.0 (2023-12-21)
 ------------------
 
