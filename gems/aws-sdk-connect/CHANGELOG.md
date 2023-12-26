@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2023-12-21)
+------------------
+
+* Feature - Adds APIs to manage User Proficiencies and Predefined Attributes. Enhances StartOutboundVoiceContact API input. Introduces SearchContacts API. Enhances DescribeContact API. Adds an API to update Routing Attributes in QueuePriority and QueueTimeAdjustmentSeconds.
+
+1.144.0 (2023-12-15)
+------------------
+
+* Feature - Adds relatedContactId field to StartOutboundVoiceContact API input. Introduces PauseContact API and ResumeContact API for Task contacts. Adds pause duration, number of pauses, timestamps for last paused and resumed events to DescribeContact API response. Adds new Rule type and new Rule action.
+
+1.143.0 (2023-12-14)
+------------------
+
+* Feature - This release adds support for more granular billing using tags (key:value pairs)
+
 1.142.0 (2023-12-06)
 ------------------
 

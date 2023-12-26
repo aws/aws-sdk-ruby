@@ -80,6 +80,8 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'CreateInfrastructureConfigurationResponse')
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
     CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
+    CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
+    CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
     CvssScore = Shapes::StructureShape.new(name: 'CvssScore')
     CvssScoreAdjustment = Shapes::StructureShape.new(name: 'CvssScoreAdjustment')
     CvssScoreAdjustmentList = Shapes::ListShape.new(name: 'CvssScoreAdjustmentList')
@@ -103,6 +105,8 @@ module Aws::Imagebuilder
     DeleteInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteInfrastructureConfigurationResponse')
     DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
+    DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
+    DeleteWorkflowResponse = Shapes::StructureShape.new(name: 'DeleteWorkflowResponse')
     DiskImageFormat = Shapes::StringShape.new(name: 'DiskImageFormat')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionConfiguration = Shapes::StructureShape.new(name: 'DistributionConfiguration')
@@ -158,6 +162,8 @@ module Aws::Imagebuilder
     GetLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'GetLifecyclePolicyResponse')
     GetWorkflowExecutionRequest = Shapes::StructureShape.new(name: 'GetWorkflowExecutionRequest')
     GetWorkflowExecutionResponse = Shapes::StructureShape.new(name: 'GetWorkflowExecutionResponse')
+    GetWorkflowRequest = Shapes::StructureShape.new(name: 'GetWorkflowRequest')
+    GetWorkflowResponse = Shapes::StructureShape.new(name: 'GetWorkflowResponse')
     GetWorkflowStepExecutionRequest = Shapes::StructureShape.new(name: 'GetWorkflowStepExecutionRequest')
     GetWorkflowStepExecutionResponse = Shapes::StructureShape.new(name: 'GetWorkflowStepExecutionResponse')
     HttpPutResponseHopLimit = Shapes::IntegerShape.new(name: 'HttpPutResponseHopLimit')
@@ -210,6 +216,7 @@ module Aws::Imagebuilder
     InfrastructureConfigurationSummaryList = Shapes::ListShape.new(name: 'InfrastructureConfigurationSummaryList')
     InlineComponentData = Shapes::StringShape.new(name: 'InlineComponentData')
     InlineDockerFileTemplate = Shapes::StringShape.new(name: 'InlineDockerFileTemplate')
+    InlineWorkflowData = Shapes::StringShape.new(name: 'InlineWorkflowData')
     InspectorScoreDetails = Shapes::StructureShape.new(name: 'InspectorScoreDetails')
     InstanceBlockDeviceMapping = Shapes::StructureShape.new(name: 'InstanceBlockDeviceMapping')
     InstanceBlockDeviceMappings = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappings')
@@ -301,16 +308,23 @@ module Aws::Imagebuilder
     ListLifecyclePoliciesResponse = Shapes::StructureShape.new(name: 'ListLifecyclePoliciesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListWaitingWorkflowStepsRequest = Shapes::StructureShape.new(name: 'ListWaitingWorkflowStepsRequest')
+    ListWaitingWorkflowStepsResponse = Shapes::StructureShape.new(name: 'ListWaitingWorkflowStepsResponse')
+    ListWorkflowBuildVersionsRequest = Shapes::StructureShape.new(name: 'ListWorkflowBuildVersionsRequest')
+    ListWorkflowBuildVersionsResponse = Shapes::StructureShape.new(name: 'ListWorkflowBuildVersionsResponse')
     ListWorkflowExecutionsRequest = Shapes::StructureShape.new(name: 'ListWorkflowExecutionsRequest')
     ListWorkflowExecutionsResponse = Shapes::StructureShape.new(name: 'ListWorkflowExecutionsResponse')
     ListWorkflowStepExecutionsRequest = Shapes::StructureShape.new(name: 'ListWorkflowStepExecutionsRequest')
     ListWorkflowStepExecutionsResponse = Shapes::StructureShape.new(name: 'ListWorkflowStepExecutionsResponse')
+    ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
+    ListWorkflowsResponse = Shapes::StructureShape.new(name: 'ListWorkflowsResponse')
     Logging = Shapes::StructureShape.new(name: 'Logging')
     MaxParallelLaunches = Shapes::IntegerShape.new(name: 'MaxParallelLaunches')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonEmptyStringList = Shapes::ListShape.new(name: 'NonEmptyStringList')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    OnWorkflowFailure = Shapes::StringShape.new(name: 'OnWorkflowFailure')
     OrganizationArn = Shapes::StringShape.new(name: 'OrganizationArn')
     OrganizationArnList = Shapes::ListShape.new(name: 'OrganizationArnList')
     OrganizationalUnitArn = Shapes::StringShape.new(name: 'OrganizationalUnitArn')
@@ -323,6 +337,7 @@ module Aws::Imagebuilder
     PackageEpoch = Shapes::IntegerShape.new(name: 'PackageEpoch')
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    ParallelGroup = Shapes::StringShape.new(name: 'ParallelGroup')
     PipelineExecutionStartCondition = Shapes::StringShape.new(name: 'PipelineExecutionStartCondition')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
     Platform = Shapes::StringShape.new(name: 'Platform')
@@ -354,6 +369,8 @@ module Aws::Imagebuilder
     S3Logs = Shapes::StructureShape.new(name: 'S3Logs')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    SendWorkflowStepActionRequest = Shapes::StructureShape.new(name: 'SendWorkflowStepActionRequest')
+    SendWorkflowStepActionResponse = Shapes::StructureShape.new(name: 'SendWorkflowStepActionResponse')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
@@ -394,16 +411,35 @@ module Aws::Imagebuilder
     VulnerabilityIdList = Shapes::ListShape.new(name: 'VulnerabilityIdList')
     VulnerablePackage = Shapes::StructureShape.new(name: 'VulnerablePackage')
     VulnerablePackageList = Shapes::ListShape.new(name: 'VulnerablePackageList')
+    Workflow = Shapes::StructureShape.new(name: 'Workflow')
     WorkflowBuildVersionArn = Shapes::StringShape.new(name: 'WorkflowBuildVersionArn')
+    WorkflowConfiguration = Shapes::StructureShape.new(name: 'WorkflowConfiguration')
+    WorkflowConfigurationList = Shapes::ListShape.new(name: 'WorkflowConfigurationList')
+    WorkflowData = Shapes::StringShape.new(name: 'WorkflowData')
     WorkflowExecutionId = Shapes::StringShape.new(name: 'WorkflowExecutionId')
     WorkflowExecutionMessage = Shapes::StringShape.new(name: 'WorkflowExecutionMessage')
     WorkflowExecutionMetadata = Shapes::StructureShape.new(name: 'WorkflowExecutionMetadata')
     WorkflowExecutionStatus = Shapes::StringShape.new(name: 'WorkflowExecutionStatus')
     WorkflowExecutionsList = Shapes::ListShape.new(name: 'WorkflowExecutionsList')
+    WorkflowNameArn = Shapes::StringShape.new(name: 'WorkflowNameArn')
+    WorkflowParameter = Shapes::StructureShape.new(name: 'WorkflowParameter')
+    WorkflowParameterDescription = Shapes::StringShape.new(name: 'WorkflowParameterDescription')
+    WorkflowParameterDetail = Shapes::StructureShape.new(name: 'WorkflowParameterDetail')
+    WorkflowParameterDetailList = Shapes::ListShape.new(name: 'WorkflowParameterDetailList')
+    WorkflowParameterList = Shapes::ListShape.new(name: 'WorkflowParameterList')
+    WorkflowParameterName = Shapes::StringShape.new(name: 'WorkflowParameterName')
+    WorkflowParameterType = Shapes::StringShape.new(name: 'WorkflowParameterType')
+    WorkflowParameterValue = Shapes::StringShape.new(name: 'WorkflowParameterValue')
+    WorkflowParameterValueList = Shapes::ListShape.new(name: 'WorkflowParameterValueList')
+    WorkflowState = Shapes::StructureShape.new(name: 'WorkflowState')
+    WorkflowStatus = Shapes::StringShape.new(name: 'WorkflowStatus')
     WorkflowStepAction = Shapes::StringShape.new(name: 'WorkflowStepAction')
+    WorkflowStepActionType = Shapes::StringShape.new(name: 'WorkflowStepActionType')
     WorkflowStepCount = Shapes::IntegerShape.new(name: 'WorkflowStepCount')
     WorkflowStepDescription = Shapes::StringShape.new(name: 'WorkflowStepDescription')
+    WorkflowStepExecution = Shapes::StructureShape.new(name: 'WorkflowStepExecution')
     WorkflowStepExecutionId = Shapes::StringShape.new(name: 'WorkflowStepExecutionId')
+    WorkflowStepExecutionList = Shapes::ListShape.new(name: 'WorkflowStepExecutionList')
     WorkflowStepExecutionRollbackStatus = Shapes::StringShape.new(name: 'WorkflowStepExecutionRollbackStatus')
     WorkflowStepExecutionStatus = Shapes::StringShape.new(name: 'WorkflowStepExecutionStatus')
     WorkflowStepExecutionsList = Shapes::ListShape.new(name: 'WorkflowStepExecutionsList')
@@ -413,7 +449,14 @@ module Aws::Imagebuilder
     WorkflowStepName = Shapes::StringShape.new(name: 'WorkflowStepName')
     WorkflowStepOutputs = Shapes::StringShape.new(name: 'WorkflowStepOutputs')
     WorkflowStepTimeoutSecondsInteger = Shapes::IntegerShape.new(name: 'WorkflowStepTimeoutSecondsInteger')
+    WorkflowSummary = Shapes::StructureShape.new(name: 'WorkflowSummary')
+    WorkflowSummaryList = Shapes::ListShape.new(name: 'WorkflowSummaryList')
     WorkflowType = Shapes::StringShape.new(name: 'WorkflowType')
+    WorkflowVersion = Shapes::StructureShape.new(name: 'WorkflowVersion')
+    WorkflowVersionArn = Shapes::StringShape.new(name: 'WorkflowVersionArn')
+    WorkflowVersionArnOrBuildVersionArn = Shapes::StringShape.new(name: 'WorkflowVersionArnOrBuildVersionArn')
+    WorkflowVersionList = Shapes::ListShape.new(name: 'WorkflowVersionList')
+    WorkflowWildcardVersionArn = Shapes::StringShape.new(name: 'WorkflowWildcardVersionArn')
 
     AccountAggregation.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "accountId"))
     AccountAggregation.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
@@ -650,6 +693,8 @@ module Aws::Imagebuilder
     CreateImagePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateImagePipelineRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    CreateImagePipelineRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
+    CreateImagePipelineRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
     CreateImagePipelineRequest.struct_class = Types::CreateImagePipelineRequest
 
     CreateImagePipelineResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -683,6 +728,8 @@ module Aws::Imagebuilder
     CreateImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateImageRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    CreateImageRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
+    CreateImageRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
     CreateImageRequest.struct_class = Types::CreateImageRequest
 
     CreateImageResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -725,6 +772,22 @@ module Aws::Imagebuilder
     CreateLifecyclePolicyResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     CreateLifecyclePolicyResponse.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "lifecyclePolicyArn"))
     CreateLifecyclePolicyResponse.struct_class = Types::CreateLifecyclePolicyResponse
+
+    CreateWorkflowRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    CreateWorkflowRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
+    CreateWorkflowRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    CreateWorkflowRequest.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
+    CreateWorkflowRequest.add_member(:data, Shapes::ShapeRef.new(shape: InlineWorkflowData, location_name: "data"))
+    CreateWorkflowRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, location_name: "uri"))
+    CreateWorkflowRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
+    CreateWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorkflowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorkflowRequest.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "type"))
+    CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
+
+    CreateWorkflowResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    CreateWorkflowResponse.add_member(:workflow_build_version_arn, Shapes::ShapeRef.new(shape: WorkflowBuildVersionArn, location_name: "workflowBuildVersionArn"))
+    CreateWorkflowResponse.struct_class = Types::CreateWorkflowResponse
 
     CvssScore.add_member(:base_score, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "baseScore"))
     CvssScore.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "scoringVector"))
@@ -802,6 +865,12 @@ module Aws::Imagebuilder
 
     DeleteLifecyclePolicyResponse.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "lifecyclePolicyArn"))
     DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
+
+    DeleteWorkflowRequest.add_member(:workflow_build_version_arn, Shapes::ShapeRef.new(shape: WorkflowBuildVersionArn, required: true, location: "querystring", location_name: "workflowBuildVersionArn"))
+    DeleteWorkflowRequest.struct_class = Types::DeleteWorkflowRequest
+
+    DeleteWorkflowResponse.add_member(:workflow_build_version_arn, Shapes::ShapeRef.new(shape: WorkflowBuildVersionArn, location_name: "workflowBuildVersionArn"))
+    DeleteWorkflowResponse.struct_class = Types::DeleteWorkflowResponse
 
     Distribution.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "region"))
     Distribution.add_member(:ami_distribution_configuration, Shapes::ShapeRef.new(shape: AmiDistributionConfiguration, location_name: "amiDistributionConfiguration"))
@@ -982,7 +1051,14 @@ module Aws::Imagebuilder
     GetWorkflowExecutionResponse.add_member(:total_steps_skipped, Shapes::ShapeRef.new(shape: WorkflowStepCount, location_name: "totalStepsSkipped"))
     GetWorkflowExecutionResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     GetWorkflowExecutionResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))
+    GetWorkflowExecutionResponse.add_member(:parallel_group, Shapes::ShapeRef.new(shape: ParallelGroup, location_name: "parallelGroup"))
     GetWorkflowExecutionResponse.struct_class = Types::GetWorkflowExecutionResponse
+
+    GetWorkflowRequest.add_member(:workflow_build_version_arn, Shapes::ShapeRef.new(shape: WorkflowVersionArnOrBuildVersionArn, required: true, location: "querystring", location_name: "workflowBuildVersionArn"))
+    GetWorkflowRequest.struct_class = Types::GetWorkflowRequest
+
+    GetWorkflowResponse.add_member(:workflow, Shapes::ShapeRef.new(shape: Workflow, location_name: "workflow"))
+    GetWorkflowResponse.struct_class = Types::GetWorkflowResponse
 
     GetWorkflowStepExecutionRequest.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: WorkflowStepExecutionId, required: true, location: "querystring", location_name: "stepExecutionId"))
     GetWorkflowStepExecutionRequest.struct_class = Types::GetWorkflowStepExecutionRequest
@@ -1033,6 +1109,8 @@ module Aws::Imagebuilder
     Image.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     Image.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "deprecationTime"))
     Image.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
+    Image.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
+    Image.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
     Image.struct_class = Types::Image
 
     ImageAggregation.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "imageBuildVersionArn"))
@@ -1063,6 +1141,8 @@ module Aws::Imagebuilder
     ImagePipeline.add_member(:date_next_run, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateNextRun"))
     ImagePipeline.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ImagePipeline.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    ImagePipeline.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
+    ImagePipeline.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
     ImagePipeline.struct_class = Types::ImagePipeline
 
     ImagePipelineAggregation.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, location_name: "imagePipelineArn"))
@@ -1592,6 +1672,23 @@ module Aws::Imagebuilder
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListWaitingWorkflowStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWaitingWorkflowStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWaitingWorkflowStepsRequest.struct_class = Types::ListWaitingWorkflowStepsRequest
+
+    ListWaitingWorkflowStepsResponse.add_member(:steps, Shapes::ShapeRef.new(shape: WorkflowStepExecutionList, location_name: "steps"))
+    ListWaitingWorkflowStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWaitingWorkflowStepsResponse.struct_class = Types::ListWaitingWorkflowStepsResponse
+
+    ListWorkflowBuildVersionsRequest.add_member(:workflow_version_arn, Shapes::ShapeRef.new(shape: WorkflowWildcardVersionArn, required: true, location_name: "workflowVersionArn"))
+    ListWorkflowBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWorkflowBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorkflowBuildVersionsRequest.struct_class = Types::ListWorkflowBuildVersionsRequest
+
+    ListWorkflowBuildVersionsResponse.add_member(:workflow_summary_list, Shapes::ShapeRef.new(shape: WorkflowSummaryList, location_name: "workflowSummaryList"))
+    ListWorkflowBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorkflowBuildVersionsResponse.struct_class = Types::ListWorkflowBuildVersionsResponse
+
     ListWorkflowExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListWorkflowExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowExecutionsRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
@@ -1617,6 +1714,17 @@ module Aws::Imagebuilder
     ListWorkflowStepExecutionsResponse.add_member(:message, Shapes::ShapeRef.new(shape: ImageBuildMessage, location_name: "message"))
     ListWorkflowStepExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowStepExecutionsResponse.struct_class = Types::ListWorkflowStepExecutionsResponse
+
+    ListWorkflowsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
+    ListWorkflowsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+    ListWorkflowsRequest.add_member(:by_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "byName"))
+    ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWorkflowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorkflowsRequest.struct_class = Types::ListWorkflowsRequest
+
+    ListWorkflowsResponse.add_member(:workflow_version_list, Shapes::ShapeRef.new(shape: WorkflowVersionList, location_name: "workflowVersionList"))
+    ListWorkflowsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorkflowsResponse.struct_class = Types::ListWorkflowsResponse
 
     Logging.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3Logs, location_name: "s3Logs"))
     Logging.struct_class = Types::Logging
@@ -1729,6 +1837,18 @@ module Aws::Imagebuilder
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    SendWorkflowStepActionRequest.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: WorkflowStepExecutionId, required: true, location_name: "stepExecutionId"))
+    SendWorkflowStepActionRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
+    SendWorkflowStepActionRequest.add_member(:action, Shapes::ShapeRef.new(shape: WorkflowStepActionType, required: true, location_name: "action"))
+    SendWorkflowStepActionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
+    SendWorkflowStepActionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    SendWorkflowStepActionRequest.struct_class = Types::SendWorkflowStepActionRequest
+
+    SendWorkflowStepActionResponse.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: WorkflowStepExecutionId, location_name: "stepExecutionId"))
+    SendWorkflowStepActionResponse.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "imageBuildVersionArn"))
+    SendWorkflowStepActionResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    SendWorkflowStepActionResponse.struct_class = Types::SendWorkflowStepActionResponse
+
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceException.struct_class = Types::ServiceException
 
@@ -1815,6 +1935,8 @@ module Aws::Imagebuilder
     UpdateImagePipelineRequest.add_member(:status, Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "status"))
     UpdateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateImagePipelineRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    UpdateImagePipelineRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
+    UpdateImagePipelineRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
     UpdateImagePipelineRequest.struct_class = Types::UpdateImagePipelineRequest
 
     UpdateImagePipelineResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -1875,6 +1997,29 @@ module Aws::Imagebuilder
 
     VulnerablePackageList.member = Shapes::ShapeRef.new(shape: VulnerablePackage)
 
+    Workflow.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowBuildVersionArn, location_name: "arn"))
+    Workflow.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    Workflow.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
+    Workflow.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    Workflow.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
+    Workflow.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
+    Workflow.add_member(:state, Shapes::ShapeRef.new(shape: WorkflowState, location_name: "state"))
+    Workflow.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
+    Workflow.add_member(:data, Shapes::ShapeRef.new(shape: WorkflowData, location_name: "data"))
+    Workflow.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
+    Workflow.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
+    Workflow.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Workflow.add_member(:parameters, Shapes::ShapeRef.new(shape: WorkflowParameterDetailList, location_name: "parameters"))
+    Workflow.struct_class = Types::Workflow
+
+    WorkflowConfiguration.add_member(:workflow_arn, Shapes::ShapeRef.new(shape: WorkflowVersionArnOrBuildVersionArn, required: true, location_name: "workflowArn"))
+    WorkflowConfiguration.add_member(:parameters, Shapes::ShapeRef.new(shape: WorkflowParameterList, location_name: "parameters"))
+    WorkflowConfiguration.add_member(:parallel_group, Shapes::ShapeRef.new(shape: ParallelGroup, location_name: "parallelGroup"))
+    WorkflowConfiguration.add_member(:on_failure, Shapes::ShapeRef.new(shape: OnWorkflowFailure, location_name: "onFailure"))
+    WorkflowConfiguration.struct_class = Types::WorkflowConfiguration
+
+    WorkflowConfigurationList.member = Shapes::ShapeRef.new(shape: WorkflowConfiguration)
+
     WorkflowExecutionMetadata.add_member(:workflow_build_version_arn, Shapes::ShapeRef.new(shape: WorkflowBuildVersionArn, location_name: "workflowBuildVersionArn"))
     WorkflowExecutionMetadata.add_member(:workflow_execution_id, Shapes::ShapeRef.new(shape: WorkflowExecutionId, location_name: "workflowExecutionId"))
     WorkflowExecutionMetadata.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
@@ -1886,9 +2031,41 @@ module Aws::Imagebuilder
     WorkflowExecutionMetadata.add_member(:total_steps_skipped, Shapes::ShapeRef.new(shape: WorkflowStepCount, location_name: "totalStepsSkipped"))
     WorkflowExecutionMetadata.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     WorkflowExecutionMetadata.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))
+    WorkflowExecutionMetadata.add_member(:parallel_group, Shapes::ShapeRef.new(shape: ParallelGroup, location_name: "parallelGroup"))
     WorkflowExecutionMetadata.struct_class = Types::WorkflowExecutionMetadata
 
     WorkflowExecutionsList.member = Shapes::ShapeRef.new(shape: WorkflowExecutionMetadata)
+
+    WorkflowParameter.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowParameterName, required: true, location_name: "name"))
+    WorkflowParameter.add_member(:value, Shapes::ShapeRef.new(shape: WorkflowParameterValueList, required: true, location_name: "value"))
+    WorkflowParameter.struct_class = Types::WorkflowParameter
+
+    WorkflowParameterDetail.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowParameterName, required: true, location_name: "name"))
+    WorkflowParameterDetail.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowParameterType, required: true, location_name: "type"))
+    WorkflowParameterDetail.add_member(:default_value, Shapes::ShapeRef.new(shape: WorkflowParameterValueList, location_name: "defaultValue"))
+    WorkflowParameterDetail.add_member(:description, Shapes::ShapeRef.new(shape: WorkflowParameterDescription, location_name: "description"))
+    WorkflowParameterDetail.struct_class = Types::WorkflowParameterDetail
+
+    WorkflowParameterDetailList.member = Shapes::ShapeRef.new(shape: WorkflowParameterDetail)
+
+    WorkflowParameterList.member = Shapes::ShapeRef.new(shape: WorkflowParameter)
+
+    WorkflowParameterValueList.member = Shapes::ShapeRef.new(shape: WorkflowParameterValue)
+
+    WorkflowState.add_member(:status, Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "status"))
+    WorkflowState.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
+    WorkflowState.struct_class = Types::WorkflowState
+
+    WorkflowStepExecution.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: WorkflowStepExecutionId, location_name: "stepExecutionId"))
+    WorkflowStepExecution.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "imageBuildVersionArn"))
+    WorkflowStepExecution.add_member(:workflow_execution_id, Shapes::ShapeRef.new(shape: WorkflowExecutionId, location_name: "workflowExecutionId"))
+    WorkflowStepExecution.add_member(:workflow_build_version_arn, Shapes::ShapeRef.new(shape: WorkflowBuildVersionArn, location_name: "workflowBuildVersionArn"))
+    WorkflowStepExecution.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "name"))
+    WorkflowStepExecution.add_member(:action, Shapes::ShapeRef.new(shape: WorkflowStepAction, location_name: "action"))
+    WorkflowStepExecution.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
+    WorkflowStepExecution.struct_class = Types::WorkflowStepExecution
+
+    WorkflowStepExecutionList.member = Shapes::ShapeRef.new(shape: WorkflowStepExecution)
 
     WorkflowStepExecutionsList.member = Shapes::ShapeRef.new(shape: WorkflowStepMetadata)
 
@@ -1904,6 +2081,31 @@ module Aws::Imagebuilder
     WorkflowStepMetadata.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     WorkflowStepMetadata.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))
     WorkflowStepMetadata.struct_class = Types::WorkflowStepMetadata
+
+    WorkflowSummary.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowNameArn, location_name: "arn"))
+    WorkflowSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    WorkflowSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
+    WorkflowSummary.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    WorkflowSummary.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
+    WorkflowSummary.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
+    WorkflowSummary.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
+    WorkflowSummary.add_member(:state, Shapes::ShapeRef.new(shape: WorkflowState, location_name: "state"))
+    WorkflowSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
+    WorkflowSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    WorkflowSummary.struct_class = Types::WorkflowSummary
+
+    WorkflowSummaryList.member = Shapes::ShapeRef.new(shape: WorkflowSummary)
+
+    WorkflowVersion.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowVersionArn, location_name: "arn"))
+    WorkflowVersion.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    WorkflowVersion.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
+    WorkflowVersion.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    WorkflowVersion.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, location_name: "type"))
+    WorkflowVersion.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
+    WorkflowVersion.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
+    WorkflowVersion.struct_class = Types::WorkflowVersion
+
+    WorkflowVersionList.member = Shapes::ShapeRef.new(shape: WorkflowVersion)
 
 
     # @api private
@@ -2103,6 +2305,25 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_workflow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorkflow"
+        o.http_method = "PUT"
+        o.http_request_uri = "/CreateWorkflow"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorkflowRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorkflowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVersionNumberException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_component, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteComponent"
         o.http_method = "DELETE"
@@ -2218,6 +2439,21 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDependencyException)
+      end)
+
+      api.add_operation(:delete_workflow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkflow"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/DeleteWorkflow"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkflowRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorkflowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceDependencyException)
@@ -2397,6 +2633,20 @@ module Aws::Imagebuilder
         o.http_request_uri = "/GetLifecyclePolicy"
         o.input = Shapes::ShapeRef.new(shape: GetLifecyclePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLifecyclePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+      end)
+
+      api.add_operation(:get_workflow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWorkflow"
+        o.http_method = "GET"
+        o.http_request_uri = "/GetWorkflow"
+        o.input = Shapes::ShapeRef.new(shape: GetWorkflowRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetWorkflowResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -2810,6 +3060,48 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:list_waiting_workflow_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWaitingWorkflowSteps"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListWaitingWorkflowSteps"
+        o.input = Shapes::ShapeRef.new(shape: ListWaitingWorkflowStepsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWaitingWorkflowStepsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_workflow_build_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkflowBuildVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListWorkflowBuildVersions"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkflowBuildVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkflowBuildVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_workflow_executions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkflowExecutions"
         o.http_method = "POST"
@@ -2837,6 +3129,27 @@ module Aws::Imagebuilder
         o.http_request_uri = "/ListWorkflowStepExecutions"
         o.input = Shapes::ShapeRef.new(shape: ListWorkflowStepExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListWorkflowStepExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_workflows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkflows"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListWorkflows"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkflowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkflowsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -2914,6 +3227,24 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+      end)
+
+      api.add_operation(:send_workflow_step_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendWorkflowStepAction"
+        o.http_method = "PUT"
+        o.http_request_uri = "/SendWorkflowStepAction"
+        o.input = Shapes::ShapeRef.new(shape: SendWorkflowStepActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendWorkflowStepActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:start_image_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|

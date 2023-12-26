@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Add RBS signature files to support static type checking.
 
+3.190.1 (2023-12-20)
+------------------
+
+* Issue - Add mutex around stub api_requests.
+
 3.190.0 (2023-11-29)
 ------------------
 

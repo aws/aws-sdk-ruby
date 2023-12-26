@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2023-12-15)
+------------------
+
+* Feature - Increase number of fields that can be included in CaseEventIncludedData from 50 to 200
+
 1.17.0 (2023-11-28)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2023-12-22)
+------------------
+
+* Feature - Added additional examples for some operations.
+
 1.141.0 (2023-11-28)
 ------------------
 

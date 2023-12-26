@@ -888,6 +888,16 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] arrival_time
+    #   Specifies the desired time of arrival. Uses the given time to
+    #   calculate the route. Otherwise, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route.
+    #
+    #   <note markdown="1"> ArrivalTime is not supported Esri.
+    #
+    #    </note>
+    #   @return [Time]
+    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource that you want to use to
     #   calculate the route.
@@ -937,11 +947,6 @@ module Aws::LocationService
     #   Specifies the desired time of departure. Uses the given time to
     #   calculate the route. Otherwise, the best time of day to travel with
     #   the best traffic conditions is used to calculate the route.
-    #
-    #   <note markdown="1"> Setting a departure time in the past returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
     #
     #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
     #     `2020–07-2T12:15:20.000Z+01:00`
@@ -995,6 +1000,10 @@ module Aws::LocationService
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] optimize_for
+    #   Specifies the distance to optimize for when calculating a route.
     #   @return [String]
     #
     # @!attribute [rw] travel_mode
@@ -1069,6 +1078,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteRequest AWS API Documentation
     #
     class CalculateRouteRequest < Struct.new(
+      :arrival_time,
       :calculator_name,
       :car_mode_options,
       :depart_now,
@@ -1078,6 +1088,7 @@ module Aws::LocationService
       :distance_unit,
       :include_leg_geometry,
       :key,
+      :optimize_for,
       :travel_mode,
       :truck_mode_options,
       :waypoint_positions)
@@ -3656,7 +3667,7 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] filter_geometry
-    #   The geomerty used to filter device positions.
+    #   The geometry used to filter device positions.
     #   @return [Types::TrackingFilterGeometry]
     #
     # @!attribute [rw] max_results
@@ -4802,6 +4813,16 @@ module Aws::LocationService
     #   `Main Street`.
     #   @return [String]
     #
+    # @!attribute [rw] sub_municipality
+    #   An area that's part of a larger municipality. For example,
+    #   `Blissville ` is a submunicipality in the Queen County in New York.
+    #
+    #   <note markdown="1"> This property supported by Esri and OpenData. The Esri property is
+    #   `district`, and the OpenData property is `borough`.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] sub_region
     #   A county, or an area that's part of a larger region. For example,
     #   `Metro Vancouver`.
@@ -4850,6 +4871,7 @@ module Aws::LocationService
       :postal_code,
       :region,
       :street,
+      :sub_municipality,
       :sub_region,
       :supplemental_categories,
       :time_zone,

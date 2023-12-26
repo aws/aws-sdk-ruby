@@ -30,6 +30,11 @@ module Aws::MarketplaceCatalog
     AmiProductVisibilityFilter = Shapes::StructureShape.new(name: 'AmiProductVisibilityFilter')
     AmiProductVisibilityFilterValueList = Shapes::ListShape.new(name: 'AmiProductVisibilityFilterValueList')
     AmiProductVisibilityString = Shapes::StringShape.new(name: 'AmiProductVisibilityString')
+    BatchDescribeEntitiesRequest = Shapes::StructureShape.new(name: 'BatchDescribeEntitiesRequest')
+    BatchDescribeEntitiesResponse = Shapes::StructureShape.new(name: 'BatchDescribeEntitiesResponse')
+    BatchDescribeErrorCodeString = Shapes::StringShape.new(name: 'BatchDescribeErrorCodeString')
+    BatchDescribeErrorDetail = Shapes::StructureShape.new(name: 'BatchDescribeErrorDetail')
+    BatchDescribeErrorMessageContent = Shapes::StringShape.new(name: 'BatchDescribeErrorMessageContent')
     CancelChangeSetRequest = Shapes::StructureShape.new(name: 'CancelChangeSetRequest')
     CancelChangeSetResponse = Shapes::StructureShape.new(name: 'CancelChangeSetResponse')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
@@ -81,7 +86,12 @@ module Aws::MarketplaceCatalog
     DescribeEntityRequest = Shapes::StructureShape.new(name: 'DescribeEntityRequest')
     DescribeEntityResponse = Shapes::StructureShape.new(name: 'DescribeEntityResponse')
     Entity = Shapes::StructureShape.new(name: 'Entity')
+    EntityDetail = Shapes::StructureShape.new(name: 'EntityDetail')
+    EntityDetails = Shapes::MapShape.new(name: 'EntityDetails')
+    EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityNameString = Shapes::StringShape.new(name: 'EntityNameString')
+    EntityRequest = Shapes::StructureShape.new(name: 'EntityRequest')
+    EntityRequestList = Shapes::ListShape.new(name: 'EntityRequestList')
     EntitySummary = Shapes::StructureShape.new(name: 'EntitySummary')
     EntitySummaryList = Shapes::ListShape.new(name: 'EntitySummaryList')
     EntityType = Shapes::StringShape.new(name: 'EntityType')
@@ -90,6 +100,7 @@ module Aws::MarketplaceCatalog
     ErrorCodeString = Shapes::StringShape.new(name: 'ErrorCodeString')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetailList = Shapes::ListShape.new(name: 'ErrorDetailList')
+    Errors = Shapes::MapShape.new(name: 'Errors')
     ExceptionMessageContent = Shapes::StringShape.new(name: 'ExceptionMessageContent')
     FailureCode = Shapes::StringShape.new(name: 'FailureCode')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -276,6 +287,17 @@ module Aws::MarketplaceCatalog
 
     AmiProductVisibilityFilterValueList.member = Shapes::ShapeRef.new(shape: AmiProductVisibilityString)
 
+    BatchDescribeEntitiesRequest.add_member(:entity_request_list, Shapes::ShapeRef.new(shape: EntityRequestList, required: true, location_name: "EntityRequestList"))
+    BatchDescribeEntitiesRequest.struct_class = Types::BatchDescribeEntitiesRequest
+
+    BatchDescribeEntitiesResponse.add_member(:entity_details, Shapes::ShapeRef.new(shape: EntityDetails, location_name: "EntityDetails"))
+    BatchDescribeEntitiesResponse.add_member(:errors, Shapes::ShapeRef.new(shape: Errors, location_name: "Errors"))
+    BatchDescribeEntitiesResponse.struct_class = Types::BatchDescribeEntitiesResponse
+
+    BatchDescribeErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchDescribeErrorCodeString, location_name: "ErrorCode"))
+    BatchDescribeErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: BatchDescribeErrorMessageContent, location_name: "ErrorMessage"))
+    BatchDescribeErrorDetail.struct_class = Types::BatchDescribeErrorDetail
+
     CancelChangeSetRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location: "querystring", location_name: "catalog"))
     CancelChangeSetRequest.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "querystring", location_name: "changeSetId"))
     CancelChangeSetRequest.struct_class = Types::CancelChangeSetRequest
@@ -424,6 +446,22 @@ module Aws::MarketplaceCatalog
     Entity.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier"))
     Entity.struct_class = Types::Entity
 
+    EntityDetail.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
+    EntityDetail.add_member(:entity_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EntityArn"))
+    EntityDetail.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "EntityIdentifier"))
+    EntityDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "LastModifiedDate"))
+    EntityDetail.add_member(:details_document, Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
+    EntityDetail.struct_class = Types::EntityDetail
+
+    EntityDetails.key = Shapes::ShapeRef.new(shape: EntityId)
+    EntityDetails.value = Shapes::ShapeRef.new(shape: EntityDetail)
+
+    EntityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    EntityRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EntityId"))
+    EntityRequest.struct_class = Types::EntityRequest
+
+    EntityRequestList.member = Shapes::ShapeRef.new(shape: EntityRequest)
+
     EntitySummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityNameString, location_name: "Name"))
     EntitySummary.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
     EntitySummary.add_member(:entity_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId"))
@@ -477,6 +515,9 @@ module Aws::MarketplaceCatalog
     ErrorDetail.struct_class = Types::ErrorDetail
 
     ErrorDetailList.member = Shapes::ShapeRef.new(shape: ErrorDetail)
+
+    Errors.key = Shapes::ShapeRef.new(shape: EntityId)
+    Errors.value = Shapes::ShapeRef.new(shape: BatchDescribeErrorDetail)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
     Filter.add_member(:value_list, Shapes::ShapeRef.new(shape: ValueList, location_name: "ValueList"))
@@ -840,6 +881,18 @@ module Aws::MarketplaceCatalog
         "signingName" => "aws-marketplace",
         "uid" => "marketplace-catalog-2018-09-17",
       }
+
+      api.add_operation(:batch_describe_entities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDescribeEntities"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchDescribeEntities"
+        o.input = Shapes::ShapeRef.new(shape: BatchDescribeEntitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDescribeEntitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
 
       api.add_operation(:cancel_change_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelChangeSet"

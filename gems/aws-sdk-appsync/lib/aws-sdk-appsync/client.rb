@@ -1032,6 +1032,39 @@ module Aws::AppSync
     #   This field accepts any string input with a length of 0 - 256
     #   characters.
     #
+    # @option params [String] :introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the introspection
+    #   configuration will be set to `ENABLED` by default. This field will
+    #   produce an error if the operation attempts to use the introspection
+    #   feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #
+    # @option params [Integer] :query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75` nested
+    #   levels. This field will produce a limit error if the operation falls
+    #   out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown upwards
+    #   to the first nullable field available.
+    #
+    # @option params [Integer] :resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set the
+    #   limit to `10000`. When specified, the limit value can be between `1`
+    #   and `10000`. This field will produce a limit error if the operation
+    #   falls out of bounds.
+    #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -1092,6 +1125,9 @@ module Aws::AppSync
     #     api_type: "GRAPHQL", # accepts GRAPHQL, MERGED
     #     merged_api_execution_role_arn: "String",
     #     owner_contact: "String",
+    #     introspection_config: "ENABLED", # accepts ENABLED, DISABLED
+    #     query_depth_limit: 1,
+    #     resolver_count_limit: 1,
     #   })
     #
     # @example Response structure
@@ -1139,6 +1175,9 @@ module Aws::AppSync
     #   resp.graphql_api.merged_api_execution_role_arn #=> String
     #   resp.graphql_api.owner #=> String
     #   resp.graphql_api.owner_contact #=> String
+    #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_api.query_depth_limit #=> Integer
+    #   resp.graphql_api.resolver_count_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -2099,6 +2138,9 @@ module Aws::AppSync
     #   resp.graphql_api.merged_api_execution_role_arn #=> String
     #   resp.graphql_api.owner #=> String
     #   resp.graphql_api.owner_contact #=> String
+    #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_api.query_depth_limit #=> Integer
+    #   resp.graphql_api.resolver_count_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -2609,6 +2651,9 @@ module Aws::AppSync
     #   resp.graphql_apis[0].merged_api_execution_role_arn #=> String
     #   resp.graphql_apis[0].owner #=> String
     #   resp.graphql_apis[0].owner_contact #=> String
+    #   resp.graphql_apis[0].introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_apis[0].query_depth_limit #=> Integer
+    #   resp.graphql_apis[0].resolver_count_limit #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -3556,6 +3601,39 @@ module Aws::AppSync
     #   This field accepts any string input with a length of 0 - 256
     #   characters.
     #
+    # @option params [String] :introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the introspection
+    #   configuration will be set to `ENABLED` by default. This field will
+    #   produce an error if the operation attempts to use the introspection
+    #   feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #
+    # @option params [Integer] :query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75` nested
+    #   levels. This field will produce a limit error if the operation falls
+    #   out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown upwards
+    #   to the first nullable field available.
+    #
+    # @option params [Integer] :resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set the
+    #   limit to `10000`. When specified, the limit value can be between `1`
+    #   and `10000`. This field will produce a limit error if the operation
+    #   falls out of bounds.
+    #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -3612,6 +3690,9 @@ module Aws::AppSync
     #     },
     #     merged_api_execution_role_arn: "String",
     #     owner_contact: "String",
+    #     introspection_config: "ENABLED", # accepts ENABLED, DISABLED
+    #     query_depth_limit: 1,
+    #     resolver_count_limit: 1,
     #   })
     #
     # @example Response structure
@@ -3659,6 +3740,9 @@ module Aws::AppSync
     #   resp.graphql_api.merged_api_execution_role_arn #=> String
     #   resp.graphql_api.owner #=> String
     #   resp.graphql_api.owner_contact #=> String
+    #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_api.query_depth_limit #=> Integer
+    #   resp.graphql_api.resolver_count_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -3914,7 +3998,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

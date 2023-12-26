@@ -40,6 +40,8 @@ module Aws::CloudWatchLogs
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
+  # * {SessionStreamingException}
+  # * {SessionTimeoutException}
   # * {ThrottlingException}
   # * {TooManyTagsException}
   # * {UnrecognizedClientException}
@@ -193,6 +195,36 @@ module Aws::CloudWatchLogs
       # @param [Aws::CloudWatchLogs::Types::ServiceUnavailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class SessionStreamingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchLogs::Types::SessionStreamingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SessionTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchLogs::Types::SessionTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

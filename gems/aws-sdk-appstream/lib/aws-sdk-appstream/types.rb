@@ -5618,11 +5618,31 @@ module Aws::AppStream
     #   Indicates whether the action is enabled or disabled.
     #   @return [String]
     #
+    # @!attribute [rw] maximum_length
+    #   Specifies the number of characters that can be copied by end users
+    #   from the local device to the remote session, and to the local device
+    #   from the remote session.
+    #
+    #   This can be specified only for the
+    #   `CLIPBOARD_COPY_FROM_LOCAL_DEVICE` and
+    #   `CLIPBOARD_COPY_TO_LOCAL_DEVICE` actions.
+    #
+    #   This defaults to 20,971,520 (20 MB) when unspecified and the
+    #   permission is `ENABLED`. This can't be specified when the
+    #   permission is `DISABLED`.
+    #
+    #   This can only be specified for AlwaysOn and OnDemand fleets. The
+    #   attribute is not supported on Elastic fleets.
+    #
+    #   The value can be between 1 and 20,971,520 (20 MB).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserSetting AWS API Documentation
     #
     class UserSetting < Struct.new(
       :action,
-      :permission)
+      :permission,
+      :maximum_length)
       SENSITIVE = []
       include Aws::Structure
     end

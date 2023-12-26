@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-12-14)
+------------------
+
+* Feature - Updated note to ensure customers understand running modes.
+
 1.94.0 (2023-11-28)
 ------------------
 

@@ -156,6 +156,7 @@ module Aws::MediaTailor
     String = Shapes::StringShape.new(name: 'String')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tier = Shapes::StringShape.new(name: 'Tier')
+    TimeShiftConfiguration = Shapes::StructureShape.new(name: 'TimeShiftConfiguration')
     TimeSignalMessage = Shapes::StructureShape.new(name: 'TimeSignalMessage')
     Transition = Shapes::StructureShape.new(name: 'Transition')
     Type = Shapes::StringShape.new(name: 'Type')
@@ -290,6 +291,7 @@ module Aws::MediaTailor
     CreateChannelRequest.add_member(:playback_mode, Shapes::ShapeRef.new(shape: PlaybackMode, required: true, location_name: "PlaybackMode"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateChannelRequest.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, location_name: "Tier"))
+    CreateChannelRequest.add_member(:time_shift_configuration, Shapes::ShapeRef.new(shape: TimeShiftConfiguration, location_name: "TimeShiftConfiguration"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
@@ -302,6 +304,7 @@ module Aws::MediaTailor
     CreateChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateChannelResponse.add_member(:tier, Shapes::ShapeRef.new(shape: __string, location_name: "Tier"))
+    CreateChannelResponse.add_member(:time_shift_configuration, Shapes::ShapeRef.new(shape: TimeShiftConfiguration, location_name: "TimeShiftConfiguration"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
     CreateLiveSourceRequest.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, required: true, location_name: "HttpPackageConfigurations"))
@@ -466,6 +469,7 @@ module Aws::MediaTailor
     DescribeChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeChannelResponse.add_member(:tier, Shapes::ShapeRef.new(shape: __string, location_name: "Tier"))
+    DescribeChannelResponse.add_member(:time_shift_configuration, Shapes::ShapeRef.new(shape: TimeShiftConfiguration, location_name: "TimeShiftConfiguration"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DescribeLiveSourceRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "LiveSourceName"))
@@ -867,6 +871,9 @@ module Aws::MediaTailor
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
+    TimeShiftConfiguration.add_member(:max_time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "MaxTimeDelaySeconds"))
+    TimeShiftConfiguration.struct_class = Types::TimeShiftConfiguration
+
     TimeSignalMessage.add_member(:segmentation_descriptors, Shapes::ShapeRef.new(shape: SegmentationDescriptorList, location_name: "SegmentationDescriptors"))
     TimeSignalMessage.struct_class = Types::TimeSignalMessage
 
@@ -884,6 +891,7 @@ module Aws::MediaTailor
     UpdateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
     UpdateChannelRequest.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     UpdateChannelRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: RequestOutputs, required: true, location_name: "Outputs"))
+    UpdateChannelRequest.add_member(:time_shift_configuration, Shapes::ShapeRef.new(shape: TimeShiftConfiguration, location_name: "TimeShiftConfiguration"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
@@ -896,6 +904,7 @@ module Aws::MediaTailor
     UpdateChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     UpdateChannelResponse.add_member(:tier, Shapes::ShapeRef.new(shape: __string, location_name: "Tier"))
+    UpdateChannelResponse.add_member(:time_shift_configuration, Shapes::ShapeRef.new(shape: TimeShiftConfiguration, location_name: "TimeShiftConfiguration"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
     UpdateLiveSourceRequest.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, required: true, location_name: "HttpPackageConfigurations"))

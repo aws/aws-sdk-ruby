@@ -10,7 +10,7 @@
 module Aws::RDSDataService
   module Types
 
-    # You do not have sufficient access to perform this action.
+    # You don't have sufficient access to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -70,7 +70,8 @@ module Aws::RDSDataService
       class Unknown < ArrayValue; end
     end
 
-    # There is an error in the call or in a SQL statement.
+    # There is an error in the call or in a SQL statement. (This error only
+    # appears in calls from Aurora Serverless v1 databases.)
     #
     # @!attribute [rw] message
     #   The error message returned by this `BadRequestException` error.
@@ -340,6 +341,38 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
+    # There was an error in processing the SQL statement.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/DatabaseErrorException AWS API Documentation
+    #
+    class DatabaseErrorException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The DB cluster doesn't have a DB instance.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/DatabaseNotFoundException AWS API Documentation
+    #
+    class DatabaseNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The writer instance in the DB cluster isn't available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/DatabaseUnavailableException AWS API Documentation
+    #
+    class DatabaseUnavailableException < Aws::EmptyStructure; end
+
     # The request parameters represent the input of a request to run one or
     # more SQL statements.
     #
@@ -530,7 +563,16 @@ module Aws::RDSDataService
     # @!attribute [rw] generated_fields
     #   Values for fields generated during a DML request.
     #
-    #        <note> <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the <code>RETURNING</code> clause. For more information, see <a href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From Modified Rows</a> in the PostgreSQL documentation.</p> </note>
+    #   <note markdown="1"> The `generatedFields` data isn't supported by Aurora PostgreSQL. To
+    #   get the values of generated fields, use the `RETURNING` clause. For
+    #   more information, see [Returning Data From Modified Rows][1] in the
+    #   PostgreSQL documentation.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://www.postgresql.org/docs/10/dml-returning.html
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] formatted_records
@@ -628,11 +670,38 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
+    # The HTTP endpoint for using RDS Data API isn't enabled for the DB
+    # cluster.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/HttpEndpointNotEnabledException AWS API Documentation
+    #
+    class HttpEndpointNotEnabledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal error occurred.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/InternalServerErrorException AWS API Documentation
     #
     class InternalServerErrorException < Aws::EmptyStructure; end
+
+    # The Secrets Manager secret used with the request isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/InvalidSecretException AWS API Documentation
+    #
+    class InvalidSecretException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The `resourceArn`, `secretArn`, or `transactionId` value can't be
     # found.
@@ -785,7 +854,27 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
-    # The service specified by the `resourceArn` parameter is not available.
+    # There was a problem with the Secrets Manager secret used with the
+    # request, caused by one of the following conditions:
+    #
+    # * RDS Data API timed out retrieving the secret.
+    #
+    # * The secret provided wasn't found.
+    #
+    # * The secret couldn't be decrypted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SecretsErrorException AWS API Documentation
+    #
+    class SecretsErrorException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service specified by the `resourceArn` parameter isn't available.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ServiceUnavailableError AWS API Documentation
     #
@@ -839,7 +928,11 @@ module Aws::RDSDataService
 
     # The result of a SQL statement.
     #
-    #      <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
+    # <note markdown="1"> This data structure is only used with the deprecated `ExecuteSql`
+    # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
+    # operation instead.
+    #
+    #  </note>
     #
     # @!attribute [rw] result_frame
     #   The result set of the SQL statement.
@@ -898,6 +991,39 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
+    # The transaction ID wasn't found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/TransactionNotFoundException AWS API Documentation
+    #
+    class TransactionNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There was a problem with the result because of one of the following
+    # conditions:
+    #
+    # * It contained an unsupported data type.
+    #
+    # * It contained a multidimensional array.
+    #
+    # * The size was too large.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/UnsupportedResultException AWS API Documentation
+    #
+    class UnsupportedResultException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The response elements represent the results of an update.
     #
     # @!attribute [rw] generated_fields
@@ -914,7 +1040,11 @@ module Aws::RDSDataService
 
     # Contains the value of a column.
     #
-    #      <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
+    # <note markdown="1"> This data structure is only used with the deprecated `ExecuteSql`
+    # operation. Use the `BatchExecuteStatement` or `ExecuteStatement`
+    # operation instead.
+    #
+    #  </note>
     #
     # @note Value is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Value corresponding to the set member.
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-12-20)
+------------------
+
+* Feature - Adds the ability to configure time shifting on MediaTailor channels using the TimeShiftConfiguration field
+
 1.74.0 (2023-11-28)
 ------------------
 

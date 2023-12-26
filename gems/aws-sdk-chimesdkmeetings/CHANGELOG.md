@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2023-12-19)
+------------------
+
+* Feature - Add meeting features to specify a maximum camera resolution, a maximum content sharing resolution, and a maximum number of attendees for a given meeting.
+
 1.27.0 (2023-11-28)
 ------------------
 

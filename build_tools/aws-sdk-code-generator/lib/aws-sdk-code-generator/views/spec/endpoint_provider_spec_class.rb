@@ -141,7 +141,7 @@ module AwsSdkCodeGenerator
             case value
             when Hash
               value.each_with_object({}) do |(k, v), o|
-                o[Underscore.underscore(k)] = transform_operation_values(v)
+                o[Underscore.underscore(k).to_sym] = transform_operation_values(v)
               end
             when Array
               value.map { |v| transform_operation_values(v) }

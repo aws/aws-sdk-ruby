@@ -1326,10 +1326,10 @@ module Aws::IAM
     # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
     # providers (IdPs) through our library of trusted root certificate
     # authorities (CAs) instead of using a certificate thumbprint to verify
-    # your IdP server certificate. These OIDC IdPs include Auth0, GitHub,
-    # Google, and those that use an Amazon S3 bucket to host a JSON Web Key
-    # Set (JWKS) endpoint. In these cases, your legacy thumbprint remains in
-    # your configuration, but is no longer used for validation.
+    # your IdP server certificate. In these cases, your legacy thumbprint
+    # remains in your configuration, but is no longer used for validation.
+    # These OIDC IdPs include Auth0, GitHub, GitLab, Google, and those that
+    # use an Amazon S3 bucket to host a JSON Web Key Set (JWKS) endpoint.
     #
     #  </note>
     #
@@ -12489,10 +12489,10 @@ module Aws::IAM
     # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
     # providers (IdPs) through our library of trusted root certificate
     # authorities (CAs) instead of using a certificate thumbprint to verify
-    # your IdP server certificate. These OIDC IdPs include Auth0, GitHub,
-    # Google, and those that use an Amazon S3 bucket to host a JSON Web Key
-    # Set (JWKS) endpoint. In these cases, your legacy thumbprint remains in
-    # your configuration, but is no longer used for validation.
+    # your IdP server certificate. In these cases, your legacy thumbprint
+    # remains in your configuration, but is no longer used for validation.
+    # These OIDC IdPs include Auth0, GitHub, GitLab, Google, and those that
+    # use an Amazon S3 bucket to host a JSON Web Key Set (JWKS) endpoint.
     #
     #  </note>
     #
@@ -13467,7 +13467,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

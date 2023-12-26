@@ -3775,6 +3775,10 @@ module Aws::QuickSight
     #   visibility) of a combo chart's secondary y-axis(line) field well.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] single_axis_options
+    #   The settings of a chart's single axis configuration.
+    #   @return [Types::SingleAxisOptions]
+    #
     # @!attribute [rw] color_label_options
     #   The label options (label text, label visibility, and sort icon
     #   visibility) of a combo chart's color field well.
@@ -3820,6 +3824,7 @@ module Aws::QuickSight
       :primary_y_axis_label_options,
       :secondary_y_axis_display_options,
       :secondary_y_axis_label_options,
+      :single_axis_options,
       :color_label_options,
       :legend,
       :bar_data_labels,
@@ -4798,6 +4803,11 @@ module Aws::QuickSight
     #   dashboard.
     #   @return [Types::LinkSharingConfiguration]
     #
+    # @!attribute [rw] link_entities
+    #   A list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
     #
     class CreateDashboardRequest < Struct.new(
@@ -4814,7 +4824,8 @@ module Aws::QuickSight
       :definition,
       :validation_strategy,
       :folder_arns,
-      :link_sharing_configuration)
+      :link_sharing_configuration,
+      :link_entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6705,6 +6716,11 @@ module Aws::QuickSight
     #   The last time that this dashboard was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] link_entities
+    #   A list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Dashboard AWS API Documentation
     #
     class Dashboard < Struct.new(
@@ -6714,7 +6730,8 @@ module Aws::QuickSight
       :version,
       :created_time,
       :last_published_time,
-      :last_updated_time)
+      :last_updated_time,
+      :link_entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17578,6 +17595,10 @@ module Aws::QuickSight
     #   label.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] single_axis_options
+    #   The settings of a chart's single axis configuration.
+    #   @return [Types::SingleAxisOptions]
+    #
     # @!attribute [rw] default_series_settings
     #   The options that determine the default presentation of all line
     #   series in `LineChartVisual`.
@@ -17625,6 +17646,7 @@ module Aws::QuickSight
       :primary_y_axis_label_options,
       :secondary_y_axis_display_options,
       :secondary_y_axis_label_options,
+      :single_axis_options,
       :default_series_settings,
       :series,
       :legend,
@@ -24263,6 +24285,10 @@ module Aws::QuickSight
     #   The field wells of the visual.
     #   @return [Types::ScatterPlotFieldWells]
     #
+    # @!attribute [rw] sort_configuration
+    #   The sort configuration of a scatter plot.
+    #   @return [Types::ScatterPlotSortConfiguration]
+    #
     # @!attribute [rw] x_axis_label_options
     #   The label options (label text, label visibility, and sort icon
     #   visibility) of the scatter plot's x-axis.
@@ -24303,6 +24329,7 @@ module Aws::QuickSight
     #
     class ScatterPlotConfiguration < Struct.new(
       :field_wells,
+      :sort_configuration,
       :x_axis_label_options,
       :x_axis_display_options,
       :y_axis_label_options,
@@ -24336,6 +24363,20 @@ module Aws::QuickSight
     class ScatterPlotFieldWells < Struct.new(
       :scatter_plot_categorically_aggregated_field_wells,
       :scatter_plot_unaggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sort configuration of a scatter plot.
+    #
+    # @!attribute [rw] scatter_plot_limit_configuration
+    #   The limit configuration of the visual display for an axis.
+    #   @return [Types::ItemsLimitConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScatterPlotSortConfiguration AWS API Documentation
+    #
+    class ScatterPlotSortConfiguration < Struct.new(
+      :scatter_plot_limit_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25542,6 +25583,20 @@ module Aws::QuickSight
     #
     class SimpleClusterMarker < Struct.new(
       :color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings of a chart's single axis configuration.
+    #
+    # @!attribute [rw] y_axis_options
+    #   The Y axis options of a single axis configuration.
+    #   @return [Types::YAxisOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SingleAxisOptions AWS API Documentation
+    #
+    class SingleAxisOptions < Struct.new(
+      :y_axis_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30123,6 +30178,58 @@ module Aws::QuickSight
 
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the
+    #   dashboard whose links you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID for the dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_entities
+    #   list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardLinksRequest AWS API Documentation
+    #
+    class UpdateDashboardLinksRequest < Struct.new(
+      :aws_account_id,
+      :dashboard_id,
+      :link_entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dashboard_arn
+    #   The Amazon Resource Name (ARN) of the dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_entities
+    #   A list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardLinksResponse AWS API Documentation
+    #
+    class UpdateDashboardLinksResponse < Struct.new(
+      :request_id,
+      :status,
+      :dashboard_arn,
+      :link_entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
     #   dashboard whose permissions you're updating.
     #   @return [String]
     #
@@ -33164,6 +33271,23 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that are available for a single Y axis in a chart.
+    #
+    # @!attribute [rw] y_axis
+    #   The Y axis type to be used in the chart.
+    #
+    #   If you choose `PRIMARY_Y_AXIS`, the primary Y Axis is located on the
+    #   leftmost vertical axis of the chart.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/YAxisOptions AWS API Documentation
+    #
+    class YAxisOptions < Struct.new(
+      :y_axis)
       SENSITIVE = []
       include Aws::Structure
     end

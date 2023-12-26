@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-12-12)
+------------------
+
+* Feature - This release adds the Image Workflows feature to give more flexibility and control over the image building and testing process.
+
 1.55.0 (2023-11-28)
 ------------------
 

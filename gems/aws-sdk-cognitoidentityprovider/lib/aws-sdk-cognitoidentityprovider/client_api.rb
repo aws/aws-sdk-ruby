@@ -327,6 +327,8 @@ module Aws::CognitoIdentityProvider
     PasswordType = Shapes::StringShape.new(name: 'PasswordType')
     PoolQueryLimitType = Shapes::IntegerShape.new(name: 'PoolQueryLimitType')
     PreSignedUrlType = Shapes::StringShape.new(name: 'PreSignedUrlType')
+    PreTokenGenerationLambdaVersionType = Shapes::StringShape.new(name: 'PreTokenGenerationLambdaVersionType')
+    PreTokenGenerationVersionConfigType = Shapes::StructureShape.new(name: 'PreTokenGenerationVersionConfigType')
     PrecedenceType = Shapes::IntegerShape.new(name: 'PrecedenceType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
     PreventUserExistenceErrorTypes = Shapes::StringShape.new(name: 'PreventUserExistenceErrorTypes')
@@ -1325,6 +1327,7 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.add_member(:create_auth_challenge, Shapes::ShapeRef.new(shape: ArnType, location_name: "CreateAuthChallenge"))
     LambdaConfigType.add_member(:verify_auth_challenge_response, Shapes::ShapeRef.new(shape: ArnType, location_name: "VerifyAuthChallengeResponse"))
     LambdaConfigType.add_member(:pre_token_generation, Shapes::ShapeRef.new(shape: ArnType, location_name: "PreTokenGeneration"))
+    LambdaConfigType.add_member(:pre_token_generation_config, Shapes::ShapeRef.new(shape: PreTokenGenerationVersionConfigType, location_name: "PreTokenGenerationConfig"))
     LambdaConfigType.add_member(:user_migration, Shapes::ShapeRef.new(shape: ArnType, location_name: "UserMigration"))
     LambdaConfigType.add_member(:custom_sms_sender, Shapes::ShapeRef.new(shape: CustomSMSLambdaVersionConfigType, location_name: "CustomSMSSender"))
     LambdaConfigType.add_member(:custom_email_sender, Shapes::ShapeRef.new(shape: CustomEmailLambdaVersionConfigType, location_name: "CustomEmailSender"))
@@ -1488,6 +1491,10 @@ module Aws::CognitoIdentityProvider
 
     PasswordResetRequiredException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     PasswordResetRequiredException.struct_class = Types::PasswordResetRequiredException
+
+    PreTokenGenerationVersionConfigType.add_member(:lambda_version, Shapes::ShapeRef.new(shape: PreTokenGenerationLambdaVersionType, required: true, location_name: "LambdaVersion"))
+    PreTokenGenerationVersionConfigType.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "LambdaArn"))
+    PreTokenGenerationVersionConfigType.struct_class = Types::PreTokenGenerationVersionConfigType
 
     PreconditionNotMetException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     PreconditionNotMetException.struct_class = Types::PreconditionNotMetException

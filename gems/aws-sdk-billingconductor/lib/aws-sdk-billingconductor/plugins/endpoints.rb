@@ -85,6 +85,8 @@ module Aws::BillingConductor
             Aws::BillingConductor::Endpoints::DisassociateAccounts.build(context)
           when :disassociate_pricing_rules
             Aws::BillingConductor::Endpoints::DisassociatePricingRules.build(context)
+          when :get_billing_group_cost_report
+            Aws::BillingConductor::Endpoints::GetBillingGroupCostReport.build(context)
           when :list_account_associations
             Aws::BillingConductor::Endpoints::ListAccountAssociations.build(context)
           when :list_billing_group_cost_reports

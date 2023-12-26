@@ -1267,6 +1267,10 @@ module Aws::SageMaker
     #   The user profile name.
     #   @return [String]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @!attribute [rw] app_type
     #   The type of app.
     #   @return [String]
@@ -1283,10 +1287,6 @@ module Aws::SageMaker
     #   The creation time.
     #   @return [Time]
     #
-    # @!attribute [rw] space_name
-    #   The name of the space.
-    #   @return [String]
-    #
     # @!attribute [rw] resource_spec
     #   Specifies the ARN's of a SageMaker image and SageMaker image
     #   version, and the instance type that the version runs on.
@@ -1297,11 +1297,11 @@ module Aws::SageMaker
     class AppDetails < Struct.new(
       :domain_id,
       :user_profile_name,
+      :space_name,
       :app_type,
       :app_name,
       :status,
       :creation_time,
-      :space_name,
       :resource_spec)
       SENSITIVE = []
       include Aws::Structure
@@ -2243,16 +2243,16 @@ module Aws::SageMaker
     #   settings.
     #   @return [Types::AutoMLSecurityConfig]
     #
+    # @!attribute [rw] candidate_generation_config
+    #   The configuration for generating a candidate for an AutoML job
+    #   (optional).
+    #   @return [Types::AutoMLCandidateGenerationConfig]
+    #
     # @!attribute [rw] data_split_config
     #   The configuration for splitting the input training dataset.
     #
     #   Type: AutoMLDataSplitConfig
     #   @return [Types::AutoMLDataSplitConfig]
-    #
-    # @!attribute [rw] candidate_generation_config
-    #   The configuration for generating a candidate for an AutoML job
-    #   (optional).
-    #   @return [Types::AutoMLCandidateGenerationConfig]
     #
     # @!attribute [rw] mode
     #   The method that Autopilot uses to train the data. You can either
@@ -2288,8 +2288,8 @@ module Aws::SageMaker
     class AutoMLJobConfig < Struct.new(
       :completion_criteria,
       :security_config,
-      :data_split_config,
       :candidate_generation_config,
+      :data_split_config,
       :mode)
       SENSITIVE = []
       include Aws::Structure
@@ -2499,15 +2499,15 @@ module Aws::SageMaker
     #   classification problem type.
     #   @return [Types::TextClassificationJobConfig]
     #
-    # @!attribute [rw] tabular_job_config
-    #   Settings used to configure an AutoML job V2 for the tabular problem
-    #   type (regression, classification).
-    #   @return [Types::TabularJobConfig]
-    #
     # @!attribute [rw] time_series_forecasting_job_config
     #   Settings used to configure an AutoML job V2 for the time-series
     #   forecasting problem type.
     #   @return [Types::TimeSeriesForecastingJobConfig]
+    #
+    # @!attribute [rw] tabular_job_config
+    #   Settings used to configure an AutoML job V2 for the tabular problem
+    #   type (regression, classification).
+    #   @return [Types::TabularJobConfig]
     #
     # @!attribute [rw] text_generation_job_config
     #   Settings used to configure an AutoML job V2 for the text generation
@@ -2530,8 +2530,8 @@ module Aws::SageMaker
     class AutoMLProblemTypeConfig < Struct.new(
       :image_classification_job_config,
       :text_classification_job_config,
-      :tabular_job_config,
       :time_series_forecasting_job_config,
+      :tabular_job_config,
       :text_generation_job_config,
       :unknown)
       SENSITIVE = []
@@ -2540,8 +2540,8 @@ module Aws::SageMaker
 
       class ImageClassificationJobConfig < AutoMLProblemTypeConfig; end
       class TextClassificationJobConfig < AutoMLProblemTypeConfig; end
-      class TabularJobConfig < AutoMLProblemTypeConfig; end
       class TimeSeriesForecastingJobConfig < AutoMLProblemTypeConfig; end
+      class TabularJobConfig < AutoMLProblemTypeConfig; end
       class TextGenerationJobConfig < AutoMLProblemTypeConfig; end
       class Unknown < AutoMLProblemTypeConfig; end
     end
@@ -3226,13 +3226,13 @@ module Aws::SageMaker
     #   The settings for connecting to an external data source with OAuth.
     #   @return [Array<Types::IdentityProviderOAuthSetting>]
     #
-    # @!attribute [rw] kendra_settings
-    #   The settings for document querying.
-    #   @return [Types::KendraSettings]
-    #
     # @!attribute [rw] direct_deploy_settings
     #   The model deployment settings for the SageMaker Canvas application.
     #   @return [Types::DirectDeploySettings]
+    #
+    # @!attribute [rw] kendra_settings
+    #   The settings for document querying.
+    #   @return [Types::KendraSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
     #
@@ -3241,8 +3241,8 @@ module Aws::SageMaker
       :model_register_settings,
       :workspace_settings,
       :identity_provider_o_auth_settings,
-      :kendra_settings,
-      :direct_deploy_settings)
+      :direct_deploy_settings,
+      :kendra_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4592,6 +4592,16 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #   @return [String]
     #
+    # @!attribute [rw] model_data_source
+    #   Specifies the location of ML model data to deploy.
+    #
+    #   <note markdown="1"> Currently you cannot use `ModelDataSource` in conjunction with
+    #   SageMaker batch transform, SageMaker serverless endpoints, SageMaker
+    #   multi-model endpoints, and SageMaker Marketplace.
+    #
+    #    </note>
+    #   @return [Types::ModelDataSource]
+    #
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container. Each key
     #   and value in the `Environment` string to string map can have length
@@ -4611,16 +4621,6 @@ module Aws::SageMaker
     #   Specifies additional configuration for multi-model endpoints.
     #   @return [Types::MultiModelConfig]
     #
-    # @!attribute [rw] model_data_source
-    #   Specifies the location of ML model data to deploy.
-    #
-    #   <note markdown="1"> Currently you cannot use `ModelDataSource` in conjunction with
-    #   SageMaker batch transform, SageMaker serverless endpoints, SageMaker
-    #   multi-model endpoints, and SageMaker Marketplace.
-    #
-    #    </note>
-    #   @return [Types::ModelDataSource]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -4629,11 +4629,11 @@ module Aws::SageMaker
       :image_config,
       :mode,
       :model_data_url,
+      :model_data_source,
       :environment,
       :model_package_name,
       :inference_specification_name,
-      :multi_model_config,
-      :model_data_source)
+      :multi_model_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5012,6 +5012,11 @@ module Aws::SageMaker
     #   must be set.
     #   @return [String]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
+    #   @return [String]
+    #
     # @!attribute [rw] app_type
     #   The type of app.
     #   @return [String]
@@ -5039,21 +5044,16 @@ module Aws::SageMaker
     #    </note>
     #   @return [Types::ResourceSpec]
     #
-    # @!attribute [rw] space_name
-    #   The name of the space. If this value is not set, then
-    #   `UserProfileName` must be set.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
     #
     class CreateAppRequest < Struct.new(
       :domain_id,
       :user_profile_name,
+      :space_name,
       :app_type,
       :app_name,
       :tags,
-      :resource_spec,
-      :space_name)
+      :resource_spec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5764,6 +5764,10 @@ module Aws::SageMaker
     #   `CreateDomain`.
     #   @return [Types::UserSettings]
     #
+    # @!attribute [rw] domain_settings
+    #   A collection of `Domain` settings.
+    #   @return [Types::DomainSettings]
+    #
     # @!attribute [rw] subnet_ids
     #   The VPC subnets that the domain uses for communication.
     #   @return [Array<String>]
@@ -5811,10 +5815,6 @@ module Aws::SageMaker
     #   value must be set to `Service`.
     #   @return [String]
     #
-    # @!attribute [rw] domain_settings
-    #   A collection of `Domain` settings.
-    #   @return [Types::DomainSettings]
-    #
     # @!attribute [rw] default_space_settings
     #   The default settings used to create a space.
     #   @return [Types::DefaultSpaceSettings]
@@ -5825,6 +5825,7 @@ module Aws::SageMaker
       :domain_name,
       :auth_mode,
       :default_user_settings,
+      :domain_settings,
       :subnet_ids,
       :vpc_id,
       :tags,
@@ -5832,7 +5833,6 @@ module Aws::SageMaker
       :home_efs_file_system_kms_key_id,
       :kms_key_id,
       :app_security_group_management,
-      :domain_settings,
       :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -7822,21 +7822,6 @@ module Aws::SageMaker
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] customer_metadata_properties
-    #   The metadata properties associated with the model package versions.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] drift_check_baselines
-    #   Represents the drift check baselines that can be used when the model
-    #   monitor is set using the model package. For more information, see
-    #   the topic on [Drift Detection against Previous Baselines in
-    #   SageMaker Pipelines][1] in the *Amazon SageMaker Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
-    #   @return [Types::DriftCheckBaselines]
-    #
     # @!attribute [rw] domain
     #   The machine learning domain of your model package and its
     #   components. Common machine learning domains include computer vision
@@ -7866,6 +7851,21 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax
     #   @return [String]
     #
+    # @!attribute [rw] customer_metadata_properties
+    #   The metadata properties associated with the model package versions.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] drift_check_baselines
+    #   Represents the drift check baselines that can be used when the model
+    #   monitor is set using the model package. For more information, see
+    #   the topic on [Drift Detection against Previous Baselines in
+    #   SageMaker Pipelines][1] in the *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
+    #   @return [Types::DriftCheckBaselines]
+    #
     # @!attribute [rw] additional_inference_specifications
     #   An array of additional Inference Specification objects. Each
     #   additional Inference Specification specifies artifacts based on this
@@ -7892,11 +7892,11 @@ module Aws::SageMaker
       :metadata_properties,
       :model_metrics,
       :client_token,
-      :customer_metadata_properties,
-      :drift_check_baselines,
       :domain,
       :task,
       :sample_payload_url,
+      :customer_metadata_properties,
+      :drift_check_baselines,
       :additional_inference_specifications,
       :skip_model_validation)
       SENSITIVE = []
@@ -8376,6 +8376,10 @@ module Aws::SageMaker
     #   * `app:RStudioServerPro:relative/path`: Directs users to the
     #     relative path in the RStudio application.
     #
+    #   * `app:CodeEditor:relative/path`: Directs users to the relative path
+    #     in the Code Editor, based on Code-OSS, Visual Studio Code - Open
+    #     Source application.
+    #
     #   * `app:Canvas:relative/path`: Directs users to the relative path in
     #     the Canvas application.
     #   @return [String]
@@ -8614,10 +8618,6 @@ module Aws::SageMaker
     #   A collection of space settings.
     #   @return [Types::SpaceSettings]
     #
-    # @!attribute [rw] space_display_name
-    #   The name of the space that appears in the SageMaker Studio UI.
-    #   @return [String]
-    #
     # @!attribute [rw] ownership_settings
     #   A collection of ownership settings.
     #   @return [Types::OwnershipSettings]
@@ -8626,6 +8626,10 @@ module Aws::SageMaker
     #   A collection of space sharing settings.
     #   @return [Types::SpaceSharingSettings]
     #
+    # @!attribute [rw] space_display_name
+    #   The name of the space that appears in the SageMaker Studio UI.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateSpaceRequest AWS API Documentation
     #
     class CreateSpaceRequest < Struct.new(
@@ -8633,9 +8637,9 @@ module Aws::SageMaker
       :space_name,
       :tags,
       :space_settings,
-      :space_display_name,
       :ownership_settings,
-      :space_sharing_settings)
+      :space_sharing_settings,
+      :space_display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8932,6 +8936,17 @@ module Aws::SageMaker
     #   `InternalServerError`.
     #   @return [Types::RetryStrategy]
     #
+    # @!attribute [rw] remote_debug_config
+    #   Configuration for remote debugging. To learn more about the remote
+    #   debugging functionality of SageMaker, see [Access a training
+    #   container through Amazon Web Services Systems Manager (SSM) for
+    #   remote debugging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #   @return [Types::RemoteDebugConfig]
+    #
     # @!attribute [rw] infra_check_config
     #   Contains information about the infrastructure health check
     #   configuration for the training job.
@@ -8962,6 +8977,7 @@ module Aws::SageMaker
       :profiler_rule_configurations,
       :environment,
       :retry_strategy,
+      :remote_debug_config,
       :infra_check_config)
       SENSITIVE = []
       include Aws::Structure
@@ -10238,6 +10254,11 @@ module Aws::SageMaker
     #   must be set.
     #   @return [String]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
+    #   @return [String]
+    #
     # @!attribute [rw] app_type
     #   The type of app.
     #   @return [String]
@@ -10246,19 +10267,14 @@ module Aws::SageMaker
     #   The name of the app.
     #   @return [String]
     #
-    # @!attribute [rw] space_name
-    #   The name of the space. If this value is not set, then
-    #   `UserProfileName` must be set.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAppRequest AWS API Documentation
     #
     class DeleteAppRequest < Struct.new(
       :domain_id,
       :user_profile_name,
+      :space_name,
       :app_type,
-      :app_name,
-      :space_name)
+      :app_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10360,6 +10376,18 @@ module Aws::SageMaker
     #
     class DeleteCodeRepositoryInput < Struct.new(
       :code_repository_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] compilation_job_name
+    #   The name of the compilation job to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteCompilationJobRequest AWS API Documentation
+    #
+    class DeleteCompilationJobRequest < Struct.new(
+      :compilation_job_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11067,22 +11095,22 @@ module Aws::SageMaker
     #   strategy with all at once traffic shifting by default.
     #   @return [Types::BlueGreenUpdatePolicy]
     #
-    # @!attribute [rw] auto_rollback_configuration
-    #   Automatic rollback configuration for handling endpoint deployment
-    #   failures and recovery.
-    #   @return [Types::AutoRollbackConfig]
-    #
     # @!attribute [rw] rolling_update_policy
     #   Specifies a rolling deployment strategy for updating a SageMaker
     #   endpoint.
     #   @return [Types::RollingUpdatePolicy]
     #
+    # @!attribute [rw] auto_rollback_configuration
+    #   Automatic rollback configuration for handling endpoint deployment
+    #   failures and recovery.
+    #   @return [Types::AutoRollbackConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentConfig AWS API Documentation
     #
     class DeploymentConfig < Struct.new(
       :blue_green_update_policy,
-      :auto_rollback_configuration,
-      :rolling_update_policy)
+      :rolling_update_policy,
+      :auto_rollback_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11429,6 +11457,10 @@ module Aws::SageMaker
     #   must be set.
     #   @return [String]
     #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
     # @!attribute [rw] app_type
     #   The type of app.
     #   @return [String]
@@ -11437,18 +11469,14 @@ module Aws::SageMaker
     #   The name of the app.
     #   @return [String]
     #
-    # @!attribute [rw] space_name
-    #   The name of the space.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppRequest AWS API Documentation
     #
     class DescribeAppRequest < Struct.new(
       :domain_id,
       :user_profile_name,
+      :space_name,
       :app_type,
-      :app_name,
-      :space_name)
+      :app_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11471,6 +11499,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] user_profile_name
     #   The user profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space. If this value is not set, then
+    #   `UserProfileName` must be set.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -11501,11 +11534,6 @@ module Aws::SageMaker
     #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
-    # @!attribute [rw] space_name
-    #   The name of the space. If this value is not set, then
-    #   `UserProfileName` must be set.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppResponse AWS API Documentation
     #
     class DescribeAppResponse < Struct.new(
@@ -11514,13 +11542,13 @@ module Aws::SageMaker
       :app_name,
       :domain_id,
       :user_profile_name,
+      :space_name,
       :status,
       :last_health_check_timestamp,
       :last_user_activity_timestamp,
       :creation_time,
       :failure_reason,
-      :resource_spec,
-      :space_name)
+      :resource_spec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11783,6 +11811,11 @@ module Aws::SageMaker
     #   AutoML job V2.
     #   @return [Types::AutoMLProblemTypeConfig]
     #
+    # @!attribute [rw] auto_ml_problem_type_config_name
+    #   Returns the name of the problem type configuration set for the
+    #   AutoML job V2.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   Returns the creation time of the AutoML job V2.
     #   @return [Time]
@@ -11818,6 +11851,14 @@ module Aws::SageMaker
     #   Returns the secondary status of the AutoML job V2.
     #   @return [String]
     #
+    # @!attribute [rw] auto_ml_job_artifacts
+    #   The artifacts that are generated during an AutoML job.
+    #   @return [Types::AutoMLJobArtifacts]
+    #
+    # @!attribute [rw] resolved_attributes
+    #   Returns the resolved attributes used by the AutoML job V2.
+    #   @return [Types::AutoMLResolvedAttributes]
+    #
     # @!attribute [rw] model_deploy_config
     #   Indicates whether the model was deployed automatically to an
     #   endpoint and the name of that endpoint if deployed automatically.
@@ -11837,19 +11878,6 @@ module Aws::SageMaker
     #   VPC settings.
     #   @return [Types::AutoMLSecurityConfig]
     #
-    # @!attribute [rw] auto_ml_job_artifacts
-    #   The artifacts that are generated during an AutoML job.
-    #   @return [Types::AutoMLJobArtifacts]
-    #
-    # @!attribute [rw] resolved_attributes
-    #   Returns the resolved attributes used by the AutoML job V2.
-    #   @return [Types::AutoMLResolvedAttributes]
-    #
-    # @!attribute [rw] auto_ml_problem_type_config_name
-    #   Returns the name of the problem type configuration set for the
-    #   AutoML job V2.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2Response AWS API Documentation
     #
     class DescribeAutoMLJobV2Response < Struct.new(
@@ -11860,6 +11888,7 @@ module Aws::SageMaker
       :role_arn,
       :auto_ml_job_objective,
       :auto_ml_problem_type_config,
+      :auto_ml_problem_type_config_name,
       :creation_time,
       :end_time,
       :last_modified_time,
@@ -11868,13 +11897,12 @@ module Aws::SageMaker
       :best_candidate,
       :auto_ml_job_status,
       :auto_ml_job_secondary_status,
+      :auto_ml_job_artifacts,
+      :resolved_attributes,
       :model_deploy_config,
       :model_deploy_result,
       :data_split_config,
-      :security_config,
-      :auto_ml_job_artifacts,
-      :resolved_attributes,
-      :auto_ml_problem_type_config_name)
+      :security_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12499,7 +12527,7 @@ module Aws::SageMaker
     # @!attribute [rw] single_sign_on_application_arn
     #   The ARN of the application managed by SageMaker in IAM Identity
     #   Center. This value is only returned for domains created after
-    #   September 19, 2023.
+    #   October 1, 2023.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -12518,6 +12546,11 @@ module Aws::SageMaker
     #   The failure reason.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_id_for_domain_boundary
+    #   The ID of the security group that authorizes traffic between the
+    #   `RSessionGateway` apps and the `RStudioServerPro` app.
+    #   @return [String]
+    #
     # @!attribute [rw] auth_mode
     #   The domain's authentication mode.
     #   @return [String]
@@ -12526,6 +12559,10 @@ module Aws::SageMaker
     #   Settings which are applied to UserProfiles in this domain if
     #   settings are not explicitly specified in a given UserProfile.
     #   @return [Types::UserSettings]
+    #
+    # @!attribute [rw] domain_settings
+    #   A collection of `Domain` settings.
+    #   @return [Types::DomainSettings]
     #
     # @!attribute [rw] app_network_access_type
     #   Specifies the VPC used for non-EFS traffic. The default value is
@@ -12559,21 +12596,12 @@ module Aws::SageMaker
     #   EFS volume attached to the domain.
     #   @return [String]
     #
-    # @!attribute [rw] domain_settings
-    #   A collection of `Domain` settings.
-    #   @return [Types::DomainSettings]
-    #
     # @!attribute [rw] app_security_group_management
     #   The entity that creates and manages the required security groups for
     #   inter-app communication in `VPCOnly` mode. Required when
     #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
     #   is provided.
-    #   @return [String]
-    #
-    # @!attribute [rw] security_group_id_for_domain_boundary
-    #   The ID of the security group that authorizes traffic between the
-    #   `RSessionGateway` apps and the `RStudioServerPro` app.
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
@@ -12593,17 +12621,17 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :failure_reason,
+      :security_group_id_for_domain_boundary,
       :auth_mode,
       :default_user_settings,
+      :domain_settings,
       :app_network_access_type,
       :home_efs_file_system_kms_key_id,
       :subnet_ids,
       :url,
       :vpc_id,
       :kms_key_id,
-      :domain_settings,
       :app_security_group_management,
-      :security_group_id_for_domain_boundary,
       :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -13749,6 +13777,11 @@ module Aws::SageMaker
     #   job.
     #   @return [Types::HyperParameterTuningJobWarmStartConfig]
     #
+    # @!attribute [rw] autotune
+    #   A flag to indicate if autotune is enabled for the hyperparameter
+    #   tuning job.
+    #   @return [Types::Autotune]
+    #
     # @!attribute [rw] failure_reason
     #   If the tuning job failed, the reason it failed.
     #   @return [String]
@@ -13764,11 +13797,6 @@ module Aws::SageMaker
     # @!attribute [rw] consumed_resources
     #   The total resources consumed by your hyperparameter tuning job.
     #   @return [Types::HyperParameterTuningJobConsumedResources]
-    #
-    # @!attribute [rw] autotune
-    #   A flag to indicate if autotune is enabled for the hyperparameter
-    #   tuning job.
-    #   @return [Types::Autotune]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJobResponse AWS API Documentation
     #
@@ -13787,10 +13815,10 @@ module Aws::SageMaker
       :best_training_job,
       :overall_best_training_job,
       :warm_start_config,
+      :autotune,
       :failure_reason,
       :tuning_job_completion_details,
-      :consumed_resources,
-      :autotune)
+      :consumed_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15129,21 +15157,6 @@ module Aws::SageMaker
     #   A description provided for the model approval.
     #   @return [String]
     #
-    # @!attribute [rw] customer_metadata_properties
-    #   The metadata properties associated with the model package versions.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] drift_check_baselines
-    #   Represents the drift check baselines that can be used when the model
-    #   monitor is set using the model package. For more information, see
-    #   the topic on [Drift Detection against Previous Baselines in
-    #   SageMaker Pipelines][1] in the *Amazon SageMaker Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
-    #   @return [Types::DriftCheckBaselines]
-    #
     # @!attribute [rw] domain
     #   The machine learning domain of the model package you specified.
     #   Common machine learning domains include computer vision and natural
@@ -15161,6 +15174,21 @@ module Aws::SageMaker
     #   payload are stored. This path points to a single gzip compressed tar
     #   archive (.tar.gz suffix).
     #   @return [String]
+    #
+    # @!attribute [rw] customer_metadata_properties
+    #   The metadata properties associated with the model package versions.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] drift_check_baselines
+    #   Represents the drift check baselines that can be used when the model
+    #   monitor is set using the model package. For more information, see
+    #   the topic on [Drift Detection against Previous Baselines in
+    #   SageMaker Pipelines][1] in the *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
+    #   @return [Types::DriftCheckBaselines]
     #
     # @!attribute [rw] additional_inference_specifications
     #   An array of additional Inference Specification objects. Each
@@ -15195,11 +15223,11 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :approval_description,
-      :customer_metadata_properties,
-      :drift_check_baselines,
       :domain,
       :task,
       :sample_payload_url,
+      :customer_metadata_properties,
+      :drift_check_baselines,
       :additional_inference_specifications,
       :skip_model_validation)
       SENSITIVE = []
@@ -16082,6 +16110,19 @@ module Aws::SageMaker
     #   A collection of space settings.
     #   @return [Types::SpaceSettings]
     #
+    # @!attribute [rw] ownership_settings
+    #   The collection of ownership settings for a space.
+    #   @return [Types::OwnershipSettings]
+    #
+    # @!attribute [rw] space_sharing_settings
+    #   The collection of space sharing settings for a space.
+    #   @return [Types::SpaceSharingSettings]
+    #
+    # @!attribute [rw] space_display_name
+    #   The name of the space that appears in the Amazon SageMaker Studio
+    #   UI.
+    #   @return [String]
+    #
     # @!attribute [rw] url
     #   Returns the URL of the space. If the space is created with Amazon
     #   Web Services IAM Identity Center (Successor to Amazon Web Services
@@ -16094,20 +16135,10 @@ module Aws::SageMaker
     #   * Studio Classic: `&redirect=JupyterServer`
     #
     #   * JupyterLab: `&redirect=JupyterLab`
+    #
+    #   * Code Editor, based on Code-OSS, Visual Studio Code - Open Source:
+    #     `&redirect=CodeEditor`
     #   @return [String]
-    #
-    # @!attribute [rw] space_display_name
-    #   The name of the space that appears in the Amazon SageMaker Studio
-    #   UI.
-    #   @return [String]
-    #
-    # @!attribute [rw] ownership_settings
-    #   The collection of ownership settings for a space.
-    #   @return [Types::OwnershipSettings]
-    #
-    # @!attribute [rw] space_sharing_settings
-    #   The collection of space sharing settings for a space.
-    #   @return [Types::SpaceSharingSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSpaceResponse AWS API Documentation
     #
@@ -16121,10 +16152,10 @@ module Aws::SageMaker
       :creation_time,
       :failure_reason,
       :space_settings,
-      :url,
-      :space_display_name,
       :ownership_settings,
-      :space_sharing_settings)
+      :space_sharing_settings,
+      :space_display_name,
+      :url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16366,6 +16397,10 @@ module Aws::SageMaker
     #   that are configured for model training.
     #   @return [Types::ResourceConfig]
     #
+    # @!attribute [rw] warm_pool_status
+    #   The status of the warm pool associated with the training job.
+    #   @return [Types::WarmPoolStatus]
+    #
     # @!attribute [rw] vpc_config
     #   A [VpcConfig][1] object that specifies the VPC that this training
     #   job has access to. For more information, see [Protect Training Jobs
@@ -16536,18 +16571,25 @@ module Aws::SageMaker
     #   Profiling status of a training job.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] retry_strategy
     #   The number of times to retry the job when the job fails due to an
     #   `InternalServerError`.
     #   @return [Types::RetryStrategy]
     #
-    # @!attribute [rw] environment
-    #   The environment variables to set in the Docker container.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] remote_debug_config
+    #   Configuration for remote debugging. To learn more about the remote
+    #   debugging functionality of SageMaker, see [Access a training
+    #   container through Amazon Web Services Systems Manager (SSM) for
+    #   remote debugging][1].
     #
-    # @!attribute [rw] warm_pool_status
-    #   The status of the warm pool associated with the training job.
-    #   @return [Types::WarmPoolStatus]
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #   @return [Types::RemoteDebugConfig]
     #
     # @!attribute [rw] infra_check_config
     #   Contains information about the infrastructure health check
@@ -16572,6 +16614,7 @@ module Aws::SageMaker
       :input_data_config,
       :output_data_config,
       :resource_config,
+      :warm_pool_status,
       :vpc_config,
       :stopping_condition,
       :creation_time,
@@ -16595,9 +16638,9 @@ module Aws::SageMaker
       :profiler_rule_configurations,
       :profiler_rule_evaluation_statuses,
       :profiling_status,
-      :retry_strategy,
       :environment,
-      :warm_pool_status,
+      :retry_strategy,
+      :remote_debug_config,
       :infra_check_config)
       SENSITIVE = []
       include Aws::Structure
@@ -18396,6 +18439,10 @@ module Aws::SageMaker
     #   The instance types to use for the load test.
     #   @return [String]
     #
+    # @!attribute [rw] serverless_config
+    #   Specifies the serverless configuration for an endpoint variant.
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
     # @!attribute [rw] inference_specification_name
     #   The inference specification name in the model package version.
     #   @return [String]
@@ -18404,17 +18451,13 @@ module Aws::SageMaker
     #   The parameter you want to benchmark against.
     #   @return [Types::EnvironmentParameterRanges]
     #
-    # @!attribute [rw] serverless_config
-    #   Specifies the serverless configuration for an endpoint variant.
-    #   @return [Types::ProductionVariantServerlessConfig]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointInputConfiguration AWS API Documentation
     #
     class EndpointInputConfiguration < Struct.new(
       :instance_type,
+      :serverless_config,
       :inference_specification_name,
-      :environment_parameter_ranges,
-      :serverless_config)
+      :environment_parameter_ranges)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21374,6 +21417,15 @@ module Aws::SageMaker
     #    </note>
     #   @return [Types::ResourceConfig]
     #
+    # @!attribute [rw] hyper_parameter_tuning_resource_config
+    #   The configuration for the hyperparameter tuning resources, including
+    #   the compute instances and storage volumes, used for training jobs
+    #   launched by the tuning job. By default, storage volumes hold model
+    #   artifacts and incremental states. Choose `File` for
+    #   `TrainingInputMode` in the `AlgorithmSpecification` parameter to
+    #   additionally store training data in the storage volume (optional).
+    #   @return [Types::HyperParameterTuningResourceConfig]
+    #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model hyperparameter training job
     #   can run. It also specifies how long a managed spot training job has
@@ -21414,15 +21466,6 @@ module Aws::SageMaker
     #   `InternalServerError`.
     #   @return [Types::RetryStrategy]
     #
-    # @!attribute [rw] hyper_parameter_tuning_resource_config
-    #   The configuration for the hyperparameter tuning resources, including
-    #   the compute instances and storage volumes, used for training jobs
-    #   launched by the tuning job. By default, storage volumes hold model
-    #   artifacts and incremental states. Choose `File` for
-    #   `TrainingInputMode` in the `AlgorithmSpecification` parameter to
-    #   additionally store training data in the storage volume (optional).
-    #   @return [Types::HyperParameterTuningResourceConfig]
-    #
     # @!attribute [rw] environment
     #   An environment variable that you can pass into the SageMaker
     #   [CreateTrainingJob][1] API. You can use an existing [environment
@@ -21458,13 +21501,13 @@ module Aws::SageMaker
       :vpc_config,
       :output_data_config,
       :resource_config,
+      :hyper_parameter_tuning_resource_config,
       :stopping_condition,
       :enable_network_isolation,
       :enable_inter_container_traffic_encryption,
       :enable_managed_spot_training,
       :checkpoint_config,
       :retry_strategy,
-      :hyper_parameter_tuning_resource_config,
       :environment)
       SENSITIVE = []
       include Aws::Structure
@@ -21873,15 +21916,6 @@ module Aws::SageMaker
     #   The error that was created when a hyperparameter tuning job failed.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The tags associated with a hyperparameter tuning job. For more
-    #   information see [Tagging Amazon Web Services resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-    #   @return [Array<Types::Tag>]
-    #
     # @!attribute [rw] tuning_job_completion_details
     #   Information about either a current or completed hyperparameter
     #   tuning job.
@@ -21891,6 +21925,15 @@ module Aws::SageMaker
     #   The total amount of resources consumed by a hyperparameter tuning
     #   job.
     #   @return [Types::HyperParameterTuningJobConsumedResources]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a hyperparameter tuning job. For more
+    #   information see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobSearchEntity AWS API Documentation
     #
@@ -21910,9 +21953,9 @@ module Aws::SageMaker
       :overall_best_training_job,
       :warm_start_config,
       :failure_reason,
-      :tags,
       :tuning_job_completion_details,
-      :consumed_resources)
+      :consumed_resources,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23002,6 +23045,10 @@ module Aws::SageMaker
     # A list of recommendations made by Amazon SageMaker Inference
     # Recommender.
     #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID which uniquely identifies each recommendation.
+    #   @return [String]
+    #
     # @!attribute [rw] metrics
     #   The metrics used to decide what recommendation to make.
     #   @return [Types::RecommendationMetrics]
@@ -23014,10 +23061,6 @@ module Aws::SageMaker
     #   Defines the model configuration.
     #   @return [Types::ModelConfiguration]
     #
-    # @!attribute [rw] recommendation_id
-    #   The recommendation ID which uniquely identifies each recommendation.
-    #   @return [String]
-    #
     # @!attribute [rw] invocation_end_time
     #   A timestamp that shows when the benchmark completed.
     #   @return [Time]
@@ -23029,10 +23072,10 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendation AWS API Documentation
     #
     class InferenceRecommendation < Struct.new(
+      :recommendation_id,
       :metrics,
       :endpoint_configuration,
       :model_configuration,
-      :recommendation_id,
       :invocation_end_time,
       :invocation_start_time)
       SENSITIVE = []
@@ -23570,6 +23613,11 @@ module Aws::SageMaker
     # The configuration for the file system and kernels in a SageMaker image
     # running as a JupyterLab app.
     #
+    # @!attribute [rw] file_system_config
+    #   The Amazon Elastic File System (EFS) storage configuration for a
+    #   SageMaker image.
+    #   @return [Types::FileSystemConfig]
+    #
     # @!attribute [rw] container_config
     #   The configuration used to run the application image container.
     #   @return [Types::ContainerConfig]
@@ -23577,6 +23625,7 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterLabAppImageConfig AWS API Documentation
     #
     class JupyterLabAppImageConfig < Struct.new(
+      :file_system_config,
       :container_config)
       SENSITIVE = []
       include Aws::Structure
@@ -33560,13 +33609,12 @@ module Aws::SageMaker
     #   If you use a KMS key ID or an alias of your KMS key, the SageMaker
     #   execution role must include permissions to call `kms:Encrypt`. If
     #   you don't provide a KMS key ID, SageMaker uses the default KMS key
-    #   for Amazon S3 for your role's account. SageMaker uses server-side
-    #   encryption with KMS-managed keys for `OutputDataConfig`. If you use
-    #   a bucket policy with an `s3:PutObject` permission that only allows
-    #   objects with server-side encryption, set the condition key of
-    #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
-    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
-    #   Simple Storage Service Developer Guide.*
+    #   for Amazon S3 for your role's account. For more information, see
+    #   [KMS-Managed Encryption Keys][1] in the *Amazon Simple Storage
+    #   Service Developer Guide*. If the output data is stored in Amazon S3
+    #   Express One Zone, it is encrypted with server-side encryption with
+    #   Amazon S3 managed keys (SSE-S3). KMS key is not supported for Amazon
+    #   S3 Express One Zone
     #
     #   The KMS key policy must grant permission to the IAM role that you
     #   specify in your `CreateTrainingJob`, `CreateTransformJob`, or
@@ -34144,13 +34192,13 @@ module Aws::SageMaker
     #   The parallelism configuration applied to the pipeline execution.
     #   @return [Types::ParallelismConfiguration]
     #
-    # @!attribute [rw] pipeline_parameters
-    #   Contains a list of pipeline parameters. This list can be empty.
-    #   @return [Array<Types::Parameter>]
-    #
     # @!attribute [rw] selective_execution_config
     #   The selective execution configuration applied to the pipeline run.
     #   @return [Types::SelectiveExecutionConfig]
+    #
+    # @!attribute [rw] pipeline_parameters
+    #   Contains a list of pipeline parameters. This list can be empty.
+    #   @return [Array<Types::Parameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecution AWS API Documentation
     #
@@ -34167,8 +34215,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_by,
       :parallelism_configuration,
-      :pipeline_parameters,
-      :selective_execution_config)
+      :selective_execution_config,
+      :pipeline_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34204,15 +34252,6 @@ module Aws::SageMaker
     #   hit.
     #   @return [Types::CacheHitResult]
     #
-    # @!attribute [rw] attempt_count
-    #   The current attempt of the execution step. For more information, see
-    #   [Retry Policy for SageMaker Pipelines steps][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html
-    #   @return [Integer]
-    #
     # @!attribute [rw] failure_reason
     #   The reason why the step failed execution. This is only returned if
     #   the step failed its execution.
@@ -34221,6 +34260,15 @@ module Aws::SageMaker
     # @!attribute [rw] metadata
     #   Metadata to run the pipeline step.
     #   @return [Types::PipelineExecutionStepMetadata]
+    #
+    # @!attribute [rw] attempt_count
+    #   The current attempt of the execution step. For more information, see
+    #   [Retry Policy for SageMaker Pipelines steps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html
+    #   @return [Integer]
     #
     # @!attribute [rw] selective_execution_result
     #   The ARN from an execution of the current pipeline from which results
@@ -34237,9 +34285,9 @@ module Aws::SageMaker
       :end_time,
       :step_status,
       :cache_hit_result,
-      :attempt_count,
       :failure_reason,
       :metadata,
+      :attempt_count,
       :selective_execution_result)
       SENSITIVE = []
       include Aws::Structure
@@ -34292,6 +34340,10 @@ module Aws::SageMaker
     #   by this step execution and a list of output parameters.
     #   @return [Types::LambdaStepMetadata]
     #
+    # @!attribute [rw] emr
+    #   The configurations and outcomes of an Amazon EMR step execution.
+    #   @return [Types::EMRStepMetadata]
+    #
     # @!attribute [rw] quality_check
     #   The configurations and outcomes of the check step execution. This
     #   includes:
@@ -34343,10 +34395,6 @@ module Aws::SageMaker
     #     `CalculatedBaseline`.
     #   @return [Types::ClarifyCheckStepMetadata]
     #
-    # @!attribute [rw] emr
-    #   The configurations and outcomes of an Amazon EMR step execution.
-    #   @return [Types::EMRStepMetadata]
-    #
     # @!attribute [rw] fail
     #   The configurations and outcomes of a Fail step execution.
     #   @return [Types::FailStepMetadata]
@@ -34368,9 +34416,9 @@ module Aws::SageMaker
       :condition,
       :callback,
       :lambda,
+      :emr,
       :quality_check,
       :clarify_check,
-      :emr,
       :fail,
       :auto_ml_job)
       SENSITIVE = []
@@ -36488,6 +36536,14 @@ module Aws::SageMaker
     #   real-time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_endpoint_type
+    #   The endpoint type to receive recommendations for. By default this is
+    #   null, and the results of the inference recommendation job return a
+    #   combined list of both real-time and serverless benchmarks. By
+    #   specifying a value for this field, you can receive a longer list of
+    #   benchmarks for the desired endpoint type.
+    #   @return [String]
+    #
     # @!attribute [rw] data_input_config
     #   Specifies the name and shape of the expected data inputs for your
     #   trained model with a JSON dictionary form. This field is used for
@@ -36497,14 +36553,6 @@ module Aws::SageMaker
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig
-    #   @return [String]
-    #
-    # @!attribute [rw] supported_endpoint_type
-    #   The endpoint type to receive recommendations for. By default this is
-    #   null, and the results of the inference recommendation job return a
-    #   combined list of both real-time and serverless benchmarks. By
-    #   specifying a value for this field, you can receive a longer list of
-    #   benchmarks for the desired endpoint type.
     #   @return [String]
     #
     # @!attribute [rw] supported_response_mime_types
@@ -36521,8 +36569,8 @@ module Aws::SageMaker
       :payload_config,
       :nearest_model_name,
       :supported_instance_types,
-      :data_input_config,
       :supported_endpoint_type,
+      :data_input_config,
       :supported_response_mime_types)
       SENSITIVE = []
       include Aws::Structure
@@ -36534,6 +36582,11 @@ module Aws::SageMaker
     # @!attribute [rw] metrics
     #   The metrics of recommendations.
     #   @return [Types::RecommendationMetrics]
+    #
+    # @!attribute [rw] endpoint_metrics
+    #   The metrics for an existing endpoint compared in an Inference
+    #   Recommender job.
+    #   @return [Types::InferenceMetrics]
     #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration made by Inference Recommender during a
@@ -36549,11 +36602,6 @@ module Aws::SageMaker
     #   The reason why a benchmark failed.
     #   @return [String]
     #
-    # @!attribute [rw] endpoint_metrics
-    #   The metrics for an existing endpoint compared in an Inference
-    #   Recommender job.
-    #   @return [Types::InferenceMetrics]
-    #
     # @!attribute [rw] invocation_end_time
     #   A timestamp that shows when the benchmark completed.
     #   @return [Time]
@@ -36566,10 +36614,10 @@ module Aws::SageMaker
     #
     class RecommendationJobInferenceBenchmark < Struct.new(
       :metrics,
+      :endpoint_metrics,
       :endpoint_configuration,
       :model_configuration,
       :failure_reason,
-      :endpoint_metrics,
       :invocation_end_time,
       :invocation_start_time)
       SENSITIVE = []
@@ -36580,6 +36628,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] model_package_version_arn
     #   The Amazon Resource Name (ARN) of a versioned model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name of the created model.
     #   @return [String]
     #
     # @!attribute [rw] job_duration_in_seconds
@@ -36655,14 +36707,11 @@ module Aws::SageMaker
     #   VPC in the inference recommendation job.
     #   @return [Types::RecommendationJobVpcConfig]
     #
-    # @!attribute [rw] model_name
-    #   The name of the created model.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
       :model_package_version_arn,
+      :model_name,
       :job_duration_in_seconds,
       :traffic_pattern,
       :resource_limit,
@@ -36670,8 +36719,7 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :container_config,
       :endpoints,
-      :vpc_config,
-      :model_name)
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36972,6 +37020,50 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration for remote debugging for the [CreateTrainingJob][1] API.
+    # To learn more about the remote debugging functionality of SageMaker,
+    # see [Access a training container through Amazon Web Services Systems
+    # Manager (SSM) for remote debugging][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #
+    # @!attribute [rw] enable_remote_debug
+    #   If set to True, enables remote debugging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoteDebugConfig AWS API Documentation
+    #
+    class RemoteDebugConfig < Struct.new(
+      :enable_remote_debug)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for remote debugging for the [UpdateTrainingJob][1] API.
+    # To learn more about the remote debugging functionality of SageMaker,
+    # see [Access a training container through Amazon Web Services Systems
+    # Manager (SSM) for remote debugging][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateTrainingJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #
+    # @!attribute [rw] enable_remote_debug
+    #   If set to True, enables remote debugging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoteDebugConfigForUpdate AWS API Documentation
+    #
+    class RemoteDebugConfigForUpdate < Struct.new(
+      :enable_remote_debug)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ui_template
     #   A `Template` object containing the worker UI template to render.
     #   @return [Types::UiTemplate]
@@ -37266,14 +37358,14 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
-    # @!attribute [rw] instance_groups
-    #   The configuration of a heterogeneous cluster in JSON format.
-    #   @return [Array<Types::InstanceGroup>]
-    #
     # @!attribute [rw] keep_alive_period_in_seconds
     #   The duration of time in seconds to retain configured resources in a
     #   warm pool for subsequent training jobs.
     #   @return [Integer]
+    #
+    # @!attribute [rw] instance_groups
+    #   The configuration of a heterogeneous cluster in JSON format.
+    #   @return [Array<Types::InstanceGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
     #
@@ -37282,8 +37374,8 @@ module Aws::SageMaker
       :instance_count,
       :volume_size_in_gb,
       :volume_kms_key_id,
-      :instance_groups,
-      :keep_alive_period_in_seconds)
+      :keep_alive_period_in_seconds,
+      :instance_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37384,7 +37476,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sage_maker_image_version_alias
-    #   The SageMakerImageVersionAlias.
+    #   The SageMakerImageVersionAlias of the image to launch with. This
+    #   value is in SemVer 2.0.0 versioning format.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -38060,26 +38153,26 @@ module Aws::SageMaker
     #   composed of features and values per features.
     #   @return [Types::FeatureGroup]
     #
-    # @!attribute [rw] project
-    #   The properties of a project.
-    #   @return [Types::Project]
-    #
     # @!attribute [rw] feature_metadata
     #   The feature metadata used to search through the features.
     #   @return [Types::FeatureMetadata]
+    #
+    # @!attribute [rw] project
+    #   The properties of a project.
+    #   @return [Types::Project]
     #
     # @!attribute [rw] hyper_parameter_tuning_job
     #   The properties of a hyperparameter tuning job.
     #   @return [Types::HyperParameterTuningJobSearchEntity]
     #
-    # @!attribute [rw] model
-    #   A model displayed in the Amazon SageMaker Model Dashboard.
-    #   @return [Types::ModelDashboardModel]
-    #
     # @!attribute [rw] model_card
     #   An Amazon SageMaker Model Card that documents details about a
     #   machine learning model.
     #   @return [Types::ModelCard]
+    #
+    # @!attribute [rw] model
+    #   A model displayed in the Amazon SageMaker Model Dashboard.
+    #   @return [Types::ModelDashboardModel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
@@ -38094,11 +38187,11 @@ module Aws::SageMaker
       :pipeline,
       :pipeline_execution,
       :feature_group,
-      :project,
       :feature_metadata,
+      :project,
       :hyper_parameter_tuning_job,
-      :model,
-      :model_card)
+      :model_card,
+      :model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38151,6 +38244,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html
     #   @return [String]
     #
+    # @!attribute [rw] visibility_conditions
+    #   Limits the results of your search request to the resources that you
+    #   can access.
+    #   @return [Array<Types::VisibilityConditions>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRequest AWS API Documentation
     #
     class SearchRequest < Struct.new(
@@ -38160,7 +38258,8 @@ module Aws::SageMaker
       :sort_order,
       :next_token,
       :max_results,
-      :cross_account_filter_option)
+      :cross_account_filter_option,
+      :visibility_conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38279,9 +38378,9 @@ module Aws::SageMaker
     #     * Preparing the instances for training.
     #
     #   Training
-    #   : * Downloading the training image.
+    #   : * Training image download completed. Training in progress.
     #
-    #     * Training image download completed. Training in progress.
+    #     ^
     #
     #   Status messages are subject to change. Therefore, we recommend not
     #   including them in code that programmatically initiates actions. For
@@ -38785,10 +38884,6 @@ module Aws::SageMaker
     #   The last modified time.
     #   @return [Time]
     #
-    # @!attribute [rw] space_display_name
-    #   The name of the space that appears in the Studio UI.
-    #   @return [String]
-    #
     # @!attribute [rw] space_settings_summary
     #   Specifies summary information about the space settings.
     #   @return [Types::SpaceSettingsSummary]
@@ -38801,6 +38896,10 @@ module Aws::SageMaker
     #   Specifies summary information about the ownership settings.
     #   @return [Types::OwnershipSettingsSummary]
     #
+    # @!attribute [rw] space_display_name
+    #   The name of the space that appears in the Studio UI.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceDetails AWS API Documentation
     #
     class SpaceDetails < Struct.new(
@@ -38809,10 +38908,10 @@ module Aws::SageMaker
       :status,
       :creation_time,
       :last_modified_time,
-      :space_display_name,
       :space_settings_summary,
       :space_sharing_settings_summary,
-      :ownership_settings_summary)
+      :ownership_settings_summary,
+      :space_display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38848,21 +38947,21 @@ module Aws::SageMaker
     #   The KernelGateway app settings.
     #   @return [Types::KernelGatewayAppSettings]
     #
-    # @!attribute [rw] jupyter_lab_app_settings
-    #   The settings for the JupyterLab application.
-    #   @return [Types::SpaceJupyterLabAppSettings]
-    #
     # @!attribute [rw] code_editor_app_settings
     #   The Code Editor application settings.
     #   @return [Types::SpaceCodeEditorAppSettings]
     #
-    # @!attribute [rw] space_storage_settings
-    #   The storage settings for a private space.
-    #   @return [Types::SpaceStorageSettings]
+    # @!attribute [rw] jupyter_lab_app_settings
+    #   The settings for the JupyterLab application.
+    #   @return [Types::SpaceJupyterLabAppSettings]
     #
     # @!attribute [rw] app_type
     #   The type of app created within the space.
     #   @return [String]
+    #
+    # @!attribute [rw] space_storage_settings
+    #   The storage settings for a private space.
+    #   @return [Types::SpaceStorageSettings]
     #
     # @!attribute [rw] custom_file_systems
     #   A file system, created by you, that you assign to a space for an
@@ -38875,10 +38974,10 @@ module Aws::SageMaker
     class SpaceSettings < Struct.new(
       :jupyter_server_app_settings,
       :kernel_gateway_app_settings,
-      :jupyter_lab_app_settings,
       :code_editor_app_settings,
-      :space_storage_settings,
+      :jupyter_lab_app_settings,
       :app_type,
+      :space_storage_settings,
       :custom_file_systems)
       SENSITIVE = []
       include Aws::Structure
@@ -39913,12 +40012,24 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-llms-finetuning-set-hyperparameters.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] model_access_config
+    #   The access configuration file for the ML model. You can explicitly
+    #   accept the model end-user license agreement (EULA) within the
+    #   `ModelAccessConfig`. For more information, see [End-user license
+    #   agreements][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+    #   @return [Types::ModelAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextGenerationJobConfig AWS API Documentation
     #
     class TextGenerationJobConfig < Struct.new(
       :completion_criteria,
       :base_model_name,
-      :text_generation_hyper_parameters)
+      :text_generation_hyper_parameters,
+      :model_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41065,6 +41176,11 @@ module Aws::SageMaker
     #   Describes the results of a transform job.
     #   @return [Types::TransformOutput]
     #
+    # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data for
+    #   batch transform jobs.
+    #   @return [Types::BatchDataCaptureConfig]
+    #
     # @!attribute [rw] transform_resources
     #   Describes the resources, including ML instance types and ML instance
     #   count, to use for transform job.
@@ -41132,11 +41248,6 @@ module Aws::SageMaker
     #   A list of tags associated with the transform job.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] data_capture_config
-    #   Configuration to control how SageMaker captures inference data for
-    #   batch transform jobs.
-    #   @return [Types::BatchDataCaptureConfig]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJob AWS API Documentation
     #
     class TransformJob < Struct.new(
@@ -41152,6 +41263,7 @@ module Aws::SageMaker
       :environment,
       :transform_input,
       :transform_output,
+      :data_capture_config,
       :transform_resources,
       :creation_time,
       :transform_start_time,
@@ -41160,8 +41272,7 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :data_processing,
       :experiment_config,
-      :tags,
-      :data_capture_config)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42582,10 +42693,6 @@ module Aws::SageMaker
     #   A collection of `DomainSettings` configuration values to update.
     #   @return [Types::DomainSettingsForUpdate]
     #
-    # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space within the Domain.
-    #   @return [Types::DefaultSpaceSettings]
-    #
     # @!attribute [rw] app_security_group_management
     #   The entity that creates and manages the required security groups for
     #   inter-app communication in `VPCOnly` mode. Required when
@@ -42594,6 +42701,10 @@ module Aws::SageMaker
     #   is provided. If setting up the domain for use with RStudio, this
     #   value must be set to `Service`.
     #   @return [String]
+    #
+    # @!attribute [rw] default_space_settings
+    #   The default settings used to create a space within the Domain.
+    #   @return [Types::DefaultSpaceSettings]
     #
     # @!attribute [rw] subnet_ids
     #   The VPC subnets that Studio uses for communication.
@@ -42626,8 +42737,8 @@ module Aws::SageMaker
       :domain_id,
       :default_user_settings,
       :domain_settings_for_update,
-      :default_space_settings,
       :app_security_group_management,
+      :default_space_settings,
       :subnet_ids,
       :app_network_access_type)
       SENSITIVE = []
@@ -43755,13 +43866,27 @@ module Aws::SageMaker
     #   length.
     #   @return [Types::ResourceConfigForUpdate]
     #
+    # @!attribute [rw] remote_debug_config
+    #   Configuration for remote debugging while the training job is
+    #   running. You can update the remote debugging configuration when the
+    #   `SecondaryStatus` of the job is `Downloading` or `Training`.To learn
+    #   more about the remote debugging functionality of SageMaker, see
+    #   [Access a training container through Amazon Web Services Systems
+    #   Manager (SSM) for remote debugging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html
+    #   @return [Types::RemoteDebugConfigForUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateTrainingJobRequest AWS API Documentation
     #
     class UpdateTrainingJobRequest < Struct.new(
       :training_job_name,
       :profiler_config,
       :profiler_rule_configurations,
-      :resource_config)
+      :resource_config,
+      :remote_debug_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44179,13 +44304,13 @@ module Aws::SageMaker
     #   The Canvas app settings.
     #   @return [Types::CanvasAppSettings]
     #
-    # @!attribute [rw] jupyter_lab_app_settings
-    #   The settings for the JupyterLab application.
-    #   @return [Types::JupyterLabAppSettings]
-    #
     # @!attribute [rw] code_editor_app_settings
     #   The Code Editor application settings.
     #   @return [Types::CodeEditorAppSettings]
+    #
+    # @!attribute [rw] jupyter_lab_app_settings
+    #   The settings for the JupyterLab application.
+    #   @return [Types::JupyterLabAppSettings]
     #
     # @!attribute [rw] space_storage_settings
     #   The storage settings for a private space.
@@ -44231,8 +44356,8 @@ module Aws::SageMaker
       :r_studio_server_pro_app_settings,
       :r_session_app_settings,
       :canvas_app_settings,
-      :jupyter_lab_app_settings,
       :code_editor_app_settings,
+      :jupyter_lab_app_settings,
       :space_storage_settings,
       :default_landing_uri,
       :studio_web_portal,
@@ -44316,6 +44441,27 @@ module Aws::SageMaker
       :arn,
       :type,
       :lineage_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of key-value pairs that you specify for your resources.
+    #
+    # @!attribute [rw] key
+    #   The key for that specifies the tag that you're using to filter the
+    #   search results. The key must start with `Tags.`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the tag that you're using to filter the search
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VisibilityConditions AWS API Documentation
+    #
+    class VisibilityConditions < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

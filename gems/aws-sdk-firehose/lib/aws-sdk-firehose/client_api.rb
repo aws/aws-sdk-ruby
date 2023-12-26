@@ -133,6 +133,7 @@ module Aws::Firehose
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     InvalidKMSResourceException = Shapes::StructureShape.new(name: 'InvalidKMSResourceException')
+    InvalidSourceException = Shapes::StructureShape.new(name: 'InvalidSourceException')
     KMSEncryptionConfig = Shapes::StructureShape.new(name: 'KMSEncryptionConfig')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KinesisStreamARN = Shapes::StringShape.new(name: 'KinesisStreamARN')
@@ -209,6 +210,9 @@ module Aws::Firehose
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
     SourceDescription = Shapes::StructureShape.new(name: 'SourceDescription')
+    SplunkBufferingHints = Shapes::StructureShape.new(name: 'SplunkBufferingHints')
+    SplunkBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'SplunkBufferingIntervalInSeconds')
+    SplunkBufferingSizeInMBs = Shapes::IntegerShape.new(name: 'SplunkBufferingSizeInMBs')
     SplunkDestinationConfiguration = Shapes::StructureShape.new(name: 'SplunkDestinationConfiguration')
     SplunkDestinationDescription = Shapes::StructureShape.new(name: 'SplunkDestinationDescription')
     SplunkDestinationUpdate = Shapes::StructureShape.new(name: 'SplunkDestinationUpdate')
@@ -622,6 +626,10 @@ module Aws::Firehose
     InvalidKMSResourceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidKMSResourceException.struct_class = Types::InvalidKMSResourceException
 
+    InvalidSourceException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    InvalidSourceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSourceException.struct_class = Types::InvalidSourceException
+
     KMSEncryptionConfig.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: AWSKMSKeyARN, required: true, location_name: "AWSKMSKeyARN"))
     KMSEncryptionConfig.struct_class = Types::KMSEncryptionConfig
 
@@ -846,6 +854,10 @@ module Aws::Firehose
     SourceDescription.add_member(:msk_source_description, Shapes::ShapeRef.new(shape: MSKSourceDescription, location_name: "MSKSourceDescription"))
     SourceDescription.struct_class = Types::SourceDescription
 
+    SplunkBufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: SplunkBufferingIntervalInSeconds, location_name: "IntervalInSeconds"))
+    SplunkBufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: SplunkBufferingSizeInMBs, location_name: "SizeInMBs"))
+    SplunkBufferingHints.struct_class = Types::SplunkBufferingHints
+
     SplunkDestinationConfiguration.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, required: true, location_name: "HECEndpoint"))
     SplunkDestinationConfiguration.add_member(:hec_endpoint_type, Shapes::ShapeRef.new(shape: HECEndpointType, required: true, location_name: "HECEndpointType"))
     SplunkDestinationConfiguration.add_member(:hec_token, Shapes::ShapeRef.new(shape: HECToken, required: true, location_name: "HECToken"))
@@ -855,6 +867,7 @@ module Aws::Firehose
     SplunkDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
     SplunkDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     SplunkDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: SplunkBufferingHints, location_name: "BufferingHints"))
     SplunkDestinationConfiguration.struct_class = Types::SplunkDestinationConfiguration
 
     SplunkDestinationDescription.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, location_name: "HECEndpoint"))
@@ -866,6 +879,7 @@ module Aws::Firehose
     SplunkDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
     SplunkDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     SplunkDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: SplunkBufferingHints, location_name: "BufferingHints"))
     SplunkDestinationDescription.struct_class = Types::SplunkDestinationDescription
 
     SplunkDestinationUpdate.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, location_name: "HECEndpoint"))
@@ -877,6 +891,7 @@ module Aws::Firehose
     SplunkDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
     SplunkDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     SplunkDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: SplunkBufferingHints, location_name: "BufferingHints"))
     SplunkDestinationUpdate.struct_class = Types::SplunkDestinationUpdate
 
     SplunkRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SplunkRetryDurationInSeconds, location_name: "DurationInSeconds"))
@@ -1019,6 +1034,7 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSourceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1031,6 +1047,7 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSourceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 

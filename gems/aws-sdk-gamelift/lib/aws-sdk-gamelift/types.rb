@@ -1212,14 +1212,14 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   For an example, see [Create a game session with custom
+    #   properties][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] creator_id
@@ -1524,16 +1524,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]). This information is added to the new
-    #   `GameSession` object that is created for a successful match. This
-    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   This information is added to the new `GameSession` object that is
+    #   created for a successful match. This parameter is not used if
+    #   `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -3825,17 +3820,18 @@ module Aws::GameLift
     #     operating system of the Fleet.
     #
     #   * SERVER\_PROCESS\_SDK\_INITIALIZATION\_TIMEOUT -- The server
-    #     process did not call InitSDK() within the time expected. Check
-    #     your game session log to see why InitSDK() was not called in time.
+    #     process did not call `InitSDK()` within the time expected (5
+    #     minutes). Check your game session log to see why `InitSDK()` was
+    #     not called in time.
     #
     #   * SERVER\_PROCESS\_PROCESS\_READY\_TIMEOUT -- The server process did
-    #     not call ProcessReady() within the time expected after calling
-    #     InitSDK(). Check your game session log to see why ProcessReady()
-    #     was not called in time.
+    #     not call `ProcessReady()` within the time expected (5 minutes)
+    #     after calling `InitSDK()`. Check your game session log to see why
+    #     `ProcessReady()` was not called in time.
     #
     #   * SERVER\_PROCESS\_CRASHED -- The server process exited without
-    #     calling ProcessEnding(). Check your game session log to see why
-    #     ProcessEnding() was not called.
+    #     calling `ProcessEnding()`. Check your game session log to see why
+    #     `ProcessEnding()` was not called.
     #
     #   * SERVER\_PROCESS\_TERMINATED\_UNHEALTHY -- The server process did
     #     not report a valid health check for too long and was therefore
@@ -3843,20 +3839,20 @@ module Aws::GameLift
     #     thread became stuck processing a synchronous task for too long.
     #
     #   * SERVER\_PROCESS\_FORCE\_TERMINATED -- The server process did not
-    #     exit cleanly after OnProcessTerminate() was sent within the time
-    #     expected. Check your game session log to see why termination took
+    #     exit cleanly within the time expected after `OnProcessTerminate()`
+    #     was sent. Check your game session log to see why termination took
     #     longer than expected.
     #
     #   * SERVER\_PROCESS\_PROCESS\_EXIT\_TIMEOUT -- The server process did
-    #     not exit cleanly within the time expected after calling
-    #     ProcessEnding(). Check your game session log to see why
+    #     not exit cleanly within the time expected (30 seconds) after
+    #     calling `ProcessEnding()`. Check your game session log to see why
     #     termination took longer than expected.
     #
     #   **Game session events:**
     #
     #   * GAME\_SESSION\_ACTIVATION\_TIMEOUT -- GameSession failed to
     #     activate within the expected time. Check your game session log to
-    #     see why ActivateGameSession() took longer to complete than
+    #     see why `ActivateGameSession()` took longer to complete than
     #     expected.
     #
     #   ^
@@ -4344,17 +4340,23 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Set of key-value pairs that contain information about a game session.
-    # When included in a game session request, these properties communicate
-    # details to be used when setting up the new game session. For example,
-    # a game property might specify a game mode, level, or map. Game
-    # properties are passed to the game server process when initiating a new
-    # game session. For more information, see the [ Amazon GameLift
-    # Developer Guide][1].
+    # This key-value pair can store custom data about a game session. For
+    # example, you might use a `GameProperty` to track a game session's
+    # map, level of difficulty, or remaining time. The difficulty level
+    # could be specified like this: `\{"Key": "difficulty",
+    # "Value":"Novice"\}`.
+    #
+    # You can set game properties when creating a game session. You can also
+    # modify game properties of an active game session. When searching for
+    # game sessions, you can filter on game property keys and values. You
+    # can't delete game properties from a game session.
+    #
+    # For examples of working with game properties, see [Create a game
+    # session with properties][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties
     #
     # @!attribute [rw] key
     #   The game property identifier.
@@ -4777,14 +4779,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] ip_address
@@ -5029,14 +5025,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -6541,16 +6531,11 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]). This information is added to the new
-    #   `GameSession` object that is created for a successful match. This
-    #   parameter is not used when `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   This information is added to the new `GameSession` object that is
+    #   created for a successful match. This parameter is not used when
+    #   `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -8168,14 +8153,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -9153,6 +9132,19 @@ module Aws::GameLift
     #     status, it cannot be terminated during a scale-down event.
     #   @return [String]
     #
+    # @!attribute [rw] game_properties
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   You can use this parameter to modify game properties in an active
+    #   game session. This action adds new properties and modifies existing
+    #   properties. There is no way to delete properties. For an example,
+    #   see [Update the value of a game property][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update
+    #   @return [Array<Types::GameProperty>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionInput AWS API Documentation
     #
     class UpdateGameSessionInput < Struct.new(
@@ -9160,7 +9152,8 @@ module Aws::GameLift
       :maximum_player_session_count,
       :name,
       :player_session_creation_policy,
-      :protection_policy)
+      :protection_policy,
+      :game_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9343,16 +9336,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]). This information is added to the new
-    #   `GameSession` object that is created for a successful match. This
-    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   This information is added to the new `GameSession` object that is
+    #   created for a successful match. This parameter is not used if
+    #   `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data

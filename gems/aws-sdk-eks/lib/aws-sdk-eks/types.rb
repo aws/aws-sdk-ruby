@@ -10,6 +10,26 @@
 module Aws::EKS
   module Types
 
+    # The access configuration for the cluster.
+    #
+    # @!attribute [rw] bootstrap_cluster_creator_admin_permissions
+    #   Specifies whether or not the cluster creator IAM principal was set
+    #   as a cluster admin access entry during cluster creation time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] authentication_mode
+    #   The current authentication mode of the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AccessConfigResponse AWS API Documentation
+    #
+    class AccessConfigResponse < Struct.new(
+      :bootstrap_cluster_creator_admin_permissions,
+      :authentication_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You don't have permissions to perform the requested operation. The
     # [IAM principal][1] making the request must have at least one IAM
     # permissions policy attached that grants the required permissions. For
@@ -32,6 +52,137 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An access entry allows an IAM principal (user or role) to access your
+    # cluster. Access entries can replace the need to maintain the
+    # `aws-auth` `ConfigMap` for authentication. For more information about
+    # access entries, see [Access entries][1] in the *Amazon EKS User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the access entry. If you ever
+    #   delete the IAM principal with this ARN, the access entry isn't
+    #   automatically deleted. We recommend that you delete the access entry
+    #   with an ARN for an IAM principal that you delete. If you don't
+    #   delete the access entry and ever recreate the IAM principal, even if
+    #   it has the same ARN, the access entry won't work. This is because
+    #   even though the ARN is the same for the recreated IAM principal, the
+    #   `roleID` or `userID` (you can see this with the Security Token
+    #   Service `GetCallerIdentity` API) is different for the recreated IAM
+    #   principal than it was for the original IAM principal. Even though
+    #   you don't see the IAM principal's `roleID` or `userID` for an
+    #   access entry, Amazon EKS stores it with the access entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_groups
+    #   A `name` that you've specified in a Kubernetes `RoleBinding` or
+    #   `ClusterRoleBinding` object so that Kubernetes authorizes the
+    #   `principalARN` access to cluster objects.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] access_entry_arn
+    #   The ARN of the access entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp at object creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The Unix epoch timestamp for the last modification to the object.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] username
+    #   The `name` of a user that can authenticate to your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the access entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AccessEntry AWS API Documentation
+    #
+    class AccessEntry < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :kubernetes_groups,
+      :access_entry_arn,
+      :created_at,
+      :modified_at,
+      :tags,
+      :username,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An access policy includes permissions that allow Amazon EKS to
+    # authorize an IAM principal to work with Kubernetes objects on your
+    # cluster. The policies are managed by Amazon EKS, but they're not IAM
+    # policies. You can't view the permissions in the policies using the
+    # API. The permissions for many of the policies are similar to the
+    # Kubernetes `cluster-admin`, `admin`, `edit`, and `view` cluster roles.
+    # For more information about these cluster roles, see [User-facing
+    # roles][1] in the Kubernetes documentation. To view the contents of the
+    # policies, see [Access policy permissions][2] in the *Amazon EKS User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions
+    #
+    # @!attribute [rw] name
+    #   The name of the access policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the access policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AccessPolicy AWS API Documentation
+    #
+    class AccessPolicy < Struct.new(
+      :name,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of an `AccessPolicy` that's associated to an `AccessEntry`.
+    #
+    # @!attribute [rw] type
+    #   The scope type of an access policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespaces
+    #   A Kubernetes `namespace` that an access policy is scoped to. A value
+    #   is required if you specified `namespace` for `Type`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AccessScope AWS API Documentation
+    #
+    class AccessScope < Struct.new(
+      :type,
+      :namespaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Amazon EKS add-on. For more information, see [Amazon EKS
     # add-ons][1] in the *Amazon EKS User Guide*.
     #
@@ -44,7 +195,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
-    #   The name of the cluster.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -64,23 +215,23 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time that the add-on was created.
+    #   The Unix epoch timestamp at object creation.
     #   @return [Time]
     #
     # @!attribute [rw] modified_at
-    #   The date and time that the add-on was last modified.
+    #   The Unix epoch timestamp for the last modification to the object.
     #   @return [Time]
     #
     # @!attribute [rw] service_account_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that's bound to the
-    #   Kubernetes service account that the add-on uses.
+    #   Kubernetes `ServiceAccount` object that the add-on uses.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata that you apply to the add-on to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both. Add-on tags do not propagate to any
-    #   other resources associated with the cluster.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] publisher
@@ -231,8 +382,59 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster that you are associating with encryption
-    #   configuration.
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The Amazon Resource Name (ARN) of the IAM user or role for the
+    #   `AccessEntry` that you're associating the access policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the `AccessPolicy` that you're associating. For a list
+    #   of ARNs, use `ListAccessPolicies`.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_scope
+    #   The scope for the `AccessPolicy`. You can scope access policies to
+    #   an entire cluster or to specific Kubernetes namespaces.
+    #   @return [Types::AccessScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateAccessPolicyRequest AWS API Documentation
+    #
+    class AssociateAccessPolicyRequest < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :policy_arn,
+      :access_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_access_policy
+    #   The `AccessPolicy` and scope associated to the `AccessEntry`.
+    #   @return [Types::AssociatedAccessPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateAccessPolicyResponse AWS API Documentation
+    #
+    class AssociateAccessPolicyResponse < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :associated_access_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] encryption_config
@@ -240,8 +442,8 @@ module Aws::EKS
     #   @return [Array<Types::EncryptionConfig>]
     #
     # @!attribute [rw] client_request_token
-    #   The client request token you are using with the encryption
-    #   configuration.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -270,7 +472,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster to associate the configuration to.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] oidc
@@ -279,13 +481,14 @@ module Aws::EKS
     #   @return [Types::OidcIdentityProviderConfigRequest]
     #
     # @!attribute [rw] tags
-    #   The metadata to apply to the configuration to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -316,6 +519,36 @@ module Aws::EKS
     class AssociateIdentityProviderConfigResponse < Struct.new(
       :update,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An access policy association.
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the `AccessPolicy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_scope
+    #   The scope of the access policy.
+    #   @return [Types::AccessScope]
+    #
+    # @!attribute [rw] associated_at
+    #   The date and time the `AccessPolicy` was associated with an
+    #   `AccessEntry`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The Unix epoch timestamp for the last modification to the object.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociatedAccessPolicy AWS API Documentation
+    #
+    class AssociatedAccessPolicy < Struct.new(
+      :policy_arn,
+      :access_scope,
+      :associated_at,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -419,10 +652,36 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Details about clients using the deprecated resources.
+    #
+    # @!attribute [rw] user_agent
+    #   The user agent of the Kubernetes client using the deprecated
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_requests_last_30_days
+    #   The number of requests from the Kubernetes client seen over the last
+    #   30 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_request_time
+    #   The timestamp of the last request seen from the Kubernetes client.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClientStat AWS API Documentation
+    #
+    class ClientStat < Struct.new(
+      :user_agent,
+      :number_of_requests_last_30_days,
+      :last_request_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an Amazon EKS cluster.
     #
     # @!attribute [rw] name
-    #   The name of the cluster.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -430,8 +689,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the cluster was
-    #   created.
+    #   The Unix epoch timestamp at object creation.
     #   @return [Time]
     #
     # @!attribute [rw] version
@@ -452,7 +710,7 @@ module Aws::EKS
     #   The VPC configuration used by the cluster control plane. Amazon EKS
     #   VPC resources have specific requirements to work properly with
     #   Kubernetes. For more information, see [Cluster VPC
-    #   Considerations][1] and [Cluster Security Group Considerations][2] in
+    #   considerations][1] and [Cluster security group considerations][2] in
     #   the *Amazon EKS User Guide*.
     #
     #
@@ -482,25 +740,29 @@ module Aws::EKS
     #   @return [Types::Certificate]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
     # @!attribute [rw] platform_version
     #   The platform version of your Amazon EKS cluster. For more
-    #   information, see [Platform Versions][1] in the <i> <i>Amazon EKS
-    #   User Guide</i> </i>.
+    #   information about clusters deployed on the Amazon Web Services
+    #   Cloud, see [Platform versions][1] in the <i> <i>Amazon EKS User
+    #   Guide</i> </i>. For more information about local clusters deployed
+    #   on an Outpost, see [Amazon EKS local cluster platform versions][2]
+    #   in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-platform-versions.html
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata that you apply to the cluster to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both. Cluster tags do not propagate to
-    #   any other resources associated with the cluster.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] encryption_config
@@ -529,6 +791,10 @@ module Aws::EKS
     #   available for clusters on the Amazon Web Services cloud.
     #   @return [Types::OutpostConfigResponse]
     #
+    # @!attribute [rw] access_config
+    #   The access configuration for the cluster.
+    #   @return [Types::AccessConfigResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -551,7 +817,8 @@ module Aws::EKS
       :connector_config,
       :id,
       :health,
-      :outpost_config)
+      :outpost_config,
+      :access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -723,17 +990,167 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The access configuration information for the cluster.
+    #
+    # @!attribute [rw] bootstrap_cluster_creator_admin_permissions
+    #   Specifies whether or not the cluster creator IAM principal was set
+    #   as a cluster admin access entry during cluster creation time. The
+    #   default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] authentication_mode
+    #   The desired authentication mode for the cluster. If you create a
+    #   cluster by using the EKS API, Amazon Web Services SDKs, or
+    #   CloudFormation, the default is `CONFIG_MAP`. If you create the
+    #   cluster by using the Amazon Web Services Management Console, the
+    #   default value is `API_AND_CONFIG_MAP`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAccessConfigRequest AWS API Documentation
+    #
+    class CreateAccessConfigRequest < Struct.new(
+      :bootstrap_cluster_creator_admin_permissions,
+      :authentication_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
-    #   The name of the cluster to create the add-on for.
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`. You can specify
+    #   one ARN for each access entry. You can't specify the same ARN in
+    #   more than one access entry. This value can't be changed after
+    #   access entry creation.
+    #
+    #   The valid principals differ depending on the type of the access
+    #   entry in the `type` field. The only valid ARN is IAM roles for the
+    #   types of access entries for nodes: ` . You can use every IAM
+    #   principal type for STANDARD access entries. You can't use the STS
+    #   session principal type with access entries because this is a
+    #   temporary principal for each session and not a permanent identity
+    #   that can be assigned permissions.</p>  IAM best practices recommend
+    #   using IAM roles with temporary credentials, rather than IAM users
+    #   with long-term credentials.
+    #   `
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_groups
+    #   The value for `name` that you've specified for `kind: Group` as a
+    #   `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding`
+    #   object. Amazon EKS doesn't confirm that the value for `name` exists
+    #   in any bindings on your cluster. You can specify one or more names.
+    #
+    #   Kubernetes authorizes the `principalArn` of the access entry to
+    #   access any cluster objects that you've specified in a Kubernetes
+    #   `Role` or `ClusterRole` object that is also specified in a
+    #   binding's `roleRef`. For more information about creating Kubernetes
+    #   `RoleBinding`, `ClusterRoleBinding`, `Role`, or `ClusterRole`
+    #   objects, see [Using RBAC Authorization in the Kubernetes
+    #   documentation][1].
+    #
+    #   If you want Amazon EKS to authorize the `principalArn` (instead of,
+    #   or in addition to Kubernetes authorizing the `principalArn`), you
+    #   can associate one or more access policies to the access entry using
+    #   `AssociateAccessPolicy`. If you associate any access policies, the
+    #   `principalARN` has all permissions assigned in the associated access
+    #   policies and all permissions in any Kubernetes `Role` or
+    #   `ClusterRole` objects that the group names are bound to.
+    #
+    #
+    #
+    #   [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username to authenticate to Kubernetes with. We recommend not
+    #   specifying a username and letting Amazon EKS specify it for you. For
+    #   more information about the value Amazon EKS specifies for you, or
+    #   constraints before specifying your own username, see [Creating
+    #   access entries][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html#creating-access-entries
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the new access entry. Valid values are `Standard`,
+    #   `FARGATE_LINUX`, `EC2_LINUX`, and `EC2_WINDOWS`.
+    #
+    #   If the `principalArn` is for an IAM role that's used for
+    #   self-managed Amazon EC2 nodes, specify `EC2_LINUX` or `EC2_WINDOWS`.
+    #   Amazon EKS grants the necessary permissions to the node for you. If
+    #   the `principalArn` is for any other purpose, specify `STANDARD`. If
+    #   you don't specify a value, Amazon EKS sets the value to `STANDARD`.
+    #   It's unnecessary to create access entries for IAM roles used with
+    #   Fargate profiles or managed Amazon EC2 nodes, because Amazon EKS
+    #   creates entries in the `aws-auth` `ConfigMap` for the roles. You
+    #   can't change this value once you've created the access entry.
+    #
+    #   If you set the value to `EC2_LINUX` or `EC2_WINDOWS`, you can't
+    #   specify values for `kubernetesGroups`, or associate an
+    #   `AccessPolicy` to the access entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAccessEntryRequest AWS API Documentation
+    #
+    class CreateAccessEntryRequest < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :kubernetes_groups,
+      :tags,
+      :client_request_token,
+      :username,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_entry
+    #   An access entry allows an IAM principal (user or role) to access
+    #   your cluster. Access entries can replace the need to maintain the
+    #   `aws-auth` `ConfigMap` for authentication. For more information
+    #   about access entries, see [Access entries][1] in the *Amazon EKS
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html
+    #   @return [Types::AccessEntry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAccessEntryResponse AWS API Documentation
+    #
+    class CreateAccessEntryResponse < Struct.new(
+      :access_entry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] addon_name
-    #   The name of the add-on. The name must match one of the names that [
-    #   `DescribeAddonVersions` ][1] returns.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   The name of the add-on. The name must match one of the names
+    #   returned by `DescribeAddonVersions`.
     #   @return [String]
     #
     # @!attribute [rw] addon_version
@@ -805,19 +1222,16 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata to apply to the cluster to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value.
-    #   You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] configuration_values
     #   The set of configuration values for the add-on that's created. The
-    #   values that you provide are validated against the schema in [
-    #   `DescribeAddonConfiguration` ][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #   values that you provide are validated against the schema returned by
+    #   `DescribeAddonConfiguration`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddonRequest AWS API Documentation
@@ -918,7 +1332,7 @@ module Aws::EKS
     #   @return [Types::Logging]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -926,9 +1340,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata to apply to the cluster to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value.
-    #   You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] encryption_config
@@ -948,6 +1363,10 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html
     #   @return [Types::OutpostConfigRequest]
     #
+    # @!attribute [rw] access_config
+    #   The access configuration for the cluster.
+    #   @return [Types::CreateAccessConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -960,7 +1379,8 @@ module Aws::EKS
       :client_request_token,
       :tags,
       :encryption_config,
-      :outpost_config)
+      :outpost_config,
+      :access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1012,7 +1432,7 @@ module Aws::EKS
     #   @return [Boolean]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1057,16 +1477,16 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster to apply the Fargate profile to.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] pod_execution_role_arn
-    #   The Amazon Resource Name (ARN) of the pod execution role to use for
-    #   pods that match the selectors in the Fargate profile. The pod
-    #   execution role allows Fargate infrastructure to register with your
-    #   cluster as a node, and it provides read access to Amazon ECR image
-    #   repositories. For more information, see [Pod Execution Role][1] in
-    #   the *Amazon EKS User Guide*.
+    #   The Amazon Resource Name (ARN) of the `Pod` execution role to use
+    #   for a `Pod` that matches the selectors in the Fargate profile. The
+    #   `Pod` execution role allows Fargate infrastructure to register with
+    #   your cluster as a node, and it provides read access to Amazon ECR
+    #   image repositories. For more information, see [ `Pod` execution
+    #   role][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1074,21 +1494,21 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of subnets to launch your pods into. At this time, pods
-    #   running on Fargate are not assigned public IP addresses, so only
-    #   private subnets (with no direct route to an Internet Gateway) are
-    #   accepted for this parameter.
+    #   The IDs of subnets to launch a `Pod` into. A `Pod` running on
+    #   Fargate isn't assigned a public IP address, so only private subnets
+    #   (with no direct route to an Internet Gateway) are accepted for this
+    #   parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] selectors
-    #   The selectors to match for pods to use this Fargate profile. Each
-    #   selector must have an associated namespace. Optionally, you can also
-    #   specify labels for a namespace. You may specify up to five selectors
-    #   in a Fargate profile.
+    #   The selectors to match for a `Pod` to use this Fargate profile. Each
+    #   selector must have an associated Kubernetes `namespace`. Optionally,
+    #   you can also specify `labels` for a `namespace`. You may specify up
+    #   to five selectors in a Fargate profile.
     #   @return [Array<Types::FargateProfileSelector>]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1096,11 +1516,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata to apply to the Fargate profile to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both. Fargate profile tags do not
-    #   propagate to any other resources associated with the Fargate
-    #   profile, such as the pods that are scheduled with it.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateFargateProfileRequest AWS API Documentation
@@ -1130,7 +1549,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster to create the node group in.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
@@ -1159,15 +1578,14 @@ module Aws::EKS
     # @!attribute [rw] subnets
     #   The subnets to use for the Auto Scaling group that is created for
     #   your node group. If you specify `launchTemplate`, then don't
-    #   specify [ `SubnetId` ][1] in your launch template, or the node group
+    #   specify ` SubnetId ` in your launch template, or the node group
     #   deployment will fail. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][2] in the
+    #   templates with Amazon EKS, see [Launch template support][1] in the
     #   *Amazon EKS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
-    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_types
@@ -1228,22 +1646,20 @@ module Aws::EKS
     #   into a cluster, you must create an IAM role for those nodes to use
     #   when they are launched. For more information, see [Amazon EKS node
     #   IAM role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If you
-    #   specify `launchTemplate`, then don't specify [ `IamInstanceProfile`
-    #   ][2] in your launch template, or the node group deployment will
-    #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][3] in the *Amazon EKS User
-    #   Guide*.
+    #   specify `launchTemplate`, then don't specify ` IamInstanceProfile `
+    #   in your launch template, or the node group deployment will fail. For
+    #   more information about using launch templates with Amazon EKS, see
+    #   [Launch template support][2] in the *Amazon EKS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
-    #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] labels
-    #   The Kubernetes labels to be applied to the nodes in the node group
-    #   when they are created.
+    #   The Kubernetes `labels` to apply to the nodes in the node group when
+    #   they are created.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] taints
@@ -1256,15 +1672,14 @@ module Aws::EKS
     #   @return [Array<Types::Taint>]
     #
     # @!attribute [rw] tags
-    #   The metadata to apply to the node group to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both. Node group tags do not propagate to
-    #   any other resources associated with the node group, such as the
-    #   Amazon EC2 instances or subnets.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1383,7 +1798,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1391,9 +1806,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata that you apply to a resource to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -1450,7 +1866,28 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster to delete the add-on from.
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAccessEntryRequest AWS API Documentation
+    #
+    class DeleteAccessEntryRequest < Struct.new(
+      :cluster_name,
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAccessEntryResponse AWS API Documentation
+    #
+    class DeleteAccessEntryResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] addon_name
@@ -1544,8 +1981,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster associated with the Fargate
-    #   profile to delete.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] fargate_profile_name
@@ -1574,8 +2010,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that is associated with your node
-    #   group.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
@@ -1633,6 +2068,43 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The summary information about deprecated resource usage for an insight
+    # check in the `UPGRADE_READINESS` category.
+    #
+    # @!attribute [rw] usage
+    #   The deprecated version of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] replaced_with
+    #   The newer version of the resource to migrate to if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] stop_serving_version
+    #   The version of the software where the deprecated resource version
+    #   will stop being served.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_serving_replacement_version
+    #   The version of the software where the newer resource version became
+    #   available to migrate to if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_stats
+    #   Details about Kubernetes clients using the deprecated resources.
+    #   @return [Array<Types::ClientStat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeprecationDetail AWS API Documentation
+    #
+    class DeprecationDetail < Struct.new(
+      :usage,
+      :replaced_with,
+      :stop_serving_version,
+      :start_serving_replacement_version,
+      :client_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the connected cluster to deregister.
     #   @return [String]
@@ -1657,13 +2129,38 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAccessEntryRequest AWS API Documentation
+    #
+    class DescribeAccessEntryRequest < Struct.new(
+      :cluster_name,
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_entry
+    #   Information about the access entry.
+    #   @return [Types::AccessEntry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAccessEntryResponse AWS API Documentation
+    #
+    class DescribeAccessEntryResponse < Struct.new(
+      :access_entry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] addon_name
-    #   The name of the add-on. The name must match one of the names that [
-    #   `DescribeAddonVersions` ][1] returns.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   The name of the add-on. The name must match one of the names
+    #   returned by `DescribeAddonVersions`.
     #   @return [String]
     #
     # @!attribute [rw] addon_version
@@ -1698,8 +2195,8 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] configuration_schema
-    #   A JSON schema that's used to validate the configuration values that
-    #   you provide when an addon is created or updated.
+    #   A JSON schema that's used to validate the configuration values you
+    #   provide when an add-on is created or updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfigurationResponse AWS API Documentation
@@ -1713,7 +2210,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] addon_name
@@ -1756,15 +2253,21 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `DescribeAddonVersionsRequest` where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is used
     #   only to retrieve the next items in a list and not for other
@@ -1840,7 +2343,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] name
-    #   The name of the cluster to describe.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeClusterRequest AWS API Documentation
@@ -1888,8 +2391,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster associated with the Fargate
-    #   profile.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] fargate_profile_name
@@ -1918,8 +2420,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The cluster name that the identity provider configuration is
-    #   associated to.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_config
@@ -1949,7 +2450,36 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster associated with the node group.
+    #   The name of the cluster to describe the insight for.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identity of the insight to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsightRequest AWS API Documentation
+    #
+    class DescribeInsightRequest < Struct.new(
+      :cluster_name,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight
+    #   The full description of the insight.
+    #   @return [Types::Insight]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsightResponse AWS API Documentation
+    #
+    class DescribeInsightResponse < Struct.new(
+      :insight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
@@ -2006,6 +2536,8 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Describes an update request.
+    #
     # @!attribute [rw] name
     #   The name of the Amazon EKS cluster associated with the update.
     #   @return [String]
@@ -2053,7 +2585,35 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster to disassociate an identity provider from.
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the policy to disassociate from the access entry. For a
+    #   list of associated policies ARNs, use
+    #   `ListAssociatedAccessPolicies`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateAccessPolicyRequest AWS API Documentation
+    #
+    class DisassociateAccessPolicyRequest < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :policy_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateAccessPolicyResponse AWS API Documentation
+    #
+    class DisassociateAccessPolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_config
@@ -2198,7 +2758,7 @@ module Aws::EKS
     #
     # @!attribute [rw] resources
     #   Specifies the resources to be encrypted. The only supported value is
-    #   "secrets".
+    #   `secrets`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] provider
@@ -2230,7 +2790,7 @@ module Aws::EKS
     #     interface limit for your account.
     #
     #   * **IpNotAvailable**: A subnet associated with the cluster doesn't
-    #     have any free IP addresses.
+    #     have any available IP addresses.
     #
     #   * **AccessDenied**: You don't have permissions to perform the
     #     specified operation.
@@ -2273,20 +2833,18 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that the Fargate profile belongs
-    #   to.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the Fargate profile was
-    #   created.
+    #   The Unix epoch timestamp at object creation.
     #   @return [Time]
     #
     # @!attribute [rw] pod_execution_role_arn
-    #   The Amazon Resource Name (ARN) of the pod execution role to use for
-    #   pods that match the selectors in the Fargate profile. For more
-    #   information, see [Pod Execution Role][1] in the *Amazon EKS User
-    #   Guide*.
+    #   The Amazon Resource Name (ARN) of the `Pod` execution role to use
+    #   for any `Pod` that matches the selectors in the Fargate profile. For
+    #   more information, see [ `Pod` execution role][1] in the *Amazon EKS
+    #   User Guide*.
     #
     #
     #
@@ -2294,11 +2852,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of subnets to launch pods into.
+    #   The IDs of subnets to launch a `Pod` into.
     #   @return [Array<String>]
     #
     # @!attribute [rw] selectors
-    #   The selectors to match for pods to use this Fargate profile.
+    #   The selectors to match for a `Pod` to use this Fargate profile.
     #   @return [Array<Types::FargateProfileSelector>]
     #
     # @!attribute [rw] status
@@ -2306,11 +2864,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata applied to the Fargate profile to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both. Fargate profile tags do not
-    #   propagate to any other resources associated with the Fargate
-    #   profile, such as the pods that are scheduled with it.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/FargateProfile AWS API Documentation
@@ -2332,7 +2889,7 @@ module Aws::EKS
     # An object representing an Fargate profile selector.
     #
     # @!attribute [rw] namespace
-    #   The Kubernetes namespace that the selector should match.
+    #   The Kubernetes `namespace` that the selector should match.
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -2400,6 +2957,222 @@ module Aws::EKS
     #
     class IdentityProviderConfigResponse < Struct.new(
       :oidc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A check that provides recommendations to remedy potential
+    # upgrade-impacting issues.
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_version
+    #   The Kubernetes minor version associated with an insight if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_refresh_time
+    #   The time Amazon EKS last successfully completed a refresh of this
+    #   insight check on the cluster.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_transition_time
+    #   The time the status of the insight last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the insight which includes alert criteria,
+    #   remediation recommendation, and additional resources (contains
+    #   Markdown).
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_status
+    #   An object containing more detail on the status of the insight
+    #   resource.
+    #   @return [Types::InsightStatus]
+    #
+    # @!attribute [rw] recommendation
+    #   A summary of how to remediate the finding of this insight if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_info
+    #   Links to sources that provide additional context on the insight.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resources
+    #   The details about each resource listed in the insight check result.
+    #   @return [Array<Types::InsightResourceDetail>]
+    #
+    # @!attribute [rw] category_specific_summary
+    #   Summary information that relates to the category of the insight.
+    #   Currently only returned with certain insights having category
+    #   `UPGRADE_READINESS`.
+    #   @return [Types::InsightCategorySpecificSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Insight AWS API Documentation
+    #
+    class Insight < Struct.new(
+      :id,
+      :name,
+      :category,
+      :kubernetes_version,
+      :last_refresh_time,
+      :last_transition_time,
+      :description,
+      :insight_status,
+      :recommendation,
+      :additional_info,
+      :resources,
+      :category_specific_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information that relates to the category of the insight.
+    # Currently only returned with certain insights having category
+    # `UPGRADE_READINESS`.
+    #
+    # @!attribute [rw] deprecation_details
+    #   The summary information about deprecated resource usage for an
+    #   insight check in the `UPGRADE_READINESS` category.
+    #   @return [Array<Types::DeprecationDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightCategorySpecificSummary AWS API Documentation
+    #
+    class InsightCategorySpecificSummary < Struct.new(
+      :deprecation_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the resource being evaluated.
+    #
+    # @!attribute [rw] insight_status
+    #   An object containing more detail on the status of the insight
+    #   resource.
+    #   @return [Types::InsightStatus]
+    #
+    # @!attribute [rw] kubernetes_resource_uri
+    #   The Kubernetes resource URI if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightResourceDetail AWS API Documentation
+    #
+    class InsightResourceDetail < Struct.new(
+      :insight_status,
+      :kubernetes_resource_uri,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the insight.
+    #
+    # @!attribute [rw] status
+    #   The status of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Explanation on the reasoning for the status of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightStatus AWS API Documentation
+    #
+    class InsightStatus < Struct.new(
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summarized description of the insight.
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_version
+    #   The Kubernetes minor version associated with an insight if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_refresh_time
+    #   The time Amazon EKS last successfully completed a refresh of this
+    #   insight check on the cluster.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_transition_time
+    #   The time the status of the insight last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the insight which includes alert criteria,
+    #   remediation recommendation, and additional resources (contains
+    #   Markdown).
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_status
+    #   An object containing more detail on the status of the insight.
+    #   @return [Types::InsightStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightSummary AWS API Documentation
+    #
+    class InsightSummary < Struct.new(
+      :id,
+      :name,
+      :category,
+      :kubernetes_version,
+      :last_refresh_time,
+      :last_transition_time,
+      :description,
+      :insight_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria to use for the insights.
+    #
+    # @!attribute [rw] categories
+    #   The categories to use to filter insights.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kubernetes_versions
+    #   The Kubernetes versions to use to filter the insights.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   The statuses to use to filter the insights.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightsFilter AWS API Documentation
+    #
+    class InsightsFilter < Struct.new(
+      :categories,
+      :kubernetes_versions,
+      :statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2524,7 +3297,7 @@ module Aws::EKS
     #     addresses to instances launched into it. If you want your
     #     instances to be assigned a public IP address, then you need to
     #     enable the `auto-assign public IP address` setting for the subnet.
-    #     See [Modifying the public IPv4 addressing attribute for your
+    #     See [Modifying the public `IPv4` addressing attribute for your
     #     subnet][1] in the *Amazon VPC User Guide*.
     #
     #   * **IamInstanceProfileNotFound**: We couldn't find the IAM instance
@@ -2593,10 +3366,10 @@ module Aws::EKS
     #   * Doesn't overlap with any CIDR block assigned to the VPC that you
     #     selected for VPC.
     #
-    #   * Between /24 and /12.
+    #   * Between `/24` and `/12`.
     #
-    #   You can only specify a custom CIDR block when you create a cluster
-    #   and can't change this value once the cluster is created.
+    #   You can only specify a custom CIDR block when you create a cluster.
+    #   You can't change this value after the cluster is created.
     #   @return [String]
     #
     # @!attribute [rw] ip_family
@@ -2636,13 +3409,13 @@ module Aws::EKS
     # not both.
     #
     # @!attribute [rw] service_ipv_4_cidr
-    #   The CIDR block that Kubernetes pod and service IP addresses are
-    #   assigned from. Kubernetes assigns addresses from an IPv4 CIDR block
-    #   assigned to a subnet that the node is in. If you didn't specify a
-    #   CIDR block when you created the cluster, then Kubernetes assigns
-    #   addresses from either the `10.100.0.0/16` or `172.20.0.0/16` CIDR
-    #   blocks. If this was specified, then it was specified when the
-    #   cluster was created and it can't be changed.
+    #   The CIDR block that Kubernetes `Pod` and `Service` object IP
+    #   addresses are assigned from. Kubernetes assigns addresses from an
+    #   `IPv4` CIDR block assigned to a subnet that the node is in. If you
+    #   didn't specify a CIDR block when you created the cluster, then
+    #   Kubernetes assigns addresses from either the `10.100.0.0/16` or
+    #   `172.20.0.0/16` CIDR blocks. If this was specified, then it was
+    #   specified when the cluster was created and it can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] service_ipv_6_cidr
@@ -2656,10 +3429,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] ip_family
-    #   The IP family used to assign Kubernetes pod and service IP
-    #   addresses. The IP family is always `ipv4`, unless you have a `1.21`
-    #   or later cluster running version 1.10.1 or later of the Amazon VPC
-    #   CNI add-on and specified `ipv6` when you created the cluster.
+    #   The IP family used to assign Kubernetes `Pod` and `Service` objects
+    #   IP addresses. The IP family is always `ipv4`, unless you have a
+    #   `1.21` or later cluster running version `1.10.1` or later of the
+    #   Amazon VPC CNI plugin for Kubernetes and specified `ipv6` when you
+    #   created the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubernetesNetworkConfigResponse AWS API Documentation
@@ -2725,26 +3499,164 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster.
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_policy_arn
+    #   The ARN of an `AccessPolicy`. When you specify an access policy ARN,
+    #   only the access entries associated to that access policy are
+    #   returned. For a list of available policy ARNs, use
+    #   `ListAccessPolicies`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of add-on results returned by `ListAddonsRequest`
-    #   in paginated output. When you use this parameter,
-    #   `ListAddonsRequest` returns only `maxResults` results in a single
-    #   page along with a `nextToken` response element. You can see the
-    #   remaining results of the initial request by sending another
-    #   `ListAddonsRequest` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If you don't use this
-    #   parameter, `ListAddonsRequest` returns up to 100 results and a
-    #   `nextToken` value, if applicable.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListAddonsRequest` where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAccessEntriesRequest AWS API Documentation
+    #
+    class ListAccessEntriesRequest < Struct.new(
+      :cluster_name,
+      :associated_policy_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_entries
+    #   The list of access entries that exist for the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAccessEntriesResponse AWS API Documentation
+    #
+    class ListAccessEntriesResponse < Struct.new(
+      :access_entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAccessPoliciesRequest AWS API Documentation
+    #
+    class ListAccessPoliciesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_policies
+    #   The list of available access policies. You can't view the contents
+    #   of an access policy using the API. To view the contents, see [Access
+    #   policy permissions][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions
+    #   @return [Array<Types::AccessPolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAccessPoliciesResponse AWS API Documentation
+    #
+    class ListAccessPoliciesResponse < Struct.new(
+      :access_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is used
     #   only to retrieve the next items in a list and not for other
@@ -2789,22 +3701,102 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
-    #   The maximum number of cluster results returned by `ListClusters` in
-    #   paginated output. When you use this parameter, `ListClusters`
-    #   returns only `maxResults` results in a single page along with a
-    #   `nextToken` response element. You can see the remaining results of
-    #   the initial request by sending another `ListClusters` request with
-    #   the returned `nextToken` value. This value can be between 1 and 100.
-    #   If you don't use this parameter, `ListClusters` returns up to 100
-    #   results and a `nextToken` value if applicable.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListClusters` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAssociatedAccessPoliciesRequest AWS API Documentation
+    #
+    class ListAssociatedAccessPoliciesRequest < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_access_policies
+    #   The list of access policies associated with the access entry.
+    #   @return [Array<Types::AssociatedAccessPolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAssociatedAccessPoliciesResponse AWS API Documentation
+    #
+    class ListAssociatedAccessPoliciesResponse < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :next_token,
+      :associated_access_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is used
     #   only to retrieve the next items in a list and not for other
@@ -2815,9 +3807,14 @@ module Aws::EKS
     #
     # @!attribute [rw] include
     #   Indicates whether external clusters are included in the returned
-    #   list. Use '`all`' to return connected clusters, or blank to return
-    #   only Amazon EKS clusters. '`all`' must be in lowercase otherwise
-    #   an error occurs.
+    #   list. Use '`all`' to return
+    #   [https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html][1]connected
+    #   clusters, or blank to return only Amazon EKS clusters. '`all`'
+    #   must be in lowercase otherwise an error occurs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListClustersRequest AWS API Documentation
@@ -2832,14 +3829,21 @@ module Aws::EKS
 
     # @!attribute [rw] clusters
     #   A list of all of the clusters for your account in the specified
-    #   Region.
+    #   Amazon Web Services Region.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListClusters` request.
-    #   When the results of a `ListClusters` request exceed `maxResults`,
-    #   you can use this value to retrieve the next page of results. This
-    #   value is `null` when there are no more results to return.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListClustersResponse AWS API Documentation
@@ -2908,28 +3912,31 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that you would like to list
-    #   Fargate profiles in.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Fargate profile results returned by
-    #   `ListFargateProfiles` in paginated output. When you use this
-    #   parameter, `ListFargateProfiles` returns only `maxResults` results
-    #   in a single page along with a `nextToken` response element. You can
-    #   see the remaining results of the initial request by sending another
-    #   `ListFargateProfiles` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If you don't use this
-    #   parameter, `ListFargateProfiles` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListFargateProfiles` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListFargateProfilesRequest AWS API Documentation
@@ -2948,11 +3955,17 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListFargateProfiles`
-    #   request. When the results of a `ListFargateProfiles` request exceed
-    #   `maxResults`, you can use this value to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListFargateProfilesResponse AWS API Documentation
@@ -2965,28 +3978,31 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The cluster name that you want to list identity provider
-    #   configurations for.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of identity provider configurations returned by
-    #   `ListIdentityProviderConfigs` in paginated output. When you use this
-    #   parameter, `ListIdentityProviderConfigs` returns only `maxResults`
-    #   results in a single page along with a `nextToken` response element.
-    #   You can see the remaining results of the initial request by sending
-    #   another `ListIdentityProviderConfigs` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If you
-    #   don't use this parameter, `ListIdentityProviderConfigs` returns up
-    #   to 100 results and a `nextToken` value, if applicable.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `IdentityProviderConfigsRequest` where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigsRequest AWS API Documentation
@@ -3009,6 +4025,12 @@ module Aws::EKS
     #   `ListIdentityProviderConfigsResponse` request exceed `maxResults`,
     #   you can use this value to retrieve the next page of results. This
     #   value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigsResponse AWS API Documentation
@@ -3021,27 +4043,91 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that you would like to list node
-    #   groups in.
+    #   The name of the Amazon EKS cluster associated with the insights.
     #   @return [String]
     #
+    # @!attribute [rw] filter
+    #   The criteria to filter your list of insights for your cluster. You
+    #   can filter which insights are returned by category, associated
+    #   Kubernetes version, and status.
+    #   @return [Types::InsightsFilter]
+    #
     # @!attribute [rw] max_results
-    #   The maximum number of node group results returned by
-    #   `ListNodegroups` in paginated output. When you use this parameter,
-    #   `ListNodegroups` returns only `maxResults` results in a single page
+    #   The maximum number of identity provider configurations returned by
+    #   `ListInsights` in paginated output. When you use this parameter,
+    #   `ListInsights` returns only `maxResults` results in a single page
     #   along with a `nextToken` response element. You can see the remaining
-    #   results of the initial request by sending another `ListNodegroups`
+    #   results of the initial request by sending another `ListInsights`
     #   request with the returned `nextToken` value. This value can be
-    #   between 1 and 100. If you don't use this parameter,
-    #   `ListNodegroups` returns up to 100 results and a `nextToken` value
-    #   if applicable.
+    #   between 1 and 100. If you don't use this parameter, `ListInsights`
+    #   returns up to 100 results and a `nextToken` value, if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated
-    #   `ListNodegroups` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   `ListInsights` request. When the results of a `ListInsights` request
+    #   exceed `maxResults`, you can use this value to retrieve the next
+    #   page of results. This value is `null` when there are no more results
+    #   to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListInsightsRequest AWS API Documentation
+    #
+    class ListInsightsRequest < Struct.new(
+      :cluster_name,
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insights
+    #   The returned list of insights.
+    #   @return [Array<Types::InsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListInsights` request.
+    #   When the results of a `ListInsights` request exceed `maxResults`,
+    #   you can use this value to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListInsightsResponse AWS API Documentation
+    #
+    class ListInsightsResponse < Struct.new(
+      :insights,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListNodegroupsRequest AWS API Documentation
@@ -3060,11 +4146,17 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListNodegroups`
-    #   request. When the results of a `ListNodegroups` request exceed
-    #   `maxResults`, you can use this value to retrieve the next page of
-    #   results. This value is `null` when there are no more results to
-    #   return.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListNodegroupsResponse AWS API Documentation
@@ -3168,9 +4260,8 @@ module Aws::EKS
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) that identifies the resource for
-    #   which to list the tags. Currently, the supported resources are
-    #   Amazon EKS clusters and managed node groups.
+    #   The Amazon Resource Name (ARN) that identifies the resource to list
+    #   tags for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListTagsForResourceRequest AWS API Documentation
@@ -3206,21 +4297,27 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListUpdates` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of update results returned by `ListUpdates` in
-    #   paginated output. When you use this parameter, `ListUpdates` returns
-    #   only `maxResults` results in a single page along with a `nextToken`
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
     #   response element. You can see the remaining results of the initial
-    #   request by sending another `ListUpdates` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If you
-    #   don't use this parameter, `ListUpdates` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesRequest AWS API Documentation
@@ -3240,10 +4337,17 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value to include in a future `ListUpdates` request.
-    #   When the results of a `ListUpdates` request exceed `maxResults`, you
-    #   can use this value to retrieve the next page of results. This value
-    #   is `null` when there are no more results to return.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesResponse AWS API Documentation
@@ -3325,7 +4429,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
-    #   The name of the cluster that the managed node group resides in.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -3341,13 +4445,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the managed node group
-    #   was created.
+    #   The Unix epoch timestamp at object creation.
     #   @return [Time]
     #
     # @!attribute [rw] modified_at
-    #   The Unix epoch timestamp in seconds for when the managed node group
-    #   was last modified.
+    #   The Unix epoch timestamp for the last modification to the object.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -3396,11 +4498,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] labels
-    #   The Kubernetes labels applied to the nodes in the node group.
+    #   The Kubernetes `labels` applied to the nodes in the node group.
     #
-    #   <note markdown="1"> Only labels that are applied with the Amazon EKS API are shown here.
-    #   There may be other Kubernetes labels applied to the nodes in this
-    #   group.
+    #   <note markdown="1"> Only `labels` that are applied with the Amazon EKS API are shown
+    #   here. There may be other Kubernetes `labels` applied to the nodes in
+    #   this group.
     #
     #    </note>
     #   @return [Hash<String,String>]
@@ -3444,11 +4546,10 @@ module Aws::EKS
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] tags
-    #   The metadata applied to the node group to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value.
-    #   You define both. Node group tags do not propagate to any other
-    #   resources associated with the node group, such as the Amazon EC2
-    #   instances or subnets.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Nodegroup AWS API Documentation
@@ -3541,9 +4642,9 @@ module Aws::EKS
     #   The current number of nodes that the managed node group should
     #   maintain.
     #
-    #   If you use Cluster Autoscaler, you shouldn't change the desiredSize
-    #   value directly, as this can cause the Cluster Autoscaler to suddenly
-    #   scale up or scale down.
+    #   If you use the Kubernetes [Cluster Autoscaler][1], you shouldn't
+    #   change the `desiredSize` value directly, as this can cause the
+    #   Cluster Autoscaler to suddenly scale up or scale down.
     #
     #   Whenever this parameter changes, the number of worker nodes in the
     #   node group is updated to the specified size. If this parameter is
@@ -3552,14 +4653,19 @@ module Aws::EKS
     #   match the given value. When using CloudFormation, no action occurs
     #   if you remove this parameter from your CFN template.
     #
-    #   This parameter can be different from minSize in some cases, such as
-    #   when starting with extra hosts for testing. This parameter can also
-    #   be different when you want to start with an estimated number of
-    #   needed hosts, but let Cluster Autoscaler reduce the number if there
-    #   are too many. When Cluster Autoscaler is used, the desiredSize
-    #   parameter is altered by Cluster Autoscaler (but can be out-of-date
-    #   for short periods of time). Cluster Autoscaler doesn't scale a
-    #   managed node group lower than minSize or higher than maxSize.
+    #   This parameter can be different from `minSize` in some cases, such
+    #   as when starting with extra hosts for testing. This parameter can
+    #   also be different when you want to start with an estimated number of
+    #   needed hosts, but let the Cluster Autoscaler reduce the number if
+    #   there are too many. When the Cluster Autoscaler is used, the
+    #   `desiredSize` parameter is altered by the Cluster Autoscaler (but
+    #   can be out-of-date for short periods of time). the Cluster
+    #   Autoscaler doesn't scale a managed node group lower than `minSize`
+    #   or higher than `maxSize`.
+    #
+    #
+    #
+    #   [1]: https://github.com/kubernetes/autoscaler#kubernetes-autoscaler
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupScalingConfig AWS API Documentation
@@ -3576,16 +4682,15 @@ module Aws::EKS
     #
     # @!attribute [rw] max_unavailable
     #   The maximum number of nodes unavailable at once during a version
-    #   update. Nodes will be updated in parallel. This value or
+    #   update. Nodes are updated in parallel. This value or
     #   `maxUnavailablePercentage` is required to have a value.The maximum
     #   number is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] max_unavailable_percentage
     #   The maximum percentage of nodes unavailable during a version update.
-    #   This percentage of nodes will be updated in parallel, up to 100
-    #   nodes at once. This value or `maxUnavailable` is required to have a
-    #   value.
+    #   This percentage of nodes are updated in parallel, up to 100 nodes at
+    #   once. This value or `maxUnavailable` is required to have a value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupUpdateConfig AWS API Documentation
@@ -3644,7 +4749,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
-    #   The cluster that the configuration is associated to.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] issuer_url
@@ -3685,9 +4790,10 @@ module Aws::EKS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   The metadata to apply to the provider configuration to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -3715,8 +4821,8 @@ module Aws::EKS
 
     # An object representing an OpenID Connect (OIDC) configuration. Before
     # associating an OIDC identity provider to your cluster, review the
-    # considerations in [Authenticating users for your cluster from an
-    # OpenID Connect identity provider][1] in the *Amazon EKS User Guide*.
+    # considerations in [Authenticating users for your cluster from an OIDC
+    # identity provider][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -3727,10 +4833,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] issuer_url
-    #   The URL of the OpenID identity provider that allows the API server
-    #   to discover public signing keys for verifying tokens. The URL must
+    #   The URL of the OIDC identity provider that allows the API server to
+    #   discover public signing keys for verifying tokens. The URL must
     #   begin with `https://` and should correspond to the `iss` claim in
-    #   the provider's OIDC ID tokens. Per the OIDC standard, path
+    #   the provider's OIDC ID tokens. Based on the OIDC standard, path
     #   components are allowed but query parameters are not. Typically the
     #   URL consists of only a hostname, like `https://server.example.org`
     #   or `https://example.com`. This URL should point to the level below
@@ -3740,14 +4846,14 @@ module Aws::EKS
     #
     # @!attribute [rw] client_id
     #   This is also known as *audience*. The ID for the client application
-    #   that makes authentication requests to the OpenID identity provider.
+    #   that makes authentication requests to the OIDC identity provider.
     #   @return [String]
     #
     # @!attribute [rw] username_claim
     #   The JSON Web Token (JWT) claim to use as the username. The default
     #   is `sub`, which is expected to be a unique identifier of the end
     #   user. You can choose other claims, such as `email` or `name`,
-    #   depending on the OpenID identity provider. Claims other than `email`
+    #   depending on the OIDC identity provider. Claims other than `email`
     #   are prefixed with the issuer URL to prevent naming clashes with
     #   other plug-ins.
     #   @return [String]
@@ -3887,7 +4993,7 @@ module Aws::EKS
     end
 
     # Amazon EKS Pod Identity associations provide the ability to manage
-    # credentials for your applications, similar to the way that 7EC2l
+    # credentials for your applications, similar to the way that Amazon EC2
     # instance profiles provide credentials to Amazon EC2 instances.
     #
     # @!attribute [rw] cluster_name
@@ -3921,9 +5027,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata that you apply to a resource to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -4050,7 +5157,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] name
-    #   Define a unique name for this cluster for your Region.
+    #   A unique name for this cluster in your Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] connector_config
@@ -4059,7 +5166,7 @@ module Aws::EKS
     #   @return [Types::ConnectorConfigRequest]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4067,10 +5174,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata that you apply to the cluster to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Cluster tags do not
-    #   propagate to any other resources associated with the cluster.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterClusterRequest AWS API Documentation
@@ -4196,9 +5303,9 @@ module Aws::EKS
     end
 
     # The specified resource could not be found. You can view your available
-    # clusters with ListClusters. You can view your available managed node
-    # groups with ListNodegroups. Amazon EKS clusters and node groups are
-    # Region-specific.
+    # clusters with `ListClusters`. You can view your available managed node
+    # groups with `ListNodegroups`. Amazon EKS clusters and node groups are
+    # Amazon Web Services Region specific.
     #
     # @!attribute [rw] cluster_name
     #   The Amazon EKS cluster associated with the exception.
@@ -4302,14 +5409,14 @@ module Aws::EKS
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #   Currently, the supported resources are Amazon EKS clusters and
-    #   managed node groups.
+    #   The Amazon Resource Name (ARN) of the resource to add tags to.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to add to the resource. A tag is an array of key-value
-    #   pairs.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags
+    #   don't propagate to any other cluster or Amazon Web Services
+    #   resources.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResourceRequest AWS API Documentation
@@ -4325,8 +5432,9 @@ module Aws::EKS
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # A property that allows a node to repel a set of pods. For more
-    # information, see [Node taints on managed node groups][1].
+    # A property that allows a node to repel a `Pod`. For more information,
+    # see [Node taints on managed node groups][1] in the *Amazon EKS User
+    # Guide*.
     #
     #
     #
@@ -4391,13 +5499,11 @@ module Aws::EKS
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resources are Amazon EKS clusters and
-    #   managed node groups.
+    #   The Amazon Resource Name (ARN) of the resource to delete tags from.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The keys of the tags to be removed.
+    #   The keys of the tags to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UntagResourceRequest AWS API Documentation
@@ -4433,7 +5539,7 @@ module Aws::EKS
     #   @return [Array<Types::UpdateParam>]
     #
     # @!attribute [rw] created_at
-    #   The Unix epoch timestamp in seconds for when the update was created.
+    #   The Unix epoch timestamp at object creation.
     #   @return [Time]
     #
     # @!attribute [rw] errors
@@ -4453,8 +5559,101 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The access configuration information for the cluster.
+    #
+    # @!attribute [rw] authentication_mode
+    #   The desired authentication mode for the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAccessConfigRequest AWS API Documentation
+    #
+    class UpdateAccessConfigRequest < Struct.new(
+      :authentication_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
-    #   The name of the cluster.
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_groups
+    #   The value for `name` that you've specified for `kind: Group` as a
+    #   `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding`
+    #   object. Amazon EKS doesn't confirm that the value for `name` exists
+    #   in any bindings on your cluster. You can specify one or more names.
+    #
+    #   Kubernetes authorizes the `principalArn` of the access entry to
+    #   access any cluster objects that you've specified in a Kubernetes
+    #   `Role` or `ClusterRole` object that is also specified in a
+    #   binding's `roleRef`. For more information about creating Kubernetes
+    #   `RoleBinding`, `ClusterRoleBinding`, `Role`, or `ClusterRole`
+    #   objects, see [Using RBAC Authorization in the Kubernetes
+    #   documentation][1].
+    #
+    #   If you want Amazon EKS to authorize the `principalArn` (instead of,
+    #   or in addition to Kubernetes authorizing the `principalArn`), you
+    #   can associate one or more access policies to the access entry using
+    #   `AssociateAccessPolicy`. If you associate any access policies, the
+    #   `principalARN` has all permissions assigned in the associated access
+    #   policies and all permissions in any Kubernetes `Role` or
+    #   `ClusterRole` objects that the group names are bound to.
+    #
+    #
+    #
+    #   [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username to authenticate to Kubernetes with. We recommend not
+    #   specifying a username and letting Amazon EKS specify it for you. For
+    #   more information about the value Amazon EKS specifies for you, or
+    #   constraints before specifying your own username, see [Creating
+    #   access entries][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html#creating-access-entries
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAccessEntryRequest AWS API Documentation
+    #
+    class UpdateAccessEntryRequest < Struct.new(
+      :cluster_name,
+      :principal_arn,
+      :kubernetes_groups,
+      :client_request_token,
+      :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_entry
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #   @return [Types::AccessEntry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAccessEntryResponse AWS API Documentation
+    #
+    class UpdateAccessEntryResponse < Struct.new(
+      :access_entry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] addon_name
@@ -4514,7 +5713,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4523,12 +5722,8 @@ module Aws::EKS
     #
     # @!attribute [rw] configuration_values
     #   The set of configuration values for the add-on that's created. The
-    #   values that you provide are validated against the schema in
-    #   [DescribeAddonConfiguration][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #   values that you provide are validated against the schema returned by
+    #   `DescribeAddonConfiguration`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAddonRequest AWS API Documentation
@@ -4586,12 +5781,16 @@ module Aws::EKS
     #   @return [Types::Logging]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
+    #
+    # @!attribute [rw] access_config
+    #   The access configuration for the cluster.
+    #   @return [Types::UpdateAccessConfigRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest AWS API Documentation
     #
@@ -4599,7 +5798,8 @@ module Aws::EKS
       :name,
       :resources_vpc_config,
       :logging,
-      :client_request_token)
+      :client_request_token,
+      :access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4625,7 +5825,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4693,15 +5893,15 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing a Kubernetes label change for a managed node
+    # An object representing a Kubernetes `label` change for a managed node
     # group.
     #
     # @!attribute [rw] add_or_update_labels
-    #   Kubernetes labels to be added or updated.
+    #   The Kubernetes `labels` to add or update.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] remove_labels
-    #   Kubernetes labels to be removed.
+    #   The Kubernetes `labels` to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateLabelsPayload AWS API Documentation
@@ -4714,8 +5914,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that the managed node group
-    #   resides in.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
@@ -4723,7 +5922,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] labels
-    #   The Kubernetes labels to be applied to the nodes in the node group
+    #   The Kubernetes `labels` to apply to the nodes in the node group
     #   after the update.
     #   @return [Types::UpdateLabelsPayload]
     #
@@ -4747,7 +5946,7 @@ module Aws::EKS
     #   @return [Types::NodegroupUpdateConfig]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4781,8 +5980,7 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that is associated with the
-    #   managed node group to update.
+    #   The name of your cluster.
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
@@ -4836,15 +6034,15 @@ module Aws::EKS
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] force
-    #   Force the update if the existing node group's pods are unable to be
-    #   drained due to a pod disruption budget issue. If an update fails
-    #   because pods could not be drained, you can force the update after it
-    #   fails to terminate the old node whether or not any pods are running
-    #   on the node.
+    #   Force the update if any `Pod` on the existing node group can't be
+    #   drained due to a `Pod` disruption budget issue. If an update fails
+    #   because all Pods can't be drained, you can force the update after
+    #   it fails to terminate the old node whether or not any `Pod` is
+    #   running on the node.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4909,7 +6107,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4941,7 +6139,8 @@ module Aws::EKS
     end
 
     # An object representing the details of an update to a taints payload.
-    # For more information, see [Node taints on managed node groups][1].
+    # For more information, see [Node taints on managed node groups][1] in
+    # the *Amazon EKS User Guide*.
     #
     #
     #
@@ -5024,10 +6223,10 @@ module Aws::EKS
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the CIDR blocks that you specify is denied. The
     #   default value is `0.0.0.0/0`. If you've disabled private endpoint
-    #   access and you have nodes or Fargate pods in the cluster, then
-    #   ensure that you specify the necessary CIDR blocks. For more
-    #   information, see [Amazon EKS cluster endpoint access control][1] in
-    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   access, make sure that you specify the necessary CIDR blocks for
+    #   every node and Fargate `Pod` in the cluster. For more information,
+    #   see [Amazon EKS cluster endpoint access control][1] in the <i>
+    #   <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -5070,10 +6269,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] endpoint_public_access
-    #   This parameter indicates whether the Amazon EKS public API server
-    #   endpoint is enabled. If the Amazon EKS public API server endpoint is
-    #   disabled, your cluster's Kubernetes API server can only receive
-    #   requests that originate from within the cluster VPC.
+    #   Whether the public API server endpoint is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] endpoint_private_access
@@ -5095,17 +6291,7 @@ module Aws::EKS
     #
     # @!attribute [rw] public_access_cidrs
     #   The CIDR blocks that are allowed access to your cluster's public
-    #   Kubernetes API server endpoint. Communication to the endpoint from
-    #   addresses outside of the listed CIDR blocks is denied. The default
-    #   value is `0.0.0.0/0`. If you've disabled private endpoint access
-    #   and you have nodes or Fargate pods in the cluster, then ensure that
-    #   the necessary CIDR blocks are listed. For more information, see
-    #   [Amazon EKS cluster endpoint access control][1] in the <i> <i>Amazon
-    #   EKS User Guide</i> </i>.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #   Kubernetes API server endpoint.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigResponse AWS API Documentation

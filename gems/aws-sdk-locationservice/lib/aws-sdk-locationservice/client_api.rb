@@ -220,6 +220,7 @@ module Aws::LocationService
     MapConfiguration = Shapes::StructureShape.new(name: 'MapConfiguration')
     MapConfigurationUpdate = Shapes::StructureShape.new(name: 'MapConfigurationUpdate')
     MapStyle = Shapes::StringShape.new(name: 'MapStyle')
+    OptimizationMode = Shapes::StringShape.new(name: 'OptimizationMode')
     Place = Shapes::StructureShape.new(name: 'Place')
     PlaceCategory = Shapes::StringShape.new(name: 'PlaceCategory')
     PlaceCategoryList = Shapes::ListShape.new(name: 'PlaceCategoryList')
@@ -490,6 +491,7 @@ module Aws::LocationService
     CalculateRouteMatrixSummary.add_member(:route_count, Shapes::ShapeRef.new(shape: CalculateRouteMatrixSummaryRouteCountInteger, required: true, location_name: "RouteCount"))
     CalculateRouteMatrixSummary.struct_class = Types::CalculateRouteMatrixSummary
 
+    CalculateRouteRequest.add_member(:arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ArrivalTime"))
     CalculateRouteRequest.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CalculatorName"))
     CalculateRouteRequest.add_member(:car_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteCarModeOptions, location_name: "CarModeOptions"))
     CalculateRouteRequest.add_member(:depart_now, Shapes::ShapeRef.new(shape: Boolean, location_name: "DepartNow"))
@@ -499,6 +501,7 @@ module Aws::LocationService
     CalculateRouteRequest.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
     CalculateRouteRequest.add_member(:include_leg_geometry, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeLegGeometry"))
     CalculateRouteRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
+    CalculateRouteRequest.add_member(:optimize_for, Shapes::ShapeRef.new(shape: OptimizationMode, location_name: "OptimizeFor"))
     CalculateRouteRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: TravelMode, location_name: "TravelMode"))
     CalculateRouteRequest.add_member(:truck_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteTruckModeOptions, location_name: "TruckModeOptions"))
     CalculateRouteRequest.add_member(:waypoint_positions, Shapes::ShapeRef.new(shape: CalculateRouteRequestWaypointPositionsList, location_name: "WaypointPositions"))
@@ -1058,6 +1061,7 @@ module Aws::LocationService
     Place.add_member(:postal_code, Shapes::ShapeRef.new(shape: String, location_name: "PostalCode"))
     Place.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "Region"))
     Place.add_member(:street, Shapes::ShapeRef.new(shape: String, location_name: "Street"))
+    Place.add_member(:sub_municipality, Shapes::ShapeRef.new(shape: String, location_name: "SubMunicipality"))
     Place.add_member(:sub_region, Shapes::ShapeRef.new(shape: String, location_name: "SubRegion"))
     Place.add_member(:supplemental_categories, Shapes::ShapeRef.new(shape: PlaceSupplementalCategoryList, location_name: "SupplementalCategories"))
     Place.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))

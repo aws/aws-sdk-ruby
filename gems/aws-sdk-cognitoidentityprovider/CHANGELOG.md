@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2023-12-18)
+------------------
+
+* Feature - Amazon Cognito now supports trigger versions that define the fields in the request sent to pre token generation Lambda triggers.
+
 1.84.0 (2023-11-28)
 ------------------
 

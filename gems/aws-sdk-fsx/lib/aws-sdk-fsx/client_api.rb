@@ -226,6 +226,7 @@ module Aws::FSx
     FlexCacheEndpointType = Shapes::StringShape.new(name: 'FlexCacheEndpointType')
     GeneralARN = Shapes::StringShape.new(name: 'GeneralARN')
     HAPairs = Shapes::IntegerShape.new(name: 'HAPairs')
+    IncludeShared = Shapes::BooleanShape.new(name: 'IncludeShared')
     IncompatibleParameterError = Shapes::StructureShape.new(name: 'IncompatibleParameterError')
     IncompatibleRegionForMultiAZ = Shapes::StructureShape.new(name: 'IncompatibleRegionForMultiAZ')
     InputOntapVolumeType = Shapes::StringShape.new(name: 'InputOntapVolumeType')
@@ -1091,6 +1092,7 @@ module Aws::FSx
     DescribeSnapshotsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SnapshotFilters, location_name: "Filters"))
     DescribeSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     DescribeSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapshotsRequest.add_member(:include_shared, Shapes::ShapeRef.new(shape: IncludeShared, location_name: "IncludeShared"))
     DescribeSnapshotsRequest.struct_class = Types::DescribeSnapshotsRequest
 
     DescribeSnapshotsResponse.add_member(:snapshots, Shapes::ShapeRef.new(shape: Snapshots, location_name: "Snapshots"))
@@ -1453,6 +1455,7 @@ module Aws::FSx
     OpenZFSVolumeConfiguration.add_member(:delete_intermediate_data, Shapes::ShapeRef.new(shape: Flag, location_name: "DeleteIntermediateData"))
     OpenZFSVolumeConfiguration.add_member(:source_snapshot_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "SourceSnapshotARN"))
     OpenZFSVolumeConfiguration.add_member(:destination_snapshot, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "DestinationSnapshot"))
+    OpenZFSVolumeConfiguration.add_member(:copy_strategy, Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
     OpenZFSVolumeConfiguration.struct_class = Types::OpenZFSVolumeConfiguration
 
     ReleaseConfiguration.add_member(:duration_since_last_access, Shapes::ShapeRef.new(shape: DurationSinceLastAccess, location_name: "DurationSinceLastAccess"))

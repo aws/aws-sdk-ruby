@@ -952,6 +952,8 @@ module Aws::QuickSight
     LineChartVisual = Shapes::StructureShape.new(name: 'LineChartVisual')
     LineInterpolation = Shapes::StringShape.new(name: 'LineInterpolation')
     LineSeriesAxisDisplayOptions = Shapes::StructureShape.new(name: 'LineSeriesAxisDisplayOptions')
+    LinkEntityArn = Shapes::StringShape.new(name: 'LinkEntityArn')
+    LinkEntityArnList = Shapes::ListShape.new(name: 'LinkEntityArnList')
     LinkSharingConfiguration = Shapes::StructureShape.new(name: 'LinkSharingConfiguration')
     ListAnalysesRequest = Shapes::StructureShape.new(name: 'ListAnalysesRequest')
     ListAnalysesResponse = Shapes::StructureShape.new(name: 'ListAnalysesResponse')
@@ -1304,6 +1306,7 @@ module Aws::QuickSight
     ScatterPlotCategoricallyAggregatedFieldWells = Shapes::StructureShape.new(name: 'ScatterPlotCategoricallyAggregatedFieldWells')
     ScatterPlotConfiguration = Shapes::StructureShape.new(name: 'ScatterPlotConfiguration')
     ScatterPlotFieldWells = Shapes::StructureShape.new(name: 'ScatterPlotFieldWells')
+    ScatterPlotSortConfiguration = Shapes::StructureShape.new(name: 'ScatterPlotSortConfiguration')
     ScatterPlotUnaggregatedFieldWells = Shapes::StructureShape.new(name: 'ScatterPlotUnaggregatedFieldWells')
     ScatterPlotVisual = Shapes::StructureShape.new(name: 'ScatterPlotVisual')
     ScheduleRefreshOnEntity = Shapes::StructureShape.new(name: 'ScheduleRefreshOnEntity')
@@ -1404,6 +1407,8 @@ module Aws::QuickSight
     SimpleClusterMarker = Shapes::StructureShape.new(name: 'SimpleClusterMarker')
     SimpleNumericalAggregationFunction = Shapes::StringShape.new(name: 'SimpleNumericalAggregationFunction')
     SimpleTotalAggregationFunction = Shapes::StringShape.new(name: 'SimpleTotalAggregationFunction')
+    SingleAxisOptions = Shapes::StructureShape.new(name: 'SingleAxisOptions')
+    SingleYAxisOption = Shapes::StringShape.new(name: 'SingleYAxisOption')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SliderControlDisplayOptions = Shapes::StructureShape.new(name: 'SliderControlDisplayOptions')
     SmallMultiplesAxisPlacement = Shapes::StringShape.new(name: 'SmallMultiplesAxisPlacement')
@@ -1659,6 +1664,8 @@ module Aws::QuickSight
     UpdateAnalysisPermissionsResponse = Shapes::StructureShape.new(name: 'UpdateAnalysisPermissionsResponse')
     UpdateAnalysisRequest = Shapes::StructureShape.new(name: 'UpdateAnalysisRequest')
     UpdateAnalysisResponse = Shapes::StructureShape.new(name: 'UpdateAnalysisResponse')
+    UpdateDashboardLinksRequest = Shapes::StructureShape.new(name: 'UpdateDashboardLinksRequest')
+    UpdateDashboardLinksResponse = Shapes::StructureShape.new(name: 'UpdateDashboardLinksResponse')
     UpdateDashboardPermissionsRequest = Shapes::StructureShape.new(name: 'UpdateDashboardPermissionsRequest')
     UpdateDashboardPermissionsResponse = Shapes::StructureShape.new(name: 'UpdateDashboardPermissionsResponse')
     UpdateDashboardPublishedVersionRequest = Shapes::StructureShape.new(name: 'UpdateDashboardPublishedVersionRequest')
@@ -1776,6 +1783,7 @@ module Aws::QuickSight
     WordCloudWordPadding = Shapes::StringShape.new(name: 'WordCloudWordPadding')
     WordCloudWordScaling = Shapes::StringShape.new(name: 'WordCloudWordScaling')
     WorkGroup = Shapes::StringShape.new(name: 'WorkGroup')
+    YAxisOptions = Shapes::StructureShape.new(name: 'YAxisOptions')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -2617,6 +2625,7 @@ module Aws::QuickSight
     ComboChartConfiguration.add_member(:primary_y_axis_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "PrimaryYAxisLabelOptions"))
     ComboChartConfiguration.add_member(:secondary_y_axis_display_options, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "SecondaryYAxisDisplayOptions"))
     ComboChartConfiguration.add_member(:secondary_y_axis_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "SecondaryYAxisLabelOptions"))
+    ComboChartConfiguration.add_member(:single_axis_options, Shapes::ShapeRef.new(shape: SingleAxisOptions, location_name: "SingleAxisOptions"))
     ComboChartConfiguration.add_member(:color_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ColorLabelOptions"))
     ComboChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
     ComboChartConfiguration.add_member(:bar_data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "BarDataLabels"))
@@ -2792,6 +2801,7 @@ module Aws::QuickSight
     CreateDashboardRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     CreateDashboardRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDashboardRequest.add_member(:link_sharing_configuration, Shapes::ShapeRef.new(shape: LinkSharingConfiguration, location_name: "LinkSharingConfiguration"))
+    CreateDashboardRequest.add_member(:link_entities, Shapes::ShapeRef.new(shape: LinkEntityArnList, location_name: "LinkEntities"))
     CreateDashboardRequest.struct_class = Types::CreateDashboardRequest
 
     CreateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -3157,6 +3167,7 @@ module Aws::QuickSight
     Dashboard.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Dashboard.add_member(:last_published_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastPublishedTime"))
     Dashboard.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    Dashboard.add_member(:link_entities, Shapes::ShapeRef.new(shape: LinkEntityArnList, location_name: "LinkEntities"))
     Dashboard.struct_class = Types::Dashboard
 
     DashboardError.add_member(:type, Shapes::ShapeRef.new(shape: DashboardErrorType, location_name: "Type"))
@@ -5373,6 +5384,7 @@ module Aws::QuickSight
     LineChartConfiguration.add_member(:primary_y_axis_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "PrimaryYAxisLabelOptions"))
     LineChartConfiguration.add_member(:secondary_y_axis_display_options, Shapes::ShapeRef.new(shape: LineSeriesAxisDisplayOptions, location_name: "SecondaryYAxisDisplayOptions"))
     LineChartConfiguration.add_member(:secondary_y_axis_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "SecondaryYAxisLabelOptions"))
+    LineChartConfiguration.add_member(:single_axis_options, Shapes::ShapeRef.new(shape: SingleAxisOptions, location_name: "SingleAxisOptions"))
     LineChartConfiguration.add_member(:default_series_settings, Shapes::ShapeRef.new(shape: LineChartDefaultSeriesSettings, location_name: "DefaultSeriesSettings"))
     LineChartConfiguration.add_member(:series, Shapes::ShapeRef.new(shape: SeriesItemList, location_name: "Series"))
     LineChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
@@ -5425,6 +5437,8 @@ module Aws::QuickSight
     LineSeriesAxisDisplayOptions.add_member(:axis_options, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "AxisOptions"))
     LineSeriesAxisDisplayOptions.add_member(:missing_data_configurations, Shapes::ShapeRef.new(shape: MissingDataConfigurationList, location_name: "MissingDataConfigurations"))
     LineSeriesAxisDisplayOptions.struct_class = Types::LineSeriesAxisDisplayOptions
+
+    LinkEntityArnList.member = Shapes::ShapeRef.new(shape: LinkEntityArn)
 
     LinkSharingConfiguration.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     LinkSharingConfiguration.struct_class = Types::LinkSharingConfiguration
@@ -6699,6 +6713,7 @@ module Aws::QuickSight
     ScatterPlotCategoricallyAggregatedFieldWells.struct_class = Types::ScatterPlotCategoricallyAggregatedFieldWells
 
     ScatterPlotConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: ScatterPlotFieldWells, location_name: "FieldWells"))
+    ScatterPlotConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: ScatterPlotSortConfiguration, location_name: "SortConfiguration"))
     ScatterPlotConfiguration.add_member(:x_axis_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "XAxisLabelOptions"))
     ScatterPlotConfiguration.add_member(:x_axis_display_options, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "XAxisDisplayOptions"))
     ScatterPlotConfiguration.add_member(:y_axis_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "YAxisLabelOptions"))
@@ -6712,6 +6727,9 @@ module Aws::QuickSight
     ScatterPlotFieldWells.add_member(:scatter_plot_categorically_aggregated_field_wells, Shapes::ShapeRef.new(shape: ScatterPlotCategoricallyAggregatedFieldWells, location_name: "ScatterPlotCategoricallyAggregatedFieldWells"))
     ScatterPlotFieldWells.add_member(:scatter_plot_unaggregated_field_wells, Shapes::ShapeRef.new(shape: ScatterPlotUnaggregatedFieldWells, location_name: "ScatterPlotUnaggregatedFieldWells"))
     ScatterPlotFieldWells.struct_class = Types::ScatterPlotFieldWells
+
+    ScatterPlotSortConfiguration.add_member(:scatter_plot_limit_configuration, Shapes::ShapeRef.new(shape: ItemsLimitConfiguration, location_name: "ScatterPlotLimitConfiguration"))
+    ScatterPlotSortConfiguration.struct_class = Types::ScatterPlotSortConfiguration
 
     ScatterPlotUnaggregatedFieldWells.add_member(:x_axis, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "XAxis"))
     ScatterPlotUnaggregatedFieldWells.add_member(:y_axis, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "YAxis"))
@@ -6976,6 +6994,9 @@ module Aws::QuickSight
     SimpleClusterMarker.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, location_name: "Color"))
     SimpleClusterMarker.struct_class = Types::SimpleClusterMarker
 
+    SingleAxisOptions.add_member(:y_axis_options, Shapes::ShapeRef.new(shape: YAxisOptions, location_name: "YAxisOptions"))
+    SingleAxisOptions.struct_class = Types::SingleAxisOptions
+
     SliderControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
     SliderControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     SliderControlDisplayOptions.struct_class = Types::SliderControlDisplayOptions
@@ -7057,7 +7078,7 @@ module Aws::QuickSight
 
     SnapshotJobS3ResultList.member = Shapes::ShapeRef.new(shape: SnapshotJobS3Result)
 
-    SnapshotS3DestinationConfiguration.add_member(:bucket_configuration, Shapes::ShapeRef.new(shape: S3BucketConfiguration, location_name: "BucketConfiguration"))
+    SnapshotS3DestinationConfiguration.add_member(:bucket_configuration, Shapes::ShapeRef.new(shape: S3BucketConfiguration, required: true, location_name: "BucketConfiguration"))
     SnapshotS3DestinationConfiguration.struct_class = Types::SnapshotS3DestinationConfiguration
 
     SnapshotS3DestinationConfigurationList.member = Shapes::ShapeRef.new(shape: SnapshotS3DestinationConfiguration)
@@ -7927,6 +7948,17 @@ module Aws::QuickSight
     UpdateAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateAnalysisResponse.struct_class = Types::UpdateAnalysisResponse
 
+    UpdateDashboardLinksRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateDashboardLinksRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
+    UpdateDashboardLinksRequest.add_member(:link_entities, Shapes::ShapeRef.new(shape: LinkEntityArnList, required: true, location_name: "LinkEntities"))
+    UpdateDashboardLinksRequest.struct_class = Types::UpdateDashboardLinksRequest
+
+    UpdateDashboardLinksResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateDashboardLinksResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateDashboardLinksResponse.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DashboardArn"))
+    UpdateDashboardLinksResponse.add_member(:link_entities, Shapes::ShapeRef.new(shape: LinkEntityArnList, location_name: "LinkEntities"))
+    UpdateDashboardLinksResponse.struct_class = Types::UpdateDashboardLinksResponse
+
     UpdateDashboardPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateDashboardPermissionsRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
     UpdateDashboardPermissionsRequest.add_member(:grant_permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "GrantPermissions"))
@@ -8497,6 +8529,9 @@ module Aws::QuickSight
     WordCloudVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     WordCloudVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     WordCloudVisual.struct_class = Types::WordCloudVisual
+
+    YAxisOptions.add_member(:y_axis, Shapes::ShapeRef.new(shape: SingleYAxisOption, required: true, location_name: "YAxis"))
+    YAxisOptions.struct_class = Types::YAxisOptions
 
 
     # @api private
@@ -10829,6 +10864,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_dashboard_links, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDashboardLinks"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/dashboards/{DashboardId}/linked-entities"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDashboardLinksRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDashboardLinksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

@@ -968,6 +968,10 @@ module Aws::Firehose
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
     #       },
+    #       buffering_hints: {
+    #         interval_in_seconds: 1,
+    #         size_in_m_bs: 1,
+    #       },
     #     },
     #     http_endpoint_destination_configuration: {
     #       endpoint_configuration: { # required
@@ -1456,6 +1460,8 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.endpoint_configuration.url #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.endpoint_configuration.name #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.buffering_hints.size_in_m_bs #=> Integer
@@ -2536,6 +2542,10 @@ module Aws::Firehose
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
     #       },
+    #       buffering_hints: {
+    #         interval_in_seconds: 1,
+    #         size_in_m_bs: 1,
+    #       },
     #     },
     #     http_endpoint_destination_update: {
     #       endpoint_configuration: {
@@ -2680,7 +2690,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

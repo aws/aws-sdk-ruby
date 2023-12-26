@@ -211,6 +211,8 @@ module Aws::CodeCommit
             Aws::CodeCommit::Endpoints::UpdatePullRequestTitle.build(context)
           when :update_repository_description
             Aws::CodeCommit::Endpoints::UpdateRepositoryDescription.build(context)
+          when :update_repository_encryption_key
+            Aws::CodeCommit::Endpoints::UpdateRepositoryEncryptionKey.build(context)
           when :update_repository_name
             Aws::CodeCommit::Endpoints::UpdateRepositoryName.build(context)
           end

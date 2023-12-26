@@ -27,12 +27,15 @@ module Aws
       @api_requests = []
 
       requests = @api_requests
+      requests_mutex = Mutex.new
       self.handle do |context|
-        requests << {
-          operation_name: context.operation_name,
-          params: context.params,
-          context: context
-        }
+        requests_mutex.synchronize do
+          requests << {
+            operation_name: context.operation_name,
+            params: context.params,
+            context: context
+          }
+        end
         @handler.call(context)
       end
     end

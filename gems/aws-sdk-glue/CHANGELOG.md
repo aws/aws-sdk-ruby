@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2023-12-22)
+------------------
+
+* Feature - This release adds additional configurations for Query Session Context on the following APIs: GetUnfilteredTableMetadata, GetUnfilteredPartitionMetadata, GetUnfilteredPartitionsMetadata.
+
 1.164.0 (2023-11-30)
 ------------------
 

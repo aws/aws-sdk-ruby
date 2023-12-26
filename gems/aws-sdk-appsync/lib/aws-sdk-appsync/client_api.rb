@@ -159,6 +159,7 @@ module Aws::AppSync
     GetSourceApiAssociationResponse = Shapes::StructureShape.new(name: 'GetSourceApiAssociationResponse')
     GetTypeRequest = Shapes::StructureShape.new(name: 'GetTypeRequest')
     GetTypeResponse = Shapes::StructureShape.new(name: 'GetTypeResponse')
+    GraphQLApiIntrospectionConfig = Shapes::StringShape.new(name: 'GraphQLApiIntrospectionConfig')
     GraphQLApiType = Shapes::StringShape.new(name: 'GraphQLApiType')
     GraphQLApiVisibility = Shapes::StringShape.new(name: 'GraphQLApiVisibility')
     GraphQLSchemaException = Shapes::StructureShape.new(name: 'GraphQLSchemaException')
@@ -207,6 +208,7 @@ module Aws::AppSync
     Ownership = Shapes::StringShape.new(name: 'Ownership')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PipelineConfig = Shapes::StructureShape.new(name: 'PipelineConfig')
+    QueryDepthLimit = Shapes::IntegerShape.new(name: 'QueryDepthLimit')
     RdsDataApiConfig = Shapes::StructureShape.new(name: 'RdsDataApiConfig')
     RdsDataApiConfigDatabaseName = Shapes::StringShape.new(name: 'RdsDataApiConfigDatabaseName')
     RdsDataApiConfigResourceArn = Shapes::StringShape.new(name: 'RdsDataApiConfigResourceArn')
@@ -215,6 +217,7 @@ module Aws::AppSync
     RelationalDatabaseDataSourceConfig = Shapes::StructureShape.new(name: 'RelationalDatabaseDataSourceConfig')
     RelationalDatabaseSourceType = Shapes::StringShape.new(name: 'RelationalDatabaseSourceType')
     Resolver = Shapes::StructureShape.new(name: 'Resolver')
+    ResolverCountLimit = Shapes::IntegerShape.new(name: 'ResolverCountLimit')
     ResolverKind = Shapes::StringShape.new(name: 'ResolverKind')
     Resolvers = Shapes::ListShape.new(name: 'Resolvers')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
@@ -454,6 +457,9 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:api_type, Shapes::ShapeRef.new(shape: GraphQLApiType, location_name: "apiType"))
     CreateGraphqlApiRequest.add_member(:merged_api_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiExecutionRoleArn"))
     CreateGraphqlApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
+    CreateGraphqlApiRequest.add_member(:introspection_config, Shapes::ShapeRef.new(shape: GraphQLApiIntrospectionConfig, location_name: "introspectionConfig"))
+    CreateGraphqlApiRequest.add_member(:query_depth_limit, Shapes::ShapeRef.new(shape: QueryDepthLimit, location_name: "queryDepthLimit"))
+    CreateGraphqlApiRequest.add_member(:resolver_count_limit, Shapes::ShapeRef.new(shape: ResolverCountLimit, location_name: "resolverCountLimit"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
 
     CreateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -792,6 +798,9 @@ module Aws::AppSync
     GraphqlApi.add_member(:merged_api_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiExecutionRoleArn"))
     GraphqlApi.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
     GraphqlApi.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
+    GraphqlApi.add_member(:introspection_config, Shapes::ShapeRef.new(shape: GraphQLApiIntrospectionConfig, location_name: "introspectionConfig"))
+    GraphqlApi.add_member(:query_depth_limit, Shapes::ShapeRef.new(shape: QueryDepthLimit, location_name: "queryDepthLimit"))
+    GraphqlApi.add_member(:resolver_count_limit, Shapes::ShapeRef.new(shape: ResolverCountLimit, location_name: "resolverCountLimit"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
@@ -1130,6 +1139,9 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
     UpdateGraphqlApiRequest.add_member(:merged_api_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiExecutionRoleArn"))
     UpdateGraphqlApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
+    UpdateGraphqlApiRequest.add_member(:introspection_config, Shapes::ShapeRef.new(shape: GraphQLApiIntrospectionConfig, location_name: "introspectionConfig"))
+    UpdateGraphqlApiRequest.add_member(:query_depth_limit, Shapes::ShapeRef.new(shape: QueryDepthLimit, location_name: "queryDepthLimit"))
+    UpdateGraphqlApiRequest.add_member(:resolver_count_limit, Shapes::ShapeRef.new(shape: ResolverCountLimit, location_name: "resolverCountLimit"))
     UpdateGraphqlApiRequest.struct_class = Types::UpdateGraphqlApiRequest
 
     UpdateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))

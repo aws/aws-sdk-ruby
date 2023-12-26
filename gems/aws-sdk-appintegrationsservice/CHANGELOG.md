@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2023-12-21)
+------------------
+
+* Feature - The Amazon AppIntegrations service adds DeleteApplication API for deleting applications, and updates APIs to support third party applications reacting to workspace events and make data requests to Amazon Connect for agent and contact events.
+
 1.27.0 (2023-11-28)
 ------------------
 

@@ -808,6 +808,31 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network border
+    #   group for Local Zones when you provision and advertise a BYOIPv4 CIDR.
+    #   Choose the network border group carefully as the EIP and the Amazon
+    #   Web Services resource it is associated with must reside in the same
+    #   network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #
     # @return [Types::AdvertiseByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AdvertiseByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
@@ -818,6 +843,7 @@ module Aws::EC2
     #     cidr: "String", # required
     #     asn: "String",
     #     dry_run: false,
+    #     network_border_group: "String",
     #   })
     #
     # @example Response structure
@@ -831,6 +857,7 @@ module Aws::EC2
     #   resp.byoip_cidr.asn_associations[0].state #=> String, one of "disassociated", "failed-disassociation", "failed-association", "pending-disassociation", "pending-association", "associated"
     #   resp.byoip_cidr.status_message #=> String
     #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
+    #   resp.byoip_cidr.network_border_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidr AWS API Documentation
     #
@@ -18916,6 +18943,7 @@ module Aws::EC2
     #   resp.byoip_cidr.asn_associations[0].state #=> String, one of "disassociated", "failed-disassociation", "failed-association", "pending-disassociation", "pending-association", "associated"
     #   resp.byoip_cidr.status_message #=> String
     #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
+    #   resp.byoip_cidr.network_border_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionByoipCidr AWS API Documentation
     #
@@ -20090,6 +20118,7 @@ module Aws::EC2
     #   resp.byoip_cidrs[0].asn_associations[0].state #=> String, one of "disassociated", "failed-disassociation", "failed-association", "pending-disassociation", "pending-association", "associated"
     #   resp.byoip_cidrs[0].status_message #=> String
     #   resp.byoip_cidrs[0].state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
+    #   resp.byoip_cidrs[0].network_border_group #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeByoipCidrs AWS API Documentation
@@ -51242,6 +51271,7 @@ module Aws::EC2
     #   resp.byoip_cidr.asn_associations[0].state #=> String, one of "disassociated", "failed-disassociation", "failed-association", "pending-disassociation", "pending-association", "associated"
     #   resp.byoip_cidr.status_message #=> String
     #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
+    #   resp.byoip_cidr.network_border_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveByoipCidrToIpam AWS API Documentation
     #
@@ -51308,6 +51338,31 @@ module Aws::EC2
     # @option params [Boolean] :multi_region
     #   Reserved.
     #
+    # @option params [String] :network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network border
+    #   group for Local Zones when you provision and advertise a BYOIPv4 CIDR.
+    #   Choose the network border group carefully as the EIP and the Amazon
+    #   Web Services resource it is associated with must reside in the same
+    #   network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #
     # @return [Types::ProvisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProvisionByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
@@ -51335,6 +51390,7 @@ module Aws::EC2
     #       },
     #     ],
     #     multi_region: false,
+    #     network_border_group: "String",
     #   })
     #
     # @example Response structure
@@ -51348,6 +51404,7 @@ module Aws::EC2
     #   resp.byoip_cidr.asn_associations[0].state #=> String, one of "disassociated", "failed-disassociation", "failed-association", "pending-disassociation", "pending-association", "associated"
     #   resp.byoip_cidr.status_message #=> String
     #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
+    #   resp.byoip_cidr.network_border_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidr AWS API Documentation
     #
@@ -58594,6 +58651,7 @@ module Aws::EC2
     #   resp.byoip_cidr.asn_associations[0].state #=> String, one of "disassociated", "failed-disassociation", "failed-association", "pending-disassociation", "pending-association", "associated"
     #   resp.byoip_cidr.status_message #=> String
     #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
+    #   resp.byoip_cidr.network_border_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidr AWS API Documentation
     #
@@ -58617,7 +58675,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.430.0'
+      context[:gem_version] = '1.431.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

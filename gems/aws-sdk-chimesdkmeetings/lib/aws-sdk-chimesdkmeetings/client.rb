@@ -458,6 +458,16 @@ module Aws::ChimeSDKMeetings
     #
     # When using capabilities, be aware of these corner cases:
     #
+    # * If you specify `MeetingFeatures:Video:MaxResolution:None` when you
+    #   create a meeting, all API requests that include `SendReceive`,
+    #   `Send`, or `Receive` for `AttendeeCapabilities:Video` will be
+    #   rejected with `ValidationError 400`.
+    #
+    # * If you specify `MeetingFeatures:Content:MaxResolution:None` when you
+    #   create a meeting, all API requests that include `SendReceive`,
+    #   `Send`, or `Receive` for `AttendeeCapabilities:Content` will be
+    #   rejected with `ValidationError 400`.
+    #
     # * You can't set `content` capabilities to `SendReceive` or `Receive`
     #   unless you also set `video` capabilities to `SendReceive` or
     #   `Receive`. If you don't set the `video` capability to receive, the
@@ -547,6 +557,16 @@ module Aws::ChimeSDKMeetings
     #
     #   When using capabilities, be aware of these corner cases:
     #
+    #   * If you specify `MeetingFeatures:Video:MaxResolution:None` when you
+    #     create a meeting, all API requests that include `SendReceive`,
+    #     `Send`, or `Receive` for `AttendeeCapabilities:Video` will be
+    #     rejected with `ValidationError 400`.
+    #
+    #   * If you specify `MeetingFeatures:Content:MaxResolution:None` when you
+    #     create a meeting, all API requests that include `SendReceive`,
+    #     `Send`, or `Receive` for `AttendeeCapabilities:Content` will be
+    #     rejected with `ValidationError 400`.
+    #
     #   * You can't set `content` capabilities to `SendReceive` or `Receive`
     #     unless you also set `video` capabilities to `SendReceive` or
     #     `Receive`. If you don't set the `video` capability to receive, the
@@ -626,8 +646,8 @@ module Aws::ChimeSDKMeetings
     #   `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`,
     #   `us-west-2`.
     #
-    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
-    #   `us-gov-west-1`.
+    #   Available values in Amazon Web Services GovCloud (US) Regions:
+    #   `us-gov-east-1`, `us-gov-west-1`.
     #
     # @option params [String] :meeting_host_id
     #   Reserved.
@@ -670,8 +690,8 @@ module Aws::ChimeSDKMeetings
     #   * Each resource can have up to 50 tags. For other limits, see [Tag
     #     Naming and Usage Conventions][2] in the *AWS General Reference*.
     #
-    #   * You can only tag resources that are located in the specified AWS
-    #     Region for the AWS account.
+    #   * You can only tag resources that are located in the specified Amazon
+    #     Web Services Region for the Amazon Web Services account.
     #
     #   * To add tags to a resource, you need the necessary permissions for
     #     the service that the resource belongs to as well as permissions for
@@ -728,6 +748,15 @@ module Aws::ChimeSDKMeetings
     #       audio: {
     #         echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
     #       },
+    #       video: {
+    #         max_resolution: "None", # accepts None, HD, FHD
+    #       },
+    #       content: {
+    #         max_resolution: "None", # accepts None, FHD, UHD
+    #       },
+    #       attendee: {
+    #         max_count: 1,
+    #       },
     #     },
     #     primary_meeting_id: "PrimaryMeetingId",
     #     tenant_ids: ["TenantId"],
@@ -754,6 +783,9 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.meeting.meeting_features.video.max_resolution #=> String, one of "None", "HD", "FHD"
+    #   resp.meeting.meeting_features.content.max_resolution #=> String, one of "None", "FHD", "UHD"
+    #   resp.meeting.meeting_features.attendee.max_count #=> Integer
     #   resp.meeting.primary_meeting_id #=> String
     #   resp.meeting.tenant_ids #=> Array
     #   resp.meeting.tenant_ids[0] #=> String
@@ -795,8 +827,8 @@ module Aws::ChimeSDKMeetings
     #   `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`,
     #   `us-west-2`.
     #
-    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
-    #   `us-gov-west-1`.
+    #   Available values in Amazon Web Services GovCloud (US) Regions:
+    #   `us-gov-east-1`, `us-gov-west-1`.
     #
     # @option params [String] :meeting_host_id
     #   Reserved.
@@ -848,6 +880,15 @@ module Aws::ChimeSDKMeetings
     #       audio: {
     #         echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
     #       },
+    #       video: {
+    #         max_resolution: "None", # accepts None, HD, FHD
+    #       },
+    #       content: {
+    #         max_resolution: "None", # accepts None, FHD, UHD
+    #       },
+    #       attendee: {
+    #         max_count: 1,
+    #       },
     #     },
     #     notifications_configuration: {
     #       lambda_function_arn: "Arn",
@@ -889,6 +930,9 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.meeting.meeting_features.video.max_resolution #=> String, one of "None", "HD", "FHD"
+    #   resp.meeting.meeting_features.content.max_resolution #=> String, one of "None", "FHD", "UHD"
+    #   resp.meeting.meeting_features.attendee.max_count #=> Integer
     #   resp.meeting.primary_meeting_id #=> String
     #   resp.meeting.tenant_ids #=> Array
     #   resp.meeting.tenant_ids[0] #=> String
@@ -1057,6 +1101,9 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.meeting.meeting_features.video.max_resolution #=> String, one of "None", "HD", "FHD"
+    #   resp.meeting.meeting_features.content.max_resolution #=> String, one of "None", "FHD", "UHD"
+    #   resp.meeting.meeting_features.attendee.max_count #=> Integer
     #   resp.meeting.primary_meeting_id #=> String
     #   resp.meeting.tenant_ids #=> Array
     #   resp.meeting.tenant_ids[0] #=> String
@@ -1163,10 +1210,21 @@ module Aws::ChimeSDKMeetings
     # combinations are valid, refer to the [StartStreamTranscription][2] API
     # in the *Amazon Transcribe Developer Guide*.
     #
-    # Amazon Chime SDK live transcription is powered by Amazon Transcribe.
-    # Use of Amazon Transcribe is subject to the [AWS Service Terms][3],
-    # including the terms specific to the AWS Machine Learning and
-    # Artificial Intelligence Services.
+    # <note markdown="1"> By default, Amazon Transcribe may use and store audio content
+    # processed by the service to develop and improve Amazon Web Services
+    # AI/ML services as further described in section 50 of the [Amazon Web
+    # Services Service Terms][3]. Using Amazon Transcribe may be subject to
+    # federal and state laws or regulations regarding the recording or
+    # interception of electronic communications. It is your and your end
+    # users’ responsibility to comply with all applicable laws regarding the
+    # recording, including properly notifying all participants in a recorded
+    # session or communication that the session or communication is being
+    # recorded, and obtaining all necessary consents. You can opt out from
+    # Amazon Web Services using audio content to develop and improve AWS
+    # AI/ML services by configuring an AI services opt out policy using
+    # Amazon Web Services Organizations.
+    #
+    #  </note>
     #
     #
     #
@@ -1231,10 +1289,19 @@ module Aws::ChimeSDKMeetings
     # information, refer to [ Using Amazon Chime SDK live transcription ][1]
     # in the *Amazon Chime SDK Developer Guide*.
     #
-    # Amazon Chime SDK live transcription is powered by Amazon Transcribe.
-    # Use of Amazon Transcribe is subject to the [AWS Service Terms][2],
-    # including the terms specific to the AWS Machine Learning and
-    # Artificial Intelligence Services.
+    # By default, Amazon Transcribe may use and store audio content
+    # processed by the service to develop and improve Amazon Web Services
+    # AI/ML services as further described in section 50 of the [Amazon Web
+    # Services Service Terms][2]. Using Amazon Transcribe may be subject to
+    # federal and state laws or regulations regarding the recording or
+    # interception of electronic communications. It is your and your end
+    # users’ responsibility to comply with all applicable laws regarding the
+    # recording, including properly notifying all participants in a recorded
+    # session or communication that the session or communication is being
+    # recorded, and obtaining all necessary consents. You can opt out from
+    # Amazon Web Services using audio content to develop and improve Amazon
+    # Web Services AI/ML services by configuring an AI services opt out
+    # policy using Amazon Web Services Organizations.
     #
     #
     #
@@ -1302,8 +1369,8 @@ module Aws::ChimeSDKMeetings
     #   for removing tags. For more information, see the documentation for
     #   the service whose resource you want to untag.
     #
-    # * You can only tag resources that are located in the specified AWS
-    #   Region for the calling AWS account.
+    # * You can only tag resources that are located in the specified Amazon
+    #   Web Services Region for the calling Amazon Web Services account.
     #
     # **Minimum permissions**
     #
@@ -1350,6 +1417,16 @@ module Aws::ChimeSDKMeetings
     #  </note>
     #
     # When using capabilities, be aware of these corner cases:
+    #
+    # * If you specify `MeetingFeatures:Video:MaxResolution:None` when you
+    #   create a meeting, all API requests that include `SendReceive`,
+    #   `Send`, or `Receive` for `AttendeeCapabilities:Video` will be
+    #   rejected with `ValidationError 400`.
+    #
+    # * If you specify `MeetingFeatures:Content:MaxResolution:None` when you
+    #   create a meeting, all API requests that include `SendReceive`,
+    #   `Send`, or `Receive` for `AttendeeCapabilities:Content` will be
+    #   rejected with `ValidationError 400`.
     #
     # * You can't set `content` capabilities to `SendReceive` or `Receive`
     #   unless you also set `video` capabilities to `SendReceive` or
@@ -1425,7 +1502,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

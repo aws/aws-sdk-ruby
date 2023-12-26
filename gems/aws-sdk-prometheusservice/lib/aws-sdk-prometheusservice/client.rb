@@ -621,12 +621,17 @@ module Aws::PrometheusService
     # @option params [Hash<String,String>] :tags
     #   Optional, user-provided tags for this workspace.
     #
+    # @option params [String] :kms_key_arn
+    #   Optional, customer managed KMS key used to encrypt data for this
+    #   workspace
+    #
     # @return [Types::CreateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkspaceResponse#workspace_id #workspace_id} => String
     #   * {Types::CreateWorkspaceResponse#arn #arn} => String
     #   * {Types::CreateWorkspaceResponse#status #status} => Types::WorkspaceStatus
     #   * {Types::CreateWorkspaceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateWorkspaceResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -636,6 +641,7 @@ module Aws::PrometheusService
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -645,6 +651,7 @@ module Aws::PrometheusService
     #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspace AWS API Documentation
     #
@@ -998,6 +1005,7 @@ module Aws::PrometheusService
     #   resp.workspace.created_at #=> Time
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
+    #   resp.workspace.kms_key_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1219,6 +1227,7 @@ module Aws::PrometheusService
     #   resp.workspaces[0].created_at #=> Time
     #   resp.workspaces[0].tags #=> Hash
     #   resp.workspaces[0].tags["TagKey"] #=> String
+    #   resp.workspaces[0].kms_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListWorkspaces AWS API Documentation
@@ -1467,7 +1476,7 @@ module Aws::PrometheusService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

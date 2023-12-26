@@ -992,12 +992,13 @@ module Aws::KMS
     #   Management Service Developer Guide*.
     #
     #   Use this parameter only when you intend to prevent the principal
-    #   that is making the request from making a subsequent PutKeyPolicy
-    #   request on the KMS key.
+    #   that is making the request from making a subsequent
+    #   [PutKeyPolicy][2] request on the KMS key.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -1596,7 +1597,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-concepts.html#term-attestdoc
     #   [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #   @return [Types::RecipientInfo]
@@ -3167,8 +3168,8 @@ module Aws::KMS
     #     You cannot use the RSAES\_OAEP\_SHA\_1 wrapping algorithm with the
     #     RSA\_2048 wrapping key spec to wrap ECC\_NIST\_P521 key material.
     #
-    #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — Supported only for
-    #     symmetric encryption key material (and only in legacy mode).
+    #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — As of October 10, 2023, KMS
+    #     does not support the RSAES\_PKCS1\_V1\_5 wrapping algorithm.
     #   @return [String]
     #
     # @!attribute [rw] wrapping_key_spec
@@ -4710,12 +4711,13 @@ module Aws::KMS
     #   Management Service Developer Guide*.
     #
     #   Use this parameter only when you intend to prevent the principal
-    #   that is making the request from making a subsequent PutKeyPolicy
-    #   request on the KMS key.
+    #   that is making the request from making a subsequent
+    #   [PutKeyPolicy][2] request on the KMS key.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicyRequest AWS API Documentation
@@ -5107,12 +5109,13 @@ module Aws::KMS
     #   Management Service Developer Guide*.
     #
     #   Use this parameter only when you intend to prevent the principal
-    #   that is making the request from making a subsequent PutKeyPolicy
-    #   request on the KMS key.
+    #   that is making the request from making a subsequent
+    #   [PutKeyPolicy][2] request on the KMS key.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -6528,9 +6531,12 @@ module Aws::KMS
     # The request was rejected because the Amazon VPC endpoint service
     # configuration does not fulfill the requirements for an external key
     # store proxy. For details, see the exception message and [review the
-    # requirements](kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements)
-    # for Amazon VPC endpoint service connectivity for an external key
-    # store.
+    # requirements][1] for Amazon VPC endpoint service connectivity for an
+    # external key store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements
     #
     # @!attribute [rw] message
     #   @return [String]

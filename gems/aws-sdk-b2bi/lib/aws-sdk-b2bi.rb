@@ -52,6 +52,6 @@ require_relative 'aws-sdk-b2bi/customizations'
 # @!group service
 module Aws::B2bi
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end

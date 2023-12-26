@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-12-18)
+------------------
+
+* Feature - Add DOH protocols in resolver endpoints.
+
 1.51.0 (2023-11-28)
 ------------------
 

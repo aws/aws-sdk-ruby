@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-12-22)
+------------------
+
+* Feature - This release adds additional configurations on GetTemporaryGlueTableCredentials for Query Session Context.
+
 1.45.0 (2023-11-28)
 ------------------
 

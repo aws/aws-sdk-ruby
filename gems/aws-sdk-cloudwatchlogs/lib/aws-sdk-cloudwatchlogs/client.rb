@@ -33,6 +33,7 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatchlogs)
 
@@ -83,6 +84,7 @@ module Aws::CloudWatchLogs
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::CloudWatchLogs::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -216,9 +218,15 @@ module Aws::CloudWatchLogs
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
     #     variables and the shared configuration file.
+    #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -235,6 +243,9 @@ module Aws::CloudWatchLogs
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
@@ -592,7 +603,7 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
-    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
     #
     # @option params [required, String] :delivery_source_name
     #   The name of the delivery source to use for this delivery.
@@ -777,8 +788,8 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html
     #
     # @option params [required, Array<String>] :log_group_arn_list
-    #   An array containing the ARNs of the log groups that this anomaly
-    #   detector will watch. You must specify at least one ARN.
+    #   An array containing the ARN of the log group that this anomaly
+    #   detector will watch. You can specify only one log group ARN.
     #
     # @option params [String] :detector_name
     #   A name for this anomaly detector.
@@ -938,6 +949,8 @@ module Aws::CloudWatchLogs
     #     Logs features and incurs lower costs.
     #
     #   If you omit this parameter, the default of `STANDARD` is used.
+    #
+    #   After a log group is created, its class can't be changed.
     #
     #   For details about the features supported by each class, see [Log
     #   classes][1]
@@ -2107,7 +2120,9 @@ module Aws::CloudWatchLogs
     end
 
     # This operation returns a paginated list of your saved CloudWatch Logs
-    # Insights query definitions.
+    # Insights query definitions. You can retrieve query definitions from
+    # the current account or from a source account that is linked to the
+    # current account.
     #
     # You can use the `queryDefinitionNamePrefix` parameter to limit the
     # results to only the query definitions that have names that start with
@@ -3532,7 +3547,7 @@ module Aws::CloudWatchLogs
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
     # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
     #
@@ -3703,7 +3718,7 @@ module Aws::CloudWatchLogs
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationolicy.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
     # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
     #
@@ -4398,6 +4413,284 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Starts a Live Tail streaming session for one or more log groups. A
+    # Live Tail session returns a stream of log events that have been
+    # recently ingested in the log groups. For more information, see [Use
+    # Live Tail to view logs in near real time][1].
+    #
+    # The response to this operation is a response stream, over which the
+    # server sends live log events and the client receives them.
+    #
+    # The following objects are sent over the stream:
+    #
+    # * A single [LiveTailSessionStart][2] object is sent at the start of
+    #   the session.
+    #
+    # * Every second, a [LiveTailSessionUpdate][3] object is sent. Each of
+    #   these objects contains an array of the actual log events.
+    #
+    #   If no new log events were ingested in the past second, the
+    #   `LiveTailSessionUpdate` object will contain an empty array.
+    #
+    #   The array of log events contained in a `LiveTailSessionUpdate` can
+    #   include as many as 500 log events. If the number of log events
+    #   matching the request exceeds 500 per second, the log events are
+    #   sampled down to 500 log events to be included in each
+    #   `LiveTailSessionUpdate` object.
+    #
+    #   If your client consumes the log events slower than the server
+    #   produces them, CloudWatch Logs buffers up to 10
+    #   `LiveTailSessionUpdate` events or 5000 log events, after which it
+    #   starts dropping the oldest events.
+    #
+    # * A [SessionStreamingException][4] object is returned if an unknown
+    #   error occurs on the server side.
+    #
+    # * A [SessionTimeoutException][5] object is returned when the session
+    #   times out, after it has been kept open for three hours.
+    #
+    # You can end a session before it times out by closing the session
+    # stream or by closing the client that is receiving the stream. The
+    # session also ends if the established connection between the client and
+    # the server breaks.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionStart.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionUpdate.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionStreamingException.html
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionTimeoutException.html
+    #
+    # @option params [required, Array<String>] :log_group_identifiers
+    #   An array where each item in the array is a log group to include in the
+    #   Live Tail session.
+    #
+    #   Specify each log group by its ARN.
+    #
+    #   If you specify an ARN, the ARN can't end with an asterisk (*).
+    #
+    #   <note markdown="1"> You can include up to 10 log groups.
+    #
+    #    </note>
+    #
+    # @option params [Array<String>] :log_stream_names
+    #   If you specify this parameter, then only log events in the log streams
+    #   that you specify here are included in the Live Tail session.
+    #
+    #   <note markdown="1"> You can specify this parameter only if you specify only one log group
+    #   in `logGroupIdentifiers`.
+    #
+    #    </note>
+    #
+    # @option params [Array<String>] :log_stream_name_prefixes
+    #   If you specify this parameter, then only log events in the log streams
+    #   that have names that start with the prefixes that you specify here are
+    #   included in the Live Tail session.
+    #
+    #   <note markdown="1"> You can specify this parameter only if you specify only one log group
+    #   in `logGroupIdentifiers`.
+    #
+    #    </note>
+    #
+    # @option params [String] :log_event_filter_pattern
+    #   An optional pattern to use to filter the results to include only log
+    #   events that match the pattern. For example, a filter pattern of `error
+    #   404` causes only log events that include both `error` and `404` to be
+    #   included in the Live Tail stream.
+    #
+    #   Regular expression filter patterns are supported.
+    #
+    #   For more information about filter pattern syntax, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    #
+    # @return [Types::StartLiveTailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartLiveTailResponse#response_stream #response_stream} => Types::StartLiveTailResponseStream
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process event once it arrives immediately, or wait until
+    #   full response complete and iterate through eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #start_live_tail
+    #   with callbacks, callbacks can be register for specifc events or for all events,
+    #   callback for errors in the event stream is also available for register.
+    #
+    #   Callbacks can be passed in by `:event_stream_handler` option or within block
+    #   statement attached to #start_live_tail call directly. Hybrid pattern of both
+    #   is also supported.
+    #
+    #   `:event_stream_handler` option takes in either Proc object or
+    #   Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream object.
+    #
+    #   Usage pattern a): callbacks with a block attached to #start_live_tail
+    #     Example for registering callbacks for all event types and error event
+    #
+    #     client.start_live_tail( # params input# ) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): pass in `:event_stream_handler` for #start_live_tail
+    #
+    #     1) create a Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream.new
+    #       handler.on_session_start_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::sessionStart
+    #       end
+    #       handler.on_session_update_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::sessionUpdate
+    #       end
+    #       handler.on_session_timeout_exception_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
+    #       end
+    #       handler.on_session_streaming_exception_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::SessionStreamingException
+    #       end
+    #
+    #     client.start_live_tail( # params input #, event_stream_handler: handler)
+    #
+    #     2) use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_session_start_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::sessionStart
+    #       end
+    #       stream.on_session_update_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::sessionUpdate
+    #       end
+    #       stream.on_session_timeout_exception_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
+    #       end
+    #       stream.on_session_streaming_exception_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::SessionStreamingException
+    #       end
+    #     end
+    #
+    #     client.start_live_tail( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): hybird pattern of a) and b)
+    #
+    #       handler = Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream.new
+    #       handler.on_session_start_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::sessionStart
+    #       end
+    #       handler.on_session_update_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::sessionUpdate
+    #       end
+    #       handler.on_session_timeout_exception_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
+    #       end
+    #       handler.on_session_streaming_exception_event do |event|
+    #         event # => Aws::CloudWatchLogs::Types::SessionStreamingException
+    #       end
+    #
+    #     client.start_live_tail( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   Besides above usage patterns for process events when they arrive immediately, you can also
+    #   iterate through events after response complete.
+    #
+    #   Events are available at resp.response_stream # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_live_tail({
+    #     log_group_identifiers: ["LogGroupIdentifier"], # required
+    #     log_stream_names: ["LogStreamName"],
+    #     log_stream_name_prefixes: ["LogStreamName"],
+    #     log_event_filter_pattern: "FilterPattern",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   All events are available at resp.response_stream:
+    #   resp.response_stream #=> Enumerator
+    #   resp.response_stream.event_types #=> [:session_start, :session_update, :session_timeout_exception, :session_streaming_exception]
+    #
+    #   For :session_start event available at #on_session_start_event callback and response eventstream enumerator:
+    #   event.request_id #=> String
+    #   event.session_id #=> String
+    #   event.log_group_identifiers #=> Array
+    #   event.log_group_identifiers[0] #=> String
+    #   event.log_stream_names #=> Array
+    #   event.log_stream_names[0] #=> String
+    #   event.log_stream_name_prefixes #=> Array
+    #   event.log_stream_name_prefixes[0] #=> String
+    #   event.log_event_filter_pattern #=> String
+    #
+    #   For :session_update event available at #on_session_update_event callback and response eventstream enumerator:
+    #   event.session_metadata.sampled #=> Boolean
+    #   event.session_results #=> Array
+    #   event.session_results[0].log_stream_name #=> String
+    #   event.session_results[0].log_group_identifier #=> String
+    #   event.session_results[0].message #=> String
+    #   event.session_results[0].timestamp #=> Integer
+    #   event.session_results[0].ingestion_time #=> Integer
+    #
+    #   For :session_timeout_exception event available at #on_session_timeout_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :session_streaming_exception event available at #on_session_streaming_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartLiveTail AWS API Documentation
+    #
+    # @overload start_live_tail(params = {})
+    # @param [Hash] params ({})
+    def start_live_tail(params = {}, options = {})
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::StartLiveTailResponseStream then handler
+        when Proc then EventStreams::StartLiveTailResponseStream.new.tap(&handler)
+        when nil then EventStreams::StartLiveTailResponseStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:start_live_tail, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options)
+    end
+
     # Schedules a query of a log group using CloudWatch Logs Insights. You
     # specify the log group and time range to query and the query string to
     # use.
@@ -4912,7 +5205,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

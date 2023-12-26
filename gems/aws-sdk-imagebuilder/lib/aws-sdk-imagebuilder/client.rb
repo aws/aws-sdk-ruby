@@ -515,7 +515,7 @@ module Aws::Imagebuilder
     # @option params [String] :change_description
     #   The change description of the component. Describes what change has
     #   been made in this version, or what makes this version different from
-    #   other versions of this component.
+    #   other versions of the component.
     #
     # @option params [required, String] :platform
     #   The operating system platform of the component.
@@ -920,6 +920,13 @@ module Aws::Imagebuilder
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
     #   Contains settings for vulnerability scans.
     #
+    # @option params [Array<Types::WorkflowConfiguration>] :workflows
+    #   Contains an array of workflow configuration objects.
+    #
+    # @option params [String] :execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #
     # @return [Types::CreateImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImageResponse#request_id #request_id} => String
@@ -949,6 +956,20 @@ module Aws::Imagebuilder
     #         container_tags: ["NonEmptyString"],
     #       },
     #     },
+    #     workflows: [
+    #       {
+    #         workflow_arn: "WorkflowVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "WorkflowParameterName", # required
+    #             value: ["WorkflowParameterValue"], # required
+    #           },
+    #         ],
+    #         parallel_group: "ParallelGroup",
+    #         on_failure: "CONTINUE", # accepts CONTINUE, ABORT
+    #       },
+    #     ],
+    #     execution_role: "RoleNameOrArn",
     #   })
     #
     # @example Response structure
@@ -1025,6 +1046,13 @@ module Aws::Imagebuilder
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
     #   Contains settings for vulnerability scans.
     #
+    # @option params [Array<Types::WorkflowConfiguration>] :workflows
+    #   Contains an array of workflow configuration objects.
+    #
+    # @option params [String] :execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #
     # @return [Types::CreateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImagePipelineResponse#request_id #request_id} => String
@@ -1062,6 +1090,20 @@ module Aws::Imagebuilder
     #         container_tags: ["NonEmptyString"],
     #       },
     #     },
+    #     workflows: [
+    #       {
+    #         workflow_arn: "WorkflowVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "WorkflowParameterName", # required
+    #             value: ["WorkflowParameterValue"], # required
+    #           },
+    #         ],
+    #         parallel_group: "ParallelGroup",
+    #         on_failure: "CONTINUE", # accepts CONTINUE, ABORT
+    #       },
+    #     ],
+    #     execution_role: "RoleNameOrArn",
     #   })
     #
     # @example Response structure
@@ -1352,8 +1394,8 @@ module Aws::Imagebuilder
     #   Indicates whether the lifecycle policy resource is enabled.
     #
     # @option params [required, String] :execution_role
-    #   The role name or Amazon Resource Name (ARN) for the IAM role that
-    #   grants Image Builder access to run lifecycle actions.
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to run lifecycle actions.
     #
     # @option params [required, String] :resource_type
     #   The type of Image Builder resource that the lifecycle policy applies
@@ -1457,6 +1499,111 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def create_lifecycle_policy(params = {}, options = {})
       req = build_request(:create_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Create a new workflow or a new version of an existing workflow.
+    #
+    # @option params [required, String] :name
+    #   The name of the workflow to create.
+    #
+    # @option params [required, String] :semantic_version
+    #   The semantic version of this workflow resource. The semantic version
+    #   syntax adheres to the following rules.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number to the fourth node.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
+    #
+    # @option params [String] :description
+    #   Describes the workflow.
+    #
+    # @option params [String] :change_description
+    #   Describes what change has been made in this version of the workflow,
+    #   or what makes this version different from other versions of the
+    #   workflow.
+    #
+    # @option params [String] :data
+    #   Contains the UTF-8 encoded YAML document content for the workflow.
+    #   Alternatively, you can specify the `uri` of a YAML document file
+    #   stored in Amazon S3. However, you cannot specify both properties.
+    #
+    # @option params [String] :uri
+    #   The `uri` of a YAML component document file. This must be an S3 URL
+    #   (`s3://bucket/key`), and the requester must have permission to access
+    #   the S3 bucket it points to. If you use Amazon S3, you can specify
+    #   component content up to your service quota.
+    #
+    #   Alternatively, you can specify the YAML document inline, using the
+    #   component `data` property. You cannot specify both properties.
+    #
+    # @option params [String] :kms_key_id
+    #   The ID of the KMS key that is used to encrypt this workflow resource.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags that apply to the workflow resource.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :type
+    #   The phase in the image build process for which the workflow resource
+    #   is responsible.
+    #
+    # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkflowResponse#client_token #client_token} => String
+    #   * {Types::CreateWorkflowResponse#workflow_build_version_arn #workflow_build_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workflow({
+    #     name: "ResourceName", # required
+    #     semantic_version: "VersionNumber", # required
+    #     description: "NonEmptyString",
+    #     change_description: "NonEmptyString",
+    #     data: "InlineWorkflowData",
+    #     uri: "Uri",
+    #     kms_key_id: "NonEmptyString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken", # required
+    #     type: "BUILD", # required, accepts BUILD, TEST, DISTRIBUTION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_token #=> String
+    #   resp.workflow_build_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateWorkflow AWS API Documentation
+    #
+    # @overload create_workflow(params = {})
+    # @param [Hash] params ({})
+    def create_workflow(params = {}, options = {})
+      req = build_request(:create_workflow, params)
       req.send_request(options)
     end
 
@@ -1718,6 +1865,34 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def delete_lifecycle_policy(params = {}, options = {})
       req = build_request(:delete_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specific workflow resource.
+    #
+    # @option params [required, String] :workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource to delete.
+    #
+    # @return [Types::DeleteWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWorkflowResponse#workflow_build_version_arn #workflow_build_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workflow({
+    #     workflow_build_version_arn: "WorkflowBuildVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_build_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteWorkflow AWS API Documentation
+    #
+    # @overload delete_workflow(params = {})
+    # @param [Hash] params ({})
+    def delete_workflow(params = {}, options = {})
+      req = build_request(:delete_workflow, params)
       req.send_request(options)
     end
 
@@ -2177,6 +2352,15 @@ module Aws::Imagebuilder
     #   resp.image.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
     #   resp.image.deprecation_time #=> Time
     #   resp.image.lifecycle_execution_id #=> String
+    #   resp.image.execution_role #=> String
+    #   resp.image.workflows #=> Array
+    #   resp.image.workflows[0].workflow_arn #=> String
+    #   resp.image.workflows[0].parameters #=> Array
+    #   resp.image.workflows[0].parameters[0].name #=> String
+    #   resp.image.workflows[0].parameters[0].value #=> Array
+    #   resp.image.workflows[0].parameters[0].value[0] #=> String
+    #   resp.image.workflows[0].parallel_group #=> String
+    #   resp.image.workflows[0].on_failure #=> String, one of "CONTINUE", "ABORT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImage AWS API Documentation
     #
@@ -2232,6 +2416,15 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image_pipeline.execution_role #=> String
+    #   resp.image_pipeline.workflows #=> Array
+    #   resp.image_pipeline.workflows[0].workflow_arn #=> String
+    #   resp.image_pipeline.workflows[0].parameters #=> Array
+    #   resp.image_pipeline.workflows[0].parameters[0].name #=> String
+    #   resp.image_pipeline.workflows[0].parameters[0].value #=> Array
+    #   resp.image_pipeline.workflows[0].parameters[0].value[0] #=> String
+    #   resp.image_pipeline.workflows[0].parallel_group #=> String
+    #   resp.image_pipeline.workflows[0].on_failure #=> String, one of "CONTINUE", "ABORT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImagePipeline AWS API Documentation
     #
@@ -2518,6 +2711,54 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Get a workflow resource object.
+    #
+    # @option params [required, String] :workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource that you want
+    #   to get.
+    #
+    # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowResponse#workflow #workflow} => Types::Workflow
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow({
+    #     workflow_build_version_arn: "WorkflowVersionArnOrBuildVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow.arn #=> String
+    #   resp.workflow.name #=> String
+    #   resp.workflow.version #=> String
+    #   resp.workflow.description #=> String
+    #   resp.workflow.change_description #=> String
+    #   resp.workflow.type #=> String, one of "BUILD", "TEST", "DISTRIBUTION"
+    #   resp.workflow.state.status #=> String, one of "DEPRECATED"
+    #   resp.workflow.state.reason #=> String
+    #   resp.workflow.owner #=> String
+    #   resp.workflow.data #=> String
+    #   resp.workflow.kms_key_id #=> String
+    #   resp.workflow.date_created #=> String
+    #   resp.workflow.tags #=> Hash
+    #   resp.workflow.tags["TagKey"] #=> String
+    #   resp.workflow.parameters #=> Array
+    #   resp.workflow.parameters[0].name #=> String
+    #   resp.workflow.parameters[0].type #=> String
+    #   resp.workflow.parameters[0].default_value #=> Array
+    #   resp.workflow.parameters[0].default_value[0] #=> String
+    #   resp.workflow.parameters[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflow AWS API Documentation
+    #
+    # @overload get_workflow(params = {})
+    # @param [Hash] params ({})
+    def get_workflow(params = {}, options = {})
+      req = build_request(:get_workflow, params)
+      req.send_request(options)
+    end
+
     # Get the runtime information that was logged for a specific runtime
     # instance of the workflow.
     #
@@ -2540,6 +2781,7 @@ module Aws::Imagebuilder
     #   * {Types::GetWorkflowExecutionResponse#total_steps_skipped #total_steps_skipped} => Integer
     #   * {Types::GetWorkflowExecutionResponse#start_time #start_time} => String
     #   * {Types::GetWorkflowExecutionResponse#end_time #end_time} => String
+    #   * {Types::GetWorkflowExecutionResponse#parallel_group #parallel_group} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2554,7 +2796,7 @@ module Aws::Imagebuilder
     #   resp.workflow_execution_id #=> String
     #   resp.image_build_version_arn #=> String
     #   resp.type #=> String, one of "BUILD", "TEST", "DISTRIBUTION"
-    #   resp.status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETED"
+    #   resp.status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETED", "CANCELLED"
     #   resp.message #=> String
     #   resp.total_step_count #=> Integer
     #   resp.total_steps_succeeded #=> Integer
@@ -2562,6 +2804,7 @@ module Aws::Imagebuilder
     #   resp.total_steps_skipped #=> Integer
     #   resp.start_time #=> String
     #   resp.end_time #=> String
+    #   resp.parallel_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowExecution AWS API Documentation
     #
@@ -2615,7 +2858,7 @@ module Aws::Imagebuilder
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.action #=> String
-    #   resp.status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
     #   resp.rollback_status #=> String, one of "RUNNING", "COMPLETED", "SKIPPED", "FAILED"
     #   resp.message #=> String
     #   resp.inputs #=> String
@@ -2662,7 +2905,7 @@ module Aws::Imagebuilder
     # @option params [String] :change_description
     #   The change description of the component. This description indicates
     #   the change that has been made in this version, or what makes this
-    #   version different from other versions of this component.
+    #   version different from other versions of the component.
     #
     # @option params [required, String] :type
     #   The type of the component denotes whether the component is used to
@@ -3446,6 +3689,15 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image_pipeline_list[0].execution_role #=> String
+    #   resp.image_pipeline_list[0].workflows #=> Array
+    #   resp.image_pipeline_list[0].workflows[0].workflow_arn #=> String
+    #   resp.image_pipeline_list[0].workflows[0].parameters #=> Array
+    #   resp.image_pipeline_list[0].workflows[0].parameters[0].name #=> String
+    #   resp.image_pipeline_list[0].workflows[0].parameters[0].value #=> Array
+    #   resp.image_pipeline_list[0].workflows[0].parameters[0].value[0] #=> String
+    #   resp.image_pipeline_list[0].workflows[0].parallel_group #=> String
+    #   resp.image_pipeline_list[0].workflows[0].on_failure #=> String, one of "CONTINUE", "ABORT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelines AWS API Documentation
@@ -4072,6 +4324,105 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Get a list of workflow steps that are waiting for action for workflows
+    # in your Amazon Web Services account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListWaitingWorkflowStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWaitingWorkflowStepsResponse#steps #steps} => Array&lt;Types::WorkflowStepExecution&gt;
+    #   * {Types::ListWaitingWorkflowStepsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_waiting_workflow_steps({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.steps #=> Array
+    #   resp.steps[0].step_execution_id #=> String
+    #   resp.steps[0].image_build_version_arn #=> String
+    #   resp.steps[0].workflow_execution_id #=> String
+    #   resp.steps[0].workflow_build_version_arn #=> String
+    #   resp.steps[0].name #=> String
+    #   resp.steps[0].action #=> String
+    #   resp.steps[0].start_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWaitingWorkflowSteps AWS API Documentation
+    #
+    # @overload list_waiting_workflow_steps(params = {})
+    # @param [Hash] params ({})
+    def list_waiting_workflow_steps(params = {}, options = {})
+      req = build_request(:list_waiting_workflow_steps, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of build versions for a specific workflow resource.
+    #
+    # @option params [required, String] :workflow_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource for which to
+    #   get a list of build versions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListWorkflowBuildVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowBuildVersionsResponse#workflow_summary_list #workflow_summary_list} => Array&lt;Types::WorkflowSummary&gt;
+    #   * {Types::ListWorkflowBuildVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflow_build_versions({
+    #     workflow_version_arn: "WorkflowWildcardVersionArn", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_summary_list #=> Array
+    #   resp.workflow_summary_list[0].arn #=> String
+    #   resp.workflow_summary_list[0].name #=> String
+    #   resp.workflow_summary_list[0].version #=> String
+    #   resp.workflow_summary_list[0].description #=> String
+    #   resp.workflow_summary_list[0].change_description #=> String
+    #   resp.workflow_summary_list[0].type #=> String, one of "BUILD", "TEST", "DISTRIBUTION"
+    #   resp.workflow_summary_list[0].owner #=> String
+    #   resp.workflow_summary_list[0].state.status #=> String, one of "DEPRECATED"
+    #   resp.workflow_summary_list[0].state.reason #=> String
+    #   resp.workflow_summary_list[0].date_created #=> String
+    #   resp.workflow_summary_list[0].tags #=> Hash
+    #   resp.workflow_summary_list[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowBuildVersions AWS API Documentation
+    #
+    # @overload list_workflow_build_versions(params = {})
+    # @param [Hash] params ({})
+    def list_workflow_build_versions(params = {}, options = {})
+      req = build_request(:list_workflow_build_versions, params)
+      req.send_request(options)
+    end
+
     # Returns a list of workflow runtime instance metadata objects for a
     # specific image build version.
     #
@@ -4111,7 +4462,7 @@ module Aws::Imagebuilder
     #   resp.workflow_executions[0].workflow_build_version_arn #=> String
     #   resp.workflow_executions[0].workflow_execution_id #=> String
     #   resp.workflow_executions[0].type #=> String, one of "BUILD", "TEST", "DISTRIBUTION"
-    #   resp.workflow_executions[0].status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETED"
+    #   resp.workflow_executions[0].status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETED", "CANCELLED"
     #   resp.workflow_executions[0].message #=> String
     #   resp.workflow_executions[0].total_step_count #=> Integer
     #   resp.workflow_executions[0].total_steps_succeeded #=> Integer
@@ -4119,6 +4470,7 @@ module Aws::Imagebuilder
     #   resp.workflow_executions[0].total_steps_skipped #=> Integer
     #   resp.workflow_executions[0].start_time #=> String
     #   resp.workflow_executions[0].end_time #=> String
+    #   resp.workflow_executions[0].parallel_group #=> String
     #   resp.image_build_version_arn #=> String
     #   resp.message #=> String
     #   resp.next_token #=> String
@@ -4132,8 +4484,8 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Shows runtime data for each step in a runtime instance of the workflow
-    # that you specify in the request.
+    # Returns runtime data for each step in a runtime instance of the
+    # workflow that you specify in the request.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -4174,7 +4526,7 @@ module Aws::Imagebuilder
     #   resp.steps[0].name #=> String
     #   resp.steps[0].description #=> String
     #   resp.steps[0].action #=> String
-    #   resp.steps[0].status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.steps[0].status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
     #   resp.steps[0].rollback_status #=> String, one of "RUNNING", "COMPLETED", "SKIPPED", "FAILED"
     #   resp.steps[0].message #=> String
     #   resp.steps[0].inputs #=> String
@@ -4193,6 +4545,68 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def list_workflow_step_executions(params = {}, options = {})
       req = build_request(:list_workflow_step_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists workflow build versions based on filtering parameters.
+    #
+    # @option params [String] :owner
+    #   Used to get a list of workflow build version filtered by the identity
+    #   of the creator.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Used to streamline search results.
+    #
+    # @option params [Boolean] :by_name
+    #   Specify all or part of the workflow name to streamline results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowsResponse#workflow_version_list #workflow_version_list} => Array&lt;Types::WorkflowVersion&gt;
+    #   * {Types::ListWorkflowsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflows({
+    #     owner: "Self", # accepts Self, Shared, Amazon, ThirdParty
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     by_name: false,
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_version_list #=> Array
+    #   resp.workflow_version_list[0].arn #=> String
+    #   resp.workflow_version_list[0].name #=> String
+    #   resp.workflow_version_list[0].version #=> String
+    #   resp.workflow_version_list[0].description #=> String
+    #   resp.workflow_version_list[0].type #=> String, one of "BUILD", "TEST", "DISTRIBUTION"
+    #   resp.workflow_version_list[0].owner #=> String
+    #   resp.workflow_version_list[0].date_created #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflows AWS API Documentation
+    #
+    # @overload list_workflows(params = {})
+    # @param [Hash] params ({})
+    def list_workflows(params = {}, options = {})
+      req = build_request(:list_workflows, params)
       req.send_request(options)
     end
 
@@ -4369,6 +4783,66 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def put_image_recipe_policy(params = {}, options = {})
       req = build_request(:put_image_recipe_policy, params)
+      req.send_request(options)
+    end
+
+    # Pauses or resumes image creation when the associated workflow runs a
+    # `WaitForAction` step.
+    #
+    # @option params [required, String] :step_execution_id
+    #   Uniquely identifies the workflow step that sent the step action.
+    #
+    # @option params [required, String] :image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the image build version to send
+    #   action for.
+    #
+    # @option params [required, String] :action
+    #   The action for the image creation process to take while a workflow
+    #   `WaitForAction` step waits for an asynchronous action to complete.
+    #
+    # @option params [String] :reason
+    #   The reason why this action is sent.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::SendWorkflowStepActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendWorkflowStepActionResponse#step_execution_id #step_execution_id} => String
+    #   * {Types::SendWorkflowStepActionResponse#image_build_version_arn #image_build_version_arn} => String
+    #   * {Types::SendWorkflowStepActionResponse#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_workflow_step_action({
+    #     step_execution_id: "WorkflowStepExecutionId", # required
+    #     image_build_version_arn: "ImageBuildVersionArn", # required
+    #     action: "RESUME", # required, accepts RESUME, STOP
+    #     reason: "NonEmptyString",
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.step_execution_id #=> String
+    #   resp.image_build_version_arn #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SendWorkflowStepAction AWS API Documentation
+    #
+    # @overload send_workflow_step_action(params = {})
+    # @param [Hash] params ({})
+    def send_workflow_step_action(params = {}, options = {})
+      req = build_request(:send_workflow_step_action, params)
       req.send_request(options)
     end
 
@@ -4671,7 +5145,9 @@ module Aws::Imagebuilder
     end
 
     # Updates an image pipeline. Image pipelines enable you to automate the
-    # creation and distribution of images.
+    # creation and distribution of images. You must specify exactly one
+    # recipe for your image, using either a `containerRecipeArn` or an
+    # `imageRecipeArn`.
     #
     # <note markdown="1"> UpdateImagePipeline does not support selective updates for the
     # pipeline. You must specify all of the required properties in the
@@ -4733,6 +5209,13 @@ module Aws::Imagebuilder
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
     #   Contains settings for vulnerability scans.
     #
+    # @option params [Array<Types::WorkflowConfiguration>] :workflows
+    #   Contains the workflows to run for the pipeline.
+    #
+    # @option params [String] :execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions.
+    #
     # @return [Types::UpdateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateImagePipelineResponse#request_id #request_id} => String
@@ -4767,6 +5250,20 @@ module Aws::Imagebuilder
     #         container_tags: ["NonEmptyString"],
     #       },
     #     },
+    #     workflows: [
+    #       {
+    #         workflow_arn: "WorkflowVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "WorkflowParameterName", # required
+    #             value: ["WorkflowParameterValue"], # required
+    #           },
+    #         ],
+    #         parallel_group: "ParallelGroup",
+    #         on_failure: "CONTINUE", # accepts CONTINUE, ABORT
+    #       },
+    #     ],
+    #     execution_role: "RoleNameOrArn",
     #   })
     #
     # @example Response structure
@@ -4929,8 +5426,8 @@ module Aws::Imagebuilder
     #   Indicates whether the lifecycle policy resource is enabled.
     #
     # @option params [required, String] :execution_role
-    #   The name of the IAM role that Image Builder should use to update the
-    #   lifecycle policy.
+    #   The name or Amazon Resource Name (ARN) of the IAM role that Image
+    #   Builder uses to update the lifecycle policy.
     #
     # @option params [required, String] :resource_type
     #   The type of image resource that the lifecycle policy applies to.
@@ -5040,7 +5537,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
