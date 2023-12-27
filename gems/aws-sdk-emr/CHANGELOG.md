@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-12-27)
+------------------
+
+* Feature - Add support for customers to modify cluster attribute auto-terminate post cluster launch
+
 1.81.0 (2023-11-28)
 ------------------
 
