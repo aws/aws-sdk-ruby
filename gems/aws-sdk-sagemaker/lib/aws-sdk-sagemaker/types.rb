@@ -17468,6 +17468,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A collection of settings that configure the domain's Docker
+    # interaction.
+    #
+    # @!attribute [rw] enable_docker_access
+    #   Indicates whether the domain can access Docker.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_only_trusted_accounts
+    #   The list of Amazon Web Services accounts that are trusted when the
+    #   domain is created in VPC-only mode.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DockerSettings AWS API Documentation
+    #
+    class DockerSettings < Struct.new(
+      :enable_docker_access,
+      :vpc_only_trusted_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The domain's details.
     #
     # @!attribute [rw] domain_arn
@@ -17535,12 +17556,18 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] docker_settings
+    #   A collection of settings that configure the domain's Docker
+    #   interaction.
+    #   @return [Types::DockerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
     #
     class DomainSettings < Struct.new(
       :security_group_ids,
       :r_studio_server_pro_domain_settings,
-      :execution_role_identity_config)
+      :execution_role_identity_config,
+      :docker_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17570,12 +17597,18 @@ module Aws::SageMaker
     #   apps.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] docker_settings
+    #   A collection of settings that configure the domain's Docker
+    #   interaction.
+    #   @return [Types::DockerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
       :r_studio_server_pro_domain_settings_for_update,
       :execution_role_identity_config,
-      :security_group_ids)
+      :security_group_ids,
+      :docker_settings)
       SENSITIVE = []
       include Aws::Structure
     end

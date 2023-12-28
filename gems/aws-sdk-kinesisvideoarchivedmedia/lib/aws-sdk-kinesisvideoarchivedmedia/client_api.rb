@@ -319,6 +319,7 @@ module Aws::KinesisVideoArchivedMedia
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ClientLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoDataRetentionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

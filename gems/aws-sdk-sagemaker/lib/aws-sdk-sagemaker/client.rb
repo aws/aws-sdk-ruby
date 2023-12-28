@@ -2584,6 +2584,10 @@ module Aws::SageMaker
     #         },
     #       },
     #       execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
+    #       docker_settings: {
+    #         enable_docker_access: "ENABLED", # accepts ENABLED, DISABLED
+    #         vpc_only_trusted_accounts: ["AccountId"],
+    #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
     #     vpc_id: "VpcId", # required
@@ -11733,6 +11737,9 @@ module Aws::SageMaker
     #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.lifecycle_config_arn #=> String
     #   resp.domain_settings.execution_role_identity_config #=> String, one of "USER_PROFILE_NAME", "DISABLED"
+    #   resp.domain_settings.docker_settings.enable_docker_access #=> String, one of "ENABLED", "DISABLED"
+    #   resp.domain_settings.docker_settings.vpc_only_trusted_accounts #=> Array
+    #   resp.domain_settings.docker_settings.vpc_only_trusted_accounts[0] #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -23616,6 +23623,10 @@ module Aws::SageMaker
     #       },
     #       execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #       security_group_ids: ["SecurityGroupId"],
+    #       docker_settings: {
+    #         enable_docker_access: "ENABLED", # accepts ENABLED, DISABLED
+    #         vpc_only_trusted_accounts: ["AccountId"],
+    #       },
     #     },
     #     app_security_group_management: "Service", # accepts Service, Customer
     #     default_space_settings: {
@@ -25844,7 +25855,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.226.0'
+      context[:gem_version] = '1.227.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

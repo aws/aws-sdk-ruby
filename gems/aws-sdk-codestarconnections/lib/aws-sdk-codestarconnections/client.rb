@@ -425,7 +425,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
-    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
+    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
     #     connection_name: "ConnectionName", # required
     #     tags: [
     #       {
@@ -494,7 +494,7 @@ module Aws::CodeStarconnections
     #
     #   resp = client.create_host({
     #     name: "HostName", # required
-    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
+    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
     #     provider_endpoint: "Url", # required
     #     vpc_configuration: {
     #       vpc_id: "VpcId", # required
@@ -572,7 +572,7 @@ module Aws::CodeStarconnections
     #   resp.repository_link_info.connection_arn #=> String
     #   resp.repository_link_info.encryption_key_arn #=> String
     #   resp.repository_link_info.owner_id #=> String
-    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.repository_link_info.repository_link_arn #=> String
     #   resp.repository_link_info.repository_link_id #=> String
     #   resp.repository_link_info.repository_name #=> String
@@ -637,7 +637,7 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.branch #=> String
     #   resp.sync_configuration.config_file #=> String
     #   resp.sync_configuration.owner_id #=> String
-    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.sync_configuration.repository_link_id #=> String
     #   resp.sync_configuration.repository_name #=> String
     #   resp.sync_configuration.resource_name #=> String
@@ -778,7 +778,7 @@ module Aws::CodeStarconnections
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.connection.owner_account_id #=> String
     #   resp.connection.connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connection.host_arn #=> String
@@ -816,7 +816,7 @@ module Aws::CodeStarconnections
     #
     #   resp.name #=> String
     #   resp.status #=> String
-    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.provider_endpoint #=> String
     #   resp.vpc_configuration.vpc_id #=> String
     #   resp.vpc_configuration.subnet_ids #=> Array
@@ -856,7 +856,7 @@ module Aws::CodeStarconnections
     #   resp.repository_link_info.connection_arn #=> String
     #   resp.repository_link_info.encryption_key_arn #=> String
     #   resp.repository_link_info.owner_id #=> String
-    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.repository_link_info.repository_link_arn #=> String
     #   resp.repository_link_info.repository_link_id #=> String
     #   resp.repository_link_info.repository_name #=> String
@@ -944,7 +944,7 @@ module Aws::CodeStarconnections
     #   resp.desired_state.directory #=> String
     #   resp.desired_state.owner_id #=> String
     #   resp.desired_state.repository_name #=> String
-    #   resp.desired_state.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.desired_state.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.desired_state.sha #=> String
     #   resp.latest_successful_sync.events #=> Array
     #   resp.latest_successful_sync.events[0].event #=> String
@@ -955,7 +955,7 @@ module Aws::CodeStarconnections
     #   resp.latest_successful_sync.initial_revision.directory #=> String
     #   resp.latest_successful_sync.initial_revision.owner_id #=> String
     #   resp.latest_successful_sync.initial_revision.repository_name #=> String
-    #   resp.latest_successful_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.latest_successful_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.latest_successful_sync.initial_revision.sha #=> String
     #   resp.latest_successful_sync.started_at #=> Time
     #   resp.latest_successful_sync.status #=> String, one of "FAILED", "INITIATED", "IN_PROGRESS", "SUCCEEDED"
@@ -963,7 +963,7 @@ module Aws::CodeStarconnections
     #   resp.latest_successful_sync.target_revision.directory #=> String
     #   resp.latest_successful_sync.target_revision.owner_id #=> String
     #   resp.latest_successful_sync.target_revision.repository_name #=> String
-    #   resp.latest_successful_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.latest_successful_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.latest_successful_sync.target_revision.sha #=> String
     #   resp.latest_successful_sync.target #=> String
     #   resp.latest_sync.events #=> Array
@@ -975,7 +975,7 @@ module Aws::CodeStarconnections
     #   resp.latest_sync.initial_revision.directory #=> String
     #   resp.latest_sync.initial_revision.owner_id #=> String
     #   resp.latest_sync.initial_revision.repository_name #=> String
-    #   resp.latest_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.latest_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.latest_sync.initial_revision.sha #=> String
     #   resp.latest_sync.started_at #=> Time
     #   resp.latest_sync.status #=> String, one of "FAILED", "INITIATED", "IN_PROGRESS", "SUCCEEDED"
@@ -983,7 +983,7 @@ module Aws::CodeStarconnections
     #   resp.latest_sync.target_revision.directory #=> String
     #   resp.latest_sync.target_revision.owner_id #=> String
     #   resp.latest_sync.target_revision.repository_name #=> String
-    #   resp.latest_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.latest_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.latest_sync.target_revision.sha #=> String
     #   resp.latest_sync.target #=> String
     #
@@ -1070,7 +1070,7 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.branch #=> String
     #   resp.sync_configuration.config_file #=> String
     #   resp.sync_configuration.owner_id #=> String
-    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.sync_configuration.repository_link_id #=> String
     #   resp.sync_configuration.repository_name #=> String
     #   resp.sync_configuration.resource_name #=> String
@@ -1115,7 +1115,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_connections({
-    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
+    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
     #     host_arn_filter: "HostArn",
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1126,7 +1126,7 @@ module Aws::CodeStarconnections
     #   resp.connections #=> Array
     #   resp.connections[0].connection_name #=> String
     #   resp.connections[0].connection_arn #=> String
-    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.connections[0].owner_account_id #=> String
     #   resp.connections[0].connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connections[0].host_arn #=> String
@@ -1171,7 +1171,7 @@ module Aws::CodeStarconnections
     #   resp.hosts #=> Array
     #   resp.hosts[0].name #=> String
     #   resp.hosts[0].host_arn #=> String
-    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.hosts[0].provider_endpoint #=> String
     #   resp.hosts[0].vpc_configuration.vpc_id #=> String
     #   resp.hosts[0].vpc_configuration.subnet_ids #=> Array
@@ -1222,7 +1222,7 @@ module Aws::CodeStarconnections
     #   resp.repository_links[0].connection_arn #=> String
     #   resp.repository_links[0].encryption_key_arn #=> String
     #   resp.repository_links[0].owner_id #=> String
-    #   resp.repository_links[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.repository_links[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.repository_links[0].repository_link_arn #=> String
     #   resp.repository_links[0].repository_link_id #=> String
     #   resp.repository_links[0].repository_name #=> String
@@ -1317,7 +1317,7 @@ module Aws::CodeStarconnections
     #   resp.sync_configurations[0].branch #=> String
     #   resp.sync_configurations[0].config_file #=> String
     #   resp.sync_configurations[0].owner_id #=> String
-    #   resp.sync_configurations[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.sync_configurations[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.sync_configurations[0].repository_link_id #=> String
     #   resp.sync_configurations[0].repository_name #=> String
     #   resp.sync_configurations[0].resource_name #=> String
@@ -1496,7 +1496,7 @@ module Aws::CodeStarconnections
     #   resp.repository_link_info.connection_arn #=> String
     #   resp.repository_link_info.encryption_key_arn #=> String
     #   resp.repository_link_info.owner_id #=> String
-    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.repository_link_info.repository_link_arn #=> String
     #   resp.repository_link_info.repository_link_id #=> String
     #   resp.repository_link_info.repository_name #=> String
@@ -1607,7 +1607,7 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.branch #=> String
     #   resp.sync_configuration.config_file #=> String
     #   resp.sync_configuration.owner_id #=> String
-    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.sync_configuration.repository_link_id #=> String
     #   resp.sync_configuration.repository_name #=> String
     #   resp.sync_configuration.resource_name #=> String
@@ -1636,7 +1636,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

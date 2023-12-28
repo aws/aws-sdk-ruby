@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.227.0 (2023-12-28)
+------------------
+
+* Feature - Amazon SageMaker Studio now supports Docker access from within app container
+
 1.226.0 (2023-12-21)
 ------------------
 

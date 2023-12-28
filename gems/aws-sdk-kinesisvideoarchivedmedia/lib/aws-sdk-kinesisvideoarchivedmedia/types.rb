@@ -753,14 +753,10 @@ module Aws::KinesisVideoArchivedMedia
     #
     # @!attribute [rw] sampling_interval
     #   The time interval in milliseconds (ms) at which the images need to
-    #   be generated from the stream, with a default of 3000 ms. The minimum
-    #   value that can be provided is 200 ms. If the timestamp range is less
-    #   than the sampling interval, the Image from the `startTimestamp` will
-    #   be returned if available.
-    #
-    #   <note markdown="1"> The minimum value of 200 ms is a hard limit.
-    #
-    #    </note>
+    #   be generated from the stream. The minimum value that can be provided
+    #   is 200 ms (5 images per second). If the timestamp range is less than
+    #   the sampling interval, the image from the `startTimestamp` will be
+    #   returned if available.
     #   @return [Integer]
     #
     # @!attribute [rw] format
@@ -1131,6 +1127,10 @@ module Aws::KinesisVideoArchivedMedia
     # @!attribute [rw] fragment_selector
     #   Describes the timestamp range and timestamp origin for the range of
     #   fragments to return.
+    #
+    #   <note markdown="1"> This is only required when the `NextToken` isn't passed in the API.
+    #
+    #    </note>
     #   @return [Types::FragmentSelector]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsInput AWS API Documentation
@@ -1180,8 +1180,8 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
-    # A streaming session was requested for a stream that does not retain
-    # data (that is, has a `DataRetentionInHours` of 0).
+    # `GetImages` was requested for a stream that does not retain data (that
+    # is, has a `DataRetentionInHours` of 0).
     #
     # @!attribute [rw] message
     #   @return [String]

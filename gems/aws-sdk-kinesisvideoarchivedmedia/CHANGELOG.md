@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-12-28)
+------------------
+
+* Feature - NoDataRetentionException thrown when GetImages requested for a Stream that does not retain data (that is, has a DataRetentionInHours of 0).
+
 1.55.0 (2023-11-28)
 ------------------
 
