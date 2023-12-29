@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-12-29)
+------------------
+
+* Feature - This release introduces a new parameter to bypasses an API key's expiry conditions and delete the key.
+
 1.43.0 (2023-12-12)
 ------------------
 

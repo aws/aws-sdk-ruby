@@ -623,6 +623,7 @@ module Aws::LocationService
 
     DeleteGeofenceCollectionResponse.struct_class = Types::DeleteGeofenceCollectionResponse
 
+    DeleteKeyRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "forceDelete"))
     DeleteKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "KeyName"))
     DeleteKeyRequest.struct_class = Types::DeleteKeyRequest
 

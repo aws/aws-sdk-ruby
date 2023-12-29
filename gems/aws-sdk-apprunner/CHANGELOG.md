@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2023-12-29)
+------------------
+
+* Feature - AWS App Runner adds Python 3.11 and Node.js 18 runtimes.
+
 1.34.0 (2023-11-28)
 ------------------
 

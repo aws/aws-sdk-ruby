@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2023-12-29)
+------------------
+
+* Feature - Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics
+
 1.101.0 (2023-12-18)
 ------------------
 

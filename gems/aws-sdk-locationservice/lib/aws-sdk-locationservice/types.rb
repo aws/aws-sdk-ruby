@@ -120,7 +120,7 @@ module Aws::LocationService
     #
     #   * Other than wildcards, you must include the full ARN, including the
     #     `arn`, `partition`, `service`, `region`, `account-id` and
-    #     `resource-id`, delimited by colons (:).
+    #     `resource-id` delimited by colons (:).
     #
     #   * No spaces allowed, even with wildcards. For example,
     #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
@@ -2126,6 +2126,21 @@ module Aws::LocationService
     #
     class DeleteGeofenceCollectionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] force_delete
+    #   ForceDelete bypasses an API key's expiry conditions and deletes the
+    #   key. Set the parameter `true` to delete the key or to `false` to not
+    #   preemptively delete the API key.
+    #
+    #   Valid values: `true`, or `false`.
+    #
+    #   Required: No
+    #
+    #   <note markdown="1"> This action is irreversible. Only use ForceDelete if you are certain
+    #   the key is no longer in use.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] key_name
     #   The name of the API key to delete.
     #   @return [String]
@@ -2133,6 +2148,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteKeyRequest AWS API Documentation
     #
     class DeleteKeyRequest < Struct.new(
+      :force_delete,
       :key_name)
       SENSITIVE = []
       include Aws::Structure
