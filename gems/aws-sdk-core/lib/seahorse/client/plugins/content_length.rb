@@ -10,9 +10,11 @@ module Seahorse
           # https://github.com/ruby/net-http/blob/master/lib/net/http/requests.rb
           # Methods without body are forwards compatible, because content-length
           # may be set for requests without body but is technically incorrect.
-          METHODS_WITHOUT_BODY = Set.new(
-            %w[GET HEAD DELETE OPTIONS TRACE COPY MOVE]
-          )
+          unless (const_defined?(:METHODS_WITHOUT_BODY))
+            METHODS_WITHOUT_BODY = Set.new(
+              %w[GET HEAD DELETE OPTIONS TRACE COPY MOVE]
+            )
+          end
 
           def call(context)
             body = context.http_request.body

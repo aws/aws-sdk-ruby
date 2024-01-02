@@ -11,18 +11,22 @@ module Seahorse
     # @api private
     module H2
 
-      NETWORK_ERRORS = [
-        SocketError, EOFError, IOError, Timeout::Error,
-        Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
-        Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
-        Errno::EHOSTUNREACH, Errno::ECONNREFUSED,# OpenSSL::SSL::SSLErrorWaitReadable
-      ]
+      unless (const_defined?(:NETWORK_ERRORS))
+        NETWORK_ERRORS = [
+          SocketError, EOFError, IOError, Timeout::Error,
+          Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
+          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
+          Errno::EHOSTUNREACH, Errno::ECONNREFUSED,# OpenSSL::SSL::SSLErrorWaitReadable
+        ]
+      end
 
-      # @api private
-      DNS_ERROR_MESSAGES = [
-        'getaddrinfo: nodename nor servname provided, or not known', # MacOS
-        'getaddrinfo: Name or service not known' # GNU
-      ]
+      unless (const_defined?(:DNS_ERROR_MESSAGES))
+        # @api private
+        DNS_ERROR_MESSAGES = [
+          'getaddrinfo: nodename nor servname provided, or not known', # MacOS
+          'getaddrinfo: Name or service not known' # GNU
+        ]
+      }
 
       class Handler < Client::Handler
 

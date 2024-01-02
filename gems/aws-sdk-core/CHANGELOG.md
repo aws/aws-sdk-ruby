@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix re-initialization of some constants in seahorse client.
+
 3.190.1 (2023-12-20)
 ------------------
 
