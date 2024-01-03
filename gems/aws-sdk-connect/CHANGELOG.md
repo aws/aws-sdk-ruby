@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2024-01-03)
+------------------
+
+* Feature - Amazon Connect, Contact Lens Evaluation API increase evaluation notes max length to 3072.
+
 1.145.0 (2023-12-21)
 ------------------
 

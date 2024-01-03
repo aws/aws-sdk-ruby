@@ -149,6 +149,8 @@ module Aws::MediaConvert
     CmfcSettings = Shapes::StructureShape.new(name: 'CmfcSettings')
     CmfcTimedMetadata = Shapes::StringShape.new(name: 'CmfcTimedMetadata')
     CmfcTimedMetadataBoxVersion = Shapes::StringShape.new(name: 'CmfcTimedMetadataBoxVersion')
+    ColorConversion3DLUTSetting = Shapes::StructureShape.new(name: 'ColorConversion3DLUTSetting')
+    ColorConversion3DLUTSettings = Shapes::ListShape.new(name: 'ColorConversion3DLUTSettings')
     ColorCorrector = Shapes::StructureShape.new(name: 'ColorCorrector')
     ColorMetadata = Shapes::StringShape.new(name: 'ColorMetadata')
     ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
@@ -594,6 +596,14 @@ module Aws::MediaConvert
     TtmlDestinationSettings = Shapes::StructureShape.new(name: 'TtmlDestinationSettings')
     TtmlStylePassthrough = Shapes::StringShape.new(name: 'TtmlStylePassthrough')
     Type = Shapes::StringShape.new(name: 'Type')
+    UncompressedFourcc = Shapes::StringShape.new(name: 'UncompressedFourcc')
+    UncompressedFramerateControl = Shapes::StringShape.new(name: 'UncompressedFramerateControl')
+    UncompressedFramerateConversionAlgorithm = Shapes::StringShape.new(name: 'UncompressedFramerateConversionAlgorithm')
+    UncompressedInterlaceMode = Shapes::StringShape.new(name: 'UncompressedInterlaceMode')
+    UncompressedScanTypeConversionMode = Shapes::StringShape.new(name: 'UncompressedScanTypeConversionMode')
+    UncompressedSettings = Shapes::StructureShape.new(name: 'UncompressedSettings')
+    UncompressedSlowPal = Shapes::StringShape.new(name: 'UncompressedSlowPal')
+    UncompressedTelecine = Shapes::StringShape.new(name: 'UncompressedTelecine')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateJobTemplateRequest = Shapes::StructureShape.new(name: 'UpdateJobTemplateRequest')
@@ -834,6 +844,7 @@ module Aws::MediaConvert
     __stringMin11Max11Pattern01D20305D205D = Shapes::StringShape.new(name: '__stringMin11Max11Pattern01D20305D205D')
     __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG')
     __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA')
+    __stringMin14PatternS3CubeCUBEHttpsCubeCUBE = Shapes::StringShape.new(name: '__stringMin14PatternS3CubeCUBEHttpsCubeCUBE')
     __stringMin14PatternS3Mov09PngHttpsMov09Png = Shapes::StringShape.new(name: '__stringMin14PatternS3Mov09PngHttpsMov09Png')
     __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT = Shapes::StringShape.new(name: '__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT')
     __stringMin14PatternS3XmlXMLHttpsXmlXML = Shapes::StringShape.new(name: '__stringMin14PatternS3XmlXMLHttpsXmlXML')
@@ -1191,6 +1202,15 @@ module Aws::MediaConvert
     CmfcSettings.add_member(:timed_metadata_value, Shapes::ShapeRef.new(shape: __stringMax1000, location_name: "timedMetadataValue"))
     CmfcSettings.struct_class = Types::CmfcSettings
 
+    ColorConversion3DLUTSetting.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringMin14PatternS3CubeCUBEHttpsCubeCUBE, location_name: "fileInput"))
+    ColorConversion3DLUTSetting.add_member(:input_color_space, Shapes::ShapeRef.new(shape: ColorSpace, location_name: "inputColorSpace"))
+    ColorConversion3DLUTSetting.add_member(:input_mastering_luminance, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "inputMasteringLuminance"))
+    ColorConversion3DLUTSetting.add_member(:output_color_space, Shapes::ShapeRef.new(shape: ColorSpace, location_name: "outputColorSpace"))
+    ColorConversion3DLUTSetting.add_member(:output_mastering_luminance, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "outputMasteringLuminance"))
+    ColorConversion3DLUTSetting.struct_class = Types::ColorConversion3DLUTSetting
+
+    ColorConversion3DLUTSettings.member = Shapes::ShapeRef.new(shape: ColorConversion3DLUTSetting)
+
     ColorCorrector.add_member(:brightness, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "brightness"))
     ColorCorrector.add_member(:clip_limits, Shapes::ShapeRef.new(shape: ClipLimits, location_name: "clipLimits"))
     ColorCorrector.add_member(:color_space_conversion, Shapes::ShapeRef.new(shape: ColorSpaceConversion, location_name: "colorSpaceConversion"))
@@ -1198,6 +1218,7 @@ module Aws::MediaConvert
     ColorCorrector.add_member(:hdr_10_metadata, Shapes::ShapeRef.new(shape: Hdr10Metadata, location_name: "hdr10Metadata"))
     ColorCorrector.add_member(:hdr_to_sdr_tone_mapper, Shapes::ShapeRef.new(shape: HDRToSDRToneMapper, location_name: "hdrToSdrToneMapper"))
     ColorCorrector.add_member(:hue, Shapes::ShapeRef.new(shape: __integerMinNegative180Max180, location_name: "hue"))
+    ColorCorrector.add_member(:max_luminance, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "maxLuminance"))
     ColorCorrector.add_member(:sample_range_conversion, Shapes::ShapeRef.new(shape: SampleRangeConversion, location_name: "sampleRangeConversion"))
     ColorCorrector.add_member(:saturation, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "saturation"))
     ColorCorrector.add_member(:sdr_reference_white_level, Shapes::ShapeRef.new(shape: __integerMin100Max1000, location_name: "sdrReferenceWhiteLevel"))
@@ -1866,6 +1887,7 @@ module Aws::MediaConvert
 
     JobSettings.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     JobSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
+    JobSettings.add_member(:color_conversion_3_dlut_settings, Shapes::ShapeRef.new(shape: ColorConversion3DLUTSettings, location_name: "colorConversion3DLUTSettings"))
     JobSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
     JobSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
     JobSettings.add_member(:follow_source, Shapes::ShapeRef.new(shape: __integerMin1Max150, location_name: "followSource"))
@@ -1896,6 +1918,7 @@ module Aws::MediaConvert
 
     JobTemplateSettings.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     JobTemplateSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
+    JobTemplateSettings.add_member(:color_conversion_3_dlut_settings, Shapes::ShapeRef.new(shape: ColorConversion3DLUTSettings, location_name: "colorConversion3DLUTSettings"))
     JobTemplateSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
     JobTemplateSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
     JobTemplateSettings.add_member(:follow_source, Shapes::ShapeRef.new(shape: __integerMin1Max150, location_name: "followSource"))
@@ -2428,6 +2451,17 @@ module Aws::MediaConvert
     TtmlDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: TtmlStylePassthrough, location_name: "stylePassthrough"))
     TtmlDestinationSettings.struct_class = Types::TtmlDestinationSettings
 
+    UncompressedSettings.add_member(:fourcc, Shapes::ShapeRef.new(shape: UncompressedFourcc, location_name: "fourcc"))
+    UncompressedSettings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: UncompressedFramerateControl, location_name: "framerateControl"))
+    UncompressedSettings.add_member(:framerate_conversion_algorithm, Shapes::ShapeRef.new(shape: UncompressedFramerateConversionAlgorithm, location_name: "framerateConversionAlgorithm"))
+    UncompressedSettings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateDenominator"))
+    UncompressedSettings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateNumerator"))
+    UncompressedSettings.add_member(:interlace_mode, Shapes::ShapeRef.new(shape: UncompressedInterlaceMode, location_name: "interlaceMode"))
+    UncompressedSettings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: UncompressedScanTypeConversionMode, location_name: "scanTypeConversionMode"))
+    UncompressedSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: UncompressedSlowPal, location_name: "slowPal"))
+    UncompressedSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: UncompressedTelecine, location_name: "telecine"))
+    UncompressedSettings.struct_class = Types::UncompressedSettings
+
     UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -2485,6 +2519,7 @@ module Aws::MediaConvert
     VideoCodecSettings.add_member(:h265_settings, Shapes::ShapeRef.new(shape: H265Settings, location_name: "h265Settings"))
     VideoCodecSettings.add_member(:mpeg_2_settings, Shapes::ShapeRef.new(shape: Mpeg2Settings, location_name: "mpeg2Settings"))
     VideoCodecSettings.add_member(:prores_settings, Shapes::ShapeRef.new(shape: ProresSettings, location_name: "proresSettings"))
+    VideoCodecSettings.add_member(:uncompressed_settings, Shapes::ShapeRef.new(shape: UncompressedSettings, location_name: "uncompressedSettings"))
     VideoCodecSettings.add_member(:vc_3_settings, Shapes::ShapeRef.new(shape: Vc3Settings, location_name: "vc3Settings"))
     VideoCodecSettings.add_member(:vp_8_settings, Shapes::ShapeRef.new(shape: Vp8Settings, location_name: "vp8Settings"))
     VideoCodecSettings.add_member(:vp_9_settings, Shapes::ShapeRef.new(shape: Vp9Settings, location_name: "vp9Settings"))
@@ -2542,6 +2577,7 @@ module Aws::MediaConvert
     VideoSelector.add_member(:color_space_usage, Shapes::ShapeRef.new(shape: ColorSpaceUsage, location_name: "colorSpaceUsage"))
     VideoSelector.add_member(:embedded_timecode_override, Shapes::ShapeRef.new(shape: EmbeddedTimecodeOverride, location_name: "embeddedTimecodeOverride"))
     VideoSelector.add_member(:hdr_10_metadata, Shapes::ShapeRef.new(shape: Hdr10Metadata, location_name: "hdr10Metadata"))
+    VideoSelector.add_member(:max_luminance, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "maxLuminance"))
     VideoSelector.add_member(:pad_video, Shapes::ShapeRef.new(shape: PadVideo, location_name: "padVideo"))
     VideoSelector.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "pid"))
     VideoSelector.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "programNumber"))
