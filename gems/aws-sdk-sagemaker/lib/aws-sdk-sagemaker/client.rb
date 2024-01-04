@@ -3553,6 +3553,27 @@ module Aws::SageMaker
     #   [2]: https://iceberg.apache.org/
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OfflineStoreConfig.html
     #
+    # @option params [Types::ThroughputConfig] :throughput_config
+    #   Used to set feature group throughput configuration. There are two
+    #   modes: `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are
+    #   charged for data reads and writes that your application performs on
+    #   your feature group. You do not need to specify read and write
+    #   throughput because Feature Store accommodates your workloads as they
+    #   ramp up and down. You can switch a feature group to on-demand only
+    #   once in a 24 hour period. With provisioned throughput mode, you
+    #   specify the read and write capacity per second that you expect your
+    #   application to require, and you are billed based on those limits.
+    #   Exceeding provisioned throughput will result in your requests being
+    #   throttled.
+    #
+    #   Note: `PROVISIONED` throughput mode is supported only for feature
+    #   groups that are offline-only, or use the [ `Standard` ][1] tier online
+    #   store.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType
+    #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM execution role used to
     #   persist data into the `OfflineStore` if an `OfflineStoreConfig` is
@@ -3610,6 +3631,11 @@ module Aws::SageMaker
     #         database: "Database", # required
     #       },
     #       table_format: "Default", # accepts Default, Glue, Iceberg
+    #     },
+    #     throughput_config: {
+    #       throughput_mode: "OnDemand", # required, accepts OnDemand, Provisioned
+    #       provisioned_read_capacity_units: 1,
+    #       provisioned_write_capacity_units: 1,
     #     },
     #     role_arn: "RoleArn",
     #     description: "Description",
@@ -12330,6 +12356,7 @@ module Aws::SageMaker
     #   * {Types::DescribeFeatureGroupResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeFeatureGroupResponse#online_store_config #online_store_config} => Types::OnlineStoreConfig
     #   * {Types::DescribeFeatureGroupResponse#offline_store_config #offline_store_config} => Types::OfflineStoreConfig
+    #   * {Types::DescribeFeatureGroupResponse#throughput_config #throughput_config} => Types::ThroughputConfigDescription
     #   * {Types::DescribeFeatureGroupResponse#role_arn #role_arn} => String
     #   * {Types::DescribeFeatureGroupResponse#feature_group_status #feature_group_status} => String
     #   * {Types::DescribeFeatureGroupResponse#offline_store_status #offline_store_status} => Types::OfflineStoreStatus
@@ -12372,6 +12399,9 @@ module Aws::SageMaker
     #   resp.offline_store_config.data_catalog_config.catalog #=> String
     #   resp.offline_store_config.data_catalog_config.database #=> String
     #   resp.offline_store_config.table_format #=> String, one of "Default", "Glue", "Iceberg"
+    #   resp.throughput_config.throughput_mode #=> String, one of "OnDemand", "Provisioned"
+    #   resp.throughput_config.provisioned_read_capacity_units #=> Integer
+    #   resp.throughput_config.provisioned_write_capacity_units #=> Integer
     #   resp.role_arn #=> String
     #   resp.feature_group_status #=> String, one of "Creating", "Created", "CreateFailed", "Deleting", "DeleteFailed"
     #   resp.offline_store_status.status #=> String, one of "Active", "Blocked", "Disabled"
@@ -23935,6 +23965,12 @@ module Aws::SageMaker
     # @option params [Types::OnlineStoreConfigUpdate] :online_store_config
     #   Updates the feature group online store configuration.
     #
+    # @option params [Types::ThroughputConfigUpdate] :throughput_config
+    #   The new throughput configuration for the feature group. You can switch
+    #   between on-demand and provisioned modes or update the read / write
+    #   capacity of provisioned feature groups. You can switch a feature group
+    #   to on-demand only once in a 24 hour period.
+    #
     # @return [Types::UpdateFeatureGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFeatureGroupResponse#feature_group_arn #feature_group_arn} => String
@@ -23960,6 +23996,11 @@ module Aws::SageMaker
     #         unit: "Seconds", # accepts Seconds, Minutes, Hours, Days, Weeks
     #         value: 1,
     #       },
+    #     },
+    #     throughput_config: {
+    #       throughput_mode: "OnDemand", # accepts OnDemand, Provisioned
+    #       provisioned_read_capacity_units: 1,
+    #       provisioned_write_capacity_units: 1,
     #     },
     #   })
     #
@@ -25855,7 +25896,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.227.0'
+      context[:gem_version] = '1.228.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2024-01-04)
+------------------
+
+* Feature - This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.
+
 1.135.0 (2023-11-28)
 ------------------
 

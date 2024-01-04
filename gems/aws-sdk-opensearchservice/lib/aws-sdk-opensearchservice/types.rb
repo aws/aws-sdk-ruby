@@ -1165,7 +1165,11 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Specify either dual stack or IPv4 as your IP address type. Dual
+    #   stack allows you to share domain resources across IPv4 and IPv6
+    #   address types, and is the recommended option. If you set your IP
+    #   address type to dual stack, you can't change your address type
+    #   later.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_options
@@ -2514,7 +2518,10 @@ module Aws::OpenSearchService
     #   @return [Types::AccessPoliciesStatus]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Choose either dual stack or IPv4 as your IP address type. Dual stack
+    #   allows you to share domain resources across IPv4 and IPv6 address
+    #   types, and is the recommended option. If you set your IP address
+    #   type to dual stack, you can't change your address type later.
     #   @return [Types::IPAddressTypeStatus]
     #
     # @!attribute [rw] snapshot_options
@@ -2619,6 +2626,10 @@ module Aws::OpenSearchService
     #
     #   * **Policy-Min-TLS-1-2-2019-07:** TLS security policy that supports
     #     only TLS version 1.2
+    #
+    #   * **Policy-Min-TLS-1-2-PFS-2023-10:** TLS security policy that
+    #     supports TLS version 1.2 to TLS version 1.3 with perfect forward
+    #     secrecy cipher suites
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -2900,15 +2911,15 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] endpoint_v2
-    #   The domain endpoint to which index and search requests are
-    #   submitted. For example,
-    #   `search-imdb-movies-oopcnjfn6ugo.eu-west-1.es.amazonaws.com` or
-    #   `doc-imdb-movies-oopcnjfn6u.eu-west-1.es.amazonaws.com`.
+    #   If `IPAddressType` to set to `dualstack`, a version 2 domain
+    #   endpoint is provisioned. This endpoint functions like a normal
+    #   endpoint, except that it works with both IPv4 and IPv6 IP addresses.
+    #   Normal endpoints work only with IPv4 IP addresses.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
     #   The key-value pair that exists if the OpenSearch Service domain uses
-    #   VPC endpoints.. Example `key, value`:
+    #   VPC endpoints. Example `key, value`:
     #   `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
     #   @return [Hash<String,String>]
     #
@@ -5781,7 +5792,10 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Specify either dual stack or IPv4 as your IP address type. Dual
+    #   stack allows you to share domain resources across IPv4 and IPv6
+    #   address types, and is the recommended option. If your IP address
+    #   type is currently set to dual stack, you can't change it.
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_options

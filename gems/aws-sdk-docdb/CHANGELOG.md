@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2024-01-04)
+------------------
+
+* Feature - Adding PerformanceInsightsEnabled and PerformanceInsightsKMSKeyId fields to DescribeDBInstances Response.
+
 1.58.0 (2023-11-28)
 ------------------
 

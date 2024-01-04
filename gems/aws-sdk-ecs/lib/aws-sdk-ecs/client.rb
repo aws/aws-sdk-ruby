@@ -464,6 +464,7 @@ module Aws::ECS
     #         instance_warmup_period: 1,
     #       },
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #       managed_draining: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     tags: [
     #       {
@@ -485,6 +486,7 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -1615,6 +1617,8 @@ module Aws::ECS
     # more information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
+    # You can create a maximum of 5 tasks sets for a deployment.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
@@ -2027,6 +2031,7 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -3104,6 +3109,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_providers[0].update_status_reason #=> String
     #   resp.capacity_providers[0].tags #=> Array
@@ -8360,6 +8366,7 @@ module Aws::ECS
     #         instance_warmup_period: 1,
     #       },
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #       managed_draining: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -8375,6 +8382,7 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -9851,7 +9859,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
