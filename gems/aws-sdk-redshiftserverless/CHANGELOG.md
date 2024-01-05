@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-01-05)
+------------------
+
+* Feature - use_fips_ssl and require_ssl parameter support for Workgroup, UpdateWorkgroup, and CreateWorkgroup
+
 1.22.0 (2023-11-30)
 ------------------
 

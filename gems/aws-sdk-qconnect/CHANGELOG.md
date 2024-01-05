@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2024-01-05)
+------------------
+
+* Feature - Marked SearchQuickResponses API as readonly.
+
 1.1.0 (2023-12-01)
 ------------------
 

@@ -418,7 +418,7 @@ module Aws::KMS
     #
     #   * An external key store with `PUBLIC_ENDPOINT` connectivity cannot
     #     use the same `XksProxyUriEndpoint` value as an external key store
-    #     with `VPC_ENDPOINT_SERVICE` connectivity in the same Amazon Web
+    #     with `VPC_ENDPOINT_SERVICE` connectivity in this Amazon Web
     #     Services Region.
     #
     #   * Each external key store with `VPC_ENDPOINT_SERVICE` connectivity
@@ -6246,9 +6246,9 @@ module Aws::KMS
     end
 
     # The request was rejected because the (`XksKeyId`) is already
-    # associated with a KMS key in this external key store. Each KMS key in
-    # an external key store must be associated with a different external
-    # key.
+    # associated with another KMS key in this external key store. Each KMS
+    # key in an external key store must be associated with a different
+    # external key.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6427,9 +6427,9 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because the Amazon VPC endpoint service
-    # configuration does not fulfill the requirements for an external key
-    # store proxy. For details, see the exception message.
+    # The request was rejected because the external key store proxy is not
+    # configured correctly. To identify the cause, see the error message
+    # that accompanies the exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6458,11 +6458,10 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because the concatenation of the
-    # `XksProxyUriEndpoint` is already associated with an external key store
-    # in the Amazon Web Services account and Region. Each external key store
-    # in an account and Region must use a unique external key store proxy
-    # address.
+    # The request was rejected because the `XksProxyUriEndpoint` is already
+    # associated with another external key store in this Amazon Web Services
+    # Region. To identify the cause, see the error message that accompanies
+    # the exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6477,9 +6476,9 @@ module Aws::KMS
 
     # The request was rejected because the concatenation of the
     # `XksProxyUriEndpoint` and `XksProxyUriPath` is already associated with
-    # an external key store in the Amazon Web Services account and Region.
-    # Each external key store in an account and Region must use a unique
-    # external key store proxy API address.
+    # another external key store in this Amazon Web Services Region. Each
+    # external key store in a Region must use a unique external key store
+    # proxy API address.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6512,10 +6511,9 @@ module Aws::KMS
     end
 
     # The request was rejected because the specified Amazon VPC endpoint
-    # service is already associated with an external key store in the Amazon
-    # Web Services account and Region. Each external key store in an Amazon
-    # Web Services account and Region must use a different Amazon VPC
-    # endpoint service.
+    # service is already associated with another external key store in this
+    # Amazon Web Services Region. Each external key store in a Region must
+    # use a different Amazon VPC endpoint service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6530,9 +6528,9 @@ module Aws::KMS
 
     # The request was rejected because the Amazon VPC endpoint service
     # configuration does not fulfill the requirements for an external key
-    # store proxy. For details, see the exception message and [review the
-    # requirements][1] for Amazon VPC endpoint service connectivity for an
-    # external key store.
+    # store. To identify the cause, see the error message that accompanies
+    # the exception and [review the requirements][1] for Amazon VPC endpoint
+    # service connectivity for an external key store.
     #
     #
     #

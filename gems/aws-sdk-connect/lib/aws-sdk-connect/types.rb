@@ -1693,7 +1693,7 @@ module Aws::Connect
       :queue_time_adjustment_seconds,
       :queue_priority,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -3619,7 +3619,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -7385,7 +7385,7 @@ module Aws::Connect
       :sign_in_url,
       :user_arn,
       :user_id)
-      SENSITIVE = []
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -16957,7 +16957,7 @@ module Aws::Connect
       :answer_machine_detection_config,
       :campaign_id,
       :traffic_type)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -17098,7 +17098,7 @@ module Aws::Connect
       :task_template_id,
       :quick_connect_id,
       :related_contact_id)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -17200,7 +17200,7 @@ module Aws::Connect
       :related_contact_id,
       :references,
       :description)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -18599,7 +18599,7 @@ module Aws::Connect
       :name,
       :description,
       :references)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -20281,7 +20281,7 @@ module Aws::Connect
       :email,
       :secondary_email,
       :mobile)
-      SENSITIVE = []
+      SENSITIVE = [:first_name, :last_name, :email, :secondary_email]
       include Aws::Structure
     end
 
@@ -20300,7 +20300,7 @@ module Aws::Connect
     class UserIdentityInfoLite < Struct.new(
       :first_name,
       :last_name)
-      SENSITIVE = []
+      SENSITIVE = [:first_name, :last_name]
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2024-01-05)
+------------------
+
+* Feature - Minor trait updates for User APIs
+
 1.146.0 (2024-01-03)
 ------------------
 
