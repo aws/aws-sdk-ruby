@@ -205,6 +205,7 @@ module Aws::Route53Resolver
     PutResolverQueryLogConfigPolicyResponse = Shapes::StructureShape.new(name: 'PutResolverQueryLogConfigPolicyResponse')
     PutResolverRulePolicyRequest = Shapes::StructureShape.new(name: 'PutResolverRulePolicyRequest')
     PutResolverRulePolicyResponse = Shapes::StructureShape.new(name: 'PutResolverRulePolicyResponse')
+    Qtype = Shapes::StringShape.new(name: 'Qtype')
     ResolverAutodefinedReverseStatus = Shapes::StringShape.new(name: 'ResolverAutodefinedReverseStatus')
     ResolverConfig = Shapes::StructureShape.new(name: 'ResolverConfig')
     ResolverConfigList = Shapes::ListShape.new(name: 'ResolverConfigList')
@@ -353,6 +354,7 @@ module Aws::Route53Resolver
     CreateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.struct_class = Types::CreateFirewallRuleRequest
 
     CreateFirewallRuleResponse.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: FirewallRule, location_name: "FirewallRule"))
@@ -419,6 +421,7 @@ module Aws::Route53Resolver
 
     DeleteFirewallRuleRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
     DeleteFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallDomainListId"))
+    DeleteFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
     DeleteFirewallRuleRequest.struct_class = Types::DeleteFirewallRuleRequest
 
     DeleteFirewallRuleResponse.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: FirewallRule, location_name: "FirewallRule"))
@@ -526,6 +529,7 @@ module Aws::Route53Resolver
     FirewallRule.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "CreatorRequestId"))
     FirewallRule.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "CreationTime"))
     FirewallRule.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "ModificationTime"))
+    FirewallRule.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
     FirewallRule.struct_class = Types::FirewallRule
 
     FirewallRuleGroup.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
@@ -1099,6 +1103,7 @@ module Aws::Route53Resolver
     UpdateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box"=>true}))
+    UpdateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
     UpdateFirewallRuleRequest.struct_class = Types::UpdateFirewallRuleRequest
 
     UpdateFirewallRuleResponse.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: FirewallRule, location_name: "FirewallRule"))
