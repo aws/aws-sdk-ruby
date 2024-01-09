@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.190.2 (2024-01-09)
+------------------
+
 * Issue - Minor performance optimization.
 
 3.190.1 (2023-12-20)
