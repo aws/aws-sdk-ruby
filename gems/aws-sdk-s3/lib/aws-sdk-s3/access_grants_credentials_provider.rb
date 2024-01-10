@@ -12,8 +12,10 @@ module Aws
     # {Aws::S3Control::Client#get_data_access} for details.
     class AccessGrantsCredentialsProvider
       # @param [Hash] options
-      # @option options [Client] :client The S3 Control client used to create
-      #  the session.
+      # @option options [Client] :s3_control_client The S3 Control client used
+      #  to create the session.
+      # @option options [Client] :sts_client The STS client used for fetching
+      #  the account ID for the credentials if not provided.
       # @option options [String] :privilege ('Default') The privilege to use
       #  when requesting credentials. (see: {Aws::S3Control::Client#get_data_access})
       # @option options [Boolean] :fallback (false) When true, if access is
@@ -23,7 +25,8 @@ module Aws
       # @option options [Callable] :before_refresh Proc called before
       #  credentials are refreshed.
       def initialize(options = {})
-        @client = options.delete(:client) || S3Control::Client.new
+        @s3_control_client = options.delete(:s3_control_client)
+        @sts_client = options.delete(:sts_client)
         @fallback = options.delete(:fallback) || false
         @caching = options.delete(:caching) || true
         @options = options
@@ -61,6 +64,9 @@ module Aws
         options[:credentials]
       end
 
+      attr_accessor :s3_credentials
+      attr_accessor :s3_region
+
       private
 
       def cached_credentials_for(target, credentials, permission)
@@ -78,11 +84,16 @@ module Aws
       end
 
       def new_credentials_for(target, credentials, permission)
+        @s3_control_client ||= Aws::S3Control::Client.new(
+          credentials: s3_credentials,
+          region: s3_region
+        )
+
         AccessGrantsCredentials.new(
           target: target,
           account_id: account_id_for_access_grants(target, credentials),
           permission: permission,
-          client: @client,
+          client: @s3_control_client,
           **@options
         )
       end
@@ -107,7 +118,7 @@ module Aws
 
       # returns the account id associated with the access grants instance
       def new_account_id_for(target, credentials)
-        resp = @client.get_access_grants_instance_for_prefix(
+        resp = @s3_control_client.get_access_grants_instance_for_prefix(
           s3_prefix: target,
           account_id: account_id_for_credentials(credentials),
         )
@@ -120,7 +131,11 @@ module Aws
            !credentials.account_id.empty?
           credentials.account_id
         else
-          Aws::STS::Client.new.get_caller_identity.account
+          @sts_client ||= Aws::STS::Client.new(
+            credentials: s3_credentials,
+            region: s3_region
+          )
+          @sts_client.get_caller_identity.account
         end
       end
 

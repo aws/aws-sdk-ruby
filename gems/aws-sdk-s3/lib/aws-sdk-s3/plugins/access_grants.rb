@@ -45,15 +45,13 @@ setting, caching, and fallback behavior.
           }.freeze
 
           def call(context)
-            # only use access grants if it is a bucket operation.
-            # express session auth is not supported
-            if (params = context[:endpoint_params]) && params[:bucket] &&
-               (permission = PERMISSION_MAP[context.operation_name]) &&
-               context.config.disable_s3_express_session_auth
-              credentials_provider =
-                context.config.access_grants_credentials_provider
+            if access_grants_operation?(context) &&
+               !s3_express_endpoint?(context)
+              params = context[:endpoint_params]
+              permission = PERMISSION_MAP[context.operation_name]
 
-              credentials = credentials_provider.access_grants_credentials_for(
+              provider = context.config.access_grants_credentials_provider
+              credentials = provider.access_grants_credentials_for(
                 bucket: params[:bucket],
                 key: params[:key],
                 prefix: params[:prefix],
@@ -65,10 +63,28 @@ setting, caching, and fallback behavior.
 
             @handler.call(context)
           end
+
+          private
+
+          def access_grants_operation?(context)
+            params = context[:endpoint_params]
+            params[:bucket] && PERMISSION_MAP[context.operation_name]
+          end
+
+          def s3_express_endpoint?(context)
+            props = context[:endpoint_properties]
+            props['backend'] == 'S3Express'
+          end
         end
 
         def add_handlers(handlers,config)
           handlers.add(Handler) if config.s3_access_grants
+        end
+
+        def after_initialize(client)
+          provider = client.config.access_grants_credentials_provider
+          provider.s3_credentials = client.config.credentials
+          provider.s3_region = client.config.region
         end
       end
     end
