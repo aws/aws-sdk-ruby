@@ -18,7 +18,6 @@ require 'aws-sdk-s3/presigner'
 
 # s3 express session auth
 require 'aws-sdk-s3/express_credentials'
-require 'aws-sdk-s3/express_credentials_cache'
 require 'aws-sdk-s3/express_credentials_provider'
 
 # s3 access grants auth
