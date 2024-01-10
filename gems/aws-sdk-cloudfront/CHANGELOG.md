@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Minor performance optimization - replace gsub with delete.
+
 1.86.0 (2023-11-28)
 ------------------
 
