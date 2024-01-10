@@ -1414,6 +1414,8 @@ module Aws::DocDB
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -1978,6 +1980,8 @@ module Aws::DocDB
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -2891,6 +2895,8 @@ module Aws::DocDB
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_instances[0].certificate_details.ca_identifier #=> String
     #   resp.db_instances[0].certificate_details.valid_till #=> Time
+    #   resp.db_instances[0].performance_insights_enabled #=> Boolean
+    #   resp.db_instances[0].performance_insights_kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4258,6 +4264,8 @@ module Aws::DocDB
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -4557,6 +4565,8 @@ module Aws::DocDB
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.performance_insights_enabled #=> Boolean
+    #   resp.db_instance.performance_insights_kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -5360,7 +5370,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

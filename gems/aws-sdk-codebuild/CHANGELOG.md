@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-01-08)
+------------------
+
+* Feature - Aws CodeBuild now supports new compute type BUILD_GENERAL1_XLARGE
+
 1.100.0 (2023-11-28)
 ------------------
 

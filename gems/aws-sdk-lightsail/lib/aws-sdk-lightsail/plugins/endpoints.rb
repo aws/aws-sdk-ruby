@@ -303,6 +303,8 @@ module Aws::Lightsail
             Aws::Lightsail::Endpoints::GetRelationalDatabaseSnapshots.build(context)
           when :get_relational_databases
             Aws::Lightsail::Endpoints::GetRelationalDatabases.build(context)
+          when :get_setup_history
+            Aws::Lightsail::Endpoints::GetSetupHistory.build(context)
           when :get_static_ip
             Aws::Lightsail::Endpoints::GetStaticIp.build(context)
           when :get_static_ips
@@ -335,6 +337,8 @@ module Aws::Lightsail
             Aws::Lightsail::Endpoints::SetIpAddressType.build(context)
           when :set_resource_access_for_bucket
             Aws::Lightsail::Endpoints::SetResourceAccessForBucket.build(context)
+          when :setup_instance_https
+            Aws::Lightsail::Endpoints::SetupInstanceHttps.build(context)
           when :start_gui_session
             Aws::Lightsail::Endpoints::StartGUISession.build(context)
           when :start_instance

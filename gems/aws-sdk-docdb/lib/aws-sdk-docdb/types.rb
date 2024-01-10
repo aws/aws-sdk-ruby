@@ -2060,6 +2060,17 @@ module Aws::DocDB
     #   The details of the DB instance's server certificate.
     #   @return [Types::CertificateDetails]
     #
+    # @!attribute [rw] performance_insights_enabled
+    #   Set to `true` if Amazon RDS Performance Insights is enabled for the
+    #   DB instance, and otherwise `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -2090,7 +2101,9 @@ module Aws::DocDB
       :promotion_tier,
       :db_instance_arn,
       :enabled_cloudwatch_logs_exports,
-      :certificate_details)
+      :certificate_details,
+      :performance_insights_enabled,
+      :performance_insights_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

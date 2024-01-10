@@ -4582,6 +4582,18 @@ module Aws::LocationService
 
     # Specifies the map tile style selected from an available provider.
     #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as POI layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Not all map resources or styles support custom layers. See Custom
+    #   Layers for more information.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] political_view
     #   Specifies the political view for the style. Leave unset to not use a
     #   political view, or, for styles that support specific political
@@ -4720,6 +4732,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
     #
     class MapConfiguration < Struct.new(
+      :custom_layers,
       :political_view,
       :style)
       SENSITIVE = []
@@ -4727,6 +4740,18 @@ module Aws::LocationService
     end
 
     # Specifies the political view for the style.
+    #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as POI layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Not all map resources or styles support custom layers. See Custom
+    #   Layers for more information.
+    #
+    #    </note>
+    #   @return [Array<String>]
     #
     # @!attribute [rw] political_view
     #   Specifies the political view for the style. Set to an empty string
@@ -4747,6 +4772,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfigurationUpdate AWS API Documentation
     #
     class MapConfigurationUpdate < Struct.new(
+      :custom_layers,
       :political_view)
       SENSITIVE = []
       include Aws::Structure

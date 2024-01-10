@@ -52,6 +52,6 @@ require_relative 'aws-sdk-connectcampaignservice/customizations'
 # @!group service
 module Aws::ConnectCampaignService
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

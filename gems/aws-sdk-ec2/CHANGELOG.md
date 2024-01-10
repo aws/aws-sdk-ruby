@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.432.0 (2024-01-08)
+------------------
+
+* Feature - Amazon EC2 R7iz bare metal instances are powered by custom 4th generation Intel Xeon Scalable processors.
+
 1.431.0 (2023-12-19)
 ------------------
 

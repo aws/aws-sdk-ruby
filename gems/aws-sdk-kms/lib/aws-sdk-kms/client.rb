@@ -952,7 +952,7 @@ module Aws::KMS
     #
     #   * An external key store with `PUBLIC_ENDPOINT` connectivity cannot use
     #     the same `XksProxyUriEndpoint` value as an external key store with
-    #     `VPC_ENDPOINT_SERVICE` connectivity in the same Amazon Web Services
+    #     `VPC_ENDPOINT_SERVICE` connectivity in this Amazon Web Services
     #     Region.
     #
     #   * Each external key store with `VPC_ENDPOINT_SERVICE` connectivity
@@ -10103,7 +10103,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-01-05)
+------------------
+
+* Feature - Documentation updates for AWS Key Management Service (KMS).
+
 1.75.0 (2023-12-15)
 ------------------
 

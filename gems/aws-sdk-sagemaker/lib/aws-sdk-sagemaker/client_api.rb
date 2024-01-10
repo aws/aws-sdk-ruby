@@ -197,6 +197,7 @@ module Aws::SageMaker
     CapacitySize = Shapes::StructureShape.new(name: 'CapacitySize')
     CapacitySizeType = Shapes::StringShape.new(name: 'CapacitySizeType')
     CapacitySizeValue = Shapes::IntegerShape.new(name: 'CapacitySizeValue')
+    CapacityUnit = Shapes::IntegerShape.new(name: 'CapacityUnit')
     CaptureContentTypeHeader = Shapes::StructureShape.new(name: 'CaptureContentTypeHeader')
     CaptureMode = Shapes::StringShape.new(name: 'CaptureMode')
     CaptureOption = Shapes::StructureShape.new(name: 'CaptureOption')
@@ -2018,6 +2019,10 @@ module Aws::SageMaker
     TextGenerationJobConfig = Shapes::StructureShape.new(name: 'TextGenerationJobConfig')
     TextGenerationResolvedAttributes = Shapes::StructureShape.new(name: 'TextGenerationResolvedAttributes')
     ThingName = Shapes::StringShape.new(name: 'ThingName')
+    ThroughputConfig = Shapes::StructureShape.new(name: 'ThroughputConfig')
+    ThroughputConfigDescription = Shapes::StructureShape.new(name: 'ThroughputConfigDescription')
+    ThroughputConfigUpdate = Shapes::StructureShape.new(name: 'ThroughputConfigUpdate')
+    ThroughputMode = Shapes::StringShape.new(name: 'ThroughputMode')
     TimeSeriesConfig = Shapes::StructureShape.new(name: 'TimeSeriesConfig')
     TimeSeriesForecastingJobConfig = Shapes::StructureShape.new(name: 'TimeSeriesForecastingJobConfig')
     TimeSeriesForecastingSettings = Shapes::StructureShape.new(name: 'TimeSeriesForecastingSettings')
@@ -3214,6 +3219,7 @@ module Aws::SageMaker
     CreateFeatureGroupRequest.add_member(:feature_definitions, Shapes::ShapeRef.new(shape: FeatureDefinitions, required: true, location_name: "FeatureDefinitions"))
     CreateFeatureGroupRequest.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfig, location_name: "OnlineStoreConfig"))
     CreateFeatureGroupRequest.add_member(:offline_store_config, Shapes::ShapeRef.new(shape: OfflineStoreConfig, location_name: "OfflineStoreConfig"))
+    CreateFeatureGroupRequest.add_member(:throughput_config, Shapes::ShapeRef.new(shape: ThroughputConfig, location_name: "ThroughputConfig"))
     CreateFeatureGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     CreateFeatureGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateFeatureGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -4438,6 +4444,7 @@ module Aws::SageMaker
     DescribeFeatureGroupResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
     DescribeFeatureGroupResponse.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfig, location_name: "OnlineStoreConfig"))
     DescribeFeatureGroupResponse.add_member(:offline_store_config, Shapes::ShapeRef.new(shape: OfflineStoreConfig, location_name: "OfflineStoreConfig"))
+    DescribeFeatureGroupResponse.add_member(:throughput_config, Shapes::ShapeRef.new(shape: ThroughputConfigDescription, location_name: "ThroughputConfig"))
     DescribeFeatureGroupResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeFeatureGroupResponse.add_member(:feature_group_status, Shapes::ShapeRef.new(shape: FeatureGroupStatus, location_name: "FeatureGroupStatus"))
     DescribeFeatureGroupResponse.add_member(:offline_store_status, Shapes::ShapeRef.new(shape: OfflineStoreStatus, location_name: "OfflineStoreStatus"))
@@ -9061,6 +9068,21 @@ module Aws::SageMaker
     TextGenerationResolvedAttributes.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, location_name: "BaseModelName"))
     TextGenerationResolvedAttributes.struct_class = Types::TextGenerationResolvedAttributes
 
+    ThroughputConfig.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, required: true, location_name: "ThroughputMode"))
+    ThroughputConfig.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedReadCapacityUnits"))
+    ThroughputConfig.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedWriteCapacityUnits"))
+    ThroughputConfig.struct_class = Types::ThroughputConfig
+
+    ThroughputConfigDescription.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, required: true, location_name: "ThroughputMode"))
+    ThroughputConfigDescription.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedReadCapacityUnits"))
+    ThroughputConfigDescription.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedWriteCapacityUnits"))
+    ThroughputConfigDescription.struct_class = Types::ThroughputConfigDescription
+
+    ThroughputConfigUpdate.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
+    ThroughputConfigUpdate.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedReadCapacityUnits"))
+    ThroughputConfigUpdate.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedWriteCapacityUnits"))
+    ThroughputConfigUpdate.struct_class = Types::ThroughputConfigUpdate
+
     TimeSeriesConfig.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
     TimeSeriesConfig.add_member(:timestamp_attribute_name, Shapes::ShapeRef.new(shape: TimestampAttributeName, required: true, location_name: "TimestampAttributeName"))
     TimeSeriesConfig.add_member(:item_identifier_attribute_name, Shapes::ShapeRef.new(shape: ItemIdentifierAttributeName, required: true, location_name: "ItemIdentifierAttributeName"))
@@ -9516,6 +9538,7 @@ module Aws::SageMaker
     UpdateFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
     UpdateFeatureGroupRequest.add_member(:feature_additions, Shapes::ShapeRef.new(shape: FeatureAdditions, location_name: "FeatureAdditions"))
     UpdateFeatureGroupRequest.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfigUpdate, location_name: "OnlineStoreConfig"))
+    UpdateFeatureGroupRequest.add_member(:throughput_config, Shapes::ShapeRef.new(shape: ThroughputConfigUpdate, location_name: "ThroughputConfig"))
     UpdateFeatureGroupRequest.struct_class = Types::UpdateFeatureGroupRequest
 
     UpdateFeatureGroupResponse.add_member(:feature_group_arn, Shapes::ShapeRef.new(shape: FeatureGroupArn, required: true, location_name: "FeatureGroupArn"))

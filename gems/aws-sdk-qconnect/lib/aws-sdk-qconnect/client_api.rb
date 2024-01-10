@@ -1392,6 +1392,7 @@ module Aws::QConnect
         o.name = "GetRecommendations"
         o.http_method = "GET"
         o.http_request_uri = "/assistants/{assistantId}/sessions/{sessionId}/recommendations"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetRecommendationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1544,6 +1545,7 @@ module Aws::QConnect
         o.name = "QueryAssistant"
         o.http_method = "POST"
         o.http_request_uri = "/assistants/{assistantId}/query"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: QueryAssistantRequest)
         o.output = Shapes::ShapeRef.new(shape: QueryAssistantResponse)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)

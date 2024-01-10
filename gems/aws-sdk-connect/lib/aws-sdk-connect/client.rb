@@ -11097,10 +11097,10 @@ module Aws::Connect
     #
     # @option params [required, String] :instance_id
     #   The identifier of Amazon Connect instance. You can find the instance
-    #   ID in the Amazon Resource Name (ARN) of the instance
+    #   ID in the Amazon Resource Name (ARN) of the instance.
     #
     # @option params [required, Types::SearchContactsTimeRange] :time_range
-    #   Time range that you want to search results
+    #   Time range that you want to search results.
     #
     # @option params [Types::SearchCriteria] :search_criteria
     #   The search criteria to be used to return contacts.
@@ -11114,7 +11114,7 @@ module Aws::Connect
     #   results.
     #
     # @option params [Types::Sort] :sort
-    #   Specifies a field to sort by and a sort order
+    #   Specifies a field to sort by and a sort order.
     #
     # @return [Types::SearchContactsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -16195,7 +16195,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

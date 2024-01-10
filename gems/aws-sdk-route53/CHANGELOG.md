@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-01-10)
+------------------
+
+* Feature - Route53 now supports geoproximity routing in AWS regions
+
 1.84.0 (2023-12-20)
 ------------------
 
