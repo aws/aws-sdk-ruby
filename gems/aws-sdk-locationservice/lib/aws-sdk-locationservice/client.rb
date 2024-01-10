@@ -1579,6 +1579,7 @@ module Aws::LocationService
     #
     #   resp = client.create_map({
     #     configuration: { # required
+    #       custom_layers: ["CustomLayer"],
     #       political_view: "CountryCode3",
     #       style: "MapStyle", # required
     #     },
@@ -2334,6 +2335,8 @@ module Aws::LocationService
     #
     # @example Response structure
     #
+    #   resp.configuration.custom_layers #=> Array
+    #   resp.configuration.custom_layers[0] #=> String
     #   resp.configuration.political_view #=> String
     #   resp.configuration.style #=> String
     #   resp.create_time #=> Time
@@ -4396,6 +4399,7 @@ module Aws::LocationService
     #
     #   resp = client.update_map({
     #     configuration_update: {
+    #       custom_layers: ["CustomLayer"],
     #       political_view: "CountryCode3OrEmpty",
     #     },
     #     description: "ResourceDescription",
@@ -4617,7 +4621,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-01-10)
+------------------
+
+* Feature - Add support for account level subscription filter policies to PutAccountPolicy, DescribeAccountPolicies, and DeleteAccountPolicy APIs. Additionally, PutAccountPolicy has been modified with new optional "selectionCriteria" parameter for resource selection.
+
 1.76.0 (2023-12-12)
 ------------------
 
