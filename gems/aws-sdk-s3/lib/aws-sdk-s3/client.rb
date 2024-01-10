@@ -34,6 +34,7 @@ require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
+require 'aws-sdk-s3/plugins/access_grants.rb'
 require 'aws-sdk-s3/plugins/arn.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
@@ -104,6 +105,7 @@ module Aws::S3
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3::Plugins::Accelerate)
+    add_plugin(Aws::S3::Plugins::AccessGrants)
     add_plugin(Aws::S3::Plugins::ARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
@@ -365,6 +367,12 @@ module Aws::S3
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
     #
+    #
+    #   @option options [Boolean] :s3_access_grants (false)
+    #     TODO
+    #
+    #   @option options [Aws::S3::AccessGrantsCredentialsProvider] :s3_access_grants_credentials_provider
+    #     TODO
     #
     #   @option options [Boolean] :s3_disable_multiregion_access_points (false)
     #     When set to `false` this will option will raise errors when multi-region

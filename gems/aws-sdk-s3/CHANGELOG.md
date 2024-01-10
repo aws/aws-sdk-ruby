@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support S3 Access Grants authentication. Access Grants can be enabled with the `s3_access_grants` option, and custom options can be passed into the `access_grants_credentials_provider` option.
+
+* Feature - S3 now depends on `aws-sdk-s3control` for Access Grants credential fetching.
+
 1.142.0 (2023-12-22)
 ------------------
 

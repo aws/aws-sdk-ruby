@@ -9,6 +9,7 @@
 
 
 require 'aws-sdk-kms'
+require 'aws-sdk-s3control'
 require 'aws-sigv4'
 require 'aws-sdk-core'
 

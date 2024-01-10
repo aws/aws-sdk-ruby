@@ -13,7 +13,7 @@ module BuildTools
     MINIMUM_CORE_VERSION = "3.188.0"
 
     # Minimum `aws-sdk-core` version for new S3 gem builds
-    MINIMUM_CORE_VERSION_S3 = "3.189.0"
+    MINIMUM_CORE_VERSION_S3 = "3.191.0"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 

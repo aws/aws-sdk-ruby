@@ -21,6 +21,10 @@ require 'aws-sdk-s3/express_credentials'
 require 'aws-sdk-s3/express_credentials_cache'
 require 'aws-sdk-s3/express_credentials_provider'
 
+# s3 access grants auth
+require 'aws-sdk-s3/access_grants_credentials'
+require 'aws-sdk-s3/access_grants_credentials_provider'
+
 # customizations to generated classes
 require 'aws-sdk-s3/customizations/bucket'
 require 'aws-sdk-s3/customizations/errors'
