@@ -21,7 +21,6 @@ module AwsSdkCodeGenerator
     # @option options [Hash] :add_plugins ({})
     # @option options [Hash] :remove_plugins ([])
     # @option options [Boolean] :deprecated (false)
-    # @option options [Boolean] :support_rbs (false)
     def initialize(options)
       @name = options.fetch(:name)
       @identifier = name.downcase
@@ -60,7 +59,6 @@ module AwsSdkCodeGenerator
         o['endpointdiscovery'] && o['endpointdiscovery']['required']
       end
       @deprecated = options[:deprecated] || false
-      @support_rbs = options[:support_rbs] || false
     end
 
     # @return [String] The service name, e.g. "S3"
@@ -162,11 +160,6 @@ module AwsSdkCodeGenerator
       name = name.strip
 
       name
-    end
-
-    # @return [Boolean] true if the service supports RBS
-    def support_rbs?
-      @support_rbs
     end
 
     # @return [Boolean] true if the service is deprecated

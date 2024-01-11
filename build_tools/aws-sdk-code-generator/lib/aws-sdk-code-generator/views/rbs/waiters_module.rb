@@ -9,7 +9,7 @@ module AwsSdkCodeGenerator
 
         def initialize(service_name:, api:, waiters:)
           @service_name = service_name
-          @waiters = AwsSdkCodeGenerator::RBS::Waiter.build_list(api: , waiters:)
+          @waiters = AwsSdkCodeGenerator::RBS::Waiter.build_list(api: api, waiters: waiters)
         end
 
         # @return [String|nil]

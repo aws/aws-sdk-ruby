@@ -130,7 +130,7 @@ module AwsSdkCodeGenerator
               else
                 opt.doc_type.to_s
               end
-            end.then do |type|
+            end.yield_self do |type|
               [opt.name, "?#{opt.name}: #{type}", opt.doc_type]
             end
           end

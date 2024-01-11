@@ -28,7 +28,7 @@ module AwsSdkCodeGenerator
 
       def build_method_signature
         MethodSignature.new(
-          method_name:,
+          method_name: method_name,
           overloads: [
             "(#{arguments}) -> #{returns}",
             "(#{@include_required ? "" : "?"}Hash[Symbol, untyped]) -> #{returns}"

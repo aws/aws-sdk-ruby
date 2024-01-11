@@ -6,7 +6,7 @@ module AwsSdkCodeGenerator
       class << self
         def build_method_signature_list(resource:, api:)
           resource.fetch("batchActions", {}).map do |name, action|
-            new(api:, name:, action:).build_method_signature
+            new(api: api, name: name, action: action).build_method_signature
           end
         end
       end
@@ -17,8 +17,8 @@ module AwsSdkCodeGenerator
         @action = action
         @batch_action_documentation = AwsSdkCodeGenerator::ResourceBatchActionDocumentation.new(
           var_name: nil,
-          method_name:,
-          action:,
+          method_name: method_name,
+          action: action,
           api: api,
         )
         @skip_params = @batch_action_documentation.send(:skip_params)

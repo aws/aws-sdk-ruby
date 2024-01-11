@@ -6,7 +6,7 @@ module AwsSdkCodeGenerator
       class << self
         def build_method_signature_list(resource:, api:)
           (resource["actions"] || []).map do |action_name, action|
-            new(action_name:, action:, api:).build_method_signature
+            new(action_name: action_name, action: action, api: api).build_method_signature
           end
         end
       end
