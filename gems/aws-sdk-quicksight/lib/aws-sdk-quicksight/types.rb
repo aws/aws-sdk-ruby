@@ -28877,6 +28877,10 @@ module Aws::QuickSight
     #   The description of the topic.
     #   @return [String]
     #
+    # @!attribute [rw] user_experience_version
+    #   The user experience version of a topic.
+    #   @return [String]
+    #
     # @!attribute [rw] data_sets
     #   The data sets that the topic is associated with.
     #   @return [Array<Types::DatasetMetadata>]
@@ -28886,6 +28890,7 @@ module Aws::QuickSight
     class TopicDetails < Struct.new(
       :name,
       :description,
+      :user_experience_version,
       :data_sets)
       SENSITIVE = []
       include Aws::Structure

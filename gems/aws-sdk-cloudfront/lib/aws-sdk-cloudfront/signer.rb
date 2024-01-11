@@ -26,7 +26,7 @@ module Aws
         if url_sections.length < 2
           raise ArgumentError, "Invalid URL:#{url}"
         end
-        scheme = url_sections[0].gsub('*', '')
+        scheme = url_sections[0].delete('*')
         uri = "#{scheme}://#{url_sections[1]}"
         [scheme, uri]
       end

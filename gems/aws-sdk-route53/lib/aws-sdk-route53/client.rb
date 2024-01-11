@@ -1343,6 +1343,15 @@ module Aws::Route53
     #               collection_id: "UUID", # required
     #               location_name: "CidrLocationNameDefaultAllowed", # required
     #             },
+    #             geo_proximity_location: {
+    #               aws_region: "AWSRegion",
+    #               local_zone_group: "LocalZoneGroup",
+    #               coordinates: {
+    #                 latitude: "Latitude", # required
+    #                 longitude: "Longitude", # required
+    #               },
+    #               bias: 1,
+    #             },
     #           },
     #         },
     #       ],
@@ -3284,7 +3293,7 @@ module Aws::Route53
     #   Amazon Route 53 uses the two-letter country codes that are specified
     #   in [ISO standard 3166-1 alpha-2][1].
     #
-    #   Route 53 also supports the contry code **UA** forr Ukraine.
+    #   Route 53 also supports the country code **UA** for Ukraine.
     #
     #
     #
@@ -4768,6 +4777,11 @@ module Aws::Route53
     #   resp.resource_record_sets[0].traffic_policy_instance_id #=> String
     #   resp.resource_record_sets[0].cidr_routing_config.collection_id #=> String
     #   resp.resource_record_sets[0].cidr_routing_config.location_name #=> String
+    #   resp.resource_record_sets[0].geo_proximity_location.aws_region #=> String
+    #   resp.resource_record_sets[0].geo_proximity_location.local_zone_group #=> String
+    #   resp.resource_record_sets[0].geo_proximity_location.coordinates.latitude #=> String
+    #   resp.resource_record_sets[0].geo_proximity_location.coordinates.longitude #=> String
+    #   resp.resource_record_sets[0].geo_proximity_location.bias #=> Integer
     #   resp.is_truncated #=> Boolean
     #   resp.next_record_name #=> String
     #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
@@ -5695,6 +5709,11 @@ module Aws::Route53
     #   address that is returned by DNS, Route 53 then checks the health of
     #   the endpoint.
     #
+    #   If you don't specify a value for `IPAddress`, you can’t update the
+    #   health check to remove the `FullyQualifiedDomainName`; if you don’t
+    #   specify a value for `IPAddress` on creation, a
+    #   `FullyQualifiedDomainName` is required.
+    #
     #   <note markdown="1"> If you don't specify a value for `IPAddress`, Route 53 uses only IPv4
     #   to send health checks to the endpoint. If there's no resource record
     #   set with a type of A for the name that you specify for
@@ -6124,7 +6143,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

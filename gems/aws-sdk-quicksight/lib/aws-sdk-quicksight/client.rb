@@ -2561,6 +2561,7 @@ module Aws::QuickSight
     #     topic: { # required
     #       name: "ResourceName",
     #       description: "LimitedString",
+    #       user_experience_version: "LEGACY", # accepts LEGACY, NEW_READER_EXPERIENCE
     #       data_sets: [
     #         {
     #           dataset_arn: "Arn", # required
@@ -6561,6 +6562,7 @@ module Aws::QuickSight
     #   resp.topic_id #=> String
     #   resp.topic.name #=> String
     #   resp.topic.description #=> String
+    #   resp.topic.user_experience_version #=> String, one of "LEGACY", "NEW_READER_EXPERIENCE"
     #   resp.topic.data_sets #=> Array
     #   resp.topic.data_sets[0].dataset_arn #=> String
     #   resp.topic.data_sets[0].dataset_name #=> String
@@ -12956,6 +12958,7 @@ module Aws::QuickSight
     #     topic: { # required
     #       name: "ResourceName",
     #       description: "LimitedString",
+    #       user_experience_version: "LEGACY", # accepts LEGACY, NEW_READER_EXPERIENCE
     #       data_sets: [
     #         {
     #           dataset_arn: "Arn", # required
@@ -13531,7 +13534,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -151,6 +151,8 @@ module Aws::EMR
             Aws::EMR::Endpoints::RemoveTags.build(context)
           when :run_job_flow
             Aws::EMR::Endpoints::RunJobFlow.build(context)
+          when :set_keep_job_flow_alive_when_no_steps
+            Aws::EMR::Endpoints::SetKeepJobFlowAliveWhenNoSteps.build(context)
           when :set_termination_protection
             Aws::EMR::Endpoints::SetTerminationProtection.build(context)
           when :set_visible_to_all_users

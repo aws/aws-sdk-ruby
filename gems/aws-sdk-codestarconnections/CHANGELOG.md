@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-12-28)
+------------------
+
+* Feature - New integration with the GitLab self-managed provider type.
+
 1.38.0 (2023-11-28)
 ------------------
 

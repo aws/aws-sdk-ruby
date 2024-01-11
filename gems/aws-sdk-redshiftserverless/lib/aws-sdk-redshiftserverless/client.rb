@@ -1020,10 +1020,10 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, and query monitoring metrics that let
-    #   you define performance boundaries. For more information about query
-    #   monitoring rules and available metrics, see [ Query monitoring metrics
-    #   for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
+    #   metrics that let you define performance boundaries. For more
+    #   information about query monitoring rules and available metrics, see [
+    #   Query monitoring metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -3531,10 +3531,10 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, and query monitoring metrics that let
-    #   you define performance boundaries. For more information about query
-    #   monitoring rules and available metrics, see [ Query monitoring metrics
-    #   for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
+    #   metrics that let you define performance boundaries. For more
+    #   information about query monitoring rules and available metrics, see [
+    #   Query monitoring metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -3650,7 +3650,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

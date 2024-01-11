@@ -99,6 +99,8 @@ module Aws::LocationService
     CreateRouteCalculatorResponse = Shapes::StructureShape.new(name: 'CreateRouteCalculatorResponse')
     CreateTrackerRequest = Shapes::StructureShape.new(name: 'CreateTrackerRequest')
     CreateTrackerResponse = Shapes::StructureShape.new(name: 'CreateTrackerResponse')
+    CustomLayer = Shapes::StringShape.new(name: 'CustomLayer')
+    CustomLayerList = Shapes::ListShape.new(name: 'CustomLayerList')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DeleteGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'DeleteGeofenceCollectionRequest')
     DeleteGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'DeleteGeofenceCollectionResponse')
@@ -615,6 +617,8 @@ module Aws::LocationService
     CreateTrackerResponse.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TrackerName"))
     CreateTrackerResponse.struct_class = Types::CreateTrackerResponse
 
+    CustomLayerList.member = Shapes::ShapeRef.new(shape: CustomLayer)
+
     DataSourceConfiguration.add_member(:intended_use, Shapes::ShapeRef.new(shape: IntendedUse, location_name: "IntendedUse"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
@@ -623,6 +627,7 @@ module Aws::LocationService
 
     DeleteGeofenceCollectionResponse.struct_class = Types::DeleteGeofenceCollectionResponse
 
+    DeleteKeyRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "forceDelete"))
     DeleteKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "KeyName"))
     DeleteKeyRequest.struct_class = Types::DeleteKeyRequest
 
@@ -1043,10 +1048,12 @@ module Aws::LocationService
 
     ListTrackersResponseEntryList.member = Shapes::ShapeRef.new(shape: ListTrackersResponseEntry)
 
+    MapConfiguration.add_member(:custom_layers, Shapes::ShapeRef.new(shape: CustomLayerList, location_name: "CustomLayers"))
     MapConfiguration.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     MapConfiguration.add_member(:style, Shapes::ShapeRef.new(shape: MapStyle, required: true, location_name: "Style"))
     MapConfiguration.struct_class = Types::MapConfiguration
 
+    MapConfigurationUpdate.add_member(:custom_layers, Shapes::ShapeRef.new(shape: CustomLayerList, location_name: "CustomLayers"))
     MapConfigurationUpdate.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3OrEmpty, location_name: "PoliticalView"))
     MapConfigurationUpdate.struct_class = Types::MapConfigurationUpdate
 

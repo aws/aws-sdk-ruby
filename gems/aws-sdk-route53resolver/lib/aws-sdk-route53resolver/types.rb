@@ -401,6 +401,39 @@ module Aws::Route53Resolver
     #   A name that lets you identify the rule in the rule group.
     #   @return [String]
     #
+    # @!attribute [rw] qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values
+    #   are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleRequest AWS API Documentation
     #
     class CreateFirewallRuleRequest < Struct.new(
@@ -413,7 +446,8 @@ module Aws::Route53Resolver
       :block_override_domain,
       :block_override_dns_type,
       :block_override_ttl,
-      :name)
+      :name,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -822,11 +856,45 @@ module Aws::Route53Resolver
     #   The ID of the domain list that's used in the rule.
     #   @return [String]
     #
+    # @!attribute [rw] qtype
+    #   The DNS query type that the rule you are deleting evaluates. Allowed
+    #   values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleRequest AWS API Documentation
     #
     class DeleteFirewallRuleRequest < Struct.new(
       :firewall_rule_group_id,
-      :firewall_domain_list_id)
+      :firewall_domain_list_id,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1527,6 +1595,39 @@ module Aws::Route53Resolver
     #   format and Coordinated Universal Time (UTC).
     #   @return [String]
     #
+    # @!attribute [rw] qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values
+    #   are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRule AWS API Documentation
     #
     class FirewallRule < Struct.new(
@@ -1541,7 +1642,8 @@ module Aws::Route53Resolver
       :block_override_ttl,
       :creator_request_id,
       :creation_time,
-      :modification_time)
+      :modification_time,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4972,6 +5074,39 @@ module Aws::Route53Resolver
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values
+    #   are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleRequest AWS API Documentation
     #
     class UpdateFirewallRuleRequest < Struct.new(
@@ -4983,7 +5118,8 @@ module Aws::Route53Resolver
       :block_override_domain,
       :block_override_dns_type,
       :block_override_ttl,
-      :name)
+      :name,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end

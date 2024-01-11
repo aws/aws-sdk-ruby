@@ -160,12 +160,22 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     #   @return [String]
     #
+    # @!attribute [rw] managed_draining
+    #   The managed draining option for the Auto Scaling group capacity
+    #   provider. When you enable this, Amazon ECS manages and gracefully
+    #   drains the EC2 container instances that are in the Auto Scaling
+    #   group capacity provider.
+    #
+    #   The default is `ENABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AutoScalingGroupProvider AWS API Documentation
     #
     class AutoScalingGroupProvider < Struct.new(
       :auto_scaling_group_arn,
       :managed_scaling,
-      :managed_termination_protection)
+      :managed_termination_protection,
+      :managed_draining)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -201,11 +211,21 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     #   @return [String]
     #
+    # @!attribute [rw] managed_draining
+    #   The managed draining option for the Auto Scaling group capacity
+    #   provider. When you enable this, Amazon ECS manages and gracefully
+    #   drains the EC2 container instances that are in the Auto Scaling
+    #   group capacity provider.
+    #
+    #   The default is `ENABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AutoScalingGroupProviderUpdate AWS API Documentation
     #
     class AutoScalingGroupProviderUpdate < Struct.new(
       :managed_scaling,
-      :managed_termination_protection)
+      :managed_termination_protection,
+      :managed_draining)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -423,6 +443,7 @@ module Aws::ECS
     # specifying an identifier that isn't valid.
     #
     # @!attribute [rw] message
+    #   Message that describes the cause of the exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClientException AWS API Documentation
@@ -8611,6 +8632,7 @@ module Aws::ECS
     # These errors are usually caused by a server issue.
     #
     # @!attribute [rw] message
+    #   Message that describes the cause of the exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServerException AWS API Documentation

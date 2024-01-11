@@ -6340,6 +6340,28 @@ module Aws::SageMaker
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OfflineStoreConfig.html
     #   @return [Types::OfflineStoreConfig]
     #
+    # @!attribute [rw] throughput_config
+    #   Used to set feature group throughput configuration. There are two
+    #   modes: `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are
+    #   charged for data reads and writes that your application performs on
+    #   your feature group. You do not need to specify read and write
+    #   throughput because Feature Store accommodates your workloads as they
+    #   ramp up and down. You can switch a feature group to on-demand only
+    #   once in a 24 hour period. With provisioned throughput mode, you
+    #   specify the read and write capacity per second that you expect your
+    #   application to require, and you are billed based on those limits.
+    #   Exceeding provisioned throughput will result in your requests being
+    #   throttled.
+    #
+    #   Note: `PROVISIONED` throughput mode is supported only for feature
+    #   groups that are offline-only, or use the [ `Standard` ][1] tier
+    #   online store.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType
+    #   @return [Types::ThroughputConfig]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM execution role used to
     #   persist data into the `OfflineStore` if an `OfflineStoreConfig` is
@@ -6363,6 +6385,7 @@ module Aws::SageMaker
       :feature_definitions,
       :online_store_config,
       :offline_store_config,
+      :throughput_config,
       :role_arn,
       :description,
       :tags)
@@ -13220,6 +13243,28 @@ module Aws::SageMaker
     #   * Encryption configuration.
     #   @return [Types::OfflineStoreConfig]
     #
+    # @!attribute [rw] throughput_config
+    #   Active throughput configuration of the feature group. Used to set
+    #   feature group throughput configuration. There are two modes:
+    #   `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are charged
+    #   for data reads and writes that your application performs on your
+    #   feature group. You do not need to specify read and write throughput
+    #   because Feature Store accommodates your workloads as they ramp up
+    #   and down. You can switch a feature group to on-demand only once in a
+    #   24 hour period. With provisioned throughput mode, you specify the
+    #   read and write capacity per second that you expect your application
+    #   to require, and you are billed based on those limits. Exceeding
+    #   provisioned throughput will result in your requests being throttled.
+    #
+    #   Note: `PROVISIONED` throughput mode is supported only for feature
+    #   groups that are offline-only, or use the [ `Standard` ][1] tier
+    #   online store.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType
+    #   @return [Types::ThroughputConfigDescription]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM execution role used to
     #   persist data into the OfflineStore if an OfflineStoreConfig is
@@ -13275,6 +13320,7 @@ module Aws::SageMaker
       :last_modified_time,
       :online_store_config,
       :offline_store_config,
+      :throughput_config,
       :role_arn,
       :feature_group_status,
       :offline_store_status,
@@ -17468,6 +17514,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A collection of settings that configure the domain's Docker
+    # interaction.
+    #
+    # @!attribute [rw] enable_docker_access
+    #   Indicates whether the domain can access Docker.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_only_trusted_accounts
+    #   The list of Amazon Web Services accounts that are trusted when the
+    #   domain is created in VPC-only mode.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DockerSettings AWS API Documentation
+    #
+    class DockerSettings < Struct.new(
+      :enable_docker_access,
+      :vpc_only_trusted_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The domain's details.
     #
     # @!attribute [rw] domain_arn
@@ -17535,12 +17602,18 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] docker_settings
+    #   A collection of settings that configure the domain's Docker
+    #   interaction.
+    #   @return [Types::DockerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
     #
     class DomainSettings < Struct.new(
       :security_group_ids,
       :r_studio_server_pro_domain_settings,
-      :execution_role_identity_config)
+      :execution_role_identity_config,
+      :docker_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17570,12 +17643,18 @@ module Aws::SageMaker
     #   apps.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] docker_settings
+    #   A collection of settings that configure the domain's Docker
+    #   interaction.
+    #   @return [Types::DockerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
       :r_studio_server_pro_domain_settings_for_update,
       :execution_role_identity_config,
-      :security_group_ids)
+      :security_group_ids,
+      :docker_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40048,6 +40127,140 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Used to set feature group throughput configuration. There are two
+    # modes: `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are
+    # charged for data reads and writes that your application performs on
+    # your feature group. You do not need to specify read and write
+    # throughput because Feature Store accommodates your workloads as they
+    # ramp up and down. You can switch a feature group to on-demand only
+    # once in a 24 hour period. With provisioned throughput mode, you
+    # specify the read and write capacity per second that you expect your
+    # application to require, and you are billed based on those limits.
+    # Exceeding provisioned throughput will result in your requests being
+    # throttled.
+    #
+    # Note: `PROVISIONED` throughput mode is supported only for feature
+    # groups that are offline-only, or use the [ `Standard` ][1] tier online
+    # store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType
+    #
+    # @!attribute [rw] throughput_mode
+    #   The mode used for your feature group throughput: `ON_DEMAND` or
+    #   `PROVISIONED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_read_capacity_units
+    #   For provisioned feature groups with online store enabled, this
+    #   indicates the read throughput you are billed for and can consume
+    #   without throttling.
+    #
+    #   This field is not applicable for on-demand feature groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_write_capacity_units
+    #   For provisioned feature groups, this indicates the write throughput
+    #   you are billed for and can consume without throttling.
+    #
+    #   This field is not applicable for on-demand feature groups.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ThroughputConfig AWS API Documentation
+    #
+    class ThroughputConfig < Struct.new(
+      :throughput_mode,
+      :provisioned_read_capacity_units,
+      :provisioned_write_capacity_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Active throughput configuration of the feature group. Used to set
+    # feature group throughput configuration. There are two modes:
+    # `ON_DEMAND` and `PROVISIONED`. With on-demand mode, you are charged
+    # for data reads and writes that your application performs on your
+    # feature group. You do not need to specify read and write throughput
+    # because Feature Store accommodates your workloads as they ramp up and
+    # down. You can switch a feature group to on-demand only once in a 24
+    # hour period. With provisioned throughput mode, you specify the read
+    # and write capacity per second that you expect your application to
+    # require, and you are billed based on those limits. Exceeding
+    # provisioned throughput will result in your requests being throttled.
+    #
+    # Note: `PROVISIONED` throughput mode is supported only for feature
+    # groups that are offline-only, or use the [ `Standard` ][1] tier online
+    # store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType
+    #
+    # @!attribute [rw] throughput_mode
+    #   The mode used for your feature group throughput: `ON_DEMAND` or
+    #   `PROVISIONED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_read_capacity_units
+    #   For provisioned feature groups with online store enabled, this
+    #   indicates the read throughput you are billed for and can consume
+    #   without throttling.
+    #
+    #   This field is not applicable for on-demand feature groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_write_capacity_units
+    #   For provisioned feature groups, this indicates the write throughput
+    #   you are billed for and can consume without throttling.
+    #
+    #   This field is not applicable for on-demand feature groups.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ThroughputConfigDescription AWS API Documentation
+    #
+    class ThroughputConfigDescription < Struct.new(
+      :throughput_mode,
+      :provisioned_read_capacity_units,
+      :provisioned_write_capacity_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The new throughput configuration for the feature group. You can switch
+    # between on-demand and provisioned modes or update the read / write
+    # capacity of provisioned feature groups. You can switch a feature group
+    # to on-demand only once in a 24 hour period.
+    #
+    # @!attribute [rw] throughput_mode
+    #   Target throughput mode of the feature group. Throughput update is an
+    #   asynchronous operation, and the outcome should be monitored by
+    #   polling `LastUpdateStatus` field in `DescribeFeatureGroup` response.
+    #   You cannot update a feature group's throughput while another update
+    #   is in progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_read_capacity_units
+    #   For provisioned feature groups with online store enabled, this
+    #   indicates the read throughput you are billed for and can consume
+    #   without throttling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_write_capacity_units
+    #   For provisioned feature groups, this indicates the write throughput
+    #   you are billed for and can consume without throttling.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ThroughputConfigUpdate AWS API Documentation
+    #
+    class ThroughputConfigUpdate < Struct.new(
+      :throughput_mode,
+      :provisioned_read_capacity_units,
+      :provisioned_write_capacity_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The collection of components that defines the time-series.
     #
     # @!attribute [rw] target_attribute_name
@@ -42910,12 +43123,20 @@ module Aws::SageMaker
     #   Updates the feature group online store configuration.
     #   @return [Types::OnlineStoreConfigUpdate]
     #
+    # @!attribute [rw] throughput_config
+    #   The new throughput configuration for the feature group. You can
+    #   switch between on-demand and provisioned modes or update the read /
+    #   write capacity of provisioned feature groups. You can switch a
+    #   feature group to on-demand only once in a 24 hour period.
+    #   @return [Types::ThroughputConfigUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupRequest AWS API Documentation
     #
     class UpdateFeatureGroupRequest < Struct.new(
       :feature_group_name,
       :feature_additions,
-      :online_store_config)
+      :online_store_config,
+      :throughput_config)
       SENSITIVE = []
       include Aws::Structure
     end

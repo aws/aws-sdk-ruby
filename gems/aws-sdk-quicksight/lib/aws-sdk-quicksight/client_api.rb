@@ -1622,6 +1622,7 @@ module Aws::QuickSight
     TopicSummaries = Shapes::ListShape.new(name: 'TopicSummaries')
     TopicSummary = Shapes::StructureShape.new(name: 'TopicSummary')
     TopicTimeGranularity = Shapes::StringShape.new(name: 'TopicTimeGranularity')
+    TopicUserExperienceVersion = Shapes::StringShape.new(name: 'TopicUserExperienceVersion')
     TotalAggregationComputation = Shapes::StructureShape.new(name: 'TotalAggregationComputation')
     TotalAggregationFunction = Shapes::StructureShape.new(name: 'TotalAggregationFunction')
     TotalAggregationOption = Shapes::StructureShape.new(name: 'TotalAggregationOption')
@@ -7681,6 +7682,7 @@ module Aws::QuickSight
 
     TopicDetails.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
     TopicDetails.add_member(:description, Shapes::ShapeRef.new(shape: LimitedString, location_name: "Description"))
+    TopicDetails.add_member(:user_experience_version, Shapes::ShapeRef.new(shape: TopicUserExperienceVersion, location_name: "UserExperienceVersion"))
     TopicDetails.add_member(:data_sets, Shapes::ShapeRef.new(shape: Datasets, location_name: "DataSets"))
     TopicDetails.struct_class = Types::TopicDetails
 
@@ -10878,6 +10880,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-01-10)
+------------------
+
+* Feature - Minor pattern updates for Campaign and Dial Request API fields.
+
 1.12.0 (2023-11-28)
 ------------------
 

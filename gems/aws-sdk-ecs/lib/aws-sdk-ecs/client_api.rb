@@ -213,6 +213,7 @@ module Aws::ECS
     ManagedAgentStateChange = Shapes::StructureShape.new(name: 'ManagedAgentStateChange')
     ManagedAgentStateChanges = Shapes::ListShape.new(name: 'ManagedAgentStateChanges')
     ManagedAgents = Shapes::ListShape.new(name: 'ManagedAgents')
+    ManagedDraining = Shapes::StringShape.new(name: 'ManagedDraining')
     ManagedScaling = Shapes::StructureShape.new(name: 'ManagedScaling')
     ManagedScalingInstanceWarmupPeriod = Shapes::IntegerShape.new(name: 'ManagedScalingInstanceWarmupPeriod')
     ManagedScalingStatus = Shapes::StringShape.new(name: 'ManagedScalingStatus')
@@ -421,10 +422,12 @@ module Aws::ECS
     AutoScalingGroupProvider.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "autoScalingGroupArn"))
     AutoScalingGroupProvider.add_member(:managed_scaling, Shapes::ShapeRef.new(shape: ManagedScaling, location_name: "managedScaling"))
     AutoScalingGroupProvider.add_member(:managed_termination_protection, Shapes::ShapeRef.new(shape: ManagedTerminationProtection, location_name: "managedTerminationProtection"))
+    AutoScalingGroupProvider.add_member(:managed_draining, Shapes::ShapeRef.new(shape: ManagedDraining, location_name: "managedDraining"))
     AutoScalingGroupProvider.struct_class = Types::AutoScalingGroupProvider
 
     AutoScalingGroupProviderUpdate.add_member(:managed_scaling, Shapes::ShapeRef.new(shape: ManagedScaling, location_name: "managedScaling"))
     AutoScalingGroupProviderUpdate.add_member(:managed_termination_protection, Shapes::ShapeRef.new(shape: ManagedTerminationProtection, location_name: "managedTerminationProtection"))
+    AutoScalingGroupProviderUpdate.add_member(:managed_draining, Shapes::ShapeRef.new(shape: ManagedDraining, location_name: "managedDraining"))
     AutoScalingGroupProviderUpdate.struct_class = Types::AutoScalingGroupProviderUpdate
 
     AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))

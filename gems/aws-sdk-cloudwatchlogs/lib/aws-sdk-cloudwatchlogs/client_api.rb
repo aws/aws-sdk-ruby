@@ -297,6 +297,7 @@ module Aws::CloudWatchLogs
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchedLogStream = Shapes::StructureShape.new(name: 'SearchedLogStream')
     SearchedLogStreams = Shapes::ListShape.new(name: 'SearchedLogStreams')
+    SelectionCriteria = Shapes::StringShape.new(name: 'SelectionCriteria')
     SequenceToken = Shapes::StringShape.new(name: 'SequenceToken')
     Service = Shapes::StringShape.new(name: 'Service')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -362,6 +363,7 @@ module Aws::CloudWatchLogs
     AccountPolicy.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
     AccountPolicy.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, location_name: "policyType"))
     AccountPolicy.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    AccountPolicy.add_member(:selection_criteria, Shapes::ShapeRef.new(shape: SelectionCriteria, location_name: "selectionCriteria"))
     AccountPolicy.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     AccountPolicy.struct_class = Types::AccountPolicy
 
@@ -998,6 +1000,7 @@ module Aws::CloudWatchLogs
     PutAccountPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: AccountPolicyDocument, required: true, location_name: "policyDocument"))
     PutAccountPolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     PutAccountPolicyRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    PutAccountPolicyRequest.add_member(:selection_criteria, Shapes::ShapeRef.new(shape: SelectionCriteria, location_name: "selectionCriteria"))
     PutAccountPolicyRequest.struct_class = Types::PutAccountPolicyRequest
 
     PutAccountPolicyResponse.add_member(:account_policy, Shapes::ShapeRef.new(shape: AccountPolicy, location_name: "accountPolicy"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-01-08)
+------------------
+
+* Feature - This release adds support for query type configuration on firewall rules that enables customers for granular action (ALLOW, ALERT, BLOCK) by DNS query type.
+
 1.52.0 (2023-12-18)
 ------------------
 

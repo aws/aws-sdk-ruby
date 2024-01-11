@@ -155,10 +155,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A structure that defines agent hierarchy group levels which can be
-    # used to filter search results. Important: Agent hierarchy group level
-    # information in search result is a snapshot, it does not represent
-    # current agent hierarchy who handled the contact.
+    # A structure that defines search criteria for contacts using agent
+    # hierarchy group levels. For more information about agent hierarchies,
+    # see [Set Up Agent Hierarchies][1] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
     #
     # @!attribute [rw] l1_ids
     #   The identifiers for level 1 hierarchy groups.
@@ -1689,16 +1693,16 @@ module Aws::Connect
       :queue_time_adjustment_seconds,
       :queue_priority,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
-    # A structure that defines filters can be used to search within outputs
-    # analyzed by Amazon Connect Contact Lens in a contact.
+    # A structure that defines search criteria for contacts using analysis
+    # outputs from Amazon Connect Contact Lens.
     #
     # @!attribute [rw] transcript
-    #   A structure that defines filters can be used to search with text
-    #   within an Amazon Connect Contact Lens analyzed transcript.
+    #   Search criteria based on transcript analyzed by Amazon Connect
+    #   Contact Lens.
     #   @return [Types::Transcript]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysis AWS API Documentation
@@ -1993,7 +1997,7 @@ module Aws::Connect
     # Information of returned contact.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the contact
+    #   The Amazon Resource Name (ARN) of the contact.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2029,13 +2033,13 @@ module Aws::Connect
     #
     # @!attribute [rw] initiation_timestamp
     #   The date and time this contact was initiated, in UTC time. For
-    #   INBOUND, this is when the contact arrived. For OUTBOUND, this is
-    #   when the agent began dialing. For CALLBACK, this is when the
-    #   callback contact was created. For TRANSFER and QUEUE\_TRANSFER, this
-    #   is when the transfer was initiated. For API, this is when the
-    #   request arrived. For EXTERNAL\_OUTBOUND, this is when the agent
-    #   started dialing the external participant. For MONITOR, this is when
-    #   the supervisor started listening to a contact.
+    #   `INBOUND`, this is when the contact arrived. For `OUTBOUND`, this is
+    #   when the agent began dialing. For `CALLBACK`, this is when the
+    #   callback contact was created. For `TRANSFER` and `QUEUE_TRANSFER`,
+    #   this is when the transfer was initiated. For API, this is when the
+    #   request arrived. For `EXTERNAL_OUTBOUND`, this is when the agent
+    #   started dialing the external participant. For `MONITOR`, this is
+    #   when the supervisor started listening to a contact.
     #   @return [Time]
     #
     # @!attribute [rw] disconnect_timestamp
@@ -3615,7 +3619,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -7381,7 +7385,7 @@ module Aws::Connect
       :sign_in_url,
       :user_arn,
       :user_id)
-      SENSITIVE = []
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -15220,11 +15224,11 @@ module Aws::Connect
 
     # @!attribute [rw] instance_id
     #   The identifier of Amazon Connect instance. You can find the instance
-    #   ID in the Amazon Resource Name (ARN) of the instance
+    #   ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
     # @!attribute [rw] time_range
-    #   Time range that you want to search results
+    #   Time range that you want to search results.
     #   @return [Types::SearchContactsTimeRange]
     #
     # @!attribute [rw] search_criteria
@@ -15242,7 +15246,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] sort
-    #   Specifies a field to sort by and a sort order
+    #   Specifies a field to sort by and a sort order.
     #   @return [Types::Sort]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsRequest AWS API Documentation
@@ -15281,10 +15285,10 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A structure of time range that you want to search results
+    # A structure of time range that you want to search results.
     #
     # @!attribute [rw] type
-    #   The type of timestamp to search
+    #   The type of timestamp to search.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -15305,34 +15309,50 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A structure of search criteria to be used to return contacts
+    # A structure of search criteria to be used to return contacts.
     #
     # @!attribute [rw] agent_ids
-    #   The array of agent ids
+    #   The identifiers of agents who handled the contacts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] agent_hierarchy_groups
-    #   The agent hierarchy groups
+    #   The agent hierarchy groups of the agent at the time of handling the
+    #   contact.
     #   @return [Types::AgentHierarchyGroups]
     #
     # @!attribute [rw] channels
-    #   The array of channels
+    #   The list of channels associated with contacts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] contact_analysis
-    #   The ContactAnalysis object used in search criteria
+    #   Search criteria based on analysis outputs from Amazon Connect
+    #   Contact Lens.
     #   @return [Types::ContactAnalysis]
     #
     # @!attribute [rw] initiation_methods
-    #   The array of initiaton methods
+    #   The list of initiation methods associated with contacts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] queue_ids
-    #   The array of queue ids.
+    #   The list of queue IDs associated with contacts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] searchable_contact_attributes
-    #   The SearchableContactAttributes object used in search criteria
+    #   The search criteria based on user-defined contact attributes that
+    #   have been configured for contact search. For more information, see
+    #   [Search by customer contact attributes][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #   To use `SearchableContactAttributes` in a search request, the
+    #   `GetContactAttributes` action is required to perform an API request.
+    #   For more information, see
+    #   [https://docs.aws.amazon.com/service-authorization/latest/reference/list\_amazonconnect.html#amazonconnect-actions-as-permissions][2]Actions
+    #   defined by Amazon Connect.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html
+    #   [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions
     #   @return [Types::SearchableContactAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchCriteria AWS API Documentation
@@ -16000,15 +16020,17 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A structure that defines searchable contact attributes which can be
-    # used to filter search results.
+    # A structure that defines search criteria based on user-defined contact
+    # attributes that are configured for contact search.
     #
     # @!attribute [rw] criteria
-    #   The array of searhale contact attribute criteria
+    #   The list of criteria based on user-defined contact attributes that
+    #   are configured for contact search.
     #   @return [Array<Types::SearchableContactAttributesCriteria>]
     #
     # @!attribute [rw] match_type
-    #   The match type of multiple searchable contact attributes criteria.
+    #   The match type combining search criteria using multiple searchable
+    #   contact attributes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableContactAttributes AWS API Documentation
@@ -16020,14 +16042,16 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The criteria of searchable contact attributes.
+    # The search criteria based on user-defned contact attribute key and
+    # values to search on.
     #
     # @!attribute [rw] key
-    #   The searchable contact attribute key
+    #   The key containing a searchable user-defined contact attribute.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The array of contact attribute values used to filter search results.
+    #   The list of values to search for within a user-defined contact
+    #   attribute.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableContactAttributesCriteria AWS API Documentation
@@ -16465,7 +16489,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A structure that defines the sort by and a sort order
+    # A structure that defineds the field name to sort by and a sort order.
     #
     # @!attribute [rw] field_name
     #   The name of the field on which to sort.
@@ -16933,7 +16957,7 @@ module Aws::Connect
       :answer_machine_detection_config,
       :campaign_id,
       :traffic_type)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -17074,7 +17098,7 @@ module Aws::Connect
       :task_template_id,
       :quick_connect_id,
       :related_contact_id)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -17176,7 +17200,7 @@ module Aws::Connect
       :related_contact_id,
       :references,
       :description)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -18043,14 +18067,18 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The transcript object used to search results.
+    # A structure that defines search criteria and matching logic to search
+    # for contacts by matching text with transcripts analyzed by Amazon
+    # Connect Contact Lens.
     #
     # @!attribute [rw] criteria
-    #   The array of transcript search criteria
+    #   The list of search criteria based on Contact Lens conversational
+    #   analytics transcript.
     #   @return [Array<Types::TranscriptCriteria>]
     #
     # @!attribute [rw] match_type
-    #   The match type of multiple transcript criteira
+    #   The match type combining search criteria using multiple transcript
+    #   criteria.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Transcript AWS API Documentation
@@ -18062,7 +18090,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The transcript criteria used to search
+    # A structure that defines search criteria base on words or phrases,
+    # participants in the Contact Lens conversational analytics transcript.
     #
     # @!attribute [rw] participant_role
     #   The participant role in a transcript
@@ -18073,7 +18102,8 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] match_type
-    #   The match type of search texts in a transcript criteria.
+    #   The match type combining search criteria using multiple search texts
+    #   in a transcript criteria.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TranscriptCriteria AWS API Documentation
@@ -18569,7 +18599,7 @@ module Aws::Connect
       :name,
       :description,
       :references)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -20251,7 +20281,7 @@ module Aws::Connect
       :email,
       :secondary_email,
       :mobile)
-      SENSITIVE = []
+      SENSITIVE = [:first_name, :last_name, :email, :secondary_email]
       include Aws::Structure
     end
 
@@ -20270,7 +20300,7 @@ module Aws::Connect
     class UserIdentityInfoLite < Struct.new(
       :first_name,
       :last_name)
-      SENSITIVE = []
+      SENSITIVE = [:first_name, :last_name]
       include Aws::Structure
     end
 
@@ -20430,10 +20460,9 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
-    #   `description`, and `resourceID`.
-    #
-    #    </note>
+    #   The currently supported values for `FieldName` are `username`,
+    #   `firstname`, `lastname`, `resourceId`, `routingProfileId`,
+    #   `securityProfileId`, `agentGroupId`, and `agentGroupPathIds`.
     #   @return [Types::StringCondition]
     #
     # @!attribute [rw] hierarchy_group_condition

@@ -1579,6 +1579,7 @@ module Aws::LocationService
     #
     #   resp = client.create_map({
     #     configuration: { # required
+    #       custom_layers: ["CustomLayer"],
     #       political_view: "CountryCode3",
     #       style: "MapStyle", # required
     #     },
@@ -2069,6 +2070,20 @@ module Aws::LocationService
     # Deletes the specified API key. The API key must have been deactivated
     # more than 90 days previously.
     #
+    # @option params [Boolean] :force_delete
+    #   ForceDelete bypasses an API key's expiry conditions and deletes the
+    #   key. Set the parameter `true` to delete the key or to `false` to not
+    #   preemptively delete the API key.
+    #
+    #   Valid values: `true`, or `false`.
+    #
+    #   Required: No
+    #
+    #   <note markdown="1"> This action is irreversible. Only use ForceDelete if you are certain
+    #   the key is no longer in use.
+    #
+    #    </note>
+    #
     # @option params [required, String] :key_name
     #   The name of the API key to delete.
     #
@@ -2077,6 +2092,7 @@ module Aws::LocationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_key({
+    #     force_delete: false,
     #     key_name: "ResourceName", # required
     #   })
     #
@@ -2319,6 +2335,8 @@ module Aws::LocationService
     #
     # @example Response structure
     #
+    #   resp.configuration.custom_layers #=> Array
+    #   resp.configuration.custom_layers[0] #=> String
     #   resp.configuration.political_view #=> String
     #   resp.configuration.style #=> String
     #   resp.create_time #=> Time
@@ -4381,6 +4399,7 @@ module Aws::LocationService
     #
     #   resp = client.update_map({
     #     configuration_update: {
+    #       custom_layers: ["CustomLayer"],
     #       political_view: "CountryCode3OrEmpty",
     #     },
     #     description: "ResourceDescription",
@@ -4602,7 +4621,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

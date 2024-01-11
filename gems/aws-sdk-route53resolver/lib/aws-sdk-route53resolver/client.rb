@@ -813,6 +813,37 @@ module Aws::Route53Resolver
     # @option params [required, String] :name
     #   A name that lets you identify the rule in the rule group.
     #
+    # @option params [String] :qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
     # @return [Types::CreateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -830,6 +861,7 @@ module Aws::Route53Resolver
     #     block_override_dns_type: "CNAME", # accepts CNAME
     #     block_override_ttl: 1,
     #     name: "Name", # required
+    #     qtype: "Qtype",
     #   })
     #
     # @example Response structure
@@ -846,6 +878,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRule AWS API Documentation
     #
@@ -1395,6 +1428,38 @@ module Aws::Route53Resolver
     # @option params [required, String] :firewall_domain_list_id
     #   The ID of the domain list that's used in the rule.
     #
+    # @option params [String] :qtype
+    #   The DNS query type that the rule you are deleting evaluates. Allowed
+    #   values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
     # @return [Types::DeleteFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -1404,6 +1469,7 @@ module Aws::Route53Resolver
     #   resp = client.delete_firewall_rule({
     #     firewall_rule_group_id: "ResourceId", # required
     #     firewall_domain_list_id: "ResourceId", # required
+    #     qtype: "Qtype",
     #   })
     #
     # @example Response structure
@@ -1420,6 +1486,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRule AWS API Documentation
     #
@@ -2899,6 +2966,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rules[0].creator_request_id #=> String
     #   resp.firewall_rules[0].creation_time #=> String
     #   resp.firewall_rules[0].modification_time #=> String
+    #   resp.firewall_rules[0].qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRules AWS API Documentation
     #
@@ -4124,6 +4192,37 @@ module Aws::Route53Resolver
     # @option params [String] :name
     #   The name of the rule.
     #
+    # @option params [String] :qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
     # @return [Types::UpdateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -4140,6 +4239,7 @@ module Aws::Route53Resolver
     #     block_override_dns_type: "CNAME", # accepts CNAME
     #     block_override_ttl: 1,
     #     name: "Name",
+    #     qtype: "Qtype",
     #   })
     #
     # @example Response structure
@@ -4156,6 +4256,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRule AWS API Documentation
     #
@@ -4558,7 +4659,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

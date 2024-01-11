@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-01-10)
+------------------
+
+* Feature - Updates to ConfigParameter for RSS workgroup, removal of use_fips_ssl
+
+1.23.0 (2024-01-05)
+------------------
+
+* Feature - use_fips_ssl and require_ssl parameter support for Workgroup, UpdateWorkgroup, and CreateWorkgroup
+
 1.22.0 (2023-11-30)
 ------------------
 

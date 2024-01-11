@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-01-04)
+------------------
+
+* Feature - Added Idempotency token support to Service Catalog  AssociateServiceActionWithProvisioningArtifact, DisassociateServiceActionFromProvisioningArtifact, DeleteServiceAction API
+
 1.90.0 (2023-11-28)
 ------------------
 

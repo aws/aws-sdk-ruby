@@ -3665,6 +3665,53 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # You can use the `SetKeepJobFlowAliveWhenNoSteps` to configure a
+    # cluster (job flow) to terminate after the step execution, i.e., all
+    # your steps are executed. If you want a transient cluster that shuts
+    # down after the last of the current executing steps are completed, you
+    # can configure `SetKeepJobFlowAliveWhenNoSteps` to false. If you want a
+    # long running cluster, configure `SetKeepJobFlowAliveWhenNoSteps` to
+    # true.
+    #
+    # For more information, see [Managing Cluster Termination][1] in the
+    # *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
+    #
+    # @option params [required, Array<String>] :job_flow_ids
+    #   A list of strings that uniquely identify the clusters to protect. This
+    #   identifier is returned by [RunJobFlow][1] and can also be obtained
+    #   from [DescribeJobFlows][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html
+    #   [2]: https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html
+    #
+    # @option params [required, Boolean] :keep_job_flow_alive_when_no_steps
+    #   A Boolean that indicates whether to terminate the cluster after all
+    #   steps are executed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_keep_job_flow_alive_when_no_steps({
+    #     job_flow_ids: ["XmlString"], # required
+    #     keep_job_flow_alive_when_no_steps: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetKeepJobFlowAliveWhenNoSteps AWS API Documentation
+    #
+    # @overload set_keep_job_flow_alive_when_no_steps(params = {})
+    # @param [Hash] params ({})
+    def set_keep_job_flow_alive_when_no_steps(params = {}, options = {})
+      req = build_request(:set_keep_job_flow_alive_when_no_steps, params)
+      req.send_request(options)
+    end
+
     # SetTerminationProtection locks a cluster (job flow) so the Amazon EC2
     # instances in the cluster cannot be terminated by user intervention, an
     # API call, or in the event of a job-flow error. The cluster still
@@ -4049,7 +4096,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

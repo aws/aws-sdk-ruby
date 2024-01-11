@@ -197,6 +197,7 @@ module Aws::SageMaker
     CapacitySize = Shapes::StructureShape.new(name: 'CapacitySize')
     CapacitySizeType = Shapes::StringShape.new(name: 'CapacitySizeType')
     CapacitySizeValue = Shapes::IntegerShape.new(name: 'CapacitySizeValue')
+    CapacityUnit = Shapes::IntegerShape.new(name: 'CapacityUnit')
     CaptureContentTypeHeader = Shapes::StructureShape.new(name: 'CaptureContentTypeHeader')
     CaptureMode = Shapes::StringShape.new(name: 'CaptureMode')
     CaptureOption = Shapes::StructureShape.new(name: 'CaptureOption')
@@ -723,6 +724,7 @@ module Aws::SageMaker
     DisassociateNotebookInstanceLifecycleConfig = Shapes::BooleanShape.new(name: 'DisassociateNotebookInstanceLifecycleConfig')
     DisassociateTrialComponentRequest = Shapes::StructureShape.new(name: 'DisassociateTrialComponentRequest')
     DisassociateTrialComponentResponse = Shapes::StructureShape.new(name: 'DisassociateTrialComponentResponse')
+    DockerSettings = Shapes::StructureShape.new(name: 'DockerSettings')
     DocumentSchemaVersion = Shapes::StringShape.new(name: 'DocumentSchemaVersion')
     Dollars = Shapes::IntegerShape.new(name: 'Dollars')
     DomainArn = Shapes::StringShape.new(name: 'DomainArn')
@@ -2017,6 +2019,10 @@ module Aws::SageMaker
     TextGenerationJobConfig = Shapes::StructureShape.new(name: 'TextGenerationJobConfig')
     TextGenerationResolvedAttributes = Shapes::StructureShape.new(name: 'TextGenerationResolvedAttributes')
     ThingName = Shapes::StringShape.new(name: 'ThingName')
+    ThroughputConfig = Shapes::StructureShape.new(name: 'ThroughputConfig')
+    ThroughputConfigDescription = Shapes::StructureShape.new(name: 'ThroughputConfigDescription')
+    ThroughputConfigUpdate = Shapes::StructureShape.new(name: 'ThroughputConfigUpdate')
+    ThroughputMode = Shapes::StringShape.new(name: 'ThroughputMode')
     TimeSeriesConfig = Shapes::StructureShape.new(name: 'TimeSeriesConfig')
     TimeSeriesForecastingJobConfig = Shapes::StructureShape.new(name: 'TimeSeriesForecastingJobConfig')
     TimeSeriesForecastingSettings = Shapes::StructureShape.new(name: 'TimeSeriesForecastingSettings')
@@ -2218,6 +2224,7 @@ module Aws::SageMaker
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcOnlyTrustedAccounts = Shapes::ListShape.new(name: 'VpcOnlyTrustedAccounts')
     VpcSecurityGroupIds = Shapes::ListShape.new(name: 'VpcSecurityGroupIds')
     WaitIntervalInSeconds = Shapes::IntegerShape.new(name: 'WaitIntervalInSeconds')
     WarmPoolResourceStatus = Shapes::StringShape.new(name: 'WarmPoolResourceStatus')
@@ -3212,6 +3219,7 @@ module Aws::SageMaker
     CreateFeatureGroupRequest.add_member(:feature_definitions, Shapes::ShapeRef.new(shape: FeatureDefinitions, required: true, location_name: "FeatureDefinitions"))
     CreateFeatureGroupRequest.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfig, location_name: "OnlineStoreConfig"))
     CreateFeatureGroupRequest.add_member(:offline_store_config, Shapes::ShapeRef.new(shape: OfflineStoreConfig, location_name: "OfflineStoreConfig"))
+    CreateFeatureGroupRequest.add_member(:throughput_config, Shapes::ShapeRef.new(shape: ThroughputConfig, location_name: "ThroughputConfig"))
     CreateFeatureGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     CreateFeatureGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateFeatureGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -4436,6 +4444,7 @@ module Aws::SageMaker
     DescribeFeatureGroupResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
     DescribeFeatureGroupResponse.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfig, location_name: "OnlineStoreConfig"))
     DescribeFeatureGroupResponse.add_member(:offline_store_config, Shapes::ShapeRef.new(shape: OfflineStoreConfig, location_name: "OfflineStoreConfig"))
+    DescribeFeatureGroupResponse.add_member(:throughput_config, Shapes::ShapeRef.new(shape: ThroughputConfigDescription, location_name: "ThroughputConfig"))
     DescribeFeatureGroupResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeFeatureGroupResponse.add_member(:feature_group_status, Shapes::ShapeRef.new(shape: FeatureGroupStatus, location_name: "FeatureGroupStatus"))
     DescribeFeatureGroupResponse.add_member(:offline_store_status, Shapes::ShapeRef.new(shape: OfflineStoreStatus, location_name: "OfflineStoreStatus"))
@@ -5206,6 +5215,10 @@ module Aws::SageMaker
     DisassociateTrialComponentResponse.add_member(:trial_arn, Shapes::ShapeRef.new(shape: TrialArn, location_name: "TrialArn"))
     DisassociateTrialComponentResponse.struct_class = Types::DisassociateTrialComponentResponse
 
+    DockerSettings.add_member(:enable_docker_access, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "EnableDockerAccess"))
+    DockerSettings.add_member(:vpc_only_trusted_accounts, Shapes::ShapeRef.new(shape: VpcOnlyTrustedAccounts, location_name: "VpcOnlyTrustedAccounts"))
+    DockerSettings.struct_class = Types::DockerSettings
+
     DomainDetails.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
     DomainDetails.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     DomainDetails.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
@@ -5222,11 +5235,13 @@ module Aws::SageMaker
     DomainSettings.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
     DomainSettings.add_member(:r_studio_server_pro_domain_settings, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettings, location_name: "RStudioServerProDomainSettings"))
     DomainSettings.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
+    DomainSettings.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
     DomainSettings.struct_class = Types::DomainSettings
 
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
     DomainSettingsForUpdate.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettingsForUpdate.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
+    DomainSettingsForUpdate.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
     DomainSettingsForUpdate.struct_class = Types::DomainSettingsForUpdate
 
     DriftCheckBaselines.add_member(:bias, Shapes::ShapeRef.new(shape: DriftCheckBias, location_name: "Bias"))
@@ -9053,6 +9068,21 @@ module Aws::SageMaker
     TextGenerationResolvedAttributes.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, location_name: "BaseModelName"))
     TextGenerationResolvedAttributes.struct_class = Types::TextGenerationResolvedAttributes
 
+    ThroughputConfig.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, required: true, location_name: "ThroughputMode"))
+    ThroughputConfig.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedReadCapacityUnits"))
+    ThroughputConfig.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedWriteCapacityUnits"))
+    ThroughputConfig.struct_class = Types::ThroughputConfig
+
+    ThroughputConfigDescription.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, required: true, location_name: "ThroughputMode"))
+    ThroughputConfigDescription.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedReadCapacityUnits"))
+    ThroughputConfigDescription.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedWriteCapacityUnits"))
+    ThroughputConfigDescription.struct_class = Types::ThroughputConfigDescription
+
+    ThroughputConfigUpdate.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
+    ThroughputConfigUpdate.add_member(:provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedReadCapacityUnits"))
+    ThroughputConfigUpdate.add_member(:provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "ProvisionedWriteCapacityUnits"))
+    ThroughputConfigUpdate.struct_class = Types::ThroughputConfigUpdate
+
     TimeSeriesConfig.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
     TimeSeriesConfig.add_member(:timestamp_attribute_name, Shapes::ShapeRef.new(shape: TimestampAttributeName, required: true, location_name: "TimestampAttributeName"))
     TimeSeriesConfig.add_member(:item_identifier_attribute_name, Shapes::ShapeRef.new(shape: ItemIdentifierAttributeName, required: true, location_name: "ItemIdentifierAttributeName"))
@@ -9508,6 +9538,7 @@ module Aws::SageMaker
     UpdateFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
     UpdateFeatureGroupRequest.add_member(:feature_additions, Shapes::ShapeRef.new(shape: FeatureAdditions, location_name: "FeatureAdditions"))
     UpdateFeatureGroupRequest.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfigUpdate, location_name: "OnlineStoreConfig"))
+    UpdateFeatureGroupRequest.add_member(:throughput_config, Shapes::ShapeRef.new(shape: ThroughputConfigUpdate, location_name: "ThroughputConfig"))
     UpdateFeatureGroupRequest.struct_class = Types::UpdateFeatureGroupRequest
 
     UpdateFeatureGroupResponse.add_member(:feature_group_arn, Shapes::ShapeRef.new(shape: FeatureGroupArn, required: true, location_name: "FeatureGroupArn"))
@@ -9798,6 +9829,8 @@ module Aws::SageMaker
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
     VpcConfig.struct_class = Types::VpcConfig
+
+    VpcOnlyTrustedAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
     VpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
