@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2023-12-29)
+------------------
+
+* Feature - Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics
+
+1.101.0 (2023-12-18)
+------------------
+
+* Feature - A docs-only release to add missing entities to the API reference.
+
+1.100.0 (2023-12-14)
+------------------
+
+* Feature - Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
+
 1.99.0 (2023-11-28)
 ------------------
 

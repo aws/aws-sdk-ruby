@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-12-19)
+------------------
+
+* Feature - AWS Marketplace now supports a new API, BatchDescribeEntities, which returns metadata and content for multiple entities.
+
 1.37.0 (2023-11-30)
 ------------------
 

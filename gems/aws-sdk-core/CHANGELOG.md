@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.190.2 (2024-01-09)
+------------------
+
+* Issue - Minor performance optimization.
+
+3.190.1 (2023-12-20)
+------------------
+
+* Issue - Add mutex around stub api_requests.
+
 3.190.0 (2023-11-29)
 ------------------
 

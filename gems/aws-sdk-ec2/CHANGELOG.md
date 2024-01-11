@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.433.0 (2024-01-11)
+------------------
+
+* Feature - This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+
+1.432.0 (2024-01-08)
+------------------
+
+* Feature - Amazon EC2 R7iz bare metal instances are powered by custom 4th generation Intel Xeon Scalable processors.
+
+1.431.0 (2023-12-19)
+------------------
+
+* Feature - Provision BYOIPv4 address ranges and advertise them by specifying the network border groups option in Los Angeles, Phoenix and Dallas AWS Local Zones.
+
 1.430.0 (2023-12-08)
 ------------------
 

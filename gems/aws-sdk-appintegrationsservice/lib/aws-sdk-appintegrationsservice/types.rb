@@ -23,6 +23,31 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # Summary information about the Application Association.
+    #
+    # @!attribute [rw] application_association_arn
+    #   The Amazon Resource Name (ARN) of the Application Association.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The identifier for the client that is associated with the
+    #   Application Association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ApplicationAssociationSummary AWS API Documentation
+    #
+    class ApplicationAssociationSummary < Struct.new(
+      :application_association_arn,
+      :application_arn,
+      :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for where the application should be loaded from.
     #
     # @!attribute [rw] external_url_config
@@ -120,6 +145,11 @@ module Aws::AppIntegrationsService
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] permissions
+    #   The configuration of events or requests that the application has
+    #   access to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -130,7 +160,8 @@ module Aws::AppIntegrationsService
       :subscriptions,
       :publications,
       :client_token,
-      :tags)
+      :tags,
+      :permissions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -399,6 +430,22 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DeleteApplicationRequest AWS API Documentation
+    #
+    class DeleteApplicationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DeleteApplicationResponse AWS API Documentation
+    #
+    class DeleteApplicationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] data_integration_identifier
     #   A unique identifier for the DataIntegration.
     #   @return [String]
@@ -637,6 +684,11 @@ module Aws::AppIntegrationsService
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] permissions
+    #   The configuration of events or requests that the application has
+    #   access to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -650,7 +702,8 @@ module Aws::AppIntegrationsService
       :publications,
       :created_time,
       :last_modified_time,
-      :tags)
+      :tags,
+      :permissions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -800,6 +853,48 @@ module Aws::AppIntegrationsService
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   A unique identifier for the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplicationAssociationsRequest AWS API Documentation
+    #
+    class ListApplicationAssociationsRequest < Struct.new(
+      :application_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_associations
+    #   List of Application Associations for the Application.
+    #   @return [Array<Types::ApplicationAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplicationAssociationsResponse AWS API Documentation
+    #
+    class ListApplicationAssociationsResponse < Struct.new(
+      :application_associations,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1155,6 +1250,19 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # The operation is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -1200,6 +1308,11 @@ module Aws::AppIntegrationsService
     #   The events that the application publishes.
     #   @return [Array<Types::Publication>]
     #
+    # @!attribute [rw] permissions
+    #   The configuration of events or requests that the application has
+    #   access to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1208,7 +1321,8 @@ module Aws::AppIntegrationsService
       :description,
       :application_source_config,
       :subscriptions,
-      :publications)
+      :publications,
+      :permissions)
       SENSITIVE = []
       include Aws::Structure
     end

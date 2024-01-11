@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2023-12-21)
+------------------
+
+* Feature - AWS CodeCommit now supports customer managed keys from AWS Key Management Service. UpdateRepositoryEncryptionKey is added for updating the key configuration. CreateRepository, GetRepository, BatchGetRepositories are updated with new input or output parameters.
+
 1.62.0 (2023-11-28)
 ------------------
 

@@ -841,7 +841,7 @@ module Aws::BedrockAgent
     #       },
     #     },
     #     storage_configuration: { # required
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
     #         vector_index_name: "OpenSearchServerlessIndexName", # required
@@ -870,6 +870,18 @@ module Aws::BedrockAgent
     #           metadata_field: "FieldName", # required
     #         },
     #       },
+    #       rds_configuration: {
+    #         resource_arn: "RdsArn", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #         database_name: "RdsDatabaseName", # required
+    #         table_name: "RdsTableName", # required
+    #         field_mapping: { # required
+    #           primary_key_field: "ColumnName", # required
+    #           vector_field: "ColumnName", # required
+    #           text_field: "ColumnName", # required
+    #           metadata_field: "ColumnName", # required
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -885,7 +897,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.role_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
@@ -902,6 +914,14 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
     #   resp.knowledge_base.created_at #=> Time
     #   resp.knowledge_base.updated_at #=> Time
@@ -1539,7 +1559,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.role_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
@@ -1556,6 +1576,14 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
     #   resp.knowledge_base.created_at #=> Time
     #   resp.knowledge_base.updated_at #=> Time
@@ -2564,7 +2592,7 @@ module Aws::BedrockAgent
     #       },
     #     },
     #     storage_configuration: { # required
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
     #         vector_index_name: "OpenSearchServerlessIndexName", # required
@@ -2593,6 +2621,18 @@ module Aws::BedrockAgent
     #           metadata_field: "FieldName", # required
     #         },
     #       },
+    #       rds_configuration: {
+    #         resource_arn: "RdsArn", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #         database_name: "RdsDatabaseName", # required
+    #         table_name: "RdsTableName", # required
+    #         field_mapping: { # required
+    #           primary_key_field: "ColumnName", # required
+    #           vector_field: "ColumnName", # required
+    #           text_field: "ColumnName", # required
+    #           metadata_field: "ColumnName", # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -2605,7 +2645,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.role_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
@@ -2622,6 +2662,14 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
     #   resp.knowledge_base.created_at #=> Time
     #   resp.knowledge_base.updated_at #=> Time
@@ -2650,7 +2698,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

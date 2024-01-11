@@ -155,6 +155,47 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A structure that defines search criteria for contacts using agent
+    # hierarchy group levels. For more information about agent hierarchies,
+    # see [Set Up Agent Hierarchies][1] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
+    #
+    # @!attribute [rw] l1_ids
+    #   The identifiers for level 1 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l2_ids
+    #   The identifiers for level 2 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l3_ids
+    #   The identifiers for level 3 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l4_ids
+    #   The identifiers for level 4 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] l5_ids
+    #   The identifiers for level 5 hierarchy groups.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentHierarchyGroups AWS API Documentation
+    #
+    class AgentHierarchyGroups < Struct.new(
+      :l1_ids,
+      :l2_ids,
+      :l3_ids,
+      :l4_ids,
+      :l5_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the agent who accepted the contact.
     #
     # @!attribute [rw] id
@@ -165,11 +206,16 @@ module Aws::Connect
     #   The timestamp when the contact was connected to the agent.
     #   @return [Time]
     #
+    # @!attribute [rw] agent_pause_duration_in_seconds
+    #   Agent pause duration for a contact in seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentInfo AWS API Documentation
     #
     class AgentInfo < Struct.new(
       :id,
-      :connected_to_agent_timestamp)
+      :connected_to_agent_timestamp,
+      :agent_pause_duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -206,7 +252,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -827,6 +873,29 @@ module Aws::Connect
     #
     class AssociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN of the instance).
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiencies
+    #   The proficiencies to associate with the user.
+    #   @return [Array<Types::UserProficiency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateUserProficienciesRequest AWS API Documentation
+    #
+    class AssociateUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :user_proficiencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a reference when the `referenceType` is
     # `ATTACHMENT`. Otherwise, null.
     #
@@ -1286,7 +1355,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -1383,7 +1452,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -1443,6 +1512,20 @@ module Aws::Connect
       :tags,
       :phone_number_status,
       :source_phone_number_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Operation cannot be performed at this time as there is a conflict with
+    # another operation or contact state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1531,6 +1614,22 @@ module Aws::Connect
     #   The timestamp when contact was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] last_paused_timestamp
+    #   The timestamp when the contact was last paused.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_resumed_timestamp
+    #   The timestamp when the contact was last resumed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_pause_count
+    #   Total pause count for a contact.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_pause_duration_in_seconds
+    #   Total pause duration for a contact in seconds.
+    #   @return [Integer]
+    #
     # @!attribute [rw] scheduled_timestamp
     #   The timestamp, in Unix epoch time format, at which to start running
     #   the inbound flow.
@@ -1548,6 +1647,26 @@ module Aws::Connect
     #   Information about Amazon Connect Wisdom.
     #   @return [Types::WisdomInfo]
     #
+    # @!attribute [rw] queue_time_adjustment_seconds
+    #   An integer that represents the queue time adjust to be applied to
+    #   the contact, in seconds (longer / larger queue time are routed
+    #   preferentially). Cannot be specified if the QueuePriority is
+    #   specified. Must be statically defined and a valid integer value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queue_priority
+    #   An integer that represents the queue priority to be applied to the
+    #   contact (lower priorities are routed preferentially). Cannot be
+    #   specified if the QueueTimeAdjustmentSeconds is specified. Must be
+    #   statically defined, must be larger than zero, and a valid integer
+    #   value. Default Value is 5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the contact. This contains both Amazon Web
+    #   Services generated and user-defined tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
     class Contact < Struct.new(
@@ -1564,9 +1683,32 @@ module Aws::Connect
       :initiation_timestamp,
       :disconnect_timestamp,
       :last_update_timestamp,
+      :last_paused_timestamp,
+      :last_resumed_timestamp,
+      :total_pause_count,
+      :total_pause_duration_in_seconds,
       :scheduled_timestamp,
       :related_contact_id,
-      :wisdom_info)
+      :wisdom_info,
+      :queue_time_adjustment_seconds,
+      :queue_priority,
+      :tags)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # A structure that defines search criteria for contacts using analysis
+    # outputs from Amazon Connect Contact Lens.
+    #
+    # @!attribute [rw] transcript
+    #   Search criteria based on transcript analyzed by Amazon Connect
+    #   Contact Lens.
+    #   @return [Types::Transcript]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysis AWS API Documentation
+    #
+    class ContactAnalysis < Struct.new(
+      :transcript)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1679,7 +1821,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -1735,7 +1877,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -1852,6 +1994,120 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information of returned contact.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   If this contact is related to other contacts, this is the ID of the
+    #   initial contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_contact_id
+    #   If this contact is not the first contact, this is the ID of the
+    #   previous contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_method
+    #   Indicates how the contact was initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   How the contact reached your contact center.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_info
+    #   If this contact was queued, this contains information about the
+    #   queue.
+    #   @return [Types::ContactSearchSummaryQueueInfo]
+    #
+    # @!attribute [rw] agent_info
+    #   Information about the agent who accepted the contact.
+    #   @return [Types::ContactSearchSummaryAgentInfo]
+    #
+    # @!attribute [rw] initiation_timestamp
+    #   The date and time this contact was initiated, in UTC time. For
+    #   `INBOUND`, this is when the contact arrived. For `OUTBOUND`, this is
+    #   when the agent began dialing. For `CALLBACK`, this is when the
+    #   callback contact was created. For `TRANSFER` and `QUEUE_TRANSFER`,
+    #   this is when the transfer was initiated. For API, this is when the
+    #   request arrived. For `EXTERNAL_OUTBOUND`, this is when the agent
+    #   started dialing the external participant. For `MONITOR`, this is
+    #   when the supervisor started listening to a contact.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disconnect_timestamp
+    #   The timestamp when the customer endpoint disconnected from Amazon
+    #   Connect.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scheduled_timestamp
+    #   The timestamp, in Unix epoch time format, at which to start running
+    #   the inbound flow.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummary AWS API Documentation
+    #
+    class ContactSearchSummary < Struct.new(
+      :arn,
+      :id,
+      :initial_contact_id,
+      :previous_contact_id,
+      :initiation_method,
+      :channel,
+      :queue_info,
+      :agent_info,
+      :initiation_timestamp,
+      :disconnect_timestamp,
+      :scheduled_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the agent who accepted the contact.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the agent who accepted the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_to_agent_timestamp
+    #   The timestamp when the contact was connected to the agent.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummaryAgentInfo AWS API Documentation
+    #
+    class ContactSearchSummaryAgentInfo < Struct.new(
+      :id,
+      :connected_to_agent_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If this contact was queued, this contains information about the queue.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] enqueue_timestamp
+    #   The timestamp when the contact was added to the queue.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummaryQueueInfo AWS API Documentation
+    #
+    class ContactSearchSummaryQueueInfo < Struct.new(
+      :id,
+      :enqueue_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that can be used to specify Tag conditions inside the
     # `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
     # where:
@@ -1913,7 +2169,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -1947,6 +2203,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The `CreateCase` action definition.
+    #
+    # @!attribute [rw] fields
+    #   An array of objects with `Field ID` and `Value` data.
+    #   @return [Array<Types::FieldValue>]
+    #
+    # @!attribute [rw] template_id
+    #   A unique identifier of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateCaseActionDefinition AWS API Documentation
+    #
+    class CreateCaseActionDefinition < Struct.new(
+      :fields,
+      :template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -1975,7 +2250,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2057,7 +2332,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2190,7 +2465,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2324,7 +2599,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2550,6 +2825,29 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the predefined attribute.
+    #   @return [Types::PredefinedAttributeValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePredefinedAttributeRequest AWS API Documentation
+    #
+    class CreatePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -2578,7 +2876,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2647,7 +2945,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2706,7 +3004,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2784,7 +3082,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -2928,7 +3226,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -3103,7 +3401,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -3160,7 +3458,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -3213,7 +3511,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -3304,7 +3602,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -3321,7 +3619,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -3502,7 +3800,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -3942,6 +4240,24 @@ module Aws::Connect
     class DeleteIntegrationAssociationRequest < Struct.new(
       :instance_id,
       :integration_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePredefinedAttributeRequest AWS API Documentation
+    #
+    class DeletePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4660,6 +4976,36 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePredefinedAttributeRequest AWS API Documentation
+    #
+    class DescribePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predefined_attribute
+    #   Information about the predefined attribute.
+    #   @return [Types::PredefinedAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePredefinedAttributeResponse AWS API Documentation
+    #
+    class DescribePredefinedAttributeResponse < Struct.new(
+      :predefined_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -5083,12 +5429,17 @@ module Aws::Connect
     #   Information about the routing profile assigned to the user.
     #   @return [Types::RoutingProfileReference]
     #
+    # @!attribute [rw] routing_step_expression
+    #   The expression of a step in a routing criteria.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
     #
     class Dimensions < Struct.new(
       :queue,
       :channel,
-      :routing_profile)
+      :routing_profile,
+      :routing_step_expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5416,6 +5767,29 @@ module Aws::Connect
     #
     class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiencies
+    #   The proficiencies to disassociate from the user.
+    #   @return [Array<Types::UserProficiencyDisassociate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateUserProficienciesRequest AWS API Documentation
+    #
+    class DisassociateUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :user_proficiencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about why a contact was disconnected. Only Amazon
     # Connect outbound campaigns can provide this field.
     #
@@ -5511,6 +5885,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # An empty value.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EmptyFieldValue AWS API Documentation
+    #
+    class EmptyFieldValue < Aws::EmptyStructure; end
+
     # The encryption configuration.
     #
     # @!attribute [rw] encryption_type
@@ -5541,6 +5923,14 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # End associated tasks related to a case.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EndAssociatedTasksActionDefinition AWS API Documentation
+    #
+    class EndAssociatedTasksActionDefinition < Aws::EmptyStructure; end
 
     # Information about the endpoint.
     #
@@ -5623,7 +6013,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -5774,7 +6164,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -6483,6 +6873,54 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Object for case field values.
+    #
+    # @!attribute [rw] id
+    #   Unique identifier of a field.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Union of potential field value types.
+    #   @return [Types::FieldValueUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FieldValue AWS API Documentation
+    #
+    class FieldValue < Struct.new(
+      :id,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object to store union of Field values.
+    #
+    # @!attribute [rw] boolean_value
+    #   A Boolean number value type.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] double_value
+    #   a Double number value type.
+    #   @return [Float]
+    #
+    # @!attribute [rw] empty_value
+    #   An empty value.
+    #   @return [Types::EmptyFieldValue]
+    #
+    # @!attribute [rw] string_value
+    #   String value type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/FieldValueUnion AWS API Documentation
+    #
+    class FieldValueUnion < Struct.new(
+      :boolean_value,
+      :double_value,
+      :empty_value,
+      :string_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the filter to apply when retrieving metrics with the
     # [GetMetricDataV2][1] API.
     #
@@ -6530,12 +6968,18 @@ module Aws::Connect
     #   A list of up to 100 routing profile IDs or ARNs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] routing_step_expressions
+    #   A list of expressions as a filter, in which an expression is an
+    #   object of a step in a routing criteria.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters AWS API Documentation
     #
     class Filters < Struct.new(
       :queues,
       :channels,
-      :routing_profiles)
+      :routing_profiles,
+      :routing_step_expressions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6941,7 +7385,7 @@ module Aws::Connect
       :sign_in_url,
       :user_arn,
       :user_id)
-      SENSITIVE = []
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -7482,6 +7926,13 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, Feature,
     #     contact/segmentAttributes/connect:Subtype
     #
+    #   AVG\_ACTIVE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
     #   AVG\_AFTER\_CONTACT\_WORK\_TIME
     #
     #   : Unit: Seconds
@@ -7511,6 +7962,13 @@ module Aws::Connect
     #     this metric.
     #
     #      </note>
+    #
+    #   AVG\_AGENT\_PAUSE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
     #
     #   AVG\_CONTACT\_DURATION
     #
@@ -8178,7 +8636,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -8275,7 +8733,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -8664,7 +9122,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -8861,7 +9319,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -10590,6 +11048,49 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPredefinedAttributesRequest AWS API Documentation
+    #
+    class ListPredefinedAttributesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] predefined_attribute_summary_list
+    #   Summary of the predefined attributes.
+    #   @return [Array<Types::PredefinedAttributeSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPredefinedAttributesResponse AWS API Documentation
+    #
+    class ListPredefinedAttributesResponse < Struct.new(
+      :next_token,
+      :predefined_attribute_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
@@ -11573,6 +12074,64 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserProficienciesRequest AWS API Documentation
+    #
+    class ListUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiency_list
+    #   Information about the user proficiencies.
+    #   @return [Array<Types::UserProficiency>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time that the user's proficiencies are were modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The region in which a user's proficiencies were last modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserProficienciesResponse AWS API Documentation
+    #
+    class ListUserProficienciesResponse < Struct.new(
+      :next_token,
+      :user_proficiency_list,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -12110,7 +12669,7 @@ module Aws::Connect
     #
     # @!attribute [rw] user_tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}. Amazon Connect users with the specified
     #   tags will be notified.
     #   @return [Hash<String,String>]
@@ -12379,6 +12938,33 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PauseContactRequest AWS API Documentation
+    #
+    class PauseContactRequest < Struct.new(
+      :contact_id,
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PauseContactResponse AWS API Documentation
+    #
+    class PauseContactResponse < Aws::EmptyStructure; end
+
     # Enable persistent chats. For more information about enabling
     # persistent chat, and for example use cases and how to configure for
     # them, see [Enable persistent chat][1].
@@ -12512,6 +13098,114 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a predefined attribute.
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the predefined attribute.
+    #   @return [Types::PredefinedAttributeValues]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Last modified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   Last modified region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttribute AWS API Documentation
+    #
+    class PredefinedAttribute < Struct.new(
+      :name,
+      :values,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return predefined attributes.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::PredefinedAttributeSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Array<Types::PredefinedAttributeSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    #   `description`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeSearchCriteria AWS API Documentation
+    #
+    class PredefinedAttributeSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a predefined attribute.
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Last modified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   Last modified region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeSummary AWS API Documentation
+    #
+    class PredefinedAttributeSummary < Struct.new(
+      :name,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about values of a predefined attribute.
+    #
+    # @note PredefinedAttributeValues is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PredefinedAttributeValues is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PredefinedAttributeValues corresponding to the set member.
+    #
+    # @!attribute [rw] string_list
+    #   Predefined attribute values of type string list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeValues AWS API Documentation
+    #
+    class PredefinedAttributeValues < Struct.new(
+      :string_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StringList < PredefinedAttributeValues; end
+      class Unknown < PredefinedAttributeValues; end
+    end
+
     # Information about a problem detail.
     #
     # @!attribute [rw] message
@@ -12546,7 +13240,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -12771,7 +13465,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -12991,7 +13685,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -13873,6 +14567,33 @@ module Aws::Connect
     #
     class ResumeContactRecordingResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContactRequest AWS API Documentation
+    #
+    class ResumeContactRequest < Struct.new(
+      :contact_id,
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContactResponse AWS API Documentation
+    #
+    class ResumeContactResponse < Aws::EmptyStructure; end
+
     # Contains information about a routing profile.
     #
     # @!attribute [rw] instance_id
@@ -13912,7 +14633,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -14231,7 +14952,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -14296,6 +15017,26 @@ module Aws::Connect
     #   `OnMetricDataUpdate`
     #   @return [Types::SendNotificationActionDefinition]
     #
+    # @!attribute [rw] create_case_action
+    #   Information about the create case action.
+    #
+    #   Supported only for `TriggerEventSource` values:
+    #   `OnPostCallAnalysisAvailable` \| `OnPostChatAnalysisAvailable`.
+    #   @return [Types::CreateCaseActionDefinition]
+    #
+    # @!attribute [rw] update_case_action
+    #   Information about the update case action.
+    #
+    #   Supported only for `TriggerEventSource` values: `OnCaseCreate` \|
+    #   `OnCaseUpdate`.
+    #   @return [Types::UpdateCaseActionDefinition]
+    #
+    # @!attribute [rw] end_associated_tasks_action
+    #   Information about the end associated tasks action.
+    #
+    #   Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
+    #   @return [Types::EndAssociatedTasksActionDefinition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleAction AWS API Documentation
     #
     class RuleAction < Struct.new(
@@ -14303,7 +15044,10 @@ module Aws::Connect
       :task_action,
       :event_bridge_action,
       :assign_contact_category_action,
-      :send_notification_action)
+      :send_notification_action,
+      :create_case_action,
+      :update_case_action,
+      :end_associated_tasks_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14479,6 +15223,153 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of Amazon Connect instance. You can find the instance
+    #   ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_range
+    #   Time range that you want to search results.
+    #   @return [Types::SearchContactsTimeRange]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return contacts.
+    #   @return [Types::SearchCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   Specifies a field to sort by and a sort order.
+    #   @return [Types::Sort]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsRequest AWS API Documentation
+    #
+    class SearchContactsRequest < Struct.new(
+      :instance_id,
+      :time_range,
+      :search_criteria,
+      :max_results,
+      :next_token,
+      :sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contacts
+    #   Information about the contacts.
+    #   @return [Array<Types::ContactSearchSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of contacts which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsResponse AWS API Documentation
+    #
+    class SearchContactsResponse < Struct.new(
+      :contacts,
+      :next_token,
+      :total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure of time range that you want to search results.
+    #
+    # @!attribute [rw] type
+    #   The type of timestamp to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the time range.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the time range.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsTimeRange AWS API Documentation
+    #
+    class SearchContactsTimeRange < Struct.new(
+      :type,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure of search criteria to be used to return contacts.
+    #
+    # @!attribute [rw] agent_ids
+    #   The identifiers of agents who handled the contacts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] agent_hierarchy_groups
+    #   The agent hierarchy groups of the agent at the time of handling the
+    #   contact.
+    #   @return [Types::AgentHierarchyGroups]
+    #
+    # @!attribute [rw] channels
+    #   The list of channels associated with contacts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] contact_analysis
+    #   Search criteria based on analysis outputs from Amazon Connect
+    #   Contact Lens.
+    #   @return [Types::ContactAnalysis]
+    #
+    # @!attribute [rw] initiation_methods
+    #   The list of initiation methods associated with contacts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] queue_ids
+    #   The list of queue IDs associated with contacts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] searchable_contact_attributes
+    #   The search criteria based on user-defined contact attributes that
+    #   have been configured for contact search. For more information, see
+    #   [Search by customer contact attributes][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #   To use `SearchableContactAttributes` in a search request, the
+    #   `GetContactAttributes` action is required to perform an API request.
+    #   For more information, see
+    #   [https://docs.aws.amazon.com/service-authorization/latest/reference/list\_amazonconnect.html#amazonconnect-actions-as-permissions][2]Actions
+    #   defined by Amazon Connect.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html
+    #   [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions
+    #   @return [Types::SearchableContactAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchCriteria AWS API Documentation
+    #
+    class SearchCriteria < Struct.new(
+      :agent_ids,
+      :agent_hierarchy_groups,
+      :channels,
+      :contact_analysis,
+      :initiation_methods,
+      :queue_ids,
+      :searchable_contact_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -14535,6 +15426,61 @@ module Aws::Connect
     #
     class SearchHoursOfOperationsResponse < Struct.new(
       :hours_of_operations,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return predefined attributes.
+    #   @return [Types::PredefinedAttributeSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPredefinedAttributesRequest AWS API Documentation
+    #
+    class SearchPredefinedAttributesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predefined_attributes
+    #   Predefined attributes matched by the search criteria.
+    #   @return [Array<Types::PredefinedAttribute>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The approximate number of predefined attributes which matched your
+    #   search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPredefinedAttributesResponse AWS API Documentation
+    #
+    class SearchPredefinedAttributesResponse < Struct.new(
+      :predefined_attributes,
       :next_token,
       :approximate_total_count)
       SENSITIVE = []
@@ -15074,6 +16020,49 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A structure that defines search criteria based on user-defined contact
+    # attributes that are configured for contact search.
+    #
+    # @!attribute [rw] criteria
+    #   The list of criteria based on user-defined contact attributes that
+    #   are configured for contact search.
+    #   @return [Array<Types::SearchableContactAttributesCriteria>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type combining search criteria using multiple searchable
+    #   contact attributes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableContactAttributes AWS API Documentation
+    #
+    class SearchableContactAttributes < Struct.new(
+      :criteria,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria based on user-defned contact attribute key and
+    # values to search on.
+    #
+    # @!attribute [rw] key
+    #   The key containing a searchable user-defined contact attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The list of values to search for within a user-defined contact
+    #   attribute.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableContactAttributesCriteria AWS API Documentation
+    #
+    class SearchableContactAttributesCriteria < Struct.new(
+      :key,
+      :values)
+      SENSITIVE = [:key]
+      include Aws::Structure
+    end
+
     # Configuration information of the security key.
     #
     # @!attribute [rw] association_id
@@ -15123,7 +16112,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -15184,6 +16173,11 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    #   `description`.
+    #
+    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchCriteria AWS API Documentation
@@ -15220,7 +16214,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -15491,6 +16485,25 @@ module Aws::Connect
       :category,
       :condition,
       :option_ref_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that defineds the field name to sort by and a sort order.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field on which to sort.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   An ascending or descending sort.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Sort AWS API Documentation
+    #
+    class Sort < Struct.new(
+      :field_name,
+      :order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15821,6 +16834,33 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of a voice contact that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the voice contact that is shown to an agent in the
+    #   Contact Control Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A formatted URL that is shown to an agent in the Contact Control
+    #   Panel (CCP). Contacts can have the following reference types at the
+    #   time of creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \|
+    #   `EMAIL`. `ATTACHMENT` is not a supported reference type during voice
+    #   contact creation.
+    #   @return [Hash<String,Types::Reference>]
+    #
+    # @!attribute [rw] related_contact_id
+    #   The `contactId` that is related to this contact. Linking voice,
+    #   task, or chat by using `RelatedContactID` copies over contact
+    #   attributes from the related contact to the new contact. All updates
+    #   to user-defined attributes in the new contact are limited to the
+    #   individual contact ID. There are no limits to the number of contacts
+    #   that can be linked by using `RelatedContactId`.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #   @return [String]
@@ -15903,6 +16943,10 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactRequest AWS API Documentation
     #
     class StartOutboundVoiceContactRequest < Struct.new(
+      :name,
+      :description,
+      :references,
+      :related_contact_id,
       :destination_phone_number,
       :contact_flow_id,
       :instance_id,
@@ -15913,7 +16957,7 @@ module Aws::Connect
       :answer_machine_detection_config,
       :campaign_id,
       :traffic_type)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -16054,7 +17098,7 @@ module Aws::Connect
       :task_template_id,
       :quick_connect_id,
       :related_contact_id)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -16156,7 +17200,7 @@ module Aws::Connect
       :related_contact_id,
       :references,
       :description)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -16293,6 +17337,11 @@ module Aws::Connect
     class StopContactStreamingResponse < Aws::EmptyStructure; end
 
     # A leaf node condition which can be used to specify a string condition.
+    #
+    # <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    # `description`.
+    #
+    #  </note>
     #
     # @!attribute [rw] field_name
     #   The name of the field in the string condition.
@@ -16458,13 +17507,49 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the contact resource. For example, \\\{
+    #   "Tags": \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #
+    #   <note markdown="1"> Authorization is not supported by this tag.
+    #
+    #    </note>
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagContactRequest AWS API Documentation
+    #
+    class TagContactRequest < Struct.new(
+      :contact_id,
+      :instance_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagContactResponse AWS API Documentation
+    #
+    class TagContactResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -16854,7 +17939,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -16982,6 +18067,55 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A structure that defines search criteria and matching logic to search
+    # for contacts by matching text with transcripts analyzed by Amazon
+    # Connect Contact Lens.
+    #
+    # @!attribute [rw] criteria
+    #   The list of search criteria based on Contact Lens conversational
+    #   analytics transcript.
+    #   @return [Array<Types::TranscriptCriteria>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type combining search criteria using multiple transcript
+    #   criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Transcript AWS API Documentation
+    #
+    class Transcript < Struct.new(
+      :criteria,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that defines search criteria base on words or phrases,
+    # participants in the Contact Lens conversational analytics transcript.
+    #
+    # @!attribute [rw] participant_role
+    #   The participant role in a transcript
+    #   @return [String]
+    #
+    # @!attribute [rw] search_text
+    #   The words or phrases used to search within a transcript.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type combining search criteria using multiple search texts
+    #   in a transcript criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TranscriptCriteria AWS API Documentation
+    #
+    class TranscriptCriteria < Struct.new(
+      :participant_role,
+      :search_text,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -17052,6 +18186,38 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys. Existing tags on the contact whose keys are
+    #   members of this list will be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UntagContactRequest AWS API Documentation
+    #
+    class UntagContactRequest < Struct.new(
+      :contact_id,
+      :instance_id,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UntagContactResponse AWS API Documentation
+    #
+    class UntagContactResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -17112,6 +18278,20 @@ module Aws::Connect
       :state,
       :display_order,
       :reset_order_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `UpdateCase` action definition.
+    #
+    # @!attribute [rw] fields
+    #   An array of objects with `Field ID` and Value data.
+    #   @return [Array<Types::FieldValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateCaseActionDefinition AWS API Documentation
+    #
+    class UpdateCaseActionDefinition < Struct.new(
+      :fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17419,13 +18599,55 @@ module Aws::Connect
       :name,
       :description,
       :references)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactResponse AWS API Documentation
     #
     class UpdateContactResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_time_adjustment_seconds
+    #   The number of seconds to add or subtract from the contact's routing
+    #   age. Contacts are routed to agents on a first-come, first-serve
+    #   basis. This means that changing their amount of time in queue
+    #   compared to others also changes their position in queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queue_priority
+    #   Priority of the contact in the queue. The default priority for new
+    #   contacts is 5. You can raise the priority of a contact compared to
+    #   other contacts in the queue by assigning them a higher priority,
+    #   such as 1 or 2.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingDataRequest AWS API Documentation
+    #
+    class UpdateContactRoutingDataRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :queue_time_adjustment_seconds,
+      :queue_priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingDataResponse AWS API Documentation
+    #
+    class UpdateContactRoutingDataResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -17802,6 +19024,29 @@ module Aws::Connect
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number_id,
       :phone_number_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the predefined attribute.
+    #   @return [Types::PredefinedAttributeValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePredefinedAttributeRequest AWS API Documentation
+    #
+    class UpdatePredefinedAttributeRequest < Struct.new(
+      :instance_id,
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18621,6 +19866,31 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_proficiencies
+    #   The proficiencies to be updated for the user. Proficiencies must
+    #   first be associated to the user. You can do this using
+    #   AssociateUserProficiencies API.
+    #   @return [Array<Types::UserProficiency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserProficienciesRequest AWS API Documentation
+    #
+    class UpdateUserProficienciesRequest < Struct.new(
+      :instance_id,
+      :user_id,
+      :user_proficiencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] routing_profile_id
     #   The identifier of the routing profile for the user.
     #   @return [String]
@@ -19011,7 +20281,7 @@ module Aws::Connect
       :email,
       :secondary_email,
       :mobile)
-      SENSITIVE = []
+      SENSITIVE = [:first_name, :last_name, :email, :secondary_email]
       include Aws::Structure
     end
 
@@ -19030,7 +20300,7 @@ module Aws::Connect
     class UserIdentityInfoLite < Struct.new(
       :first_name,
       :last_name)
-      SENSITIVE = []
+      SENSITIVE = [:first_name, :last_name]
       include Aws::Structure
     end
 
@@ -19079,6 +20349,51 @@ module Aws::Connect
       :auto_accept,
       :after_contact_work_time_limit,
       :desk_phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about proficiency of a user.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of user's proficiency. You must use name of predefined
+    #   attribute present in the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of user's proficiency. You must use value of predefined
+    #   attribute present in the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserProficiency AWS API Documentation
+    #
+    class UserProficiency < Struct.new(
+      :attribute_name,
+      :attribute_value,
+      :level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about proficiency to be disassociated from the user.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of user's proficiency.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of user's proficiency.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserProficiencyDisassociate AWS API Documentation
+    #
+    class UserProficiencyDisassociate < Struct.new(
+      :attribute_name,
+      :attribute_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19145,10 +20460,9 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
-    #   `description`, and `resourceID`.
-    #
-    #    </note>
+    #   The currently supported values for `FieldName` are `username`,
+    #   `firstname`, `lastname`, `resourceId`, `routingProfileId`,
+    #   `securityProfileId`, `agentGroupId`, and `agentGroupPathIds`.
     #   @return [Types::StringCondition]
     #
     # @!attribute [rw] hierarchy_group_condition
@@ -19226,7 +20540,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
@@ -19546,7 +20860,7 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2024-01-03)
+------------------
+
+* Feature - This release includes video engine updates including HEVC improvements, support for ingesting VP9 encoded video in MP4 containers, and support for user-specified 3D LUTs.
+
 1.122.0 (2023-11-28)
 ------------------
 

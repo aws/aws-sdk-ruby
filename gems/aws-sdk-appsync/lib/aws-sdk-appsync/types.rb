@@ -1063,6 +1063,42 @@ module Aws::AppSync
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the
+    #   introspection configuration will be set to `ENABLED` by default.
+    #   This field will produce an error if the operation attempts to use
+    #   the introspection feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #   @return [String]
+    #
+    # @!attribute [rw] query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75`
+    #   nested levels. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown
+    #   upwards to the first nullable field available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set
+    #   the limit to `10000`. When specified, the limit value can be between
+    #   `1` and `10000`. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
@@ -1078,7 +1114,10 @@ module Aws::AppSync
       :visibility,
       :api_type,
       :merged_api_execution_role_arn,
-      :owner_contact)
+      :owner_contact,
+      :introspection_config,
+      :query_depth_limit,
+      :resolver_count_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2613,6 +2652,42 @@ module Aws::AppSync
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the
+    #   introspection configuration will be set to `ENABLED` by default.
+    #   This field will produce an error if the operation attempts to use
+    #   the introspection feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #   @return [String]
+    #
+    # @!attribute [rw] query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75`
+    #   nested levels. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown
+    #   upwards to the first nullable field available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set
+    #   the limit to `10000`. When specified, the limit value can be between
+    #   `1` and `10000`. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
     class GraphqlApi < Struct.new(
@@ -2634,7 +2709,10 @@ module Aws::AppSync
       :api_type,
       :merged_api_execution_role_arn,
       :owner,
-      :owner_contact)
+      :owner_contact,
+      :introspection_config,
+      :query_depth_limit,
+      :resolver_count_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4324,6 +4402,42 @@ module Aws::AppSync
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the
+    #   introspection configuration will be set to `ENABLED` by default.
+    #   This field will produce an error if the operation attempts to use
+    #   the introspection feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #   @return [String]
+    #
+    # @!attribute [rw] query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75`
+    #   nested levels. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown
+    #   upwards to the first nullable field available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set
+    #   the limit to `10000`. When specified, the limit value can be between
+    #   `1` and `10000`. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
     #
     class UpdateGraphqlApiRequest < Struct.new(
@@ -4337,7 +4451,10 @@ module Aws::AppSync
       :xray_enabled,
       :lambda_authorizer_config,
       :merged_api_execution_role_arn,
-      :owner_contact)
+      :owner_contact,
+      :introspection_config,
+      :query_depth_limit,
+      :resolver_count_limit)
       SENSITIVE = []
       include Aws::Structure
     end

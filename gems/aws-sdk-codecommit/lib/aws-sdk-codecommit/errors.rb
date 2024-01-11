@@ -68,7 +68,10 @@ module Aws::CodeCommit
   # * {EncryptionIntegrityChecksFailedException}
   # * {EncryptionKeyAccessDeniedException}
   # * {EncryptionKeyDisabledException}
+  # * {EncryptionKeyInvalidIdException}
+  # * {EncryptionKeyInvalidUsageException}
   # * {EncryptionKeyNotFoundException}
+  # * {EncryptionKeyRequiredException}
   # * {EncryptionKeyUnavailableException}
   # * {FileContentAndSourceFileSpecifiedException}
   # * {FileContentRequiredException}
@@ -629,11 +632,41 @@ module Aws::CodeCommit
       end
     end
 
+    class EncryptionKeyInvalidIdException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::EncryptionKeyInvalidIdException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EncryptionKeyInvalidUsageException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::EncryptionKeyInvalidUsageException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class EncryptionKeyNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeCommit::Types::EncryptionKeyNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EncryptionKeyRequiredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::EncryptionKeyRequiredException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

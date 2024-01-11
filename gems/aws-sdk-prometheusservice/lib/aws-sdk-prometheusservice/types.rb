@@ -356,12 +356,18 @@ module Aws::PrometheusService
     #   Optional, user-provided tags for this workspace.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   Optional, customer managed KMS key used to encrypt data for this
+    #   workspace
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspaceRequest AWS API Documentation
     #
     class CreateWorkspaceRequest < Struct.new(
       :alias,
       :client_token,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -385,13 +391,18 @@ module Aws::PrometheusService
     #   The tags of this workspace.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   Customer managed KMS key ARN for this workspace
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspaceResponse AWS API Documentation
     #
     class CreateWorkspaceResponse < Struct.new(
       :workspace_id,
       :arn,
       :status,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1677,6 +1688,10 @@ module Aws::PrometheusService
     #   The tags of this workspace.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The customer managed KMS key of this workspace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/WorkspaceDescription AWS API Documentation
     #
     class WorkspaceDescription < Struct.new(
@@ -1686,7 +1701,8 @@ module Aws::PrometheusService
       :status,
       :prometheus_endpoint,
       :created_at,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1731,6 +1747,10 @@ module Aws::PrometheusService
     #   The tags of this workspace.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   Customer managed KMS key ARN for this workspace
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/WorkspaceSummary AWS API Documentation
     #
     class WorkspaceSummary < Struct.new(
@@ -1739,7 +1759,8 @@ module Aws::PrometheusService
       :arn,
       :status,
       :created_at,
-      :tags)
+      :tags,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end

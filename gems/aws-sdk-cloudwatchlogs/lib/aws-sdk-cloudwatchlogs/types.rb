@@ -42,6 +42,11 @@ module Aws::CloudWatchLogs
     #   The scope of the account policy.
     #   @return [String]
     #
+    # @!attribute [rw] selection_criteria
+    #   The log group selection criteria for this subscription filter
+    #   policy.
+    #   @return [String]
+    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID that the policy applies to.
     #   @return [String]
@@ -54,6 +59,7 @@ module Aws::CloudWatchLogs
       :last_updated_time,
       :policy_type,
       :scope,
+      :selection_criteria,
       :account_id)
       SENSITIVE = []
       include Aws::Structure
@@ -589,7 +595,8 @@ module Aws::CloudWatchLogs
     #
     #   If you omit this parameter, the default of `STANDARD` is used.
     #
-    #   After a log group is created, its class can't be changed.
+    #   The value of `logGroupClass` can't be changed after a log group is
+    #   created.
     #
     #   For details about the features supported by each class, see [Log
     #   classes][1]
@@ -649,8 +656,7 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The type of policy to delete. Currently, the only valid value is
-    #   `DATA_PROTECTION_POLICY`.
+    #   The type of policy to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteAccountPolicyRequest AWS API Documentation
@@ -1117,8 +1123,7 @@ module Aws::CloudWatchLogs
 
     # @!attribute [rw] policy_type
     #   Use this parameter to limit the returned policies to only the
-    #   policies that match the policy type that you specify. Currently, the
-    #   only valid value is `DATA_PROTECTION_POLICY`.
+    #   policies that match the policy type that you specify.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
@@ -3436,9 +3441,11 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] policy_document
-    #   Specify the data protection policy, in JSON.
+    #   Specify the policy, in JSON.
     #
-    #   This policy must include two JSON blocks:
+    #   **Data protection policy**
+    #
+    #   A data protection policy must include two JSON blocks:
     #
     #   * The first block must include both a `DataIdentifer` array and an
     #     `Operation` property with an `Audit` action. The `DataIdentifer`
@@ -3475,16 +3482,52 @@ module Aws::CloudWatchLogs
     #   to CloudWatch.
     #
     #   The JSON specified in `policyDocument` can be up to 30,720
-    #   characters.
+    #   characters long.
+    #
+    #   **Subscription filter policy**
+    #
+    #   A subscription filter policy can include the following attributes in
+    #   a JSON block:
+    #
+    #   * **DestinationArn** The ARN of the destination to deliver log
+    #     events to. Supported destinations are:
+    #
+    #     * An Kinesis Data Streams data stream in the same account as the
+    #       subscription policy, for same-account delivery.
+    #
+    #     * An Kinesis Data Firehose data stream in the same account as the
+    #       subscription policy, for same-account delivery.
+    #
+    #     * A Lambda function in the same account as the subscription
+    #       policy, for same-account delivery.
+    #
+    #     * A logical destination in a different account created with
+    #       [PutDestination][2], for cross-account delivery. Kinesis Data
+    #       Streams and Kinesis Data Firehose are supported as logical
+    #       destinations.
+    #
+    #   * **RoleArn** The ARN of an IAM role that grants CloudWatch Logs
+    #     permissions to deliver ingested log events to the destination
+    #     stream. You don't need to provide the ARN when you are working
+    #     with a logical destination for cross-account delivery.
+    #
+    #   * **FilterPattern** A filter pattern for subscribing to a filtered
+    #     stream of log events.
+    #
+    #   * **Distribution**The method used to distribute log data to the
+    #     destination. By default, log data is grouped by log stream, but
+    #     the grouping can be set to `Random` for a more even distribution.
+    #     This property is only applicable when the destination is an
+    #     Kinesis Data Streams data stream.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   Currently the only valid value for this parameter is
-    #   `DATA_PROTECTION_POLICY`.
+    #   The type of policy that you're creating or updating.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -3494,13 +3537,33 @@ module Aws::CloudWatchLogs
     #   used.
     #   @return [String]
     #
+    # @!attribute [rw] selection_criteria
+    #   Use this parameter to apply the subscription filter policy to a
+    #   subset of log groups in the account. Currently, the only supported
+    #   filter is `LogGroupName NOT IN []`. The `selectionCriteria` string
+    #   can be up to 25KB in length. The length is determined by using its
+    #   UTF-8 bytes.
+    #
+    #   Using the `selectionCriteria` parameter is useful to help prevent
+    #   infinite loops. For more information, see [Log recursion
+    #   prevention][1].
+    #
+    #   Specifing `selectionCriteria` is valid only when you specify `
+    #   SUBSCRIPTION_FILTER_POLICY` for `policyType`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutAccountPolicyRequest AWS API Documentation
     #
     class PutAccountPolicyRequest < Struct.new(
       :policy_name,
       :policy_document,
       :policy_type,
-      :scope)
+      :scope,
+      :selection_criteria)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4446,6 +4509,9 @@ module Aws::CloudWatchLogs
     #   If you specify this parameter, then only log events in the log
     #   streams that you specify here are included in the Live Tail session.
     #
+    #   If you specify this field, you can't also specify the
+    #   `logStreamNamePrefixes` field.
+    #
     #   <note markdown="1"> You can specify this parameter only if you specify only one log
     #   group in `logGroupIdentifiers`.
     #
@@ -4456,6 +4522,9 @@ module Aws::CloudWatchLogs
     #   If you specify this parameter, then only log events in the log
     #   streams that have names that start with the prefixes that you
     #   specify here are included in the Live Tail session.
+    #
+    #   If you specify this field, you can't also specify the
+    #   `logStreamNames` field.
     #
     #   <note markdown="1"> You can specify this parameter only if you specify only one log
     #   group in `logGroupIdentifiers`.

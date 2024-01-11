@@ -388,23 +388,84 @@ module Aws::EKS
 
     # @!group API Operations
 
-    # Associate encryption configuration to an existing cluster.
+    # Associates an access policy and its scope to an access entry. For more
+    # information about associating access policies, see [Associating and
+    # disassociating access policies to and from access entries][1] in the
+    # *Amazon EKS User Guide*.
     #
-    # You can use this API to enable encryption on existing clusters which
-    # do not have encryption already enabled. This allows you to implement a
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
+    #
+    # @option params [required, String] :principal_arn
+    #   The Amazon Resource Name (ARN) of the IAM user or role for the
+    #   `AccessEntry` that you're associating the access policy to.
+    #
+    # @option params [required, String] :policy_arn
+    #   The ARN of the `AccessPolicy` that you're associating. For a list of
+    #   ARNs, use `ListAccessPolicies`.
+    #
+    # @option params [required, Types::AccessScope] :access_scope
+    #   The scope for the `AccessPolicy`. You can scope access policies to an
+    #   entire cluster or to specific Kubernetes namespaces.
+    #
+    # @return [Types::AssociateAccessPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateAccessPolicyResponse#cluster_name #cluster_name} => String
+    #   * {Types::AssociateAccessPolicyResponse#principal_arn #principal_arn} => String
+    #   * {Types::AssociateAccessPolicyResponse#associated_access_policy #associated_access_policy} => Types::AssociatedAccessPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_access_policy({
+    #     cluster_name: "String", # required
+    #     principal_arn: "String", # required
+    #     policy_arn: "String", # required
+    #     access_scope: { # required
+    #       type: "cluster", # accepts cluster, namespace
+    #       namespaces: ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_name #=> String
+    #   resp.principal_arn #=> String
+    #   resp.associated_access_policy.policy_arn #=> String
+    #   resp.associated_access_policy.access_scope.type #=> String, one of "cluster", "namespace"
+    #   resp.associated_access_policy.access_scope.namespaces #=> Array
+    #   resp.associated_access_policy.access_scope.namespaces[0] #=> String
+    #   resp.associated_access_policy.associated_at #=> Time
+    #   resp.associated_access_policy.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateAccessPolicy AWS API Documentation
+    #
+    # @overload associate_access_policy(params = {})
+    # @param [Hash] params ({})
+    def associate_access_policy(params = {}, options = {})
+      req = build_request(:associate_access_policy, params)
+      req.send_request(options)
+    end
+
+    # Associates an encryption configuration to an existing cluster.
+    #
+    # Use this API to enable encryption on existing clusters that don't
+    # already have encryption enabled. This allows you to implement a
     # defense-in-depth security strategy without migrating applications to
     # new Amazon EKS clusters.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster that you are associating with encryption
-    #   configuration.
+    #   The name of your cluster.
     #
     # @option params [required, Array<Types::EncryptionConfig>] :encryption_config
     #   The configuration you are using for encryption.
     #
     # @option params [String] :client_request_token
-    #   The client request token you are using with the encryption
-    #   configuration.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -432,9 +493,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -452,34 +513,34 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Associate an identity provider configuration to a cluster.
+    # Associates an identity provider configuration to a cluster.
     #
     # If you want to authenticate identities using an identity provider, you
     # can create an identity provider configuration and associate it to your
     # cluster. After configuring authentication to your cluster you can
-    # create Kubernetes `roles` and `clusterroles` to assign permissions to
-    # the roles, and then bind the roles to the identities using Kubernetes
-    # `rolebindings` and `clusterrolebindings`. For more information see
-    # [Using RBAC Authorization][1] in the Kubernetes documentation.
+    # create Kubernetes `Role` and `ClusterRole` objects, assign permissions
+    # to them, and then bind them to the identities using Kubernetes
+    # `RoleBinding` and `ClusterRoleBinding` objects. For more information
+    # see [Using RBAC Authorization][1] in the Kubernetes documentation.
     #
     #
     #
     # [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster to associate the configuration to.
+    #   The name of your cluster.
     #
     # @option params [required, Types::OidcIdentityProviderConfigRequest] :oidc
     #   An object representing an OpenID Connect (OIDC) identity provider
     #   configuration.
     #
     # @option params [Hash<String,String>] :tags
-    #   The metadata to apply to the configuration to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -516,9 +577,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -538,6 +599,154 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Creates an access entry.
+    #
+    # An access entry allows an IAM principal to access your cluster. Access
+    # entries can replace the need to maintain entries in the `aws-auth`
+    # `ConfigMap` for authentication. You have the following options for
+    # authorizing an IAM principal to access Kubernetes objects on your
+    # cluster: Kubernetes role-based access control (RBAC), Amazon EKS, or
+    # both. Kubernetes RBAC authorization requires you to create and manage
+    # Kubernetes `Role`, `ClusterRole`, `RoleBinding`, and
+    # `ClusterRoleBinding` objects, in addition to managing access entries.
+    # If you use Amazon EKS authorization exclusively, you don't need to
+    # create and manage Kubernetes `Role`, `ClusterRole`, `RoleBinding`, and
+    # `ClusterRoleBinding` objects.
+    #
+    # For more information about access entries, see [Access entries][1] in
+    # the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`. You can specify
+    #   one ARN for each access entry. You can't specify the same ARN in more
+    #   than one access entry. This value can't be changed after access entry
+    #   creation.
+    #
+    #   The valid principals differ depending on the type of the access entry
+    #   in the `type` field. The only valid ARN is IAM roles for the types of
+    #   access entries for nodes: ` . You can use every IAM principal type for
+    #   STANDARD access entries. You can't use the STS session principal type
+    #   with access entries because this is a temporary principal for each
+    #   session and not a permanent identity that can be assigned
+    #   permissions.</p>  IAM best practices recommend using IAM roles with
+    #   temporary credentials, rather than IAM users with long-term
+    #   credentials.
+    #   `
+    #
+    # @option params [Array<String>] :kubernetes_groups
+    #   The value for `name` that you've specified for `kind: Group` as a
+    #   `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding`
+    #   object. Amazon EKS doesn't confirm that the value for `name` exists
+    #   in any bindings on your cluster. You can specify one or more names.
+    #
+    #   Kubernetes authorizes the `principalArn` of the access entry to access
+    #   any cluster objects that you've specified in a Kubernetes `Role` or
+    #   `ClusterRole` object that is also specified in a binding's `roleRef`.
+    #   For more information about creating Kubernetes `RoleBinding`,
+    #   `ClusterRoleBinding`, `Role`, or `ClusterRole` objects, see [Using
+    #   RBAC Authorization in the Kubernetes documentation][1].
+    #
+    #   If you want Amazon EKS to authorize the `principalArn` (instead of, or
+    #   in addition to Kubernetes authorizing the `principalArn`), you can
+    #   associate one or more access policies to the access entry using
+    #   `AssociateAccessPolicy`. If you associate any access policies, the
+    #   `principalARN` has all permissions assigned in the associated access
+    #   policies and all permissions in any Kubernetes `Role` or `ClusterRole`
+    #   objects that the group names are bound to.
+    #
+    #
+    #
+    #   [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :username
+    #   The username to authenticate to Kubernetes with. We recommend not
+    #   specifying a username and letting Amazon EKS specify it for you. For
+    #   more information about the value Amazon EKS specifies for you, or
+    #   constraints before specifying your own username, see [Creating access
+    #   entries][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html#creating-access-entries
+    #
+    # @option params [String] :type
+    #   The type of the new access entry. Valid values are `Standard`,
+    #   `FARGATE_LINUX`, `EC2_LINUX`, and `EC2_WINDOWS`.
+    #
+    #   If the `principalArn` is for an IAM role that's used for self-managed
+    #   Amazon EC2 nodes, specify `EC2_LINUX` or `EC2_WINDOWS`. Amazon EKS
+    #   grants the necessary permissions to the node for you. If the
+    #   `principalArn` is for any other purpose, specify `STANDARD`. If you
+    #   don't specify a value, Amazon EKS sets the value to `STANDARD`. It's
+    #   unnecessary to create access entries for IAM roles used with Fargate
+    #   profiles or managed Amazon EC2 nodes, because Amazon EKS creates
+    #   entries in the `aws-auth` `ConfigMap` for the roles. You can't change
+    #   this value once you've created the access entry.
+    #
+    #   If you set the value to `EC2_LINUX` or `EC2_WINDOWS`, you can't
+    #   specify values for `kubernetesGroups`, or associate an `AccessPolicy`
+    #   to the access entry.
+    #
+    # @return [Types::CreateAccessEntryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessEntryResponse#access_entry #access_entry} => Types::AccessEntry
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_entry({
+    #     cluster_name: "String", # required
+    #     principal_arn: "String", # required
+    #     kubernetes_groups: ["String"],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_request_token: "String",
+    #     username: "String",
+    #     type: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_entry.cluster_name #=> String
+    #   resp.access_entry.principal_arn #=> String
+    #   resp.access_entry.kubernetes_groups #=> Array
+    #   resp.access_entry.kubernetes_groups[0] #=> String
+    #   resp.access_entry.access_entry_arn #=> String
+    #   resp.access_entry.created_at #=> Time
+    #   resp.access_entry.modified_at #=> Time
+    #   resp.access_entry.tags #=> Hash
+    #   resp.access_entry.tags["TagKey"] #=> String
+    #   resp.access_entry.username #=> String
+    #   resp.access_entry.type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAccessEntry AWS API Documentation
+    #
+    # @overload create_access_entry(params = {})
+    # @param [Hash] params ({})
+    def create_access_entry(params = {}, options = {})
+      req = build_request(:create_access_entry, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon EKS add-on.
     #
     # Amazon EKS add-ons help to automate the provisioning and lifecycle
@@ -550,15 +759,11 @@ module Aws::EKS
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster to create the add-on for.
+    #   The name of your cluster.
     #
     # @option params [required, String] :addon_name
-    #   The name of the add-on. The name must match one of the names that [
-    #   `DescribeAddonVersions` ][1] returns.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   The name of the add-on. The name must match one of the names returned
+    #   by `DescribeAddonVersions`.
     #
     # @option params [String] :addon_version
     #   The version of the add-on. The version must match one of the versions
@@ -625,18 +830,14 @@ module Aws::EKS
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :tags
-    #   The metadata to apply to the cluster to assist with categorization and
-    #   organization. Each tag consists of a key and an optional value. You
-    #   define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     # @option params [String] :configuration_values
     #   The set of configuration values for the add-on that's created. The
-    #   values that you provide are validated against the schema in [
-    #   `DescribeAddonConfiguration` ][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #   values that you provide are validated against the schema returned by
+    #   `DescribeAddonConfiguration`.
     #
     # @return [Types::CreateAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -801,16 +1002,16 @@ module Aws::EKS
     #   [2]: http://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :tags
-    #   The metadata to apply to the cluster to assist with categorization and
-    #   organization. Each tag consists of a key and an optional value. You
-    #   define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     # @option params [Array<Types::EncryptionConfig>] :encryption_config
     #   The encryption configuration for the cluster.
@@ -826,6 +1027,9 @@ module Aws::EKS
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html
+    #
+    # @option params [Types::CreateAccessConfigRequest] :access_config
+    #   The access configuration for the cluster.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -900,6 +1104,10 @@ module Aws::EKS
     #         group_name: "String",
     #       },
     #     },
+    #     access_config: {
+    #       bootstrap_cluster_creator_admin_permissions: false,
+    #       authentication_mode: "API", # accepts API, API_AND_CONFIG_MAP, CONFIG_MAP
+    #     },
     #   })
     #
     # @example Response structure
@@ -953,6 +1161,8 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
+    #   resp.cluster.access_config.bootstrap_cluster_creator_admin_permissions #=> Boolean
+    #   resp.cluster.access_config.authentication_mode #=> String, one of "API", "API_AND_CONFIG_MAP", "CONFIG_MAP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -998,7 +1208,7 @@ module Aws::EKS
     #   of the term.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1090,7 +1300,7 @@ module Aws::EKS
     # must wait for that Fargate profile to finish deleting before you can
     # create any other profiles in that cluster.
     #
-    # For more information, see [Fargate Profile][3] in the *Amazon EKS User
+    # For more information, see [Fargate profile][3] in the *Amazon EKS User
     # Guide*.
     #
     #
@@ -1103,45 +1313,42 @@ module Aws::EKS
     #   The name of the Fargate profile.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster to apply the Fargate profile to.
+    #   The name of your cluster.
     #
     # @option params [required, String] :pod_execution_role_arn
-    #   The Amazon Resource Name (ARN) of the pod execution role to use for
-    #   pods that match the selectors in the Fargate profile. The pod
+    #   The Amazon Resource Name (ARN) of the `Pod` execution role to use for
+    #   a `Pod` that matches the selectors in the Fargate profile. The `Pod`
     #   execution role allows Fargate infrastructure to register with your
     #   cluster as a node, and it provides read access to Amazon ECR image
-    #   repositories. For more information, see [Pod Execution Role][1] in the
-    #   *Amazon EKS User Guide*.
+    #   repositories. For more information, see [ `Pod` execution role][1] in
+    #   the *Amazon EKS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html
     #
     # @option params [Array<String>] :subnets
-    #   The IDs of subnets to launch your pods into. At this time, pods
-    #   running on Fargate are not assigned public IP addresses, so only
-    #   private subnets (with no direct route to an Internet Gateway) are
-    #   accepted for this parameter.
+    #   The IDs of subnets to launch a `Pod` into. A `Pod` running on Fargate
+    #   isn't assigned a public IP address, so only private subnets (with no
+    #   direct route to an Internet Gateway) are accepted for this parameter.
     #
     # @option params [Array<Types::FargateProfileSelector>] :selectors
-    #   The selectors to match for pods to use this Fargate profile. Each
-    #   selector must have an associated namespace. Optionally, you can also
-    #   specify labels for a namespace. You may specify up to five selectors
-    #   in a Fargate profile.
+    #   The selectors to match for a `Pod` to use this Fargate profile. Each
+    #   selector must have an associated Kubernetes `namespace`. Optionally,
+    #   you can also specify `labels` for a `namespace`. You may specify up to
+    #   five selectors in a Fargate profile.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :tags
-    #   The metadata to apply to the Fargate profile to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both. Fargate profile tags do not propagate
-    #   to any other resources associated with the Fargate profile, such as
-    #   the pods that are scheduled with it.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     # @return [Types::CreateFargateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1194,26 +1401,32 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Creates a managed node group for an Amazon EKS cluster. You can only
-    # create a node group for your cluster that is equal to the current
-    # Kubernetes version for the cluster.
+    # Creates a managed node group for an Amazon EKS cluster.
+    #
+    # You can only create a node group for your cluster that is equal to the
+    # current Kubernetes version for the cluster. All node groups are
+    # created with the latest AMI release version for the respective minor
+    # Kubernetes version of the cluster, unless you deploy a custom AMI
+    # using a launch template. For more information about using launch
+    # templates, see [Launch template support][1].
     #
     # An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group
     # and associated Amazon EC2 instances that are managed by Amazon Web
     # Services for an Amazon EKS cluster. For more information, see [Managed
-    # node groups][1] in the *Amazon EKS User Guide*.
+    # node groups][2] in the *Amazon EKS User Guide*.
     #
-    # <note markdown="1"> Windows AMI types are only supported for commercial Regions that
-    # support Windows Amazon EKS.
+    # <note markdown="1"> Windows AMI types are only supported for commercial Amazon Web
+    # Services Regions that support Windows on Amazon EKS.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster to create the node group in.
+    #   The name of your cluster.
     #
     # @option params [required, String] :nodegroup_name
     #   The unique name to give your node group.
@@ -1236,16 +1449,14 @@ module Aws::EKS
     #
     # @option params [required, Array<String>] :subnets
     #   The subnets to use for the Auto Scaling group that is created for your
-    #   node group. If you specify `launchTemplate`, then don't specify [
-    #   `SubnetId` ][1] in your launch template, or the node group deployment
-    #   will fail. For more information about using launch templates with
-    #   Amazon EKS, see [Launch template support][2] in the *Amazon EKS User
-    #   Guide*.
+    #   node group. If you specify `launchTemplate`, then don't specify `
+    #   SubnetId ` in your launch template, or the node group deployment will
+    #   fail. For more information about using launch templates with Amazon
+    #   EKS, see [Launch template support][1] in the *Amazon EKS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
-    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #
     # @option params [Array<String>] :instance_types
     #   Specify the instance types for a node group. If you specify a GPU
@@ -1301,20 +1512,19 @@ module Aws::EKS
     #   cluster, you must create an IAM role for those nodes to use when they
     #   are launched. For more information, see [Amazon EKS node IAM role][1]
     #   in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify
-    #   `launchTemplate`, then don't specify [ `IamInstanceProfile` ][2] in
-    #   your launch template, or the node group deployment will fail. For more
+    #   `launchTemplate`, then don't specify ` IamInstanceProfile ` in your
+    #   launch template, or the node group deployment will fail. For more
     #   information about using launch templates with Amazon EKS, see [Launch
-    #   template support][3] in the *Amazon EKS User Guide*.
+    #   template support][2] in the *Amazon EKS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
-    #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #
     # @option params [Hash<String,String>] :labels
-    #   The Kubernetes labels to be applied to the nodes in the node group
-    #   when they are created.
+    #   The Kubernetes `labels` to apply to the nodes in the node group when
+    #   they are created.
     #
     # @option params [Array<Types::Taint>] :taints
     #   The Kubernetes taints to be applied to the nodes in the node group.
@@ -1325,14 +1535,12 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
     #
     # @option params [Hash<String,String>] :tags
-    #   The metadata to apply to the node group to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value.
-    #   You define both. Node group tags do not propagate to any other
-    #   resources associated with the node group, such as the Amazon EC2
-    #   instances or subnets.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1497,7 +1705,7 @@ module Aws::EKS
     # credentials are rotated automatically.
     #
     # Amazon EKS Pod Identity associations provide the ability to manage
-    # credentials for your applications, similar to the way that 7EC2l
+    # credentials for your applications, similar to the way that Amazon EC2
     # instance profiles provide credentials to Amazon EC2 instances.
     #
     # If a pod uses a service account that has an association, Amazon EKS
@@ -1530,16 +1738,16 @@ module Aws::EKS
     #   use this service account.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :tags
-    #   The metadata that you apply to a resource to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value. You define both.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -1605,14 +1813,44 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Delete an Amazon EKS add-on.
+    # Deletes an access entry.
     #
-    # When you remove the add-on, it will also be deleted from the cluster.
-    # You can always manually start an add-on on the cluster using the
-    # Kubernetes API.
+    # Deleting an access entry of a type other than `Standard` can cause
+    # your cluster to function improperly. If you delete an access entry in
+    # error, you can recreate it.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster to delete the add-on from.
+    #   The name of your cluster.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_entry({
+    #     cluster_name: "String", # required
+    #     principal_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAccessEntry AWS API Documentation
+    #
+    # @overload delete_access_entry(params = {})
+    # @param [Hash] params ({})
+    def delete_access_entry(params = {}, options = {})
+      req = build_request(:delete_access_entry, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon EKS add-on.
+    #
+    # When you remove an add-on, it's deleted from the cluster. You can
+    # always manually start an add-on on the cluster using the Kubernetes
+    # API.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
     #
     # @option params [required, String] :addon_name
     #   The name of the add-on. The name must match one of the names returned
@@ -1671,18 +1909,18 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Deletes the Amazon EKS cluster control plane.
+    # Deletes an Amazon EKS cluster control plane.
     #
     # If you have active services in your cluster that are associated with a
     # load balancer, you must delete those services before deleting the
     # cluster so that the load balancers are deleted properly. Otherwise,
     # you can have orphaned resources in your VPC that prevent you from
     # being able to delete the VPC. For more information, see [Deleting a
-    # Cluster][1] in the *Amazon EKS User Guide*.
+    # cluster][1] in the *Amazon EKS User Guide*.
     #
     # If you have managed node groups or Fargate profiles attached to the
     # cluster, you must delete them first. For more information, see
-    # DeleteNodegroup and DeleteFargateProfile.
+    # `DeleteNodgroup` and `DeleteFargateProfile`.
     #
     #
     #
@@ -1765,6 +2003,8 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
+    #   resp.cluster.access_config.bootstrap_cluster_creator_admin_permissions #=> Boolean
+    #   resp.cluster.access_config.authentication_mode #=> String, one of "API", "API_AND_CONFIG_MAP", "CONFIG_MAP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -1823,19 +2063,18 @@ module Aws::EKS
 
     # Deletes an Fargate profile.
     #
-    # When you delete a Fargate profile, any pods running on Fargate that
-    # were created with the profile are deleted. If those pods match another
-    # Fargate profile, then they are scheduled on Fargate with that profile.
-    # If they no longer match any Fargate profiles, then they are not
-    # scheduled on Fargate and they may remain in a pending state.
+    # When you delete a Fargate profile, any `Pod` running on Fargate that
+    # was created with the profile is deleted. If the `Pod` matches another
+    # Fargate profile, then it is scheduled on Fargate with that profile. If
+    # it no longer matches any Fargate profiles, then it's not scheduled on
+    # Fargate and may remain in a pending state.
     #
     # Only one Fargate profile in a cluster can be in the `DELETING` status
     # at a time. You must wait for a Fargate profile to finish deleting
     # before you can delete any other profiles in that cluster.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster associated with the Fargate profile
-    #   to delete.
+    #   The name of your cluster.
     #
     # @option params [required, String] :fargate_profile_name
     #   The name of the Fargate profile to delete.
@@ -1877,11 +2116,10 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Deletes an Amazon EKS node group for a cluster.
+    # Deletes a managed node group.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster that is associated with your node
-    #   group.
+    #   The name of your cluster.
     #
     # @option params [required, String] :nodegroup_name
     #   The name of the node group to delete.
@@ -2001,6 +2239,13 @@ module Aws::EKS
     # Deregisters a connected cluster to remove it from the Amazon EKS
     # control plane.
     #
+    # A connected cluster is a Kubernetes cluster that you've connected to
+    # your control plane using the [Amazon EKS Connector][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html
+    #
     # @option params [required, String] :name
     #   The name of the connected cluster to deregister.
     #
@@ -2065,6 +2310,8 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
+    #   resp.cluster.access_config.bootstrap_cluster_creator_admin_permissions #=> Boolean
+    #   resp.cluster.access_config.authentication_mode #=> String, one of "API", "API_AND_CONFIG_MAP", "CONFIG_MAP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeregisterCluster AWS API Documentation
     #
@@ -2075,10 +2322,52 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Describes an access entry.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #
+    # @return [Types::DescribeAccessEntryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccessEntryResponse#access_entry #access_entry} => Types::AccessEntry
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_access_entry({
+    #     cluster_name: "String", # required
+    #     principal_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_entry.cluster_name #=> String
+    #   resp.access_entry.principal_arn #=> String
+    #   resp.access_entry.kubernetes_groups #=> Array
+    #   resp.access_entry.kubernetes_groups[0] #=> String
+    #   resp.access_entry.access_entry_arn #=> String
+    #   resp.access_entry.created_at #=> Time
+    #   resp.access_entry.modified_at #=> Time
+    #   resp.access_entry.tags #=> Hash
+    #   resp.access_entry.tags["TagKey"] #=> String
+    #   resp.access_entry.username #=> String
+    #   resp.access_entry.type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAccessEntry AWS API Documentation
+    #
+    # @overload describe_access_entry(params = {})
+    # @param [Hash] params ({})
+    def describe_access_entry(params = {}, options = {})
+      req = build_request(:describe_access_entry, params)
+      req.send_request(options)
+    end
+
     # Describes an Amazon EKS add-on.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster.
+    #   The name of your cluster.
     #
     # @option params [required, String] :addon_name
     #   The name of the add-on. The name must match one of the names returned
@@ -2140,12 +2429,8 @@ module Aws::EKS
     # Returns configuration options.
     #
     # @option params [required, String] :addon_name
-    #   The name of the add-on. The name must match one of the names that [
-    #   `DescribeAddonVersions` ][1] returns.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   The name of the add-on. The name must match one of the names returned
+    #   by `DescribeAddonVersions`.
     #
     # @option params [required, String] :addon_version
     #   The version of the add-on. The version must match one of the versions
@@ -2183,22 +2468,30 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Describes the versions for an add-on. Information such as the
-    # Kubernetes versions that you can use the add-on with, the `owner`,
-    # `publisher`, and the `type` of the add-on are returned.
+    # Describes the versions for an add-on.
+    #
+    # Information such as the Kubernetes versions that you can use the
+    # add-on with, the `owner`, `publisher`, and the `type` of the add-on
+    # are returned.
     #
     # @option params [String] :kubernetes_version
     #   The Kubernetes versions that you can use the add-on with.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `DescribeAddonVersionsRequest` where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
     #   to retrieve the next items in a list and not for other programmatic
@@ -2275,12 +2568,12 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Returns descriptive information about an Amazon EKS cluster.
+    # Describes an Amazon EKS cluster.
     #
     # The API server endpoint and certificate authority data returned by
     # this operation are required for `kubelet` and `kubectl` to communicate
-    # with your Kubernetes API server. For more information, see [Create a
-    # kubeconfig for Amazon EKS][1].
+    # with your Kubernetes API server. For more information, see [Creating
+    # or updating a `kubeconfig` file for an Amazon EKS cluster][1].
     #
     # <note markdown="1"> The API server endpoint and certificate authority data aren't
     # available until the cluster reaches the `ACTIVE` state.
@@ -2292,7 +2585,7 @@ module Aws::EKS
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
     #
     # @option params [required, String] :name
-    #   The name of the cluster to describe.
+    #   The name of your cluster.
     #
     # @return [Types::DescribeClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2390,6 +2683,8 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
+    #   resp.cluster.access_config.bootstrap_cluster_creator_admin_permissions #=> Boolean
+    #   resp.cluster.access_config.authentication_mode #=> String, one of "API", "API_AND_CONFIG_MAP", "CONFIG_MAP"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2448,11 +2743,10 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Returns descriptive information about an Fargate profile.
+    # Describes an Fargate profile.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster associated with the Fargate
-    #   profile.
+    #   The name of your cluster.
     #
     # @option params [required, String] :fargate_profile_name
     #   The name of the Fargate profile to describe.
@@ -2500,12 +2794,10 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Returns descriptive information about an identity provider
-    # configuration.
+    # Describes an identity provider configuration.
     #
     # @option params [required, String] :cluster_name
-    #   The cluster name that the identity provider configuration is
-    #   associated to.
+    #   The name of your cluster.
     #
     # @option params [required, Types::IdentityProviderConfig] :identity_provider_config
     #   An object representing an identity provider configuration.
@@ -2550,10 +2842,67 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Returns descriptive information about an Amazon EKS node group.
+    # Returns details about an insight that you specify using its ID.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster associated with the node group.
+    #   The name of the cluster to describe the insight for.
+    #
+    # @option params [required, String] :id
+    #   The identity of the insight to describe.
+    #
+    # @return [Types::DescribeInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInsightResponse#insight #insight} => Types::Insight
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_insight({
+    #     cluster_name: "String", # required
+    #     id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight.id #=> String
+    #   resp.insight.name #=> String
+    #   resp.insight.category #=> String, one of "UPGRADE_READINESS"
+    #   resp.insight.kubernetes_version #=> String
+    #   resp.insight.last_refresh_time #=> Time
+    #   resp.insight.last_transition_time #=> Time
+    #   resp.insight.description #=> String
+    #   resp.insight.insight_status.status #=> String, one of "PASSING", "WARNING", "ERROR", "UNKNOWN"
+    #   resp.insight.insight_status.reason #=> String
+    #   resp.insight.recommendation #=> String
+    #   resp.insight.additional_info #=> Hash
+    #   resp.insight.additional_info["String"] #=> String
+    #   resp.insight.resources #=> Array
+    #   resp.insight.resources[0].insight_status.status #=> String, one of "PASSING", "WARNING", "ERROR", "UNKNOWN"
+    #   resp.insight.resources[0].insight_status.reason #=> String
+    #   resp.insight.resources[0].kubernetes_resource_uri #=> String
+    #   resp.insight.resources[0].arn #=> String
+    #   resp.insight.category_specific_summary.deprecation_details #=> Array
+    #   resp.insight.category_specific_summary.deprecation_details[0].usage #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].replaced_with #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].stop_serving_version #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].start_serving_replacement_version #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats #=> Array
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats[0].user_agent #=> String
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats[0].number_of_requests_last_30_days #=> Integer
+    #   resp.insight.category_specific_summary.deprecation_details[0].client_stats[0].last_request_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsight AWS API Documentation
+    #
+    # @overload describe_insight(params = {})
+    # @param [Hash] params ({})
+    def describe_insight(params = {}, options = {})
+      req = build_request(:describe_insight, params)
+      req.send_request(options)
+    end
+
+    # Describes a managed node group.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
     #
     # @option params [required, String] :nodegroup_name
     #   The name of the node group to describe.
@@ -2677,8 +3026,7 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Returns descriptive information about an update against your Amazon
-    # EKS cluster or associated managed node group or Amazon EKS add-on.
+    # Describes an update to an Amazon EKS resource.
     #
     # When the status of the update is `Succeeded`, the update is complete.
     # If an update fails, the status is `Failed`, and an error detail
@@ -2720,9 +3068,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2740,17 +3088,45 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Disassociates an identity provider configuration from a cluster. If
-    # you disassociate an identity provider from your cluster, users
-    # included in the provider can no longer access the cluster. However,
-    # you can still access the cluster with [IAM principals][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
+    # Disassociates an access policy from an access entry.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster to disassociate an identity provider from.
+    #   The name of your cluster.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #
+    # @option params [required, String] :policy_arn
+    #   The ARN of the policy to disassociate from the access entry. For a
+    #   list of associated policies ARNs, use `ListAssociatedAccessPolicies`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_access_policy({
+    #     cluster_name: "String", # required
+    #     principal_arn: "String", # required
+    #     policy_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateAccessPolicy AWS API Documentation
+    #
+    # @overload disassociate_access_policy(params = {})
+    # @param [Hash] params ({})
+    def disassociate_access_policy(params = {}, options = {})
+      req = build_request(:disassociate_access_policy, params)
+      req.send_request(options)
+    end
+
+    # Disassociates an identity provider configuration from a cluster.
+    #
+    # If you disassociate an identity provider from your cluster, users
+    # included in the provider can no longer access the cluster. However,
+    # you can still access the cluster with IAM principals.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
     #
     # @option params [required, Types::IdentityProviderConfig] :identity_provider_config
     #   An object representing an identity provider configuration.
@@ -2781,9 +3157,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2801,26 +3177,143 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Lists the access entries for your cluster.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
+    #
+    # @option params [String] :associated_policy_arn
+    #   The ARN of an `AccessPolicy`. When you specify an access policy ARN,
+    #   only the access entries associated to that access policy are returned.
+    #   For a list of available policy ARNs, use `ListAccessPolicies`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListAccessEntriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessEntriesResponse#access_entries #access_entries} => Array&lt;String&gt;
+    #   * {Types::ListAccessEntriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_entries({
+    #     cluster_name: "String", # required
+    #     associated_policy_arn: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_entries #=> Array
+    #   resp.access_entries[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAccessEntries AWS API Documentation
+    #
+    # @overload list_access_entries(params = {})
+    # @param [Hash] params ({})
+    def list_access_entries(params = {}, options = {})
+      req = build_request(:list_access_entries, params)
+      req.send_request(options)
+    end
+
+    # Lists the available access policies.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListAccessPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessPoliciesResponse#access_policies #access_policies} => Array&lt;Types::AccessPolicy&gt;
+    #   * {Types::ListAccessPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_policies({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_policies #=> Array
+    #   resp.access_policies[0].name #=> String
+    #   resp.access_policies[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAccessPolicies AWS API Documentation
+    #
+    # @overload list_access_policies(params = {})
+    # @param [Hash] params ({})
+    def list_access_policies(params = {}, options = {})
+      req = build_request(:list_access_policies, params)
+      req.send_request(options)
+    end
+
     # Lists the installed add-ons.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster.
+    #   The name of your cluster.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of add-on results returned by `ListAddonsRequest`
-    #   in paginated output. When you use this parameter, `ListAddonsRequest`
-    #   returns only `maxResults` results in a single page along with a
-    #   `nextToken` response element. You can see the remaining results of the
-    #   initial request by sending another `ListAddonsRequest` request with
-    #   the returned `nextToken` value. This value can be between 1 and 100.
-    #   If you don't use this parameter, `ListAddonsRequest` returns up to
-    #   100 results and a `nextToken` value, if applicable.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListAddonsRequest` where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
     #   to retrieve the next items in a list and not for other programmatic
@@ -2858,24 +3351,94 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the Amazon EKS clusters in your Amazon Web Services account in
-    # the specified Region.
+    # Lists the access policies associated with an access entry.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of cluster results returned by `ListClusters` in
-    #   paginated output. When you use this parameter, `ListClusters` returns
-    #   only `maxResults` results in a single page along with a `nextToken`
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
     #   response element. You can see the remaining results of the initial
-    #   request by sending another `ListClusters` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If you don't
-    #   use this parameter, `ListClusters` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListClusters` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListAssociatedAccessPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssociatedAccessPoliciesResponse#cluster_name #cluster_name} => String
+    #   * {Types::ListAssociatedAccessPoliciesResponse#principal_arn #principal_arn} => String
+    #   * {Types::ListAssociatedAccessPoliciesResponse#next_token #next_token} => String
+    #   * {Types::ListAssociatedAccessPoliciesResponse#associated_access_policies #associated_access_policies} => Array&lt;Types::AssociatedAccessPolicy&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_associated_access_policies({
+    #     cluster_name: "String", # required
+    #     principal_arn: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_name #=> String
+    #   resp.principal_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.associated_access_policies #=> Array
+    #   resp.associated_access_policies[0].policy_arn #=> String
+    #   resp.associated_access_policies[0].access_scope.type #=> String, one of "cluster", "namespace"
+    #   resp.associated_access_policies[0].access_scope.namespaces #=> Array
+    #   resp.associated_access_policies[0].access_scope.namespaces[0] #=> String
+    #   resp.associated_access_policies[0].associated_at #=> Time
+    #   resp.associated_access_policies[0].modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListAssociatedAccessPolicies AWS API Documentation
+    #
+    # @overload list_associated_access_policies(params = {})
+    # @param [Hash] params ({})
+    def list_associated_access_policies(params = {}, options = {})
+      req = build_request(:list_associated_access_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists the Amazon EKS clusters in your Amazon Web Services account in
+    # the specified Amazon Web Services Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
     #   to retrieve the next items in a list and not for other programmatic
@@ -2885,9 +3448,14 @@ module Aws::EKS
     #
     # @option params [Array<String>] :include
     #   Indicates whether external clusters are included in the returned list.
-    #   Use '`all`' to return connected clusters, or blank to return only
-    #   Amazon EKS clusters. '`all`' must be in lowercase otherwise an error
-    #   occurs.
+    #   Use '`all`' to return
+    #   [https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html][1]connected
+    #   clusters, or blank to return only Amazon EKS clusters. '`all`' must
+    #   be in lowercase otherwise an error occurs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html
     #
     # @return [Types::ListClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3003,29 +3571,33 @@ module Aws::EKS
     end
 
     # Lists the Fargate profiles associated with the specified cluster in
-    # your Amazon Web Services account in the specified Region.
+    # your Amazon Web Services account in the specified Amazon Web Services
+    # Region.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster that you would like to list Fargate
-    #   profiles in.
+    #   The name of your cluster.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Fargate profile results returned by
-    #   `ListFargateProfiles` in paginated output. When you use this
-    #   parameter, `ListFargateProfiles` returns only `maxResults` results in
-    #   a single page along with a `nextToken` response element. You can see
-    #   the remaining results of the initial request by sending another
-    #   `ListFargateProfiles` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If you don't use this parameter,
-    #   `ListFargateProfiles` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `ListFargateProfiles` request where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
     #
     # @return [Types::ListFargateProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3057,29 +3629,32 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # A list of identity provider configurations.
+    # Lists the identity provider configurations for your cluster.
     #
     # @option params [required, String] :cluster_name
-    #   The cluster name that you want to list identity provider
-    #   configurations for.
+    #   The name of your cluster.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of identity provider configurations returned by
-    #   `ListIdentityProviderConfigs` in paginated output. When you use this
-    #   parameter, `ListIdentityProviderConfigs` returns only `maxResults`
-    #   results in a single page along with a `nextToken` response element.
-    #   You can see the remaining results of the initial request by sending
-    #   another `ListIdentityProviderConfigs` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If you don't
-    #   use this parameter, `ListIdentityProviderConfigs` returns up to 100
-    #   results and a `nextToken` value, if applicable.
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
-    #   `IdentityProviderConfigsRequest` where `maxResults` was used and the
-    #   results exceeded the value of that parameter. Pagination continues
-    #   from the end of the previous results that returned the `nextToken`
-    #   value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
     #
     # @return [Types::ListIdentityProviderConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3112,29 +3687,106 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the Amazon EKS managed node groups associated with the specified
-    # cluster in your Amazon Web Services account in the specified Region.
-    # Self-managed node groups are not listed.
+    # Returns a list of all insights checked for against the specified
+    # cluster. You can filter which insights are returned by category,
+    # associated Kubernetes version, and status.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster that you would like to list node
-    #   groups in.
+    #   The name of the Amazon EKS cluster associated with the insights.
+    #
+    # @option params [Types::InsightsFilter] :filter
+    #   The criteria to filter your list of insights for your cluster. You can
+    #   filter which insights are returned by category, associated Kubernetes
+    #   version, and status.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of node group results returned by `ListNodegroups`
-    #   in paginated output. When you use this parameter, `ListNodegroups`
-    #   returns only `maxResults` results in a single page along with a
-    #   `nextToken` response element. You can see the remaining results of the
-    #   initial request by sending another `ListNodegroups` request with the
-    #   returned `nextToken` value. This value can be between 1 and 100. If
-    #   you don't use this parameter, `ListNodegroups` returns up to 100
-    #   results and a `nextToken` value if applicable.
+    #   The maximum number of identity provider configurations returned by
+    #   `ListInsights` in paginated output. When you use this parameter,
+    #   `ListInsights` returns only `maxResults` results in a single page
+    #   along with a `nextToken` response element. You can see the remaining
+    #   results of the initial request by sending another `ListInsights`
+    #   request with the returned `nextToken` value. This value can be between
+    #   1 and 100. If you don't use this parameter, `ListInsights` returns up
+    #   to 100 results and a `nextToken` value, if applicable.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
-    #   `ListNodegroups` request where `maxResults` was used and the results
-    #   exceeded the value of that parameter. Pagination continues from the
-    #   end of the previous results that returned the `nextToken` value.
+    #   `ListInsights` request. When the results of a `ListInsights` request
+    #   exceed `maxResults`, you can use this value to retrieve the next page
+    #   of results. This value is `null` when there are no more results to
+    #   return.
+    #
+    # @return [Types::ListInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInsightsResponse#insights #insights} => Array&lt;Types::InsightSummary&gt;
+    #   * {Types::ListInsightsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_insights({
+    #     cluster_name: "String", # required
+    #     filter: {
+    #       categories: ["UPGRADE_READINESS"], # accepts UPGRADE_READINESS
+    #       kubernetes_versions: ["String"],
+    #       statuses: ["PASSING"], # accepts PASSING, WARNING, ERROR, UNKNOWN
+    #     },
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insights #=> Array
+    #   resp.insights[0].id #=> String
+    #   resp.insights[0].name #=> String
+    #   resp.insights[0].category #=> String, one of "UPGRADE_READINESS"
+    #   resp.insights[0].kubernetes_version #=> String
+    #   resp.insights[0].last_refresh_time #=> Time
+    #   resp.insights[0].last_transition_time #=> Time
+    #   resp.insights[0].description #=> String
+    #   resp.insights[0].insight_status.status #=> String, one of "PASSING", "WARNING", "ERROR", "UNKNOWN"
+    #   resp.insights[0].insight_status.reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListInsights AWS API Documentation
+    #
+    # @overload list_insights(params = {})
+    # @param [Hash] params ({})
+    def list_insights(params = {}, options = {})
+      req = build_request(:list_insights, params)
+      req.send_request(options)
+    end
+
+    # Lists the managed node groups associated with the specified cluster in
+    # your Amazon Web Services account in the specified Amazon Web Services
+    # Region. Self-managed node groups aren't listed.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
     #
     # @return [Types::ListNodegroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3242,9 +3894,8 @@ module Aws::EKS
     # List the tags for an Amazon EKS resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) that identifies the resource for which
-    #   to list the tags. Currently, the supported resources are Amazon EKS
-    #   clusters and managed node groups.
+    #   The Amazon Resource Name (ARN) that identifies the resource to list
+    #   tags for.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3286,8 +3937,8 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the updates associated with an Amazon EKS cluster or managed
-    # node group in your Amazon Web Services account, in the specified
+    # Lists the updates associated with an Amazon EKS resource in your
+    # Amazon Web Services account, in the specified Amazon Web Services
     # Region.
     #
     # @option params [required, String] :name
@@ -3300,20 +3951,26 @@ module Aws::EKS
     #   The names of the installed add-ons that have available updates.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated `ListUpdates`
-    #   request where `maxResults` was used and the results exceeded the value
-    #   of that parameter. Pagination continues from the end of the previous
-    #   results that returned the `nextToken` value.
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of that
+    #   parameter. Pagination continues from the end of the previous results
+    #   that returned the `nextToken` value. This value is null when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used only
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of update results returned by `ListUpdates` in
-    #   paginated output. When you use this parameter, `ListUpdates` returns
-    #   only `maxResults` results in a single page along with a `nextToken`
+    #   The maximum number of results, returned in paginated output. You
+    #   receive `maxResults` in a single page, along with a `nextToken`
     #   response element. You can see the remaining results of the initial
-    #   request by sending another `ListUpdates` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If you don't
-    #   use this parameter, `ListUpdates` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   request by sending another request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If you don't use this
+    #   parameter, 100 results and a `nextToken` value, if applicable, are
+    #   returned.
     #
     # @return [Types::ListUpdatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3359,34 +4016,33 @@ module Aws::EKS
     # `activationCode` must be applied to the Kubernetes cluster through
     # it's native provider to provide visibility.
     #
-    # After the Manifest is updated and applied, then the connected cluster
-    # is visible to the Amazon EKS control plane. If the Manifest is not
-    # applied within three days, then the connected cluster will no longer
-    # be visible and must be deregistered. See DeregisterCluster.
+    # After the manifest is updated and applied, the connected cluster is
+    # visible to the Amazon EKS control plane. If the manifest isn't
+    # applied within three days, the connected cluster will no longer be
+    # visible and must be deregistered using `DeregisterCluster`.
     #
     #
     #
     # [1]: https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml
     #
     # @option params [required, String] :name
-    #   Define a unique name for this cluster for your Region.
+    #   A unique name for this cluster in your Amazon Web Services Region.
     #
     # @option params [required, Types::ConnectorConfigRequest] :connector_config
     #   The configuration settings required to connect the Kubernetes cluster
     #   to the Amazon EKS control plane.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :tags
-    #   The metadata that you apply to the cluster to assist with
-    #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Cluster tags do not
-    #   propagate to any other resources associated with the cluster.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     # @return [Types::RegisterClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3457,6 +4113,8 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
     #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
+    #   resp.cluster.access_config.bootstrap_cluster_creator_admin_permissions #=> Boolean
+    #   resp.cluster.access_config.authentication_mode #=> String, one of "API", "API_AND_CONFIG_MAP", "CONFIG_MAP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterCluster AWS API Documentation
     #
@@ -3467,22 +4125,23 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Associates the specified tags to a resource with the specified
-    # `resourceArn`. If existing tags on a resource are not specified in the
-    # request parameters, they are not changed. When a resource is deleted,
-    # the tags associated with that resource are deleted as well. Tags that
-    # you create for Amazon EKS resources do not propagate to any other
-    # resources associated with the cluster. For example, if you tag a
-    # cluster with this operation, that tag does not automatically propagate
-    # to the subnets and nodes associated with the cluster.
+    # Associates the specified tags to an Amazon EKS resource with the
+    # specified `resourceArn`. If existing tags on a resource are not
+    # specified in the request parameters, they aren't changed. When a
+    # resource is deleted, the tags associated with that resource are also
+    # deleted. Tags that you create for Amazon EKS resources don't
+    # propagate to any other resources associated with the cluster. For
+    # example, if you tag a cluster with this operation, that tag doesn't
+    # automatically propagate to the subnets and nodes associated with the
+    # cluster.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #   Currently, the supported resources are Amazon EKS clusters and managed
-    #   node groups.
+    #   The Amazon Resource Name (ARN) of the resource to add tags to.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #   Metadata that assists with categorization and organization. Each tag
+    #   consists of a key and an optional value. You define both. Tags don't
+    #   propagate to any other cluster or Amazon Web Services resources.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3504,15 +4163,13 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Deletes specified tags from a resource.
+    # Deletes specified tags from an Amazon EKS resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resources are Amazon EKS clusters and
-    #   managed node groups.
+    #   The Amazon Resource Name (ARN) of the resource to delete tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The keys of the tags to be removed.
+    #   The keys of the tags to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3532,10 +4189,98 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Updates an access entry.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of your cluster.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the IAM principal for the `AccessEntry`.
+    #
+    # @option params [Array<String>] :kubernetes_groups
+    #   The value for `name` that you've specified for `kind: Group` as a
+    #   `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding`
+    #   object. Amazon EKS doesn't confirm that the value for `name` exists
+    #   in any bindings on your cluster. You can specify one or more names.
+    #
+    #   Kubernetes authorizes the `principalArn` of the access entry to access
+    #   any cluster objects that you've specified in a Kubernetes `Role` or
+    #   `ClusterRole` object that is also specified in a binding's `roleRef`.
+    #   For more information about creating Kubernetes `RoleBinding`,
+    #   `ClusterRoleBinding`, `Role`, or `ClusterRole` objects, see [Using
+    #   RBAC Authorization in the Kubernetes documentation][1].
+    #
+    #   If you want Amazon EKS to authorize the `principalArn` (instead of, or
+    #   in addition to Kubernetes authorizing the `principalArn`), you can
+    #   associate one or more access policies to the access entry using
+    #   `AssociateAccessPolicy`. If you associate any access policies, the
+    #   `principalARN` has all permissions assigned in the associated access
+    #   policies and all permissions in any Kubernetes `Role` or `ClusterRole`
+    #   objects that the group names are bound to.
+    #
+    #
+    #
+    #   [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :username
+    #   The username to authenticate to Kubernetes with. We recommend not
+    #   specifying a username and letting Amazon EKS specify it for you. For
+    #   more information about the value Amazon EKS specifies for you, or
+    #   constraints before specifying your own username, see [Creating access
+    #   entries][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html#creating-access-entries
+    #
+    # @return [Types::UpdateAccessEntryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccessEntryResponse#access_entry #access_entry} => Types::AccessEntry
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_access_entry({
+    #     cluster_name: "String", # required
+    #     principal_arn: "String", # required
+    #     kubernetes_groups: ["String"],
+    #     client_request_token: "String",
+    #     username: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_entry.cluster_name #=> String
+    #   resp.access_entry.principal_arn #=> String
+    #   resp.access_entry.kubernetes_groups #=> Array
+    #   resp.access_entry.kubernetes_groups[0] #=> String
+    #   resp.access_entry.access_entry_arn #=> String
+    #   resp.access_entry.created_at #=> Time
+    #   resp.access_entry.modified_at #=> Time
+    #   resp.access_entry.tags #=> Hash
+    #   resp.access_entry.tags["TagKey"] #=> String
+    #   resp.access_entry.username #=> String
+    #   resp.access_entry.type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAccessEntry AWS API Documentation
+    #
+    # @overload update_access_entry(params = {})
+    # @param [Hash] params ({})
+    def update_access_entry(params = {}, options = {})
+      req = build_request(:update_access_entry, params)
+      req.send_request(options)
+    end
+
     # Updates an Amazon EKS add-on.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the cluster.
+    #   The name of your cluster.
     #
     # @option params [required, String] :addon_name
     #   The name of the add-on. The name must match one of the names returned
@@ -3590,7 +4335,7 @@ module Aws::EKS
     #     cluster.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -3598,12 +4343,8 @@ module Aws::EKS
     #
     # @option params [String] :configuration_values
     #   The set of configuration values for the add-on that's created. The
-    #   values that you provide are validated against the schema in
-    #   [DescribeAddonConfiguration][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html
+    #   values that you provide are validated against the schema returned by
+    #   `DescribeAddonConfiguration`.
     #
     # @return [Types::UpdateAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3625,9 +4366,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -3647,14 +4388,14 @@ module Aws::EKS
 
     # Updates an Amazon EKS cluster configuration. Your cluster continues to
     # function during the update. The response output includes an update ID
-    # that you can use to track the status of your cluster update with the
-    # DescribeUpdate API operation.
+    # that you can use to track the status of your cluster update with
+    # `DescribeUpdate`"/&gt;.
     #
     # You can use this API operation to enable or disable exporting the
     # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
     # default, cluster control plane logs aren't exported to CloudWatch
-    # Logs. For more information, see [Amazon EKS Cluster Control Plane
-    # Logs][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    # Logs. For more information, see [Amazon EKS Cluster control plane
+    # logs][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     # apply to exported control plane logs. For more information, see
@@ -3716,11 +4457,14 @@ module Aws::EKS
     #   [2]: http://aws.amazon.com/cloudwatch/pricing/
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Types::UpdateAccessConfigRequest] :access_config
+    #   The access configuration for the cluster.
     #
     # @return [Types::UpdateClusterConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3746,15 +4490,18 @@ module Aws::EKS
     #       ],
     #     },
     #     client_request_token: "String",
+    #     access_config: {
+    #       authentication_mode: "API", # accepts API, API_AND_CONFIG_MAP, CONFIG_MAP
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -3794,7 +4541,7 @@ module Aws::EKS
     #   The desired Kubernetes version following a successful update.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -3816,9 +4563,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -3900,15 +4647,14 @@ module Aws::EKS
     # configuration.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster that the managed node group resides
-    #   in.
+    #   The name of your cluster.
     #
     # @option params [required, String] :nodegroup_name
     #   The name of the managed node group to update.
     #
     # @option params [Types::UpdateLabelsPayload] :labels
-    #   The Kubernetes labels to be applied to the nodes in the node group
-    #   after the update.
+    #   The Kubernetes `labels` to apply to the nodes in the node group after
+    #   the update.
     #
     # @option params [Types::UpdateTaintsPayload] :taints
     #   The Kubernetes taints to be applied to the nodes in the node group
@@ -3927,7 +4673,7 @@ module Aws::EKS
     #   The node group update configuration.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -3980,9 +4726,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4024,10 +4770,10 @@ module Aws::EKS
     # AMI version.
     #
     # When a node in a managed node group is terminated due to a scaling
-    # action or update, the pods in that node are drained first. Amazon EKS
-    # attempts to drain the nodes gracefully and will fail if it is unable
-    # to do so. You can `force` the update if Amazon EKS is unable to drain
-    # the nodes as a result of a pod disruption budget issue.
+    # action or update, every `Pod` on that node is drained first. Amazon
+    # EKS attempts to drain the nodes gracefully and will fail if it is
+    # unable to do so. You can `force` the update if Amazon EKS is unable to
+    # drain the nodes as a result of a `Pod` disruption budget issue.
     #
     #
     #
@@ -4035,8 +4781,7 @@ module Aws::EKS
     # [2]: https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster that is associated with the managed
-    #   node group to update.
+    #   The name of your cluster.
     #
     # @option params [required, String] :nodegroup_name
     #   The name of the managed node group to update.
@@ -4083,14 +4828,14 @@ module Aws::EKS
     #   group was originally deployed with a launch template.
     #
     # @option params [Boolean] :force
-    #   Force the update if the existing node group's pods are unable to be
-    #   drained due to a pod disruption budget issue. If an update fails
-    #   because pods could not be drained, you can force the update after it
-    #   fails to terminate the old node whether or not any pods are running on
+    #   Force the update if any `Pod` on the existing node group can't be
+    #   drained due to a `Pod` disruption budget issue. If an update fails
+    #   because all Pods can't be drained, you can force the update after it
+    #   fails to terminate the old node whether or not any `Pod` is running on
     #   the node.
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4120,9 +4865,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4143,7 +4888,7 @@ module Aws::EKS
     # Updates a EKS Pod Identity association. Only the IAM role can be
     # changed; an association can't be moved between clusters, namespaces,
     # or service accounts. If you need to edit the namespace or service
-    # account, you need to remove the association and then create a new
+    # account, you need to delete the association and then create a new
     # association with your desired settings.
     #
     # @option params [required, String] :cluster_name
@@ -4156,7 +4901,7 @@ module Aws::EKS
     #   The new IAM role to change the
     #
     # @option params [String] :client_request_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4210,7 +4955,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

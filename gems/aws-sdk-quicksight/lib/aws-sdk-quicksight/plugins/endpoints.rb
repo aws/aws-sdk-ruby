@@ -345,6 +345,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateAnalysisPermissions.build(context)
           when :update_dashboard
             Aws::QuickSight::Endpoints::UpdateDashboard.build(context)
+          when :update_dashboard_links
+            Aws::QuickSight::Endpoints::UpdateDashboardLinks.build(context)
           when :update_dashboard_permissions
             Aws::QuickSight::Endpoints::UpdateDashboardPermissions.build(context)
           when :update_dashboard_published_version

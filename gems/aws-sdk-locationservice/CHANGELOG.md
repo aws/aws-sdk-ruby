@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2024-01-10)
+------------------
+
+* Feature - This release adds API support for custom layers for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+
+1.44.0 (2023-12-29)
+------------------
+
+* Feature - This release introduces a new parameter to bypasses an API key's expiry conditions and delete the key.
+
 1.43.0 (2023-12-12)
 ------------------
 

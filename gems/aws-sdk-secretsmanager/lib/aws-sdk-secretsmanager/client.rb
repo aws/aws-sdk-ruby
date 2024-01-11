@@ -457,6 +457,57 @@ module Aws::SecretsManager
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To retrieve the secret values for a group of secrets listed by name
+    #
+    #   # The following example gets the values for three secrets.
+    #
+    #   resp = client.batch_get_secret_value({
+    #     secret_id_list: [
+    #       "MySecret1", 
+    #       "MySecret2", 
+    #       "MySecret3", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     secret_values: [
+    #       {
+    #         arn: "&region-arn;&asm-service-name;:us-west-2:&ExampleAccountId;:secret:MySecret1-a1b2c3", 
+    #         created_date: Time.parse(1700591229.801), 
+    #         name: "MySecret1", 
+    #         secret_string: "{\"username\":\"diego_ramirez\",\"password\":\"EXAMPLE-PASSWORD\",\"engine\":\"mysql\",\"host\":\"secretsmanagertutorial.cluster.us-west-2.rds.amazonaws.com\",\"port\":3306,\"dbClusterIdentifier\":\"secretsmanagertutorial\"}", 
+    #         version_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
+    #         version_stages: [
+    #           "AWSCURRENT", 
+    #         ], 
+    #       }, 
+    #       {
+    #         arn: "&region-arn;&asm-service-name;:us-west-2:&ExampleAccountId;:secret:MySecret2-a1b2c3", 
+    #         created_date: Time.parse(1699911394.105), 
+    #         name: "MySecret2", 
+    #         secret_string: "{\"username\":\"akua_mansa\",\"password\":\"EXAMPLE-PASSWORD\"", 
+    #         version_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLEbbbbb", 
+    #         version_stages: [
+    #           "AWSCURRENT", 
+    #         ], 
+    #       }, 
+    #       {
+    #         arn: "&region-arn;&asm-service-name;:us-west-2:&ExampleAccountId;:secret:MySecret3-a1b2c3", 
+    #         created_date: Time.parse(1699911394.105), 
+    #         name: "MySecret3", 
+    #         secret_string: "{\"username\":\"jie_liu\",\"password\":\"EXAMPLE-PASSWORD\"", 
+    #         version_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLEccccc", 
+    #         version_stages: [
+    #           "AWSCURRENT", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_secret_value({
@@ -1214,7 +1265,9 @@ module Aws::SecretsManager
 
     # Generates a random password. We recommend that you specify the maximum
     # length and include every character type that the system you are
-    # generating a password for can support.
+    # generating a password for can support. By default, Secrets Manager
+    # uses uppercase and lowercase letters, numbers, and the following
+    # characters in passwords: `` !"#$%&'()*+,-./:;<=>?@[\\]^_`\{|\}~ ``
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
@@ -2135,9 +2188,13 @@ module Aws::SecretsManager
     # Manager events with CloudTrail][2].
     #
     # <b>Required permissions: </b>
-    # `secretsmanager:ReplicateSecretToRegions`. For more information, see [
-    # IAM policy actions for Secrets Manager][3] and [Authentication and
-    # access control in Secrets Manager][4].
+    # `secretsmanager:ReplicateSecretToRegions`. If the primary secret is
+    # encrypted with a KMS key other than `aws/secretsmanager`, you also
+    # need `kms:Decrypt` permission to the key. To encrypt the replicated
+    # secret with a KMS key other than `aws/secretsmanager`, you need
+    # `kms:GenerateDataKey` and `kms:Encrypt` to the key. For more
+    # information, see [ IAM policy actions for Secrets Manager][3] and
+    # [Authentication and access control in Secrets Manager][4].
     #
     #
     #
@@ -3188,7 +3245,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

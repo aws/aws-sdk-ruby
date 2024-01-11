@@ -180,6 +180,55 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # @!attribute [rw] entity_request_list
+    #   List of entity IDs and the catalogs the entities are present in.
+    #   @return [Array<Types::EntityRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/BatchDescribeEntitiesRequest AWS API Documentation
+    #
+    class BatchDescribeEntitiesRequest < Struct.new(
+      :entity_request_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity_details
+    #   Details about each entity.
+    #   @return [Hash<String,Types::EntityDetail>]
+    #
+    # @!attribute [rw] errors
+    #   A map of errors returned, with `EntityId` as the key and
+    #   `errorDetail` as the value.
+    #   @return [Hash<String,Types::BatchDescribeErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/BatchDescribeEntitiesResponse AWS API Documentation
+    #
+    class BatchDescribeEntitiesResponse < Struct.new(
+      :entity_details,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains an error code and error message.
+    #
+    # @!attribute [rw] error_code
+    #   The error code returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/BatchDescribeErrorDetail AWS API Documentation
+    #
+    class BatchDescribeErrorDetail < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog
     #   Required. The catalog related to the request. Fixed value:
     #   `AWSMarketplace`.
@@ -221,7 +270,7 @@ module Aws::MarketplaceCatalog
     # @!attribute [rw] change_type
     #   Change types are single string values that describe your intention
     #   for the change. Each change type is unique for each `EntityType`
-    #   provided in the change's scope. For more information on change
+    #   provided in the change's scope. For more information about change
     #   types available for single-AMI products, see [Working with
     #   single-AMI products][1]. Also, for more information about change
     #   types available for container-based products, see [Working with
@@ -865,6 +914,62 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # An object that contains metadata and details about the entity.
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type of the entity, in the format of
+    #   `EntityType@Version`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_arn
+    #   The Amazon Resource Name (ARN) of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the entity, in the format of `EntityId@RevisionId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The last time the entity was modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] details_document
+    #   An object that contains all the details of the entity.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityDetail AWS API Documentation
+    #
+    class EntityDetail < Struct.new(
+      :entity_type,
+      :entity_arn,
+      :entity_identifier,
+      :last_modified_date,
+      :details_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains entity ID and the catalog in which the entity
+    # is present.
+    #
+    # @!attribute [rw] catalog
+    #   The name of the catalog the entity is present in. The only value at
+    #   this time is `AWSMarketplace`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The ID of the entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityRequest AWS API Documentation
+    #
+    class EntityRequest < Struct.new(
+      :catalog,
+      :entity_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This object is a container for common summary information about the
     # entity. The summary doesn't contain the whole entity structure, but
     # it does contain information common across all entities.
@@ -1210,8 +1315,8 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     #
     # @!attribute [rw] entity_type
-    #   The type of entities to retrieve. Valid values are: `ServerProduct`,
-    #   `AmiProduct`, `ContainerProduct`, `DataProduct`, `SaaSProduct`,
+    #   The type of entities to retrieve. Valid values are: `AmiProduct`,
+    #   `ContainerProduct`, `DataProduct`, `SaaSProduct`,
     #   `ProcurementPolicy`, `Experience`, `Audience`, `BrandingSettings`,
     #   `Offer`, `Seller`, `ResaleAuthorization`.
     #   @return [String]

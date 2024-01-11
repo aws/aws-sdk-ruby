@@ -956,7 +956,7 @@ module Aws::LakeFormation
     #
     # @option params [Types::ExternalFilteringConfiguration] :external_filtering
     #   A list of the account IDs of Amazon Web Services accounts of
-    #   third-party applications that are allowed to to access data managed by
+    #   third-party applications that are allowed to access data managed by
     #   Lake Formation.
     #
     # @return [Types::CreateLakeFormationIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2033,12 +2033,22 @@ module Aws::LakeFormation
     #   A list of supported permission types for the table. Valid values are
     #   `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
     #
+    # @option params [String] :s3_path
+    #   The Amazon S3 path for the table.
+    #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetTemporaryGlueTableCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#access_key_id #access_key_id} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#secret_access_key #secret_access_key} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#session_token #session_token} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#expiration #expiration} => Time
+    #   * {Types::GetTemporaryGlueTableCredentialsResponse#vended_s3_path #vended_s3_path} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2050,6 +2060,16 @@ module Aws::LakeFormation
     #       additional_audit_context: "AuditContextString",
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     s3_path: "PathString",
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2058,6 +2078,8 @@ module Aws::LakeFormation
     #   resp.secret_access_key #=> String
     #   resp.session_token #=> String
     #   resp.expiration #=> Time
+    #   resp.vended_s3_path #=> Array
+    #   resp.vended_s3_path[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentials AWS API Documentation
     #
@@ -3686,7 +3708,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

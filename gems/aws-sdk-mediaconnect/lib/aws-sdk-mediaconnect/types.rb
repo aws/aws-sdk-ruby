@@ -1244,6 +1244,49 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadataRequest AWS API Documentation
+    #
+    class DescribeFlowSourceMetadataRequest < Struct.new(
+      :flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful DescribeFlowSourceMetadata request.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that DescribeFlowSourceMetadata was performed
+    #   on.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   Provides a status code and message regarding issues found with the
+    #   flow source metadata.
+    #   @return [Array<Types::MessageDetail>]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the most recent change in metadata for this flow’s
+    #   source.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transport_media_info
+    #   The metadata of the transport stream in the current flow's source.
+    #   @return [Types::TransportMediaInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadataResponse AWS API Documentation
+    #
+    class DescribeFlowSourceMetadataResponse < Struct.new(
+      :flow_arn,
+      :messages,
+      :timestamp,
+      :transport_media_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_instance_arn
     #   @return [String]
     #
@@ -1831,6 +1874,25 @@ module Aws::MediaConnect
     #
     class ForbiddenException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The frame resolution used by the video stream.
+    #
+    # @!attribute [rw] frame_height
+    #   The number of pixels in the height of the video frame.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] frame_width
+    #   The number of pixels in the width of the video frame.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FrameResolution AWS API Documentation
+    #
+    class FrameResolution < Struct.new(
+      :frame_height,
+      :frame_width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4030,6 +4092,107 @@ module Aws::MediaConnect
       :source_listener_address,
       :source_listener_port,
       :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the transport stream in the current flow's source.
+    #
+    # @!attribute [rw] programs
+    #   The list of transport stream programs in the current flow's source.
+    #   @return [Array<Types::TransportStreamProgram>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TransportMediaInfo AWS API Documentation
+    #
+    class TransportMediaInfo < Struct.new(
+      :programs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of an elementary transport stream.
+    #
+    # @!attribute [rw] channels
+    #   The number of channels in the audio stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] codec
+    #   The codec used by the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] frame_rate
+    #   The frame rate used by the video stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] frame_resolution
+    #   The frame resolution used by the video stream.
+    #   @return [Types::FrameResolution]
+    #
+    # @!attribute [rw] pid
+    #   The Packet ID (PID) as it is reported in the Program Map Table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   The sample rate used by the audio stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_size
+    #   The sample bit size used by the audio stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_type
+    #   The Stream Type as it is reported in the Program Map Table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TransportStream AWS API Documentation
+    #
+    class TransportStream < Struct.new(
+      :channels,
+      :codec,
+      :frame_rate,
+      :frame_resolution,
+      :pid,
+      :sample_rate,
+      :sample_size,
+      :stream_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of a single transport stream program.
+    #
+    # @!attribute [rw] pcr_pid
+    #   The Program Clock Reference (PCR) Packet ID (PID) as it is reported
+    #   in the Program Association Table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_name
+    #   The program name as it is reported in the Program Association Table.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_number
+    #   The program number as it is reported in the Program Association
+    #   Table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_pid
+    #   The program Packet ID (PID) as it is reported in the Program
+    #   Association Table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] streams
+    #   The list of elementary transport streams in the program. The list
+    #   includes video, audio, and data streams.
+    #   @return [Array<Types::TransportStream>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TransportStreamProgram AWS API Documentation
+    #
+    class TransportStreamProgram < Struct.new(
+      :pcr_pid,
+      :program_name,
+      :program_number,
+      :program_pid,
+      :streams)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2023-12-20)
+------------------
+
+* Feature - Add support for cluster insights, new EKS capability that surfaces potentially upgrade impacting issues.
+
+1.96.0 (2023-12-18)
+------------------
+
+* Feature - Add support for EKS Cluster Access Management.
+
 1.95.0 (2023-11-28)
 ------------------
 

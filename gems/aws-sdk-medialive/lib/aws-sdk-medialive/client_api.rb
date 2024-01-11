@@ -371,6 +371,8 @@ module Aws::MediaLive
     InputDevice = Shapes::StructureShape.new(name: 'InputDevice')
     InputDeviceActiveInput = Shapes::StringShape.new(name: 'InputDeviceActiveInput')
     InputDeviceCodec = Shapes::StringShape.new(name: 'InputDeviceCodec')
+    InputDeviceConfigurableAudioChannelPairConfig = Shapes::StructureShape.new(name: 'InputDeviceConfigurableAudioChannelPairConfig')
+    InputDeviceConfigurableAudioChannelPairProfile = Shapes::StringShape.new(name: 'InputDeviceConfigurableAudioChannelPairProfile')
     InputDeviceConfigurableSettings = Shapes::StructureShape.new(name: 'InputDeviceConfigurableSettings')
     InputDeviceConfigurationValidationError = Shapes::StructureShape.new(name: 'InputDeviceConfigurationValidationError')
     InputDeviceConfiguredInput = Shapes::StringShape.new(name: 'InputDeviceConfiguredInput')
@@ -389,6 +391,8 @@ module Aws::MediaLive
     InputDeviceThumbnail = Shapes::BlobShape.new(name: 'InputDeviceThumbnail', streaming: true)
     InputDeviceTransferType = Shapes::StringShape.new(name: 'InputDeviceTransferType')
     InputDeviceType = Shapes::StringShape.new(name: 'InputDeviceType')
+    InputDeviceUhdAudioChannelPairConfig = Shapes::StructureShape.new(name: 'InputDeviceUhdAudioChannelPairConfig')
+    InputDeviceUhdAudioChannelPairProfile = Shapes::StringShape.new(name: 'InputDeviceUhdAudioChannelPairProfile')
     InputDeviceUhdSettings = Shapes::StructureShape.new(name: 'InputDeviceUhdSettings')
     InputFilter = Shapes::StringShape.new(name: 'InputFilter')
     InputLocation = Shapes::StructureShape.new(name: 'InputLocation')
@@ -825,9 +829,11 @@ module Aws::MediaLive
     __listOfInputChannelLevel = Shapes::ListShape.new(name: '__listOfInputChannelLevel')
     __listOfInputDestination = Shapes::ListShape.new(name: '__listOfInputDestination')
     __listOfInputDestinationRequest = Shapes::ListShape.new(name: '__listOfInputDestinationRequest')
+    __listOfInputDeviceConfigurableAudioChannelPairConfig = Shapes::ListShape.new(name: '__listOfInputDeviceConfigurableAudioChannelPairConfig')
     __listOfInputDeviceRequest = Shapes::ListShape.new(name: '__listOfInputDeviceRequest')
     __listOfInputDeviceSettings = Shapes::ListShape.new(name: '__listOfInputDeviceSettings')
     __listOfInputDeviceSummary = Shapes::ListShape.new(name: '__listOfInputDeviceSummary')
+    __listOfInputDeviceUhdAudioChannelPairConfig = Shapes::ListShape.new(name: '__listOfInputDeviceUhdAudioChannelPairConfig')
     __listOfInputSecurityGroup = Shapes::ListShape.new(name: '__listOfInputSecurityGroup')
     __listOfInputSource = Shapes::ListShape.new(name: '__listOfInputSource')
     __listOfInputSourceRequest = Shapes::ListShape.new(name: '__listOfInputSourceRequest')
@@ -2142,11 +2148,16 @@ module Aws::MediaLive
     InputDevice.add_member(:output_type, Shapes::ShapeRef.new(shape: InputDeviceOutputType, location_name: "outputType"))
     InputDevice.struct_class = Types::InputDevice
 
+    InputDeviceConfigurableAudioChannelPairConfig.add_member(:id, Shapes::ShapeRef.new(shape: __integer, location_name: "id"))
+    InputDeviceConfigurableAudioChannelPairConfig.add_member(:profile, Shapes::ShapeRef.new(shape: InputDeviceConfigurableAudioChannelPairProfile, location_name: "profile"))
+    InputDeviceConfigurableAudioChannelPairConfig.struct_class = Types::InputDeviceConfigurableAudioChannelPairConfig
+
     InputDeviceConfigurableSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
     InputDeviceConfigurableSettings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
     InputDeviceConfigurableSettings.add_member(:latency_ms, Shapes::ShapeRef.new(shape: __integer, location_name: "latencyMs"))
     InputDeviceConfigurableSettings.add_member(:codec, Shapes::ShapeRef.new(shape: InputDeviceCodec, location_name: "codec"))
     InputDeviceConfigurableSettings.add_member(:mediaconnect_settings, Shapes::ShapeRef.new(shape: InputDeviceMediaConnectConfigurableSettings, location_name: "mediaconnectSettings"))
+    InputDeviceConfigurableSettings.add_member(:audio_channel_pairs, Shapes::ShapeRef.new(shape: __listOfInputDeviceConfigurableAudioChannelPairConfig, location_name: "audioChannelPairs"))
     InputDeviceConfigurableSettings.struct_class = Types::InputDeviceConfigurableSettings
 
     InputDeviceConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -2207,6 +2218,10 @@ module Aws::MediaLive
     InputDeviceSummary.add_member(:output_type, Shapes::ShapeRef.new(shape: InputDeviceOutputType, location_name: "outputType"))
     InputDeviceSummary.struct_class = Types::InputDeviceSummary
 
+    InputDeviceUhdAudioChannelPairConfig.add_member(:id, Shapes::ShapeRef.new(shape: __integer, location_name: "id"))
+    InputDeviceUhdAudioChannelPairConfig.add_member(:profile, Shapes::ShapeRef.new(shape: InputDeviceUhdAudioChannelPairProfile, location_name: "profile"))
+    InputDeviceUhdAudioChannelPairConfig.struct_class = Types::InputDeviceUhdAudioChannelPairConfig
+
     InputDeviceUhdSettings.add_member(:active_input, Shapes::ShapeRef.new(shape: InputDeviceActiveInput, location_name: "activeInput"))
     InputDeviceUhdSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
     InputDeviceUhdSettings.add_member(:device_state, Shapes::ShapeRef.new(shape: InputDeviceState, location_name: "deviceState"))
@@ -2218,6 +2233,7 @@ module Aws::MediaLive
     InputDeviceUhdSettings.add_member(:latency_ms, Shapes::ShapeRef.new(shape: __integer, location_name: "latencyMs"))
     InputDeviceUhdSettings.add_member(:codec, Shapes::ShapeRef.new(shape: InputDeviceCodec, location_name: "codec"))
     InputDeviceUhdSettings.add_member(:mediaconnect_settings, Shapes::ShapeRef.new(shape: InputDeviceMediaConnectSettings, location_name: "mediaconnectSettings"))
+    InputDeviceUhdSettings.add_member(:audio_channel_pairs, Shapes::ShapeRef.new(shape: __listOfInputDeviceUhdAudioChannelPairConfig, location_name: "audioChannelPairs"))
     InputDeviceUhdSettings.struct_class = Types::InputDeviceUhdSettings
 
     InputLocation.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
@@ -3510,11 +3526,15 @@ module Aws::MediaLive
 
     __listOfInputDestinationRequest.member = Shapes::ShapeRef.new(shape: InputDestinationRequest)
 
+    __listOfInputDeviceConfigurableAudioChannelPairConfig.member = Shapes::ShapeRef.new(shape: InputDeviceConfigurableAudioChannelPairConfig)
+
     __listOfInputDeviceRequest.member = Shapes::ShapeRef.new(shape: InputDeviceRequest)
 
     __listOfInputDeviceSettings.member = Shapes::ShapeRef.new(shape: InputDeviceSettings)
 
     __listOfInputDeviceSummary.member = Shapes::ShapeRef.new(shape: InputDeviceSummary)
+
+    __listOfInputDeviceUhdAudioChannelPairConfig.member = Shapes::ShapeRef.new(shape: InputDeviceUhdAudioChannelPairConfig)
 
     __listOfInputSecurityGroup.member = Shapes::ShapeRef.new(shape: InputSecurityGroup)
 

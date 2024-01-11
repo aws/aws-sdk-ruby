@@ -968,22 +968,30 @@ module Aws::GuardDuty
     # organization delegated administrator account. A delegated
     # administrator must enable GuardDuty prior to being added as a member.
     #
+    # When you use CreateMembers as an Organizations delegated
+    # administrator, GuardDuty applies your organization's auto-enable
+    # settings to the member accounts in this request, irrespective of the
+    # accounts being new or existing members. For more information about the
+    # existing auto-enable settings for your organization, see
+    # [DescribeOrganizationConfiguration][1].
+    #
     # If you are adding accounts by invitation, before using
-    # [InviteMembers][1], use `CreateMembers` after GuardDuty has been
+    # [InviteMembers][2], use `CreateMembers` after GuardDuty has been
     # enabled in potential member accounts.
     #
     # If you disassociate a member from a GuardDuty delegated administrator,
     # the member account details obtained from this API, including the
     # associated email addresses, will be retained. This is done so that the
-    # delegated administrator can invoke the [InviteMembers][1] API without
+    # delegated administrator can invoke the [InviteMembers][2] API without
     # the need to invoke the CreateMembers API again. To remove the details
     # associated with a member account, the delegated administrator must
-    # invoke the [DeleteMembers][2] API.
+    # invoke the [DeleteMembers][3] API.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
-    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
+    # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -1852,8 +1860,8 @@ module Aws::GuardDuty
     # Retrieves aggregated statistics for your account. If you are a
     # GuardDuty administrator, you can retrieve the statistics for all the
     # resources associated with the active member accounts in your
-    # organization who have enabled EKS Runtime Monitoring and have the
-    # GuardDuty agent running on their EKS nodes.
+    # organization who have enabled Runtime Monitoring and have the
+    # GuardDuty security agent running on their resources.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the GuardDuty detector associated to the coverage
@@ -2823,6 +2831,40 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Retrieves how many active member accounts in your Amazon Web Services
+    # organization have each feature enabled within GuardDuty. Only a
+    # delegated GuardDuty administrator of an organization can run this API.
+    #
+    # When you create a new Amazon Web Services organization, it might take
+    # up to 24 hours to generate the statistics for the entire organization.
+    #
+    # @return [Types::GetOrganizationStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOrganizationStatisticsResponse#organization_details #organization_details} => Types::OrganizationDetails
+    #
+    # @example Response structure
+    #
+    #   resp.organization_details.updated_at #=> Time
+    #   resp.organization_details.organization_statistics.total_accounts_count #=> Integer
+    #   resp.organization_details.organization_statistics.member_accounts_count #=> Integer
+    #   resp.organization_details.organization_statistics.active_accounts_count #=> Integer
+    #   resp.organization_details.organization_statistics.enabled_accounts_count #=> Integer
+    #   resp.organization_details.organization_statistics.count_by_feature #=> Array
+    #   resp.organization_details.organization_statistics.count_by_feature[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING"
+    #   resp.organization_details.organization_statistics.count_by_feature[0].enabled_accounts_count #=> Integer
+    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration #=> Array
+    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].enabled_accounts_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatistics AWS API Documentation
+    #
+    # @overload get_organization_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_organization_statistics(params = {}, options = {})
+      req = build_request(:get_organization_statistics, params)
+      req.send_request(options)
+    end
+
     # Provides the number of days left for each data source used in the free
     # trial period.
     #
@@ -2959,7 +3001,7 @@ module Aws::GuardDuty
     #
     #   resp = client.get_usage_statistics({
     #     detector_id: "DetectorId", # required
-    #     usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES, SUM_BY_FEATURES
+    #     usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES, SUM_BY_FEATURES, TOP_ACCOUNTS_BY_FEATURE
     #     usage_criteria: { # required
     #       account_ids: ["AccountId"],
     #       data_sources: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
@@ -2977,6 +3019,12 @@ module Aws::GuardDuty
     #   resp.usage_statistics.sum_by_account[0].account_id #=> String
     #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
+    #   resp.usage_statistics.top_accounts_by_feature #=> Array
+    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING"
+    #   resp.usage_statistics.top_accounts_by_feature[0].accounts #=> Array
+    #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].account_id #=> String
+    #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].total.amount #=> String
+    #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_data_source #=> Array
     #   resp.usage_statistics.sum_by_data_source[0].data_source #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_LOGS", "KUBERNETES_AUDIT_LOGS", "EC2_MALWARE_SCAN"
     #   resp.usage_statistics.sum_by_data_source[0].total.amount #=> String
@@ -3085,8 +3133,8 @@ module Aws::GuardDuty
     # GuardDuty administrator, you can retrieve all resources associated
     # with the active member accounts in your organization.
     #
-    # Make sure the accounts have EKS Runtime Monitoring enabled and
-    # GuardDuty agent running on their EKS nodes.
+    # Make sure the accounts have Runtime Monitoring enabled and GuardDuty
+    # agent running on their resources.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector whose coverage details you want to
@@ -4548,7 +4596,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

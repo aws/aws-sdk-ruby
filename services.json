@@ -803,6 +803,9 @@
       "Aws::Neptune::Plugins::CrossRegionCopying"
     ]
   },
+  "NeptuneGraph": {
+    "models": "neptune-graph/2023-11-29"
+  },
   "Neptunedata": {
     "models": "neptunedata/2023-08-01"
   },
@@ -811,6 +814,9 @@
   },
   "NetworkManager": {
     "models": "networkmanager/2019-07-05"
+  },
+  "NetworkMonitor": {
+    "models": "networkmonitor/2023-08-01"
   },
   "NimbleStudio": {
     "models": "nimble/2020-08-01"

@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.879.0 (2024-01-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.878.0 (2024-01-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.877.0 (2024-01-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.876.0 (2023-12-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.875.0 (2023-12-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.874.0 (2023-12-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.873.0 (2023-12-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NetworkMonitor`.
+
+1.872.0 (2023-12-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.871.0 (2023-12-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.870.0 (2023-12-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.869.0 (2023-12-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.868.0 (2023-12-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.867.0 (2023-12-14)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NeptuneGraph`.
+
 1.866.0 (2023-12-13)
 ------------------
 

@@ -97,6 +97,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::CreateBillingGroup.build(context)
           when :create_certificate_from_csr
             Aws::IoT::Endpoints::CreateCertificateFromCsr.build(context)
+          when :create_certificate_provider
+            Aws::IoT::Endpoints::CreateCertificateProvider.build(context)
           when :create_custom_metric
             Aws::IoT::Endpoints::CreateCustomMetric.build(context)
           when :create_dimension
@@ -161,6 +163,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::DeleteCACertificate.build(context)
           when :delete_certificate
             Aws::IoT::Endpoints::DeleteCertificate.build(context)
+          when :delete_certificate_provider
+            Aws::IoT::Endpoints::DeleteCertificateProvider.build(context)
           when :delete_custom_metric
             Aws::IoT::Endpoints::DeleteCustomMetric.build(context)
           when :delete_dimension
@@ -235,6 +239,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::DescribeCACertificate.build(context)
           when :describe_certificate
             Aws::IoT::Endpoints::DescribeCertificate.build(context)
+          when :describe_certificate_provider
+            Aws::IoT::Endpoints::DescribeCertificateProvider.build(context)
           when :describe_custom_metric
             Aws::IoT::Endpoints::DescribeCustomMetric.build(context)
           when :describe_default_authorizer
@@ -353,6 +359,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::ListBillingGroups.build(context)
           when :list_ca_certificates
             Aws::IoT::Endpoints::ListCACertificates.build(context)
+          when :list_certificate_providers
+            Aws::IoT::Endpoints::ListCertificateProviders.build(context)
           when :list_certificates
             Aws::IoT::Endpoints::ListCertificates.build(context)
           when :list_certificates_by_ca
@@ -513,6 +521,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::UpdateCACertificate.build(context)
           when :update_certificate
             Aws::IoT::Endpoints::UpdateCertificate.build(context)
+          when :update_certificate_provider
+            Aws::IoT::Endpoints::UpdateCertificateProvider.build(context)
           when :update_custom_metric
             Aws::IoT::Endpoints::UpdateCustomMetric.build(context)
           when :update_dimension

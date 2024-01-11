@@ -1199,7 +1199,7 @@ module Aws::KinesisVideoArchivedMedia
       req.send_request(options)
     end
 
-    # Retrieves a list of Images corresponding to each timestamp for a given
+    # Retrieves a list of images corresponding to each timestamp for a given
     # time range, sampling interval, and image format configuration.
     #
     # @option params [String] :stream_name
@@ -1228,14 +1228,10 @@ module Aws::KinesisVideoArchivedMedia
     #
     # @option params [Integer] :sampling_interval
     #   The time interval in milliseconds (ms) at which the images need to be
-    #   generated from the stream, with a default of 3000 ms. The minimum
-    #   value that can be provided is 200 ms. If the timestamp range is less
-    #   than the sampling interval, the Image from the `startTimestamp` will
-    #   be returned if available.
-    #
-    #   <note markdown="1"> The minimum value of 200 ms is a hard limit.
-    #
-    #    </note>
+    #   generated from the stream. The minimum value that can be provided is
+    #   200 ms (5 images per second). If the timestamp range is less than the
+    #   sampling interval, the image from the `startTimestamp` will be
+    #   returned if available.
     #
     # @option params [required, String] :format
     #   The format that will be used to encode the image.
@@ -1468,6 +1464,10 @@ module Aws::KinesisVideoArchivedMedia
     #   Describes the timestamp range and timestamp origin for the range of
     #   fragments to return.
     #
+    #   <note markdown="1"> This is only required when the `NextToken` isn't passed in the API.
+    #
+    #    </note>
+    #
     # @return [Types::ListFragmentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListFragmentsOutput#fragments #fragments} => Array&lt;Types::Fragment&gt;
@@ -1523,7 +1523,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

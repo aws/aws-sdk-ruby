@@ -63,6 +63,8 @@ module Aws::AppIntegrationsService
             Aws::AppIntegrationsService::Endpoints::CreateDataIntegration.build(context)
           when :create_event_integration
             Aws::AppIntegrationsService::Endpoints::CreateEventIntegration.build(context)
+          when :delete_application
+            Aws::AppIntegrationsService::Endpoints::DeleteApplication.build(context)
           when :delete_data_integration
             Aws::AppIntegrationsService::Endpoints::DeleteDataIntegration.build(context)
           when :delete_event_integration
@@ -73,6 +75,8 @@ module Aws::AppIntegrationsService
             Aws::AppIntegrationsService::Endpoints::GetDataIntegration.build(context)
           when :get_event_integration
             Aws::AppIntegrationsService::Endpoints::GetEventIntegration.build(context)
+          when :list_application_associations
+            Aws::AppIntegrationsService::Endpoints::ListApplicationAssociations.build(context)
           when :list_applications
             Aws::AppIntegrationsService::Endpoints::ListApplications.build(context)
           when :list_data_integration_associations

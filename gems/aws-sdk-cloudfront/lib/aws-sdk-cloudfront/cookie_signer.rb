@@ -38,7 +38,7 @@ module Aws
 
         cookie_parameters = {}
         signature(content).each { |k, v|
-          cookie_parameters["CloudFront-#{k}"] = v.to_s.gsub("\n", '')
+          cookie_parameters["CloudFront-#{k}"] = v.to_s.delete("\n")
         }
         cookie_parameters
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2023-12-21)
+------------------
+
+* Feature - This release updates Amazon Managed Service for Prometheus APIs to support customer managed KMS keys.
+
 1.27.0 (2023-11-28)
 ------------------
 

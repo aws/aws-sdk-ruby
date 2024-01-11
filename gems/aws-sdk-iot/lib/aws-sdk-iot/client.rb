@@ -1311,6 +1311,82 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates an Amazon Web Services IoT Core certificate provider. You can
+    # use Amazon Web Services IoT Core certificate provider to customize how
+    # to sign a certificate signing request (CSR) in IoT fleet provisioning.
+    # For more information, see [Customizing certificate signing using
+    # Amazon Web Services IoT Core certificate provider][1] from *Amazon Web
+    # Services IoT Core Developer Guide*.
+    #
+    # Requires permission to access the [CreateCertificateProvider][2]
+    # action.
+    #
+    # After you create a certificate provider, the behavior of [
+    # `CreateCertificateFromCsr` API for fleet provisioning][3] will change
+    # and all API calls to `CreateCertificateFromCsr` will invoke the
+    # certificate provider to create the certificates. It can take up to a
+    # few minutes for this behavior to change after a certificate provider
+    # is created.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provisioning-cert-provider.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/iot/latest/developerguide/fleet-provision-api.html#create-cert-csr
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @option params [required, String] :lambda_function_arn
+    #   The ARN of the Lambda function that defines the authentication logic.
+    #
+    # @option params [required, Array<String>] :account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #
+    # @option params [String] :client_token
+    #   A string that you can optionally pass in the
+    #   `CreateCertificateProvider` request to make sure the request is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the certificate provider.
+    #
+    # @return [Types::CreateCertificateProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCertificateProviderResponse#certificate_provider_name #certificate_provider_name} => String
+    #   * {Types::CreateCertificateProviderResponse#certificate_provider_arn #certificate_provider_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #     lambda_function_arn: "CertificateProviderFunctionArn", # required
+    #     account_default_for_operations: ["CreateCertificateFromCsr"], # required, accepts CreateCertificateFromCsr
+    #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_provider_name #=> String
+    #   resp.certificate_provider_arn #=> String
+    #
+    # @overload create_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def create_certificate_provider(params = {}, options = {})
+      req = build_request(:create_certificate_provider, params)
+      req.send_request(options)
+    end
+
     # Use this API to define a Custom Metric published by your devices to
     # Device Defender.
     #
@@ -1826,10 +1902,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1984,10 +2066,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4074,6 +4162,37 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes a certificate provider.
+    #
+    # Requires permission to access the [DeleteCertificateProvider][1]
+    # action.
+    #
+    # If you delete the certificate provider resource, the behavior of
+    # `CreateCertificateFromCsr` will resume, and IoT will create
+    # certificates signed by IoT from a certificate signing request (CSR).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #   })
+    #
+    # @overload delete_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def delete_certificate_provider(params = {}, options = {})
+      req = build_request(:delete_certificate_provider, params)
+      req.send_request(options)
+    end
+
     # Deletes a Device Defender detect custom metric.
     #
     # Requires permission to access the [DeleteCustomMetric][1] action.
@@ -5478,6 +5597,50 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_certificate(params = {}, options = {})
       req = build_request(:describe_certificate, params)
+      req.send_request(options)
+    end
+
+    # Describes a certificate provider.
+    #
+    # Requires permission to access the [DescribeCertificateProvider][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @return [Types::DescribeCertificateProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCertificateProviderResponse#certificate_provider_name #certificate_provider_name} => String
+    #   * {Types::DescribeCertificateProviderResponse#certificate_provider_arn #certificate_provider_arn} => String
+    #   * {Types::DescribeCertificateProviderResponse#lambda_function_arn #lambda_function_arn} => String
+    #   * {Types::DescribeCertificateProviderResponse#account_default_for_operations #account_default_for_operations} => Array&lt;String&gt;
+    #   * {Types::DescribeCertificateProviderResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeCertificateProviderResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_provider_name #=> String
+    #   resp.certificate_provider_arn #=> String
+    #   resp.lambda_function_arn #=> String
+    #   resp.account_default_for_operations #=> Array
+    #   resp.account_default_for_operations[0] #=> String, one of "CreateCertificateFromCsr"
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def describe_certificate_provider(params = {}, options = {})
+      req = build_request(:describe_certificate_provider, params)
       req.send_request(options)
     end
 
@@ -8742,6 +8905,50 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_ca_certificates(params = {}, options = {})
       req = build_request(:list_ca_certificates, params)
+      req.send_request(options)
+    end
+
+    # Lists all your certificate providers in your Amazon Web Services
+    # account.
+    #
+    # Requires permission to access the [ListCertificateProviders][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` if there are no more
+    #   results.
+    #
+    # @option params [Boolean] :ascending_order
+    #   Returns the list of certificate providers in ascending alphabetical
+    #   order.
+    #
+    # @return [Types::ListCertificateProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCertificateProvidersResponse#certificate_providers #certificate_providers} => Array&lt;Types::CertificateProviderSummary&gt;
+    #   * {Types::ListCertificateProvidersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_certificate_providers({
+    #     next_token: "Marker",
+    #     ascending_order: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_providers #=> Array
+    #   resp.certificate_providers[0].certificate_provider_name #=> String
+    #   resp.certificate_providers[0].certificate_provider_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_certificate_providers(params = {})
+    # @param [Hash] params ({})
+    def list_certificate_providers(params = {}, options = {})
+      req = build_request(:list_certificate_providers, params)
       req.send_request(options)
     end
 
@@ -13383,6 +13590,51 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates a certificate provider.
+    #
+    # Requires permission to access the [UpdateCertificateProvider][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @option params [String] :lambda_function_arn
+    #   The Lambda function ARN that's associated with the certificate
+    #   provider.
+    #
+    # @option params [Array<String>] :account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #
+    # @return [Types::UpdateCertificateProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCertificateProviderResponse#certificate_provider_name #certificate_provider_name} => String
+    #   * {Types::UpdateCertificateProviderResponse#certificate_provider_arn #certificate_provider_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #     lambda_function_arn: "CertificateProviderFunctionArn",
+    #     account_default_for_operations: ["CreateCertificateFromCsr"], # accepts CreateCertificateFromCsr
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_provider_name #=> String
+    #   resp.certificate_provider_arn #=> String
+    #
+    # @overload update_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def update_certificate_provider(params = {}, options = {})
+      req = build_request(:update_certificate_provider, params)
+      req.send_request(options)
+    end
+
     # Updates a Device Defender detect custom metric.
     #
     # Requires permission to access the [UpdateCustomMetric][1] action.
@@ -14823,7 +15075,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

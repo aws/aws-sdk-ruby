@@ -120,7 +120,7 @@ module Aws::LocationService
     #
     #   * Other than wildcards, you must include the full ARN, including the
     #     `arn`, `partition`, `service`, `region`, `account-id` and
-    #     `resource-id`, delimited by colons (:).
+    #     `resource-id` delimited by colons (:).
     #
     #   * No spaces allowed, even with wildcards. For example,
     #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
@@ -2126,6 +2126,21 @@ module Aws::LocationService
     #
     class DeleteGeofenceCollectionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] force_delete
+    #   ForceDelete bypasses an API key's expiry conditions and deletes the
+    #   key. Set the parameter `true` to delete the key or to `false` to not
+    #   preemptively delete the API key.
+    #
+    #   Valid values: `true`, or `false`.
+    #
+    #   Required: No
+    #
+    #   <note markdown="1"> This action is irreversible. Only use ForceDelete if you are certain
+    #   the key is no longer in use.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] key_name
     #   The name of the API key to delete.
     #   @return [String]
@@ -2133,6 +2148,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteKeyRequest AWS API Documentation
     #
     class DeleteKeyRequest < Struct.new(
+      :force_delete,
       :key_name)
       SENSITIVE = []
       include Aws::Structure
@@ -4566,6 +4582,18 @@ module Aws::LocationService
 
     # Specifies the map tile style selected from an available provider.
     #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as POI layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Not all map resources or styles support custom layers. See Custom
+    #   Layers for more information.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] political_view
     #   Specifies the political view for the style. Leave unset to not use a
     #   political view, or, for styles that support specific political
@@ -4704,6 +4732,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
     #
     class MapConfiguration < Struct.new(
+      :custom_layers,
       :political_view,
       :style)
       SENSITIVE = []
@@ -4711,6 +4740,18 @@ module Aws::LocationService
     end
 
     # Specifies the political view for the style.
+    #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as POI layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Not all map resources or styles support custom layers. See Custom
+    #   Layers for more information.
+    #
+    #    </note>
+    #   @return [Array<String>]
     #
     # @!attribute [rw] political_view
     #   Specifies the political view for the style. Set to an empty string
@@ -4731,6 +4772,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfigurationUpdate AWS API Documentation
     #
     class MapConfigurationUpdate < Struct.new(
+      :custom_layers,
       :political_view)
       SENSITIVE = []
       include Aws::Structure

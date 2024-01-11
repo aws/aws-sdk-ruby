@@ -51,6 +51,7 @@ module Aws::BedrockAgent
     ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
     ChunkingStrategy = Shapes::StringShape.new(name: 'ChunkingStrategy')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAgentActionGroupRequest = Shapes::StructureShape.new(name: 'CreateAgentActionGroupRequest')
     CreateAgentActionGroupResponse = Shapes::StructureShape.new(name: 'CreateAgentActionGroupResponse')
@@ -179,6 +180,11 @@ module Aws::BedrockAgent
     PromptOverrideConfiguration = Shapes::StructureShape.new(name: 'PromptOverrideConfiguration')
     PromptState = Shapes::StringShape.new(name: 'PromptState')
     PromptType = Shapes::StringShape.new(name: 'PromptType')
+    RdsArn = Shapes::StringShape.new(name: 'RdsArn')
+    RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
+    RdsDatabaseName = Shapes::StringShape.new(name: 'RdsDatabaseName')
+    RdsFieldMapping = Shapes::StructureShape.new(name: 'RdsFieldMapping')
+    RdsTableName = Shapes::StringShape.new(name: 'RdsTableName')
     RecommendedAction = Shapes::StringShape.new(name: 'RecommendedAction')
     RecommendedActions = Shapes::ListShape.new(name: 'RecommendedActions')
     RedisEnterpriseCloudConfiguration = Shapes::StructureShape.new(name: 'RedisEnterpriseCloudConfiguration')
@@ -817,6 +823,19 @@ module Aws::BedrockAgent
     PromptOverrideConfiguration.add_member(:override_lambda, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "overrideLambda"))
     PromptOverrideConfiguration.struct_class = Types::PromptOverrideConfiguration
 
+    RdsConfiguration.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RdsArn, required: true, location_name: "resourceArn"))
+    RdsConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
+    RdsConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: RdsDatabaseName, required: true, location_name: "databaseName"))
+    RdsConfiguration.add_member(:table_name, Shapes::ShapeRef.new(shape: RdsTableName, required: true, location_name: "tableName"))
+    RdsConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: RdsFieldMapping, required: true, location_name: "fieldMapping"))
+    RdsConfiguration.struct_class = Types::RdsConfiguration
+
+    RdsFieldMapping.add_member(:primary_key_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "primaryKeyField"))
+    RdsFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "vectorField"))
+    RdsFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "textField"))
+    RdsFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "metadataField"))
+    RdsFieldMapping.struct_class = Types::RdsFieldMapping
+
     RecommendedActions.member = Shapes::ShapeRef.new(shape: RecommendedAction)
 
     RedisEnterpriseCloudConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudEndpoint, required: true, location_name: "endpoint"))
@@ -864,6 +883,7 @@ module Aws::BedrockAgent
     StorageConfiguration.add_member(:opensearch_serverless_configuration, Shapes::ShapeRef.new(shape: OpenSearchServerlessConfiguration, location_name: "opensearchServerlessConfiguration"))
     StorageConfiguration.add_member(:pinecone_configuration, Shapes::ShapeRef.new(shape: PineconeConfiguration, location_name: "pineconeConfiguration"))
     StorageConfiguration.add_member(:redis_enterprise_cloud_configuration, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudConfiguration, location_name: "redisEnterpriseCloudConfiguration"))
+    StorageConfiguration.add_member(:rds_configuration, Shapes::ShapeRef.new(shape: RdsConfiguration, location_name: "rdsConfiguration"))
     StorageConfiguration.struct_class = Types::StorageConfiguration
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)

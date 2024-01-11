@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.228.0 (2024-01-04)
+------------------
+
+* Feature - Adding support for provisioned throughput mode for SageMaker Feature Groups
+
+1.227.0 (2023-12-28)
+------------------
+
+* Feature - Amazon SageMaker Studio now supports Docker access from within app container
+
+1.226.0 (2023-12-21)
+------------------
+
+* Feature - Amazon SageMaker Training now provides model training container access for debugging purposes. Amazon SageMaker Search now provides the ability to use visibility conditions to limit resource access to a single domain or multiple domains.
+
+1.225.0 (2023-12-15)
+------------------
+
+* Feature - This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API
+
 1.224.0 (2023-11-30)
 ------------------
 

@@ -6151,7 +6151,8 @@
       "members":{
         "Cidr":{"shape":"String"},
         "Asn":{"shape":"String"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "NetworkBorderGroup":{"shape":"String"}
       }
     },
     "AdvertiseByoipCidrResult":{
@@ -8235,6 +8236,10 @@
         "State":{
           "shape":"ByoipCidrState",
           "locationName":"state"
+        },
+        "NetworkBorderGroup":{
+          "shape":"String",
+          "locationName":"networkBorderGroup"
         }
       }
     },
@@ -20718,6 +20723,14 @@
         "VolumeId":{
           "shape":"String",
           "locationName":"volumeId"
+        },
+        "AssociatedResource":{
+          "shape":"String",
+          "locationName":"associatedResource"
+        },
+        "VolumeOwnerId":{
+          "shape":"String",
+          "locationName":"volumeOwnerId"
         }
       }
     },
@@ -28397,7 +28410,9 @@
         "m7i.metal-24xl",
         "m7i.metal-48xl",
         "r7i.metal-24xl",
-        "r7i.metal-48xl"
+        "r7i.metal-48xl",
+        "r7iz.metal-16xl",
+        "r7iz.metal-32xl"
       ]
     },
     "InstanceTypeHypervisor":{
@@ -36411,7 +36426,8 @@
           "shape":"TagSpecificationList",
           "locationName":"PoolTagSpecification"
         },
-        "MultiRegion":{"shape":"Boolean"}
+        "MultiRegion":{"shape":"Boolean"},
+        "NetworkBorderGroup":{"shape":"String"}
       }
     },
     "ProvisionByoipCidrResult":{
@@ -45607,6 +45623,14 @@
         "DeleteOnTermination":{
           "shape":"Boolean",
           "locationName":"deleteOnTermination"
+        },
+        "AssociatedResource":{
+          "shape":"String",
+          "locationName":"associatedResource"
+        },
+        "InstanceOwningService":{
+          "shape":"String",
+          "locationName":"instanceOwningService"
         }
       }
     },

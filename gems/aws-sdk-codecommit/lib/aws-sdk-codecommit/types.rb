@@ -649,6 +649,38 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Returns information about errors in a BatchGetRepositories operation.
+    #
+    # @!attribute [rw] repository_id
+    #   The ID of a repository that either could not be found or was not in
+    #   a valid state.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of a repository that either could not be found or was not
+    #   in a valid state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code that specifies the type of failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message that provides detail about why the repository
+    #   either was not found or was not in a valid state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositoriesError AWS API Documentation
+    #
+    class BatchGetRepositoriesError < Struct.new(
+      :repository_id,
+      :repository_name,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a batch get repositories operation.
     #
     # @!attribute [rw] repository_names
@@ -680,11 +712,17 @@ module Aws::CodeCommit
     #   be found.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] errors
+    #   Returns information about any errors returned when attempting to
+    #   retrieve information about the repositories.
+    #   @return [Array<Types::BatchGetRepositoriesError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositoriesOutput AWS API Documentation
     #
     class BatchGetRepositoriesOutput < Struct.new(
       :repositories,
-      :repositories_not_found)
+      :repositories_not_found,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1627,12 +1665,28 @@ module Aws::CodeCommit
     #   One or more tag key-value pairs to use when tagging this repository.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the encryption key. You can view the ID of an encryption
+    #   key in the KMS console, or use the KMS APIs to programmatically
+    #   retrieve a key ID. For more information about acceptable values for
+    #   kmsKeyID, see [KeyId][1] in the Decrypt API description in the *Key
+    #   Management Service API Reference*.
+    #
+    #   If no key is specified, the default `aws/codecommit` Amazon Web
+    #   Services managed key is used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryInput AWS API Documentation
     #
     class CreateRepositoryInput < Struct.new(
       :repository_name,
       :repository_description,
-      :tags)
+      :tags,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2246,11 +2300,31 @@ module Aws::CodeCommit
     #
     class EncryptionKeyDisabledException < Aws::EmptyStructure; end
 
+    # The Key Management Service encryption key is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyInvalidIdException AWS API Documentation
+    #
+    class EncryptionKeyInvalidIdException < Aws::EmptyStructure; end
+
+    # A KMS encryption key was used to try and encrypt or decrypt a
+    # repository, but either the repository or the key was not in a valid
+    # state to support the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyInvalidUsageException AWS API Documentation
+    #
+    class EncryptionKeyInvalidUsageException < Aws::EmptyStructure; end
+
     # No encryption key was found.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyNotFoundException AWS API Documentation
     #
     class EncryptionKeyNotFoundException < Aws::EmptyStructure; end
+
+    # A KMS encryption key ID is required but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyRequiredException AWS API Documentation
+    #
+    class EncryptionKeyRequiredException < Aws::EmptyStructure; end
 
     # The encryption key is not available.
     #
@@ -6193,6 +6267,11 @@ module Aws::CodeCommit
     #   The Amazon Resource Name (ARN) of the repository.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the Key Management Service encryption key used to encrypt
+    #   and decrypt the repository.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryMetadata AWS API Documentation
     #
     class RepositoryMetadata < Struct.new(
@@ -6205,7 +6284,8 @@ module Aws::CodeCommit
       :creation_date,
       :clone_url_http,
       :clone_url_ssh,
-      :arn)
+      :arn,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7049,6 +7129,55 @@ module Aws::CodeCommit
     class UpdateRepositoryDescriptionInput < Struct.new(
       :repository_name,
       :repository_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository_name
+    #   The name of the repository for which you want to update the KMS
+    #   encryption key used to encrypt and decrypt the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the encryption key. You can view the ID of an encryption
+    #   key in the KMS console, or use the KMS APIs to programmatically
+    #   retrieve a key ID. For more information about acceptable values for
+    #   keyID, see [KeyId][1] in the Decrypt API description in the *Key
+    #   Management Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryEncryptionKeyInput AWS API Documentation
+    #
+    class UpdateRepositoryEncryptionKeyInput < Struct.new(
+      :repository_name,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository_id
+    #   The ID of the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the encryption key.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_kms_key_id
+    #   The ID of the encryption key formerly used to encrypt and decrypt
+    #   the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryEncryptionKeyOutput AWS API Documentation
+    #
+    class UpdateRepositoryEncryptionKeyOutput < Struct.new(
+      :repository_id,
+      :kms_key_id,
+      :original_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

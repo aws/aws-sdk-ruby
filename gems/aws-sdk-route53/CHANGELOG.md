@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-01-10)
+------------------
+
+* Feature - Route53 now supports geoproximity routing in AWS regions
+
+1.84.0 (2023-12-20)
+------------------
+
+* Feature - Amazon Route 53 now supports the Canada West (Calgary) Region (ca-west-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 1.83.0 (2023-11-28)
 ------------------
 

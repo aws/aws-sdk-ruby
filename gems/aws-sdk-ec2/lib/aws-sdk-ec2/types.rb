@@ -809,12 +809,39 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidrRequest AWS API Documentation
     #
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr,
       :asn,
-      :dry_run)
+      :dry_run,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3814,6 +3841,32 @@ module Aws::EC2
     #   The state of the address pool.
     #   @return [String]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ByoipCidr AWS API Documentation
     #
     class ByoipCidr < Struct.new(
@@ -3821,7 +3874,8 @@ module Aws::EC2
       :description,
       :asn_associations,
       :status_message,
-      :state)
+      :state,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16690,11 +16744,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
@@ -16739,11 +16795,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -16808,11 +16866,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -30011,13 +30071,27 @@ module Aws::EC2
     #   The ID of the EBS volume.
     #   @return [String]
     #
+    # @!attribute [rw] associated_resource
+    #   The ARN of the Amazon ECS or Fargate task to which the volume is
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_owner_id
+    #   The ID of the Amazon Web Services account that owns the volume.
+    #
+    #   This parameter is returned only for volumes that are attached to
+    #   Fargate tasks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
     #
     class EbsInstanceBlockDevice < Struct.new(
       :attach_time,
       :delete_on_termination,
       :status,
-      :volume_id)
+      :volume_id,
+      :associated_resource,
+      :volume_owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31133,6 +31207,9 @@ module Aws::EC2
     #     snapshots in the Region. Users in the account will no longer be
     #     able to request new public sharing. However, snapshots that are
     #     already publicly shared, remain publicly available.
+    #
+    #   `unblocked` is not a valid value for
+    #   **EnableSnapshotBlockPublicAccess**.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -33713,13 +33790,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
-    #   Valid range: Minimum value of 1. Maximum value of 1000.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -34120,11 +34197,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -35332,8 +35411,6 @@ module Aws::EC2
     #
     # @!attribute [rw] target_capacity_unit_type
     #   The unit for the target capacity.
-    #
-    #   Default: `units` (translates to number of instances)
     #   @return [String]
     #
     # @!attribute [rw] single_availability_zone
@@ -39294,23 +39371,22 @@ module Aws::EC2
     # The metadata options for the instance.
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -39375,24 +39451,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP
-    #   tokens is `optional` (in other words, indicates whether the use of
-    #   IMDSv2 is `optional`) or `required` (in other words, indicates
-    #   whether the use of IMDSv2 is `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
-    #
-    #   Default: `optional`
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -39668,6 +39739,16 @@ module Aws::EC2
     #   network interface, not an existing one. You cannot specify more than
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -44053,21 +44134,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   Indicates whether IMDSv2 is `optional` or `required`.
+    #   Indicates whether IMDSv2 is required.
     #
-    #   `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #   instance metadata with or without a session token in your request.
-    #   If you retrieve the IAM role credentials without a token, the IMDSv1
-    #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid session token, the IMDSv2 role credentials
-    #   are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   `required` - When IMDSv2 is required, you must send a session token
-    #   with any instance metadata retrieval requests. In this state,
-    #   retrieving the IAM role credentials always returns IMDSv2
-    #   credentials; IMDSv1 credentials are not available.
-    #
-    #   Default: `optional`
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -44132,23 +44211,22 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -44222,6 +44300,16 @@ module Aws::EC2
     # @!attribute [rw] associate_public_ip_address
     #   Indicates whether to associate a public IPv4 address with eth0 for a
     #   new network interface.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -44372,6 +44460,16 @@ module Aws::EC2
     # @!attribute [rw] associate_public_ip_address
     #   Associates a public IPv4 address with eth0 for a new network
     #   interface.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -46970,7 +47068,9 @@ module Aws::EC2
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
     #   value is specified for `DeleteOnTermination`, the default is `true`
-    #   and the volume is deleted when the instance is terminated.
+    #   and the volume is deleted when the instance is terminated. You
+    #   can't modify the `DeleteOnTermination` attribute for volumes that
+    #   are attached to Fargate tasks.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information,
@@ -47370,23 +47470,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -53401,6 +53500,32 @@ module Aws::EC2
     #   Reserved.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrRequest AWS API Documentation
     #
     class ProvisionByoipCidrRequest < Struct.new(
@@ -53410,7 +53535,8 @@ module Aws::EC2
       :description,
       :dry_run,
       :pool_tag_specifications,
-      :multi_region)
+      :multi_region,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55568,31 +55694,7 @@ module Aws::EC2
     #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the resources that are created during instance
-    #   launch.
-    #
-    #   You can specify tags for the following resources only:
-    #
-    #   * Instances
-    #
-    #   * Volumes
-    #
-    #   * Elastic graphics
-    #
-    #   * Spot Instance requests
-    #
-    #   * Network interfaces
-    #
-    #   To tag a resource after it has been created, see [CreateTags][1].
-    #
-    #   <note markdown="1"> To tag the launch template itself, you must use the
-    #   [TagSpecification][2] parameter.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
+    #   launch. These tags are not applied to the launch template.
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
@@ -59087,6 +59189,16 @@ module Aws::EC2
     #   network interface, not an existing one. You cannot specify more than
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -61117,10 +61229,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
+    #   The unit for the target capacity. You can specify this parameter
+    #   only when using attribute-based instance type selection.
     #
-    #   Default: `units` (translates to number of instances)
+    #   Default: `units` (the number of instances)
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -62189,7 +62301,7 @@ module Aws::EC2
     #     because of an increase in the Spot price.
     #
     #   * `Client.InstanceInitiatedShutdown`: The instance was shut down
-    #     using the `shutdown -h` command from the instance.
+    #     from the operating system of the instance.
     #
     #   * `Client.InstanceTerminated`: The instance was terminated or
     #     rebooted during AMI creation.
@@ -62799,8 +62911,8 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions
     #
     # @!attribute [rw] total_target_capacity
-    #   The number of units to request, filled using
-    #   `DefaultTargetCapacityType`.
+    #   The number of units to request, filled the default target capacity
+    #   type.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -62816,15 +62928,11 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
-    #   The default `TotalTargetCapacity`, which is either `Spot` or
-    #   `On-Demand`.
+    #   The default target capacity type.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
-    #
-    #   Default: `units` (translates to number of instances)
+    #   The unit for the target capacity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification AWS API Documentation
@@ -62853,7 +62961,7 @@ module Aws::EC2
     # request, EC2 Fleet will launch instances until it reaches the maximum
     # amount that you're willing to pay. When the maximum amount you're
     # willing to pay is reached, the fleet stops launching instances even if
-    # it hasn’t met the target capacity. The `MaxTotalPrice` parameters are
+    # it hasn't met the target capacity. The `MaxTotalPrice` parameters are
     # located in [OnDemandOptionsRequest][1] and [SpotOptionsRequest][2].
     #
     #
@@ -62862,8 +62970,8 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest
     #
     # @!attribute [rw] total_target_capacity
-    #   The number of units to request, filled using
-    #   `DefaultTargetCapacityType`.
+    #   The number of units to request, filled using the default target
+    #   capacity type.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -62875,15 +62983,14 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
-    #   The default `TotalTargetCapacity`, which is either `Spot` or
-    #   `On-Demand`.
+    #   The default target capacity type.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
+    #   The unit for the target capacity. You can specify this parameter
+    #   only when using attributed-based instance type selection.
     #
-    #   Default: `units` (translates to number of instances)
+    #   Default: `units` (the number of instances)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest AWS API Documentation
@@ -66672,10 +66779,16 @@ module Aws::EC2
     #
     # @!attribute [rw] device
     #   The device name.
+    #
+    #   If the volume is attached to a Fargate task, this parameter returns
+    #   `null`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
+    #
+    #   If the volume is attached to a Fargate task, this parameter returns
+    #   `null`.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -66690,6 +66803,19 @@ module Aws::EC2
     #   Indicates whether the EBS volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @!attribute [rw] associated_resource
+    #   The ARN of the Amazon ECS or Fargate task to which the volume is
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_owning_service
+    #   The service principal of Amazon Web Services service that owns the
+    #   underlying instance to which the volume is attached.
+    #
+    #   This parameter is returned only for volumes that are attached to
+    #   Fargate tasks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment AWS API Documentation
     #
     class VolumeAttachment < Struct.new(
@@ -66698,7 +66824,9 @@ module Aws::EC2
       :instance_id,
       :state,
       :volume_id,
-      :delete_on_termination)
+      :delete_on_termination,
+      :associated_resource,
+      :instance_owning_service)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-12-19)
+------------------
+
+* Feature - This release adds additional configurations on GraphQL APIs for limits on query depth, resolver count, and introspection
+
 1.69.0 (2023-11-28)
 ------------------
 

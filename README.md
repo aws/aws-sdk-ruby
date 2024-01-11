@@ -519,6 +519,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon CloudWatch Evidently                           | Aws::CloudWatchEvidently                 | aws-sdk-cloudwatchevidently                 | 2021-02-01  |
 | Amazon CloudWatch Internet Monitor                    | Aws::InternetMonitor                     | aws-sdk-internetmonitor                     | 2021-06-03  |
 | Amazon CloudWatch Logs                                | Aws::CloudWatchLogs                      | aws-sdk-cloudwatchlogs                      | 2014-03-28  |
+| Amazon CloudWatch Network Monitor                     | Aws::NetworkMonitor                      | aws-sdk-networkmonitor                      | 2023-08-01  |
 | Amazon CodeCatalyst                                   | Aws::CodeCatalyst                        | aws-sdk-codecatalyst                        | 2022-09-28  |
 | Amazon CodeGuru Profiler                              | Aws::CodeGuruProfiler                    | aws-sdk-codeguruprofiler                    | 2019-07-18  |
 | Amazon CodeGuru Reviewer                              | Aws::CodeGuruReviewer                    | aws-sdk-codegurureviewer                    | 2019-09-19  |
@@ -601,6 +602,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Mechanical Turk                                | Aws::MTurk                               | aws-sdk-mturk                               | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                            | aws-sdk-memorydb                            | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                             | aws-sdk-neptune                             | 2014-10-31  |
+| Amazon Neptune Graph                                  | Aws::NeptuneGraph                        | aws-sdk-neptunegraph                        | 2023-11-29  |
 | Amazon NeptuneData                                    | Aws::Neptunedata                         | aws-sdk-neptunedata                         | 2023-08-01  |
 | Amazon Omics                                          | Aws::Omics                               | aws-sdk-omics                               | 2022-11-28  |
 | Amazon OpenSearch Ingestion                           | Aws::OSIS                                | aws-sdk-osis                                | 2022-01-01  |

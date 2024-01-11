@@ -1896,6 +1896,23 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The certificate provider summary.
+    #
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    class CertificateProviderSummary < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The certificate operation is not allowed.
     #
     # @!attribute [rw] message
@@ -2352,6 +2369,58 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       :certificate_pem)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The ARN of the Lambda function that defines the authentication
+    #   logic.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A string that you can optionally pass in the
+    #   `CreateCertificateProvider` request to make sure the request is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the certificate provider.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateCertificateProviderRequest < Struct.new(
+      :certificate_provider_name,
+      :lambda_function_arn,
+      :account_default_for_operations,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    class CreateCertificateProviderResponse < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2833,10 +2902,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobRequest < Struct.new(
@@ -2950,10 +3026,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobTemplateRequest < Struct.new(
@@ -4186,6 +4269,18 @@ module Aws::IoT
     #
     class DeleteCACertificateResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    class DeleteCertificateProviderRequest < Struct.new(
+      :certificate_provider_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteCertificateProviderResponse < Aws::EmptyStructure; end
+
     # The input for the DeleteCertificate operation.
     #
     # @!attribute [rw] certificate_id
@@ -5049,6 +5144,55 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    class DescribeCertificateProviderRequest < Struct.new(
+      :certificate_provider_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Lambda function ARN that's associated with the certificate
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date
+    #   The date-time string that indicates when the certificate provider
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date-time string that indicates when the certificate provider
+    #   was last updated.
+    #   @return [Time]
+    #
+    class DescribeCertificateProviderResponse < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn,
+      :lambda_function_arn,
+      :account_default_for_operations,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the DescribeCertificate operation.
     #
     # @!attribute [rw] certificate_id
@@ -5609,10 +5753,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class DescribeJobTemplateResponse < Struct.new(
@@ -8273,10 +8424,19 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].The package version must be in either the Published or
+    #   Deprecated state when the job deploys. For more information, see
+    #   [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class Job < Struct.new(
@@ -9307,6 +9467,40 @@ module Aws::IoT
     class ListCACertificatesResponse < Struct.new(
       :certificates,
       :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @!attribute [rw] ascending_order
+    #   Returns the list of certificate providers in ascending alphabetical
+    #   order.
+    #   @return [Boolean]
+    #
+    class ListCertificateProvidersRequest < Struct.new(
+      :next_token,
+      :ascending_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_providers
+    #   The list of certificate providers in your Amazon Web Services
+    #   account.
+    #   @return [Array<Types::CertificateProviderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    class ListCertificateProvidersResponse < Struct.new(
+      :certificate_providers,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11605,9 +11799,8 @@ module Aws::IoT
     #   @return [Types::MetricDimension]
     #
     # @!attribute [rw] export_metric
-    #   Value added in both Behavior and AdditionalMetricsToRetainV2 to
-    #   indicate if Device Defender Detect should export the corresponding
-    #   metrics.
+    #   The value indicates exporting metrics related to the `MetricToRetain
+    #   ` when it's true.
     #   @return [Boolean]
     #
     class MetricToRetain < Struct.new(
@@ -15536,6 +15729,43 @@ module Aws::IoT
       :new_auto_registration_status,
       :registration_config,
       :remove_auto_registration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Lambda function ARN that's associated with the certificate
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #   @return [Array<String>]
+    #
+    class UpdateCertificateProviderRequest < Struct.new(
+      :certificate_provider_name,
+      :lambda_function_arn,
+      :account_default_for_operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    class UpdateCertificateProviderResponse < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end

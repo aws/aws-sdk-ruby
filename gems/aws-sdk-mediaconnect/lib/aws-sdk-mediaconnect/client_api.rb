@@ -71,6 +71,8 @@ module Aws::MediaConnect
     DescribeBridgeResponse = Shapes::StructureShape.new(name: 'DescribeBridgeResponse')
     DescribeFlowRequest = Shapes::StructureShape.new(name: 'DescribeFlowRequest')
     DescribeFlowResponse = Shapes::StructureShape.new(name: 'DescribeFlowResponse')
+    DescribeFlowSourceMetadataRequest = Shapes::StructureShape.new(name: 'DescribeFlowSourceMetadataRequest')
+    DescribeFlowSourceMetadataResponse = Shapes::StructureShape.new(name: 'DescribeFlowSourceMetadataResponse')
     DescribeGatewayInstanceRequest = Shapes::StructureShape.new(name: 'DescribeGatewayInstanceRequest')
     DescribeGatewayInstanceResponse = Shapes::StructureShape.new(name: 'DescribeGatewayInstanceResponse')
     DescribeGatewayRequest = Shapes::StructureShape.new(name: 'DescribeGatewayRequest')
@@ -97,6 +99,7 @@ module Aws::MediaConnect
     Fmtp = Shapes::StructureShape.new(name: 'Fmtp')
     FmtpRequest = Shapes::StructureShape.new(name: 'FmtpRequest')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    FrameResolution = Shapes::StructureShape.new(name: 'FrameResolution')
     Gateway = Shapes::StructureShape.new(name: 'Gateway')
     GatewayBridgeSource = Shapes::StructureShape.new(name: 'GatewayBridgeSource')
     GatewayInstance = Shapes::StructureShape.new(name: 'GatewayInstance')
@@ -193,6 +196,9 @@ module Aws::MediaConnect
     Tcs = Shapes::StringShape.new(name: 'Tcs')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     Transport = Shapes::StructureShape.new(name: 'Transport')
+    TransportMediaInfo = Shapes::StructureShape.new(name: 'TransportMediaInfo')
+    TransportStream = Shapes::StructureShape.new(name: 'TransportStream')
+    TransportStreamProgram = Shapes::StructureShape.new(name: 'TransportStreamProgram')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateBridgeFlowSourceRequest = Shapes::StructureShape.new(name: 'UpdateBridgeFlowSourceRequest')
     UpdateBridgeNetworkOutputRequest = Shapes::StructureShape.new(name: 'UpdateBridgeNetworkOutputRequest')
@@ -258,6 +264,8 @@ module Aws::MediaConnect
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
     __listOfSetSourceRequest = Shapes::ListShape.new(name: '__listOfSetSourceRequest')
     __listOfSource = Shapes::ListShape.new(name: '__listOfSource')
+    __listOfTransportStream = Shapes::ListShape.new(name: '__listOfTransportStream')
+    __listOfTransportStreamProgram = Shapes::ListShape.new(name: '__listOfTransportStreamProgram')
     __listOfVpcInterface = Shapes::ListShape.new(name: '__listOfVpcInterface')
     __listOfVpcInterfaceRequest = Shapes::ListShape.new(name: '__listOfVpcInterfaceRequest')
     __listOf__integer = Shapes::ListShape.new(name: '__listOf__integer')
@@ -519,6 +527,15 @@ module Aws::MediaConnect
     DescribeFlowResponse.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, location_name: "messages"))
     DescribeFlowResponse.struct_class = Types::DescribeFlowResponse
 
+    DescribeFlowSourceMetadataRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
+    DescribeFlowSourceMetadataRequest.struct_class = Types::DescribeFlowSourceMetadataRequest
+
+    DescribeFlowSourceMetadataResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    DescribeFlowSourceMetadataResponse.add_member(:messages, Shapes::ShapeRef.new(shape: __listOfMessageDetail, location_name: "messages"))
+    DescribeFlowSourceMetadataResponse.add_member(:timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "timestamp"))
+    DescribeFlowSourceMetadataResponse.add_member(:transport_media_info, Shapes::ShapeRef.new(shape: TransportMediaInfo, location_name: "transportMediaInfo"))
+    DescribeFlowSourceMetadataResponse.struct_class = Types::DescribeFlowSourceMetadataResponse
+
     DescribeGatewayInstanceRequest.add_member(:gateway_instance_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "gatewayInstanceArn", metadata: {"pattern"=>"^arn:.+:mediaconnect.+:gateway:.+:instance:.+$"}))
     DescribeGatewayInstanceRequest.struct_class = Types::DescribeGatewayInstanceRequest
 
@@ -628,6 +645,10 @@ module Aws::MediaConnect
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
+
+    FrameResolution.add_member(:frame_height, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "frameHeight"))
+    FrameResolution.add_member(:frame_width, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "frameWidth"))
+    FrameResolution.struct_class = Types::FrameResolution
 
     Gateway.add_member(:egress_cidr_blocks, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "egressCidrBlocks"))
     Gateway.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "gatewayArn"))
@@ -1048,6 +1069,26 @@ module Aws::MediaConnect
     Transport.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     Transport.struct_class = Types::Transport
 
+    TransportMediaInfo.add_member(:programs, Shapes::ShapeRef.new(shape: __listOfTransportStreamProgram, required: true, location_name: "programs"))
+    TransportMediaInfo.struct_class = Types::TransportMediaInfo
+
+    TransportStream.add_member(:channels, Shapes::ShapeRef.new(shape: __integer, location_name: "channels"))
+    TransportStream.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location_name: "codec"))
+    TransportStream.add_member(:frame_rate, Shapes::ShapeRef.new(shape: __string, location_name: "frameRate"))
+    TransportStream.add_member(:frame_resolution, Shapes::ShapeRef.new(shape: FrameResolution, location_name: "frameResolution"))
+    TransportStream.add_member(:pid, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "pid"))
+    TransportStream.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "sampleRate"))
+    TransportStream.add_member(:sample_size, Shapes::ShapeRef.new(shape: __integer, location_name: "sampleSize"))
+    TransportStream.add_member(:stream_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "streamType"))
+    TransportStream.struct_class = Types::TransportStream
+
+    TransportStreamProgram.add_member(:pcr_pid, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "pcrPid"))
+    TransportStreamProgram.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "programName"))
+    TransportStreamProgram.add_member(:program_number, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "programNumber"))
+    TransportStreamProgram.add_member(:program_pid, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "programPid"))
+    TransportStreamProgram.add_member(:streams, Shapes::ShapeRef.new(shape: __listOfTransportStream, required: true, location_name: "streams"))
+    TransportStreamProgram.struct_class = Types::TransportStreamProgram
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1304,6 +1345,10 @@ module Aws::MediaConnect
 
     __listOfSource.member = Shapes::ShapeRef.new(shape: Source)
 
+    __listOfTransportStream.member = Shapes::ShapeRef.new(shape: TransportStream)
+
+    __listOfTransportStreamProgram.member = Shapes::ShapeRef.new(shape: TransportStreamProgram)
+
     __listOfVpcInterface.member = Shapes::ShapeRef.new(shape: VpcInterface)
 
     __listOfVpcInterfaceRequest.member = Shapes::ShapeRef.new(shape: VpcInterfaceRequest)
@@ -1544,6 +1589,20 @@ module Aws::MediaConnect
         o.http_request_uri = "/v1/flows/{flowArn}"
         o.input = Shapes::ShapeRef.new(shape: DescribeFlowRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFlowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_flow_source_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFlowSourceMetadata"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/flows/{flowArn}/source-metadata"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFlowSourceMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFlowSourceMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

@@ -99,11 +99,11 @@ module Aws::OpenSearchService
     # Container for the parameters to the `AddDataSource` operation.
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain.
+    #   The name of the domain to add the data source to.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the data source.
+    #   A name for the data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_type
@@ -128,7 +128,7 @@ module Aws::OpenSearchService
     # The result of an `AddDataSource` operation.
     #
     # @!attribute [rw] message
-    #   A message associated with the data source.
+    #   A message associated with creation of the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddDataSourceResponse AWS API Documentation
@@ -1165,7 +1165,11 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Specify either dual stack or IPv4 as your IP address type. Dual
+    #   stack allows you to share domain resources across IPv4 and IPv6
+    #   address types, and is the recommended option. If you set your IP
+    #   address type to dual stack, you can't change your address type
+    #   later.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_options
@@ -1488,7 +1492,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Details about the data sources.
+    # Details about a direct-query data source.
     #
     # @!attribute [rw] data_source_type
     #   The type of data source.
@@ -1512,14 +1516,14 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Information about the data source.
+    # The type of data source.
     #
     # @note DataSourceType is a union - when making an API calls you must set exactly one of the members.
     #
     # @note DataSourceType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataSourceType corresponding to the set member.
     #
     # @!attribute [rw] s3_glue_data_catalog
-    #   The data source for the AWS S3 Glue Data Catalog.
+    #   An Amazon S3 data source.
     #   @return [Types::S3GlueDataCatalog]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSourceType AWS API Documentation
@@ -1542,7 +1546,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the data source.
+    #   The name of the data source to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSourceRequest AWS API Documentation
@@ -1557,7 +1561,7 @@ module Aws::OpenSearchService
     # The result of a `GetDataSource` operation.
     #
     # @!attribute [rw] message
-    #   A message associated with the initiated request.
+    #   A message associated with deletion of the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDataSourceResponse AWS API Documentation
@@ -2514,7 +2518,10 @@ module Aws::OpenSearchService
     #   @return [Types::AccessPoliciesStatus]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Choose either dual stack or IPv4 as your IP address type. Dual stack
+    #   allows you to share domain resources across IPv4 and IPv6 address
+    #   types, and is the recommended option. If you set your IP address
+    #   type to dual stack, you can't change your address type later.
     #   @return [Types::IPAddressTypeStatus]
     #
     # @!attribute [rw] snapshot_options
@@ -2614,18 +2621,15 @@ module Aws::OpenSearchService
     #   Specify the TLS security policy to apply to the HTTPS endpoint of
     #   the domain. The policy can be one of the following values:
     #
-    #   * **Policy-Min-TLS-1-0-2019-07:** TLS security policy which supports
+    #   * **Policy-Min-TLS-1-0-2019-07:** TLS security policy that supports
     #     TLS version 1.0 to TLS version 1.2
     #
-    #   * **Policy-Min-TLS-1-2-2019-07:** TLS security policy which supports
+    #   * **Policy-Min-TLS-1-2-2019-07:** TLS security policy that supports
     #     only TLS version 1.2
     #
-    #   * **Policy-Min-TLS-1-0-2023-10:** TLS security policy which supports
-    #     TLS version 1.0 to TLS version 1.3
-    #
-    #   * **Policy-Min-TLS-1-2-2023-10:** TLS security policy which supports
-    #     TLS version 1.2 to TLS version 1.3 with perfect forward secrecy
-    #     cipher suites
+    #   * **Policy-Min-TLS-1-2-PFS-2023-10:** TLS security policy that
+    #     supports TLS version 1.2 to TLS version 1.3 with perfect forward
+    #     secrecy cipher suites
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -2907,15 +2911,15 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] endpoint_v2
-    #   The domain endpoint to which index and search requests are
-    #   submitted. For example,
-    #   `search-imdb-movies-oopcnjfn6ugo.eu-west-1.es.amazonaws.com` or
-    #   `doc-imdb-movies-oopcnjfn6u.eu-west-1.es.amazonaws.com`.
+    #   If `IPAddressType` to set to `dualstack`, a version 2 domain
+    #   endpoint is provisioned. This endpoint functions like a normal
+    #   endpoint, except that it works with both IPv4 and IPv6 IP addresses.
+    #   Normal endpoints work only with IPv4 IP addresses.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
     #   The key-value pair that exists if the OpenSearch Service domain uses
-    #   VPC endpoints.. Example `key, value`:
+    #   VPC endpoints. Example `key, value`:
     #   `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
     #   @return [Hash<String,String>]
     #
@@ -3334,7 +3338,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the data source.
+    #   The name of the data source to get information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSourceRequest AWS API Documentation
@@ -3840,7 +3844,7 @@ module Aws::OpenSearchService
     # The result of a `ListDataSources` operation.
     #
     # @!attribute [rw] data_sources
-    #   A list of the data sources.
+    #   A list of data sources associated with specified domain.
     #   @return [Array<Types::DataSourceDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSourcesResponse AWS API Documentation
@@ -5122,10 +5126,10 @@ module Aws::OpenSearchService
     #
     class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure; end
 
-    # Information about the AWS S3 Glue Data Catalog.
+    # Information about the Amazon S3 Glue Data Catalog.
     #
     # @!attribute [rw] role_arn
-    #   The role ARN for the AWS S3 Glue Data Catalog.
+    #   &gt;The Amazon Resource Name (ARN) for the S3 Glue Data Catalog.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/S3GlueDataCatalog AWS API Documentation
@@ -5682,7 +5686,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the data source.
+    #   The name of the data source to modify.
     #   @return [String]
     #
     # @!attribute [rw] data_source_type
@@ -5690,7 +5694,7 @@ module Aws::OpenSearchService
     #   @return [Types::DataSourceType]
     #
     # @!attribute [rw] description
-    #   A description of the data source.
+    #   A new description of the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceRequest AWS API Documentation
@@ -5707,7 +5711,7 @@ module Aws::OpenSearchService
     # The result of an `UpdateDataSource` operation.
     #
     # @!attribute [rw] message
-    #   A message associated with the data source.
+    #   A message associated with the updated data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceResponse AWS API Documentation
@@ -5788,7 +5792,10 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Specify either dual stack or IPv4 as your IP address type. Dual
+    #   stack allows you to share domain resources across IPv4 and IPv6
+    #   address types, and is the recommended option. If your IP address
+    #   type is currently set to dual stack, you can't change it.
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_options

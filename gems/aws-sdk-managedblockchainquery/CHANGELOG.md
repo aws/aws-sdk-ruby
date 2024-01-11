@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2023-12-20)
+------------------
+
+* Feature - Adding Confirmation Status and Execution Status to GetTransaction Response.
+
 1.5.0 (2023-11-28)
 ------------------
 

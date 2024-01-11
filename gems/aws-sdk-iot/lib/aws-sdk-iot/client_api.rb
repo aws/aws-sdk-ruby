@@ -196,6 +196,13 @@ module Aws::IoT
     CertificateName = Shapes::StringShape.new(name: 'CertificateName')
     CertificatePathOnDevice = Shapes::StringShape.new(name: 'CertificatePathOnDevice')
     CertificatePem = Shapes::StringShape.new(name: 'CertificatePem')
+    CertificateProviderAccountDefaultForOperations = Shapes::ListShape.new(name: 'CertificateProviderAccountDefaultForOperations')
+    CertificateProviderArn = Shapes::StringShape.new(name: 'CertificateProviderArn')
+    CertificateProviderFunctionArn = Shapes::StringShape.new(name: 'CertificateProviderFunctionArn')
+    CertificateProviderName = Shapes::StringShape.new(name: 'CertificateProviderName')
+    CertificateProviderOperation = Shapes::StringShape.new(name: 'CertificateProviderOperation')
+    CertificateProviderSummary = Shapes::StructureShape.new(name: 'CertificateProviderSummary')
+    CertificateProviders = Shapes::ListShape.new(name: 'CertificateProviders')
     CertificateSigningRequest = Shapes::StringShape.new(name: 'CertificateSigningRequest')
     CertificateStateException = Shapes::StructureShape.new(name: 'CertificateStateException')
     CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
@@ -244,6 +251,8 @@ module Aws::IoT
     CreateBillingGroupResponse = Shapes::StructureShape.new(name: 'CreateBillingGroupResponse')
     CreateCertificateFromCsrRequest = Shapes::StructureShape.new(name: 'CreateCertificateFromCsrRequest')
     CreateCertificateFromCsrResponse = Shapes::StructureShape.new(name: 'CreateCertificateFromCsrResponse')
+    CreateCertificateProviderRequest = Shapes::StructureShape.new(name: 'CreateCertificateProviderRequest')
+    CreateCertificateProviderResponse = Shapes::StructureShape.new(name: 'CreateCertificateProviderResponse')
     CreateCustomMetricRequest = Shapes::StructureShape.new(name: 'CreateCustomMetricRequest')
     CreateCustomMetricResponse = Shapes::StructureShape.new(name: 'CreateCustomMetricResponse')
     CreateDimensionRequest = Shapes::StructureShape.new(name: 'CreateDimensionRequest')
@@ -321,6 +330,8 @@ module Aws::IoT
     DeleteBillingGroupResponse = Shapes::StructureShape.new(name: 'DeleteBillingGroupResponse')
     DeleteCACertificateRequest = Shapes::StructureShape.new(name: 'DeleteCACertificateRequest')
     DeleteCACertificateResponse = Shapes::StructureShape.new(name: 'DeleteCACertificateResponse')
+    DeleteCertificateProviderRequest = Shapes::StructureShape.new(name: 'DeleteCertificateProviderRequest')
+    DeleteCertificateProviderResponse = Shapes::StructureShape.new(name: 'DeleteCertificateProviderResponse')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DeleteConflictException = Shapes::StructureShape.new(name: 'DeleteConflictException')
     DeleteCustomMetricRequest = Shapes::StructureShape.new(name: 'DeleteCustomMetricRequest')
@@ -393,6 +404,8 @@ module Aws::IoT
     DescribeBillingGroupResponse = Shapes::StructureShape.new(name: 'DescribeBillingGroupResponse')
     DescribeCACertificateRequest = Shapes::StructureShape.new(name: 'DescribeCACertificateRequest')
     DescribeCACertificateResponse = Shapes::StructureShape.new(name: 'DescribeCACertificateResponse')
+    DescribeCertificateProviderRequest = Shapes::StructureShape.new(name: 'DescribeCertificateProviderRequest')
+    DescribeCertificateProviderResponse = Shapes::StructureShape.new(name: 'DescribeCertificateProviderResponse')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResponse = Shapes::StructureShape.new(name: 'DescribeCertificateResponse')
     DescribeCustomMetricRequest = Shapes::StructureShape.new(name: 'DescribeCustomMetricRequest')
@@ -708,6 +721,8 @@ module Aws::IoT
     ListBillingGroupsResponse = Shapes::StructureShape.new(name: 'ListBillingGroupsResponse')
     ListCACertificatesRequest = Shapes::StructureShape.new(name: 'ListCACertificatesRequest')
     ListCACertificatesResponse = Shapes::StructureShape.new(name: 'ListCACertificatesResponse')
+    ListCertificateProvidersRequest = Shapes::StructureShape.new(name: 'ListCertificateProvidersRequest')
+    ListCertificateProvidersResponse = Shapes::StructureShape.new(name: 'ListCertificateProvidersResponse')
     ListCertificatesByCARequest = Shapes::StructureShape.new(name: 'ListCertificatesByCARequest')
     ListCertificatesByCAResponse = Shapes::StructureShape.new(name: 'ListCertificatesByCAResponse')
     ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
@@ -1276,6 +1291,8 @@ module Aws::IoT
     UpdateBillingGroupResponse = Shapes::StructureShape.new(name: 'UpdateBillingGroupResponse')
     UpdateCACertificateParams = Shapes::StructureShape.new(name: 'UpdateCACertificateParams')
     UpdateCACertificateRequest = Shapes::StructureShape.new(name: 'UpdateCACertificateRequest')
+    UpdateCertificateProviderRequest = Shapes::StructureShape.new(name: 'UpdateCertificateProviderRequest')
+    UpdateCertificateProviderResponse = Shapes::StructureShape.new(name: 'UpdateCertificateProviderResponse')
     UpdateCertificateRequest = Shapes::StructureShape.new(name: 'UpdateCertificateRequest')
     UpdateCustomMetricRequest = Shapes::StructureShape.new(name: 'UpdateCustomMetricRequest')
     UpdateCustomMetricResponse = Shapes::StructureShape.new(name: 'UpdateCustomMetricResponse')
@@ -1803,6 +1820,14 @@ module Aws::IoT
     CertificateDescription.add_member(:certificate_mode, Shapes::ShapeRef.new(shape: CertificateMode, location_name: "certificateMode"))
     CertificateDescription.struct_class = Types::CertificateDescription
 
+    CertificateProviderAccountDefaultForOperations.member = Shapes::ShapeRef.new(shape: CertificateProviderOperation)
+
+    CertificateProviderSummary.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, location_name: "certificateProviderName"))
+    CertificateProviderSummary.add_member(:certificate_provider_arn, Shapes::ShapeRef.new(shape: CertificateProviderArn, location_name: "certificateProviderArn"))
+    CertificateProviderSummary.struct_class = Types::CertificateProviderSummary
+
+    CertificateProviders.member = Shapes::ShapeRef.new(shape: CertificateProviderSummary)
+
     CertificateStateException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     CertificateStateException.struct_class = Types::CertificateStateException
 
@@ -1912,6 +1937,17 @@ module Aws::IoT
     CreateCertificateFromCsrResponse.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "certificateId"))
     CreateCertificateFromCsrResponse.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: CertificatePem, location_name: "certificatePem"))
     CreateCertificateFromCsrResponse.struct_class = Types::CreateCertificateFromCsrResponse
+
+    CreateCertificateProviderRequest.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, required: true, location: "uri", location_name: "certificateProviderName"))
+    CreateCertificateProviderRequest.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: CertificateProviderFunctionArn, required: true, location_name: "lambdaFunctionArn"))
+    CreateCertificateProviderRequest.add_member(:account_default_for_operations, Shapes::ShapeRef.new(shape: CertificateProviderAccountDefaultForOperations, required: true, location_name: "accountDefaultForOperations"))
+    CreateCertificateProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCertificateProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateCertificateProviderRequest.struct_class = Types::CreateCertificateProviderRequest
+
+    CreateCertificateProviderResponse.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, location_name: "certificateProviderName"))
+    CreateCertificateProviderResponse.add_member(:certificate_provider_arn, Shapes::ShapeRef.new(shape: CertificateProviderArn, location_name: "certificateProviderArn"))
+    CreateCertificateProviderResponse.struct_class = Types::CreateCertificateProviderResponse
 
     CreateCustomMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location: "uri", location_name: "metricName"))
     CreateCustomMetricRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: CustomMetricDisplayName, location_name: "displayName"))
@@ -2276,6 +2312,11 @@ module Aws::IoT
 
     DeleteCACertificateResponse.struct_class = Types::DeleteCACertificateResponse
 
+    DeleteCertificateProviderRequest.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, required: true, location: "uri", location_name: "certificateProviderName"))
+    DeleteCertificateProviderRequest.struct_class = Types::DeleteCertificateProviderRequest
+
+    DeleteCertificateProviderResponse.struct_class = Types::DeleteCertificateProviderResponse
+
     DeleteCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     DeleteCertificateRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: ForceDelete, location: "querystring", location_name: "forceDelete"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
@@ -2500,6 +2541,17 @@ module Aws::IoT
     DescribeCACertificateResponse.add_member(:certificate_description, Shapes::ShapeRef.new(shape: CACertificateDescription, location_name: "certificateDescription"))
     DescribeCACertificateResponse.add_member(:registration_config, Shapes::ShapeRef.new(shape: RegistrationConfig, location_name: "registrationConfig"))
     DescribeCACertificateResponse.struct_class = Types::DescribeCACertificateResponse
+
+    DescribeCertificateProviderRequest.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, required: true, location: "uri", location_name: "certificateProviderName"))
+    DescribeCertificateProviderRequest.struct_class = Types::DescribeCertificateProviderRequest
+
+    DescribeCertificateProviderResponse.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, location_name: "certificateProviderName"))
+    DescribeCertificateProviderResponse.add_member(:certificate_provider_arn, Shapes::ShapeRef.new(shape: CertificateProviderArn, location_name: "certificateProviderArn"))
+    DescribeCertificateProviderResponse.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: CertificateProviderFunctionArn, location_name: "lambdaFunctionArn"))
+    DescribeCertificateProviderResponse.add_member(:account_default_for_operations, Shapes::ShapeRef.new(shape: CertificateProviderAccountDefaultForOperations, location_name: "accountDefaultForOperations"))
+    DescribeCertificateProviderResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
+    DescribeCertificateProviderResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
+    DescribeCertificateProviderResponse.struct_class = Types::DescribeCertificateProviderResponse
 
     DescribeCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     DescribeCertificateRequest.struct_class = Types::DescribeCertificateRequest
@@ -3446,6 +3498,14 @@ module Aws::IoT
     ListCACertificatesResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: CACertificates, location_name: "certificates"))
     ListCACertificatesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "nextMarker"))
     ListCACertificatesResponse.struct_class = Types::ListCACertificatesResponse
+
+    ListCertificateProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "nextToken"))
+    ListCertificateProvidersRequest.add_member(:ascending_order, Shapes::ShapeRef.new(shape: AscendingOrder, location: "querystring", location_name: "isAscendingOrder"))
+    ListCertificateProvidersRequest.struct_class = Types::ListCertificateProvidersRequest
+
+    ListCertificateProvidersResponse.add_member(:certificate_providers, Shapes::ShapeRef.new(shape: CertificateProviders, location_name: "certificateProviders"))
+    ListCertificateProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Marker, location_name: "nextToken"))
+    ListCertificateProvidersResponse.struct_class = Types::ListCertificateProvidersResponse
 
     ListCertificatesByCARequest.add_member(:ca_certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "caCertificateId"))
     ListCertificatesByCARequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location: "querystring", location_name: "pageSize"))
@@ -4900,6 +4960,15 @@ module Aws::IoT
     UpdateCACertificateRequest.add_member(:remove_auto_registration, Shapes::ShapeRef.new(shape: RemoveAutoRegistration, location_name: "removeAutoRegistration"))
     UpdateCACertificateRequest.struct_class = Types::UpdateCACertificateRequest
 
+    UpdateCertificateProviderRequest.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, required: true, location: "uri", location_name: "certificateProviderName"))
+    UpdateCertificateProviderRequest.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: CertificateProviderFunctionArn, location_name: "lambdaFunctionArn"))
+    UpdateCertificateProviderRequest.add_member(:account_default_for_operations, Shapes::ShapeRef.new(shape: CertificateProviderAccountDefaultForOperations, location_name: "accountDefaultForOperations"))
+    UpdateCertificateProviderRequest.struct_class = Types::UpdateCertificateProviderRequest
+
+    UpdateCertificateProviderResponse.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, location_name: "certificateProviderName"))
+    UpdateCertificateProviderResponse.add_member(:certificate_provider_arn, Shapes::ShapeRef.new(shape: CertificateProviderArn, location_name: "certificateProviderArn"))
+    UpdateCertificateProviderResponse.struct_class = Types::UpdateCertificateProviderResponse
+
     UpdateCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     UpdateCertificateRequest.add_member(:new_status, Shapes::ShapeRef.new(shape: CertificateStatus, required: true, location: "querystring", location_name: "newStatus"))
     UpdateCertificateRequest.struct_class = Types::UpdateCertificateRequest
@@ -5476,6 +5545,21 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:create_certificate_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCertificateProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/certificate-providers/{certificateProviderName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateCertificateProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCertificateProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:create_custom_metric, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCustomMetric"
         o.http_method = "POST"
@@ -5925,6 +6009,21 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_certificate_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCertificateProvider"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/certificate-providers/{certificateProviderName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCertificateProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCertificateProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_custom_metric, Seahorse::Model::Operation.new.tap do |o|
@@ -6405,6 +6504,20 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_certificate_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCertificateProvider"
+        o.http_method = "GET"
+        o.http_request_uri = "/certificate-providers/{certificateProviderName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCertificateProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCertificateProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:describe_custom_metric, Seahorse::Model::Operation.new.tap do |o|
@@ -7232,6 +7345,19 @@ module Aws::IoT
             "next_marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:list_certificate_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCertificateProviders"
+        o.http_method = "GET"
+        o.http_request_uri = "/certificate-providers/"
+        o.input = Shapes::ShapeRef.new(shape: ListCertificateProvidersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCertificateProvidersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -8550,6 +8676,20 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:update_certificate_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCertificateProvider"
+        o.http_method = "PUT"
+        o.http_request_uri = "/certificate-providers/{certificateProviderName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCertificateProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCertificateProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:update_custom_metric, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateCustomMetric"
         o.http_method = "PATCH"
@@ -8676,6 +8816,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdatePackageRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePackageResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -8688,6 +8829,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdatePackageConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePackageConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -8699,6 +8841,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdatePackageVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePackageVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

@@ -205,6 +205,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeDBProxyTargetGroups.build(context)
           when :describe_db_proxy_targets
             Aws::RDS::Endpoints::DescribeDBProxyTargets.build(context)
+          when :describe_db_recommendations
+            Aws::RDS::Endpoints::DescribeDBRecommendations.build(context)
           when :describe_db_security_groups
             Aws::RDS::Endpoints::DescribeDBSecurityGroups.build(context)
           when :describe_db_snapshot_attributes
@@ -249,8 +251,12 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeTenantDatabases.build(context)
           when :describe_valid_db_instance_modifications
             Aws::RDS::Endpoints::DescribeValidDBInstanceModifications.build(context)
+          when :disable_http_endpoint
+            Aws::RDS::Endpoints::DisableHttpEndpoint.build(context)
           when :download_db_log_file_portion
             Aws::RDS::Endpoints::DownloadDBLogFilePortion.build(context)
+          when :enable_http_endpoint
+            Aws::RDS::Endpoints::EnableHttpEndpoint.build(context)
           when :failover_db_cluster
             Aws::RDS::Endpoints::FailoverDBCluster.build(context)
           when :failover_global_cluster
@@ -283,6 +289,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::ModifyDBProxyEndpoint.build(context)
           when :modify_db_proxy_target_group
             Aws::RDS::Endpoints::ModifyDBProxyTargetGroup.build(context)
+          when :modify_db_recommendation
+            Aws::RDS::Endpoints::ModifyDBRecommendation.build(context)
           when :modify_db_snapshot
             Aws::RDS::Endpoints::ModifyDBSnapshot.build(context)
           when :modify_db_snapshot_attribute

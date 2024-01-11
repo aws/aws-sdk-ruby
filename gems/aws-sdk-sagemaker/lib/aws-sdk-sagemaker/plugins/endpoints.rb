@@ -193,6 +193,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteCluster.build(context)
           when :delete_code_repository
             Aws::SageMaker::Endpoints::DeleteCodeRepository.build(context)
+          when :delete_compilation_job
+            Aws::SageMaker::Endpoints::DeleteCompilationJob.build(context)
           when :delete_context
             Aws::SageMaker::Endpoints::DeleteContext.build(context)
           when :delete_data_quality_job_definition

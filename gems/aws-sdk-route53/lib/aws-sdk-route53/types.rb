@@ -183,7 +183,7 @@ module Aws::Route53
     #   : Specify the hosted zone ID for the region that you created the
     #     environment in. The environment must have a regionalized
     #     subdomain. For a list of regions and the corresponding hosted zone
-    #     IDs, see [Elastic Beanstalk endpoints and quotas][3] in the the
+    #     IDs, see [Elastic Beanstalk endpoints and quotas][3] in the
     #     *Amazon Web Services General Reference*.
     #
     #   ELB load balancer
@@ -1144,6 +1144,28 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A complex type that lists the coordinates for a geoproximity resource
+    # record.
+    #
+    # @!attribute [rw] latitude
+    #   Specifies a coordinate of the north–south position of a geographic
+    #   point on the surface of the Earth (-90 - 90).
+    #   @return [String]
+    #
+    # @!attribute [rw] longitude
+    #   Specifies a coordinate of the east–west position of a geographic
+    #   point on the surface of the Earth (-180 - 180).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/Coordinates AWS API Documentation
+    #
+    class Coordinates < Struct.new(
+      :latitude,
+      :longitude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   A unique identifier for the account that can be used to reference
     #   the collection from other API calls.
@@ -1788,7 +1810,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # A string repesenting the status of DNSSEC signing.
+    # A string representing the status of DNSSEC signing.
     #
     # @!attribute [rw] serve_signature
     #   A string that represents the current hosted zone signing status.
@@ -2329,7 +2351,7 @@ module Aws::Route53
     #   Amazon Route 53 uses the two-letter country codes that are specified
     #   in [ISO standard 3166-1 alpha-2][1].
     #
-    #   Route 53 also supports the contry code **UA** forr Ukraine.
+    #   Route 53 also supports the country code **UA** for Ukraine.
     #
     #
     #
@@ -2407,6 +2429,74 @@ module Aws::Route53
       :country_name,
       :subdivision_code,
       :subdivision_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # (Resource record sets only): A complex type that lets you control how
+    # Amazon Route 53 responds to DNS queries based on the geographic origin
+    # of the query and your resources. Only one of , `LocalZoneGroup`,
+    # `Coordinates`, or `Amazon Web ServicesRegion` is allowed per request
+    # at a time.
+    #
+    # For more information about geoproximity routing, see [Geoproximity
+    # routing][1] in the *Amazon Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region the resource you are directing DNS
+    #   traffic to, is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_zone_group
+    #   Specifies an Amazon Web Services Local Zone Group.
+    #
+    #   A local Zone Group is usually the Local Zone code without the ending
+    #   character. For example, if the Local Zone is `us-east-1-bue-1a` the
+    #   Local Zone Group is `us-east-1-bue-1`.
+    #
+    #   You can identify the Local Zones Group for a specific Local Zone by
+    #   using the [describe-availability-zones][1] CLI command:
+    #
+    #   This command returns: `"GroupName": "us-west-2-den-1"`, specifying
+    #   that the Local Zone `us-west-2-den-1a` belongs to the Local Zone
+    #   Group `us-west-2-den-1`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-availability-zones.html
+    #   @return [String]
+    #
+    # @!attribute [rw] coordinates
+    #   Contains the longitude and latitude for a geographic region.
+    #   @return [Types::Coordinates]
+    #
+    # @!attribute [rw] bias
+    #   The bias increases or decreases the size of the geographic region
+    #   from which Route 53 routes traffic to a resource.
+    #
+    #   To use `Bias` to change the size of the geographic region, specify
+    #   the applicable value for the bias:
+    #
+    #   * To expand the size of the geographic region from which Route 53
+    #     routes traffic to a resource, specify a positive integer from 1 to
+    #     99 for the bias. Route 53 shrinks the size of adjacent regions.
+    #
+    #   * To shrink the size of the geographic region from which Route 53
+    #     routes traffic to a resource, specify a negative bias of -1 to
+    #     -99. Route 53 expands the size of adjacent regions.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GeoProximityLocation AWS API Documentation
+    #
+    class GeoProximityLocation < Struct.new(
+      :aws_region,
+      :local_zone_group,
+      :coordinates,
+      :bias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2537,7 +2627,7 @@ module Aws::Route53
     end
 
     # @!attribute [rw] status
-    #   A string repesenting the status of DNSSEC.
+    #   A string representing the status of DNSSEC.
     #   @return [Types::DNSSECStatus]
     #
     # @!attribute [rw] key_signing_keys
@@ -2581,7 +2671,7 @@ module Aws::Route53
     #   Amazon Route 53 uses the two-letter country codes that are specified
     #   in [ISO standard 3166-1 alpha-2][1].
     #
-    #   Route 53 also supports the contry code **UA** forr Ukraine.
+    #   Route 53 also supports the country code **UA** for Ukraine.
     #
     #
     #
@@ -3259,7 +3349,7 @@ module Aws::Route53
     #     Route 53 health checkers consider to be healthy and compares that
     #     number with the value of `HealthThreshold`.
     #
-    #   * **RECOVERY\_CONTROL**: The health check is assocated with a
+    #   * **RECOVERY\_CONTROL**: The health check is associated with a
     #     Route53 Application Recovery Controller routing control. If the
     #     routing control state is `ON`, the health check is considered
     #     healthy. If the state is `OFF`, the health check is considered
@@ -6261,12 +6351,6 @@ module Aws::Route53
     #     You can't use the * wildcard for resource records sets that have
     #     a type of NS.
     #
-    #   You can use the * wildcard as the leftmost label in a domain name,
-    #   for example, `*.example.com`. You can't use an * for one of the
-    #   middle labels, for example, `marketing.*.example.com`. In addition,
-    #   the * must replace the entire label; for example, you can't
-    #   specify `prod*.example.com`.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
@@ -6438,11 +6522,6 @@ module Aws::Route53
     #   from Africa to be routed to a web server with an IP address of
     #   `192.0.2.111`, create a resource record set with a `Type` of `A` and
     #   a `ContinentCode` of `AF`.
-    #
-    #   <note markdown="1"> Although creating geolocation and geolocation alias resource record
-    #   sets in a private hosted zone is allowed, it's not supported.
-    #
-    #    </note>
     #
     #   If you create separate resource record sets for overlapping
     #   geographic regions (for example, one resource record set for a
@@ -6770,6 +6849,12 @@ module Aws::Route53
     #   record.
     #   @return [Types::CidrRoutingConfig]
     #
+    # @!attribute [rw] geo_proximity_location
+    #   <i> GeoproximityLocation resource record sets only:</i> A complex
+    #   type that lets you control how Route 53 responds to DNS queries
+    #   based on the geographic origin of the query and your resources.
+    #   @return [Types::GeoProximityLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSet AWS API Documentation
     #
     class ResourceRecordSet < Struct.new(
@@ -6786,7 +6871,8 @@ module Aws::Route53
       :alias_target,
       :health_check_id,
       :traffic_policy_instance_id,
-      :cidr_routing_config)
+      :cidr_routing_config,
+      :geo_proximity_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7592,6 +7678,11 @@ module Aws::Route53
     #   at the interval you specify in `RequestInterval`. Using an IPv4
     #   address that is returned by DNS, Route 53 then checks the health of
     #   the endpoint.
+    #
+    #   If you don't specify a value for `IPAddress`, you can’t update the
+    #   health check to remove the `FullyQualifiedDomainName`; if you don’t
+    #   specify a value for `IPAddress` on creation, a
+    #   `FullyQualifiedDomainName` is required.
     #
     #   <note markdown="1"> If you don't specify a value for `IPAddress`, Route 53 uses only
     #   IPv4 to send health checks to the endpoint. If there's no resource

@@ -1112,6 +1112,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The additional attributes of `RecommendedAction` data type.
+    #
+    # @!attribute [rw] key
+    #   The key of `ContextAttribute`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of `ContextAttribute`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ContextAttribute AWS API Documentation
+    #
+    class ContextAttribute < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_db_cluster_parameter_group_identifier
     #   The identifier or Amazon Resource Name (ARN) for the source DB
     #   cluster parameter group. For information about creating an ARN, see
@@ -2488,16 +2507,22 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] enable_http_endpoint
-    #   Specifies whether to enable the HTTP endpoint for an Aurora
-    #   Serverless v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   Specifies whether to enable the HTTP endpoint for the DB cluster. By
+    #   default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web
-    #   service API for running SQL queries on the Aurora Serverless v1 DB
+    #   service API (RDS Data API) for running SQL queries on the DB
     #   cluster. You can also query your database from inside the RDS
-    #   console with the query editor.
+    #   console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   RDS Data API is supported with the following DB clusters:
+    #
+    #   * Aurora PostgreSQL Serverless v2 and provisioned
+    #
+    #   * Aurora PostgreSQL and Aurora MySQL Serverless v1
+    #
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -3299,8 +3324,8 @@ module Aws::RDS
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
     #
-    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
-    #       from 20 to 64000.
+    #     * General Purpose (SSD) storage (gp3): Must be an integer from 20
+    #       to 64000.
     #
     #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #       64000.
@@ -6495,16 +6520,16 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] http_endpoint_enabled
-    #   Indicates whether the HTTP endpoint for an Aurora Serverless v1 DB
-    #   cluster is enabled.
+    #   Indicates whether the HTTP endpoint is enabled for an Aurora DB
+    #   cluster.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web
-    #   service API for running SQL queries on the Aurora Serverless v1 DB
+    #   service API (RDS Data API) for running SQL queries on the DB
     #   cluster. You can also query your database from inside the RDS
-    #   console with the query editor.
+    #   console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #
     #
@@ -9699,6 +9724,198 @@ module Aws::RDS
     #
     class DBProxyTargetNotFoundFault < Aws::EmptyStructure; end
 
+    # The recommendation for your DB instances, DB clusters, and DB
+    # parameter groups.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The unique identifier of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_id
+    #   A value that indicates the type of recommendation. This value
+    #   determines how the description is rendered.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity level of the recommendation. The severity level can
+    #   help you decide the urgency with which to address the
+    #   recommendation.
+    #
+    #   Valid values:
+    #
+    #   * `high`
+    #
+    #   * `medium`
+    #
+    #   * `low`
+    #
+    #   * `informational`
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the RDS resource associated with
+    #   the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation.
+    #
+    #   Valid values:
+    #
+    #   * `active` - The recommendations which are ready for you to apply.
+    #
+    #   * `pending` - The applied or scheduled recommendations which are in
+    #     progress.
+    #
+    #   * `resolved` - The recommendations which are completed.
+    #
+    #   * `dismissed` - The recommendations that you dismissed.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the recommendation was created. For example,
+    #   `2023-09-28T01:13:53.931000+00:00`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_time
+    #   The time when the recommendation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] detection
+    #   A short description of the issue identified for this recommendation.
+    #   The description might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation
+    #   A short description of the recommendation to resolve an issue. The
+    #   description might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the recommendation. The description might
+    #   contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why this recommendation was created. The information
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_actions
+    #   A list of recommended actions.
+    #   @return [Array<Types::RecommendedAction>]
+    #
+    # @!attribute [rw] category
+    #   The category of the recommendation.
+    #
+    #   Valid values:
+    #
+    #   * `performance efficiency`
+    #
+    #   * `security`
+    #
+    #   * `reliability`
+    #
+    #   * `cost optimization`
+    #
+    #   * `operational excellence`
+    #
+    #   * `sustainability`
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon Web Services service that generated the recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_detection
+    #   A short description of the recommendation type. The description
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_recommendation
+    #   A short description that summarizes the recommendation to fix all
+    #   the issues of the recommendation type. The description might contain
+    #   markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   A short description that explains the possible impact of an issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_info
+    #   Additional information about the recommendation. The information
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] links
+    #   A link to documentation that provides additional information about
+    #   the recommendation.
+    #   @return [Array<Types::DocLink>]
+    #
+    # @!attribute [rw] issue_details
+    #   Details of the issue that caused the recommendation.
+    #   @return [Types::IssueDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBRecommendation AWS API Documentation
+    #
+    class DBRecommendation < Struct.new(
+      :recommendation_id,
+      :type_id,
+      :severity,
+      :resource_arn,
+      :status,
+      :created_time,
+      :updated_time,
+      :detection,
+      :recommendation,
+      :description,
+      :reason,
+      :recommended_actions,
+      :category,
+      :source,
+      :type_detection,
+      :type_recommendation,
+      :impact,
+      :additional_info,
+      :links,
+      :issue_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_recommendation
+    #   The recommendation for your DB instances, DB clusters, and DB
+    #   parameter groups.
+    #   @return [Types::DBRecommendation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBRecommendationMessage AWS API Documentation
+    #
+    class DBRecommendationMessage < Struct.new(
+      :db_recommendation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_recommendations
+    #   A list of recommendations which is returned from
+    #   `DescribeDBRecommendations` API request.
+    #   @return [Array<Types::DBRecommendation>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DBRecommendationsMessage` request. This token can be used later in
+    #   a `DescribeDBRecomendations` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBRecommendationsMessage AWS API Documentation
+    #
+    class DBRecommendationsMessage < Struct.new(
+      :db_recommendations,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details for an Amazon RDS DB security group.
     #
     # This data type is used as a response element in the
@@ -12528,6 +12745,133 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] last_updated_after
+    #   A filter to include only the recommendations that were updated after
+    #   this specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_before
+    #   A filter to include only the recommendations that were updated
+    #   before this specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] locale
+    #   The language that you choose to return the list of recommendations.
+    #
+    #   Valid values:
+    #
+    #   * `en`
+    #
+    #   * `en_UK`
+    #
+    #   * `de`
+    #
+    #   * `es`
+    #
+    #   * `fr`
+    #
+    #   * `id`
+    #
+    #   * `it`
+    #
+    #   * `ja`
+    #
+    #   * `ko`
+    #
+    #   * `pt_BR`
+    #
+    #   * `zh_TW`
+    #
+    #   * `zh_CN`
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more recommendations to describe.
+    #
+    #   Supported Filters:
+    #
+    #   * `recommendation-id` - Accepts a list of recommendation
+    #     identifiers. The results list only includes the recommendations
+    #     whose identifier is one of the specified filter values.
+    #
+    #   * `status` - Accepts a list of recommendation statuses.
+    #
+    #     Valid values:
+    #
+    #     * `active` - The recommendations which are ready for you to apply.
+    #
+    #     * `pending` - The applied or scheduled recommendations which are
+    #       in progress.
+    #
+    #     * `resolved` - The recommendations which are completed.
+    #
+    #     * `dismissed` - The recommendations that you dismissed.
+    #
+    #     The results list only includes the recommendations whose status is
+    #     one of the specified filter values.
+    #
+    #   * `severity` - Accepts a list of recommendation severities. The
+    #     results list only includes the recommendations whose severity is
+    #     one of the specified filter values.
+    #
+    #     Valid values:
+    #
+    #     * `high`
+    #
+    #     * `medium`
+    #
+    #     * `low`
+    #
+    #     * `informational`
+    #
+    #   * `type-id` - Accepts a list of recommendation type identifiers. The
+    #     results list only includes the recommendations whose type is one
+    #     of the specified filter values.
+    #
+    #   * `dbi-resource-id` - Accepts a list of database resource
+    #     identifiers. The results list only includes the recommendations
+    #     that generated for the specified databases.
+    #
+    #   * `cluster-resource-id` - Accepts a list of cluster resource
+    #     identifiers. The results list only includes the recommendations
+    #     that generated for the specified clusters.
+    #
+    #   * `pg-arn` - Accepts a list of parameter group ARNs. The results
+    #     list only includes the recommendations that generated for the
+    #     specified parameter groups.
+    #
+    #   * `cluster-pg-arn` - Accepts a list of cluster parameter group ARNs.
+    #     The results list only includes the recommendations that generated
+    #     for the specified cluster parameter groups.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of recommendations to include in the response. If
+    #   more records exist than the specified `MaxRecords` value, a
+    #   pagination token called a marker is included in the response so that
+    #   you can retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBRecommendations` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBRecommendationsMessage AWS API Documentation
+    #
+    class DescribeDBRecommendationsMessage < Struct.new(
+      :last_updated_after,
+      :last_updated_before,
+      :locale,
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_security_group_name
     #   The name of the DB security group to return details for.
     #   @return [String]
@@ -14031,6 +14375,56 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DisableHttpEndpointRequest AWS API Documentation
+    #
+    class DisableHttpEndpointRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_endpoint_enabled
+    #   Indicates whether the HTTP endpoint is enabled or disabled for the
+    #   DB cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DisableHttpEndpointResponse AWS API Documentation
+    #
+    class DisableHttpEndpointResponse < Struct.new(
+      :resource_arn,
+      :http_endpoint_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A link to documentation that provides additional information for a
+    # recommendation.
+    #
+    # @!attribute [rw] text
+    #   The text with the link to documentation for the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL for the documentation for the recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DocLink AWS API Documentation
+    #
+    class DocLink < Struct.new(
+      :text,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Active Directory Domain membership record associated with the DB
     # instance or cluster.
     #
@@ -14236,6 +14630,36 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Ec2ImagePropertiesNotSupportedFault AWS API Documentation
     #
     class Ec2ImagePropertiesNotSupportedFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EnableHttpEndpointRequest AWS API Documentation
+    #
+    class EnableHttpEndpointRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_endpoint_enabled
+    #   Indicates whether the HTTP endpoint is enabled or disabled for the
+    #   DB cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EnableHttpEndpointResponse AWS API Documentation
+    #
+    class EnableHttpEndpointResponse < Struct.new(
+      :resource_arn,
+      :http_endpoint_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # This data type represents the information you need to connect to an
     # Amazon RDS DB instance. This data type is used as a response element
@@ -14883,6 +15307,8 @@ module Aws::RDS
     #
     # * `DescribeDBInstances`
     #
+    # * `DescribeDBRecommendations`
+    #
     # * `DescribePendingMaintenanceActions`
     #
     # @!attribute [rw] name
@@ -15411,6 +15837,13 @@ module Aws::RDS
     #
     class InvalidOptionGroupStateFault < Aws::EmptyStructure; end
 
+    # The operation can't be performed because another operation is in
+    # progress.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidResourceStateFault AWS API Documentation
+    #
+    class InvalidResourceStateFault < Aws::EmptyStructure; end
+
     # Cannot restore from VPC backup to non-VPC DB instance.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidRestoreFault AWS API Documentation
@@ -15439,6 +15872,22 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidVPCNetworkStateFault AWS API Documentation
     #
     class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
+
+    # The details of an issue with your DB instances, DB clusters, and DB
+    # parameter groups.
+    #
+    # @!attribute [rw] performance_issue_details
+    #   A detailed description of the issue when the recommendation category
+    #   is `performance`.
+    #   @return [Types::PerformanceIssueDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IssueDetails AWS API Documentation
+    #
+    class IssueDetails < Struct.new(
+      :performance_issue_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An error occurred accessing an Amazon Web Services KMS key.
     #
@@ -15521,6 +15970,70 @@ module Aws::RDS
       :secret_arn,
       :secret_status,
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The representation of a metric.
+    #
+    # @!attribute [rw] name
+    #   The name of a metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A list of metric references (thresholds).
+    #   @return [Array<Types::MetricReference>]
+    #
+    # @!attribute [rw] statistics_details
+    #   The details of different statistics for a metric. The description
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_query
+    #   The query to retrieve metric data points.
+    #   @return [Types::MetricQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Metric AWS API Documentation
+    #
+    class Metric < Struct.new(
+      :name,
+      :references,
+      :statistics_details,
+      :metric_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The query to retrieve metric data points.
+    #
+    # @!attribute [rw] performance_insights_metric_query
+    #   The Performance Insights query that you can use to retrieve
+    #   Performance Insights metric data points.
+    #   @return [Types::PerformanceInsightsMetricQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MetricQuery AWS API Documentation
+    #
+    class MetricQuery < Struct.new(
+      :performance_insights_metric_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reference (threshold) for a metric.
+    #
+    # @!attribute [rw] name
+    #   The name of the metric reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_details
+    #   The details of a performance issue.
+    #   @return [Types::ReferenceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MetricReference AWS API Documentation
+    #
+    class MetricReference < Struct.new(
+      :name,
+      :reference_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16127,15 +16640,23 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_http_endpoint
     #   Specifies whether to enable the HTTP endpoint for an Aurora
-    #   Serverless v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   Serverless v1 DB cluster. By default, the HTTP endpoint isn't
+    #   enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web
-    #   service API for running SQL queries on the Aurora Serverless v1 DB
-    #   cluster. You can also query your database from inside the RDS
-    #   console with the query editor.
+    #   service API (RDS Data API) for running SQL queries on the Aurora
+    #   Serverless v1 DB cluster. You can also query your database from
+    #   inside the RDS console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #   <note markdown="1"> This parameter applies only to Aurora Serverless v1 DB clusters. To
+    #   enable or disable the HTTP endpoint for an Aurora PostgreSQL
+    #   Serverless v2 or provisioned DB cluster, use the
+    #   `EnableHttpEndpoint` and `DisableHttpEndpoint` operations.
+    #
+    #    </note>
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -18137,6 +18658,40 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] recommendation_id
+    #   The identifier of the recommendation to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The language of the modified recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The recommendation status to update.
+    #
+    #   Valid values:
+    #
+    #   * active
+    #
+    #   * dismissed
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_action_updates
+    #   The list of recommended action status to update. You can update
+    #   multiple recommended actions at one time.
+    #   @return [Array<Types::RecommendedActionUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBRecommendationMessage AWS API Documentation
+    #
+    class ModifyDBRecommendationMessage < Struct.new(
+      :recommendation_id,
+      :locale,
+      :status,
+      :recommended_action_updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot to modify the attributes for.
     #   @return [String]
@@ -19701,6 +20256,141 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # A logical grouping of Performance Insights metrics for a related
+    # subject area. For example, the `db.sql` dimension group consists of
+    # the following dimensions:
+    #
+    # * `db.sql.id` - The hash of a running SQL statement, generated by
+    #   Performance Insights.
+    #
+    # * `db.sql.db_id` - Either the SQL ID generated by the database engine,
+    #   or a value generated by Performance Insights that begins with `pi-`.
+    #
+    # * `db.sql.statement` - The full text of the SQL statement that is
+    #   running, for example, `SELECT * FROM employees`.
+    #
+    # * `db.sql_tokenized.id` - The hash of the SQL digest generated by
+    #   Performance Insights.
+    #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] dimensions
+    #   A list of specific dimensions from a dimension group. If this list
+    #   isn't included, then all of the dimensions in the group were
+    #   requested, or are present in the response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group
+    #   The available dimension groups for Performance Insights metric type.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to fetch for this dimension group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PerformanceInsightsMetricDimensionGroup AWS API Documentation
+    #
+    class PerformanceInsightsMetricDimensionGroup < Struct.new(
+      :dimensions,
+      :group,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single Performance Insights metric query to process. You must
+    # provide the metric to the query. If other parameters aren't
+    # specified, Performance Insights returns all data points for the
+    # specified metric. Optionally, you can request the data points to be
+    # aggregated by dimension group (`GroupBy`) and return only those data
+    # points that match your criteria (`Filter`).
+    #
+    # Constraints:
+    #
+    # * Must be a valid Performance Insights query.
+    #
+    # ^
+    #
+    # @!attribute [rw] group_by
+    #   A specification for how to aggregate the data points from a query
+    #   result. You must specify a valid dimension group. Performance
+    #   Insights will return all of the dimensions within that group, unless
+    #   you provide the names of specific dimensions within that group. You
+    #   can also request that Performance Insights return a limited number
+    #   of values for a dimension.
+    #   @return [Types::PerformanceInsightsMetricDimensionGroup]
+    #
+    # @!attribute [rw] metric
+    #   The name of a Performance Insights metric to be measured.
+    #
+    #   Valid Values:
+    #
+    #   * `db.load.avg` - A scaled representation of the number of active
+    #     sessions for the database engine.
+    #
+    #   * `db.sampledload.avg` - The raw number of active sessions for the
+    #     database engine.
+    #
+    #   * The counter metrics listed in [Performance Insights operating
+    #     system counters][1] in the *Amazon Aurora User Guide*.
+    #
+    #   If the number of active sessions is less than an internal
+    #   Performance Insights threshold, `db.load.avg` and
+    #   `db.sampledload.avg` are the same value. If the number of active
+    #   sessions is greater than the internal threshold, Performance
+    #   Insights samples the active sessions, with `db.load.avg` showing the
+    #   scaled values, `db.sampledload.avg` showing the raw values, and
+    #   `db.sampledload.avg` less than `db.load.avg`. For most use cases,
+    #   you can query `db.load.avg` only.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PerformanceInsightsMetricQuery AWS API Documentation
+    #
+    class PerformanceInsightsMetricQuery < Struct.new(
+      :group_by,
+      :metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the performance issue.
+    #
+    # @!attribute [rw] start_time
+    #   The time when the performance issue started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the performance issue stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   The metrics that are relevant to the performance issue.
+    #   @return [Array<Types::Metric>]
+    #
+    # @!attribute [rw] analysis
+    #   The analysis of the performance issue. The information might contain
+    #   markdown.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PerformanceIssueDetails AWS API Documentation
+    #
+    class PerformanceIssueDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :metrics,
+      :analysis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # `SourceDBInstanceIdentifier` refers to a DB instance with
     # `BackupRetentionPeriod` equal to 0.
     #
@@ -20135,6 +20825,127 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The recommended actions to apply to resolve the issues associated with
+    # your DB instances, DB clusters, and DB parameter groups.
+    #
+    # @!attribute [rw] action_id
+    #   The unique identifier of the recommended action.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short description to summarize the action. The description might
+    #   contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the action. The description might contain
+    #   markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   An API operation for the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters for the API operation.
+    #   @return [Array<Types::RecommendedActionParameter>]
+    #
+    # @!attribute [rw] apply_modes
+    #   The methods to apply the recommended action.
+    #
+    #   Valid values:
+    #
+    #   * `manual` - The action requires you to resolve the recommendation
+    #     manually.
+    #
+    #   * `immediately` - The action is applied immediately.
+    #
+    #   * `next-maintainance-window` - The action is applied during the next
+    #     scheduled maintainance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the action.
+    #
+    #   * `ready`
+    #
+    #   * `applied`
+    #
+    #   * `scheduled`
+    #
+    #   * `resolved`
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_details
+    #   The details of the issue.
+    #   @return [Types::IssueDetails]
+    #
+    # @!attribute [rw] context_attributes
+    #   The supporting attributes to explain the recommended action.
+    #   @return [Array<Types::ContextAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecommendedAction AWS API Documentation
+    #
+    class RecommendedAction < Struct.new(
+      :action_id,
+      :title,
+      :description,
+      :operation,
+      :parameters,
+      :apply_modes,
+      :status,
+      :issue_details,
+      :context_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single parameter to use with the `RecommendedAction` API operation
+    # to apply the action.
+    #
+    # @!attribute [rw] key
+    #   The key of the parameter to use with the `RecommendedAction` API
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter to use with the `RecommendedAction` API
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecommendedActionParameter AWS API Documentation
+    #
+    class RecommendedActionParameter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommended status to update for the specified recommendation
+    # action ID.
+    #
+    # @!attribute [rw] action_id
+    #   A unique identifier of the updated recommendation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the updated recommendation action.
+    #
+    #   * `applied`
+    #
+    #   * `scheduled`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecommendedActionUpdate AWS API Documentation
+    #
+    class RecommendedActionUpdate < Struct.new(
+      :action_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This data type is used as a response element in the
     # `DescribeReservedDBInstances` and
     # `DescribeReservedDBInstancesOfferings` actions.
@@ -20152,6 +20963,20 @@ module Aws::RDS
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reference details of a metric.
+    #
+    # @!attribute [rw] scalar_reference_details
+    #   The metric reference details when the reference is a scalar.
+    #   @return [Types::ScalarReferenceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReferenceDetails AWS API Documentation
+    #
+    class ReferenceDetails < Struct.new(
+      :scalar_reference_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24167,6 +24992,20 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
     #
     class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
+    # The metric reference details when the reference is a scalar.
+    #
+    # @!attribute [rw] value
+    #   The value of a scalar reference.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalarReferenceDetails AWS API Documentation
+    #
+    class ScalarReferenceDetails < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the scaling configuration of an Aurora Serverless v1 DB
     # cluster.

@@ -24,9 +24,9 @@ module Aws::B2bi
     end
 
     # A capability object. Currently, only EDI (electronic data interchange)
-    # capabilities are supported. Capabilities contain the information
-    # necessary to process incoming EDI (electronic data interchange)
-    # documents.
+    # capabilities are supported. A trading capability contains the
+    # information required to transform incoming EDI documents into JSON or
+    # XML outputs.
     #
     # @note CapabilityConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -49,9 +49,9 @@ module Aws::B2bi
       class Unknown < CapabilityConfiguration; end
     end
 
-    # Returns the capability summary details. Capabilities contain the
-    # information necessary to process incoming EDI (electronic data
-    # interchange) documents.
+    # Returns the capability summary details. A trading capability contains
+    # the information required to transform incoming EDI documents into JSON
+    # or XML outputs.
     #
     # @!attribute [rw] capability_id
     #   Returns a system-assigned unique identifier for the capability.
@@ -1183,10 +1183,9 @@ module Aws::B2bi
       include Aws::Structure
     end
 
-    # A structure that contains the details for a partnership. Partnerships
-    # link trading partners with your profile and a specific transformer, so
-    # that the EDI (electronic data interchange) documents that they upload
-    # to Amazon S3 can be processed according to their specifications.
+    # A structure that contains the details for a partnership. A partnership
+    # represents the connection between you and your trading partner. It
+    # ties together a profile and one or more trading capabilities.
     #
     # @!attribute [rw] profile_id
     #   Returns the unique, system-generated identifier for the profile
@@ -1233,8 +1232,8 @@ module Aws::B2bi
       include Aws::Structure
     end
 
-    # Contains the details for a profile. Profiles contain basic information
-    # about you and your business.
+    # Contains the details for a profile. A profile is the mechanism used to
+    # create the concept of a private network.
     #
     # @!attribute [rw] profile_id
     #   Returns the unique, system-generated identifier for the profile.
@@ -1447,8 +1446,8 @@ module Aws::B2bi
     end
 
     # @!attribute [rw] input_file_content
-    #   Specify the EDI (electronic data interchange) file that is used as
-    #   input for the transform.
+    #   Specify the contents of the EDI (electronic data interchange) XML or
+    #   JSON file that is used as input for the transform.
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
@@ -1544,9 +1543,9 @@ module Aws::B2bi
       include Aws::Structure
     end
 
-    # Contains the details for a transformer object. Transformers describe
-    # how to process the incoming EDI (electronic data interchange)
-    # documents, and extract the necessary information.
+    # Contains the details for a transformer object. A transformer describes
+    # how to process the incoming EDI documents and extract the necessary
+    # information to the output file.
     #
     # @!attribute [rw] transformer_id
     #   Returns the system-assigned unique identifier for the transformer.
@@ -2026,6 +2025,12 @@ module Aws::B2bi
     # A structure that contains the X12 transaction set and version. The X12
     # structure is used when the system transforms an EDI (electronic data
     # interchange) file.
+    #
+    # <note markdown="1"> If an EDI input file contains more than one transaction, each
+    # transaction must have the same transaction set and version, for
+    # example 214/4010. If not, the transformer cannot parse the file.
+    #
+    #  </note>
     #
     # @!attribute [rw] transaction_set
     #   Returns an enumerated type where each value identifies an X12

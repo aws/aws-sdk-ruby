@@ -393,8 +393,9 @@ module Aws::ControlTower
     # parameters specified in the manifest JSON file.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The manifest.yaml file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -403,7 +404,7 @@ module Aws::ControlTower
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to be applied to the landing zone.
@@ -1039,8 +1040,9 @@ module Aws::ControlTower
     #   The unique identifier of the landing zone.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The `manifest.yaml` file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -1049,7 +1051,7 @@ module Aws::ControlTower
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #
     # @option params [required, String] :version
     #   The landing zone version, for example, 3.2.
@@ -1093,7 +1095,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

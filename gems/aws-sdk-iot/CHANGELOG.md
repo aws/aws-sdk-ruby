@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2024-01-11)
+------------------
+
+* Feature - Add ConflictException to Update APIs of AWS IoT Software Package Catalog
+
+1.116.0 (2023-12-14)
+------------------
+
+* Feature - This release adds the ability to self-manage certificate signing in AWS IoT Core fleet provisioning using the new certificate provider resource.
+
 1.115.0 (2023-11-28)
 ------------------
 

@@ -284,6 +284,7 @@ module Aws::EMR
     SessionMappingDetail = Shapes::StructureShape.new(name: 'SessionMappingDetail')
     SessionMappingSummary = Shapes::StructureShape.new(name: 'SessionMappingSummary')
     SessionMappingSummaryList = Shapes::ListShape.new(name: 'SessionMappingSummaryList')
+    SetKeepJobFlowAliveWhenNoStepsInput = Shapes::StructureShape.new(name: 'SetKeepJobFlowAliveWhenNoStepsInput')
     SetTerminationProtectionInput = Shapes::StructureShape.new(name: 'SetTerminationProtectionInput')
     SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
     ShrinkPolicy = Shapes::StructureShape.new(name: 'ShrinkPolicy')
@@ -1389,6 +1390,10 @@ module Aws::EMR
 
     SessionMappingSummaryList.member = Shapes::ShapeRef.new(shape: SessionMappingSummary)
 
+    SetKeepJobFlowAliveWhenNoStepsInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
+    SetKeepJobFlowAliveWhenNoStepsInput.add_member(:keep_job_flow_alive_when_no_steps, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "KeepJobFlowAliveWhenNoSteps"))
+    SetKeepJobFlowAliveWhenNoStepsInput.struct_class = Types::SetKeepJobFlowAliveWhenNoStepsInput
+
     SetTerminationProtectionInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
     SetTerminationProtectionInput.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "TerminationProtected"))
     SetTerminationProtectionInput.struct_class = Types::SetTerminationProtectionInput
@@ -2124,6 +2129,15 @@ module Aws::EMR
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RunJobFlowInput)
         o.output = Shapes::ShapeRef.new(shape: RunJobFlowOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:set_keep_job_flow_alive_when_no_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetKeepJobFlowAliveWhenNoSteps"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetKeepJobFlowAliveWhenNoStepsInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

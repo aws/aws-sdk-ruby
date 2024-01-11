@@ -432,13 +432,19 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Adds the data source on the domain.
+    # Creates a new direct-query data source to the specified domain. For
+    # more information, see [Creating Amazon OpenSearch Service data source
+    # integrations with Amazon S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain.
+    #   The name of the domain to add the data source to.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   A name for the data source.
     #
     # @option params [required, Types::DataSourceType] :data_source_type
     #   The type of data source.
@@ -675,7 +681,10 @@ module Aws::OpenSearchService
     #   access policies for the new domain.
     #
     # @option params [String] :ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Specify either dual stack or IPv4 as your IP address type. Dual stack
+    #   allows you to share domain resources across IPv4 and IPv6 address
+    #   types, and is the recommended option. If you set your IP address type
+    #   to dual stack, you can't change your address type later.
     #
     # @option params [Types::SnapshotOptions] :snapshot_options
     #   DEPRECATED. Container for the parameters required to configure
@@ -833,7 +842,7 @@ module Aws::OpenSearchService
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN",
@@ -956,7 +965,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -1191,13 +1200,18 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Deletes the data source.
+    # Deletes a direct-query data source. For more information, see
+    # [Deleting an Amazon OpenSearch Service data source with Amazon S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-delete.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   The name of the data source to delete.
     #
     # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1301,7 +1315,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -1584,7 +1598,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -1843,7 +1857,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
-    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
@@ -2086,7 +2100,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
     #   resp.domain_status_list[0].service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -2221,7 +2235,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.service_software_options.automated_update_date #=> Time
     #   resp.dry_run_config.service_software_options.optional_deployment #=> Boolean
     #   resp.dry_run_config.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.dry_run_config.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.dry_run_config.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.dry_run_config.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.dry_run_config.domain_endpoint_options.custom_endpoint #=> String
     #   resp.dry_run_config.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -2774,13 +2788,13 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Describes the data source details.
+    # Retrieves information about a direct query data source.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   The name of the data source to get information about.
     #
     # @return [Types::GetDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3000,7 +3014,13 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # A list of the data source details of the domain.
+    # Lists direct-query data sources for a specific domain. For more
+    # information, see For more information, see [Working with Amazon
+    # OpenSearch Service direct queries with Amazon S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
@@ -3812,19 +3832,25 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Updates the data source on the domain.
+    # Updates a direct-query data source. For more information, see [Working
+    # with Amazon OpenSearch Service data source integrations with Amazon
+    # S3][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain.
     #
     # @option params [required, String] :name
-    #   The name of the data source.
+    #   The name of the data source to modify.
     #
     # @option params [required, Types::DataSourceType] :data_source_type
     #   The type of data source.
     #
     # @option params [String] :description
-    #   A description of the data source.
+    #   A new description of the data source.
     #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3919,7 +3945,10 @@ module Aws::OpenSearchService
     #   string.
     #
     # @option params [String] :ip_address_type
-    #   The type of IP addresses supported by the endpoint for the domain.
+    #   Specify either dual stack or IPv4 as your IP address type. Dual stack
+    #   allows you to share domain resources across IPv4 and IPv6 address
+    #   types, and is the recommended option. If your IP address type is
+    #   currently set to dual stack, you can't change it.
     #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
     #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
@@ -4030,7 +4059,7 @@ module Aws::OpenSearchService
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN",
@@ -4194,7 +4223,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
-    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
@@ -4537,7 +4566,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

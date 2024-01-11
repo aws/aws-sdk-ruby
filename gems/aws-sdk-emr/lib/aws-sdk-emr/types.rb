@@ -5844,6 +5844,31 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_flow_ids
+    #   A list of strings that uniquely identify the clusters to protect.
+    #   This identifier is returned by [RunJobFlow][1] and can also be
+    #   obtained from [DescribeJobFlows][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html
+    #   [2]: https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] keep_job_flow_alive_when_no_steps
+    #   A Boolean that indicates whether to terminate the cluster after all
+    #   steps are executed.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetKeepJobFlowAliveWhenNoStepsInput AWS API Documentation
+    #
+    class SetKeepJobFlowAliveWhenNoStepsInput < Struct.new(
+      :job_flow_ids,
+      :keep_job_flow_alive_when_no_steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input argument to the TerminationProtection operation.
     #
     # @!attribute [rw] job_flow_ids

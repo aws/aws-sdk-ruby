@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-01-04)
+------------------
+
+* Feature - This release adds support to set up an HTTPS endpoint on an instance.
+
 1.84.0 (2023-11-28)
 ------------------
 

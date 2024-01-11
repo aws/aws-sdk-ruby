@@ -3894,6 +3894,9 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.mediaconnect_settings.role_arn #=> String
     #   resp.uhd_device_settings.mediaconnect_settings.secret_arn #=> String
     #   resp.uhd_device_settings.mediaconnect_settings.source_name #=> String
+    #   resp.uhd_device_settings.audio_channel_pairs #=> Array
+    #   resp.uhd_device_settings.audio_channel_pairs[0].id #=> Integer
+    #   resp.uhd_device_settings.audio_channel_pairs[0].profile #=> String, one of "DISABLED", "VBR-AAC_HHE-16000", "VBR-AAC_HE-64000", "VBR-AAC_LC-128000", "CBR-AAC_HQ-192000", "CBR-AAC_HQ-256000", "CBR-AAC_HQ-384000", "CBR-AAC_HQ-512000"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.availability_zone #=> String
@@ -4628,6 +4631,9 @@ module Aws::MediaLive
     #   resp.input_devices[0].uhd_device_settings.mediaconnect_settings.role_arn #=> String
     #   resp.input_devices[0].uhd_device_settings.mediaconnect_settings.secret_arn #=> String
     #   resp.input_devices[0].uhd_device_settings.mediaconnect_settings.source_name #=> String
+    #   resp.input_devices[0].uhd_device_settings.audio_channel_pairs #=> Array
+    #   resp.input_devices[0].uhd_device_settings.audio_channel_pairs[0].id #=> Integer
+    #   resp.input_devices[0].uhd_device_settings.audio_channel_pairs[0].profile #=> String, one of "DISABLED", "VBR-AAC_HHE-16000", "VBR-AAC_HE-64000", "VBR-AAC_LC-128000", "CBR-AAC_HQ-192000", "CBR-AAC_HQ-256000", "CBR-AAC_HQ-384000", "CBR-AAC_HQ-512000"
     #   resp.input_devices[0].tags #=> Hash
     #   resp.input_devices[0].tags["__string"] #=> String
     #   resp.input_devices[0].availability_zone #=> String
@@ -8367,6 +8373,12 @@ module Aws::MediaLive
     #         secret_arn: "__string",
     #         source_name: "__string",
     #       },
+    #       audio_channel_pairs: [
+    #         {
+    #           id: 1,
+    #           profile: "DISABLED", # accepts DISABLED, VBR-AAC_HHE-16000, VBR-AAC_HE-64000, VBR-AAC_LC-128000, CBR-AAC_HQ-192000, CBR-AAC_HQ-256000, CBR-AAC_HQ-384000, CBR-AAC_HQ-512000
+    #         },
+    #       ],
     #     },
     #     input_device_id: "__string", # required
     #     name: "__string",
@@ -8381,6 +8393,12 @@ module Aws::MediaLive
     #         secret_arn: "__string",
     #         source_name: "__string",
     #       },
+    #       audio_channel_pairs: [
+    #         {
+    #           id: 1,
+    #           profile: "DISABLED", # accepts DISABLED, VBR-AAC_HHE-16000, VBR-AAC_HE-64000, VBR-AAC_LC-128000, CBR-AAC_HQ-192000, CBR-AAC_HQ-256000, CBR-AAC_HQ-384000, CBR-AAC_HQ-512000
+    #         },
+    #       ],
     #     },
     #     availability_zone: "__string",
     #   })
@@ -8425,6 +8443,9 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.mediaconnect_settings.role_arn #=> String
     #   resp.uhd_device_settings.mediaconnect_settings.secret_arn #=> String
     #   resp.uhd_device_settings.mediaconnect_settings.source_name #=> String
+    #   resp.uhd_device_settings.audio_channel_pairs #=> Array
+    #   resp.uhd_device_settings.audio_channel_pairs[0].id #=> Integer
+    #   resp.uhd_device_settings.audio_channel_pairs[0].profile #=> String, one of "DISABLED", "VBR-AAC_HHE-16000", "VBR-AAC_HE-64000", "VBR-AAC_LC-128000", "CBR-AAC_HQ-192000", "CBR-AAC_HQ-256000", "CBR-AAC_HQ-384000", "CBR-AAC_HQ-512000"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.availability_zone #=> String
@@ -8697,7 +8718,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -629,7 +629,9 @@ module Aws::RDSDataService
 
     # Runs one or more SQL statements.
     #
-    # <note markdown="1"> This operation is deprecated. Use the `BatchExecuteStatement` or
+    # <note markdown="1"> This operation isn't supported for Aurora PostgreSQL Serverless v2
+    # and provisioned DB clusters, and for Aurora Serverless v1 DB clusters,
+    # the operation is deprecated. Use the `BatchExecuteStatement` or
     # `ExecuteStatement` operation.
     #
     #  </note>
@@ -970,7 +972,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

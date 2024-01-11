@@ -15,6 +15,7 @@ module Aws::Route53
 
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
+    AWSRegion = Shapes::StringShape.new(name: 'AWSRegion')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountLimitType = Shapes::StringShape.new(name: 'AccountLimitType')
     ActivateKeySigningKeyRequest = Shapes::StructureShape.new(name: 'ActivateKeySigningKeyRequest')
@@ -26,6 +27,7 @@ module Aws::Route53
     AssociateVPCComment = Shapes::StringShape.new(name: 'AssociateVPCComment')
     AssociateVPCWithHostedZoneRequest = Shapes::StructureShape.new(name: 'AssociateVPCWithHostedZoneRequest')
     AssociateVPCWithHostedZoneResponse = Shapes::StructureShape.new(name: 'AssociateVPCWithHostedZoneResponse')
+    Bias = Shapes::IntegerShape.new(name: 'Bias')
     Change = Shapes::StructureShape.new(name: 'Change')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     ChangeBatch = Shapes::StructureShape.new(name: 'ChangeBatch')
@@ -68,6 +70,7 @@ module Aws::Route53
     ConcurrentModification = Shapes::StructureShape.new(name: 'ConcurrentModification')
     ConflictingDomainExists = Shapes::StructureShape.new(name: 'ConflictingDomainExists')
     ConflictingTypes = Shapes::StructureShape.new(name: 'ConflictingTypes')
+    Coordinates = Shapes::StructureShape.new(name: 'Coordinates')
     CreateCidrCollectionRequest = Shapes::StructureShape.new(name: 'CreateCidrCollectionRequest')
     CreateCidrCollectionResponse = Shapes::StructureShape.new(name: 'CreateCidrCollectionResponse')
     CreateHealthCheckRequest = Shapes::StructureShape.new(name: 'CreateHealthCheckRequest')
@@ -146,6 +149,7 @@ module Aws::Route53
     GeoLocationDetailsList = Shapes::ListShape.new(name: 'GeoLocationDetailsList')
     GeoLocationSubdivisionCode = Shapes::StringShape.new(name: 'GeoLocationSubdivisionCode')
     GeoLocationSubdivisionName = Shapes::StringShape.new(name: 'GeoLocationSubdivisionName')
+    GeoProximityLocation = Shapes::StructureShape.new(name: 'GeoProximityLocation')
     GetAccountLimitRequest = Shapes::StructureShape.new(name: 'GetAccountLimitRequest')
     GetAccountLimitResponse = Shapes::StructureShape.new(name: 'GetAccountLimitResponse')
     GetChangeRequest = Shapes::StructureShape.new(name: 'GetChangeRequest')
@@ -240,6 +244,7 @@ module Aws::Route53
     KeySigningKeyWithActiveStatusNotFound = Shapes::StructureShape.new(name: 'KeySigningKeyWithActiveStatusNotFound')
     KeySigningKeys = Shapes::ListShape.new(name: 'KeySigningKeys')
     LastVPCAssociation = Shapes::StructureShape.new(name: 'LastVPCAssociation')
+    Latitude = Shapes::StringShape.new(name: 'Latitude')
     LimitValue = Shapes::IntegerShape.new(name: 'LimitValue')
     LimitsExceeded = Shapes::StructureShape.new(name: 'LimitsExceeded')
     LinkedService = Shapes::StructureShape.new(name: 'LinkedService')
@@ -281,8 +286,10 @@ module Aws::Route53
     ListTrafficPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListTrafficPolicyVersionsResponse')
     ListVPCAssociationAuthorizationsRequest = Shapes::StructureShape.new(name: 'ListVPCAssociationAuthorizationsRequest')
     ListVPCAssociationAuthorizationsResponse = Shapes::StructureShape.new(name: 'ListVPCAssociationAuthorizationsResponse')
+    LocalZoneGroup = Shapes::StringShape.new(name: 'LocalZoneGroup')
     LocationSummaries = Shapes::ListShape.new(name: 'LocationSummaries')
     LocationSummary = Shapes::StructureShape.new(name: 'LocationSummary')
+    Longitude = Shapes::StringShape.new(name: 'Longitude')
     MaxResults = Shapes::StringShape.new(name: 'MaxResults')
     MeasureLatency = Shapes::BooleanShape.new(name: 'MeasureLatency')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -545,6 +552,10 @@ module Aws::Route53
     ConflictingTypes.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConflictingTypes.struct_class = Types::ConflictingTypes
 
+    Coordinates.add_member(:latitude, Shapes::ShapeRef.new(shape: Latitude, required: true, location_name: "Latitude"))
+    Coordinates.add_member(:longitude, Shapes::ShapeRef.new(shape: Longitude, required: true, location_name: "Longitude"))
+    Coordinates.struct_class = Types::Coordinates
+
     CreateCidrCollectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, required: true, location_name: "Name"))
     CreateCidrCollectionRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: CidrNonce, required: true, location_name: "CallerReference"))
     CreateCidrCollectionRequest.struct_class = Types::CreateCidrCollectionRequest
@@ -770,6 +781,12 @@ module Aws::Route53
     GeoLocationDetails.struct_class = Types::GeoLocationDetails
 
     GeoLocationDetailsList.member = Shapes::ShapeRef.new(shape: GeoLocationDetails, location_name: "GeoLocationDetails")
+
+    GeoProximityLocation.add_member(:aws_region, Shapes::ShapeRef.new(shape: AWSRegion, location_name: "AWSRegion"))
+    GeoProximityLocation.add_member(:local_zone_group, Shapes::ShapeRef.new(shape: LocalZoneGroup, location_name: "LocalZoneGroup"))
+    GeoProximityLocation.add_member(:coordinates, Shapes::ShapeRef.new(shape: Coordinates, location_name: "Coordinates"))
+    GeoProximityLocation.add_member(:bias, Shapes::ShapeRef.new(shape: Bias, location_name: "Bias"))
+    GeoProximityLocation.struct_class = Types::GeoProximityLocation
 
     GetAccountLimitRequest.add_member(:type, Shapes::ShapeRef.new(shape: AccountLimitType, required: true, location: "uri", location_name: "Type"))
     GetAccountLimitRequest.struct_class = Types::GetAccountLimitRequest
@@ -1354,6 +1371,7 @@ module Aws::Route53
     ResourceRecordSet.add_member(:health_check_id, Shapes::ShapeRef.new(shape: HealthCheckId, location_name: "HealthCheckId"))
     ResourceRecordSet.add_member(:traffic_policy_instance_id, Shapes::ShapeRef.new(shape: TrafficPolicyInstanceId, location_name: "TrafficPolicyInstanceId"))
     ResourceRecordSet.add_member(:cidr_routing_config, Shapes::ShapeRef.new(shape: CidrRoutingConfig, location_name: "CidrRoutingConfig"))
+    ResourceRecordSet.add_member(:geo_proximity_location, Shapes::ShapeRef.new(shape: GeoProximityLocation, location_name: "GeoProximityLocation"))
     ResourceRecordSet.struct_class = Types::ResourceRecordSet
 
     ResourceRecordSets.member = Shapes::ShapeRef.new(shape: ResourceRecordSet, location_name: "ResourceRecordSet")
