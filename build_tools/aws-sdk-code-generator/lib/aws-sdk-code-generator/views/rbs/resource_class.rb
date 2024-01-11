@@ -45,6 +45,7 @@ module AwsSdkCodeGenerator
           @actions = AwsSdkCodeGenerator::RBS::ResourceAction.build_method_signature_list(resource: @resource, api: api)
           @associations = AwsSdkCodeGenerator::RBS::ResourceAssociation.build_method_signature_list(resource: @resource, api: api, paginators: paginators)
           @batch_actions = AwsSdkCodeGenerator::RBS::ResourceBatchAction.build_method_signature_list(resource: @resource, api: api)
+          avoid_duplicate_methods
         end
 
         # @return [String|nil]
@@ -74,6 +75,19 @@ module AwsSdkCodeGenerator
 
         def load_or_shape?
           load? or !!shape
+        end
+
+        private
+
+        # `Aws::RDS::DBEngineVersion` has a duplicated method named `engine`.
+        # This is a rare case and should be patched minimally.
+        def avoid_duplicate_methods
+          overrided_method_names = @actions.map(&:method_name).to_set + @associations.map(&:method_name).to_set
+          @identifiers.each do |identifier|
+            if identifier.alias && overrided_method_names.include?(identifier.alias)
+              identifier.alias = nil
+            end
+          end
         end
       end
     end
