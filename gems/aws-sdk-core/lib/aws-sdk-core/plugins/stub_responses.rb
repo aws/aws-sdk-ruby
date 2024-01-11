@@ -8,6 +8,7 @@ module Aws
       option(:stub_responses,
         default: false,
         doc_type: 'Boolean',
+        rbs_type: 'untyped',
         docstring: <<-DOCS)
 Causes the client to return stubbed responses. By default
 fake responses are generated and returned. You can specify

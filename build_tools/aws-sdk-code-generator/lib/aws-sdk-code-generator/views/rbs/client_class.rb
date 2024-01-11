@@ -118,25 +118,20 @@ module AwsSdkCodeGenerator
 
         def build_keyword_arguments(plugins)
           buffer = plugins.map do |opt|
-            type = case opt.name
-              when :retry_mode
-                '("legacy" | "standard" | "adaptive")'
-              when :retry_jitter
-                "(:none | :equal | :full | ^(Integer) -> Integer)"
-              when :stub_responses, :endpoint, :credentials, :log_formatter, :client_side_monitoring_publisher, :logger, :endpoint_provider, :token_provider, :express_credentials_provider
-                # TODO: Just not supported yet
+            if opt.rbs_type
+              opt.rbs_type
+            else
+              case opt.doc_type
+              when "Boolean"
+                "bool"
+              when nil
                 "untyped"
               else
-                case opt.doc_type
-                when "Boolean"
-                  "bool"
-                when nil
-                  "untyped"
-                else
-                  opt.doc_type
-                end
+                opt.doc_type.to_s
               end
+            end.then do |type|
               [opt.name, "?#{opt.name}: #{type}", opt.doc_type]
+            end
           end
           # Find duplicated key
           grouped = buffer.group_by { |name, _| name }

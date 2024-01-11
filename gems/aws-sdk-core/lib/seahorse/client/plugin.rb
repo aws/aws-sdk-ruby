@@ -124,6 +124,7 @@ module Seahorse
         attr_accessor :doc_type
         attr_writer :doc_default
         attr_accessor :docstring
+        attr_accessor :rbs_type
 
         def doc_default(options)
           if @doc_default.nil? && !default.is_a?(Proc)

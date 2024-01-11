@@ -8,6 +8,7 @@ module Aws
 
       option(:logger,
         doc_type: 'Logger',
+        rbs_type: 'untyped',
         docstring: <<-DOCS
 The Logger instance to send log messages to.  If this option
 is not set, logging will be disabled.
@@ -22,6 +23,7 @@ is not set, logging will be disabled.
 
       option(:log_formatter,
         doc_type: 'Aws::Log::Formatter',
+        rbs_type: 'untyped',
         doc_default: literal('Aws::Log::Formatter.default'),
         docstring: 'The log formatter.'
       ) do |config|
