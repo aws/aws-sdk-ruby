@@ -140,7 +140,7 @@ module AwsSdkCodeGenerator
             case name
             when :endpoint, :endpoint_provider
             else
-              warn("Duprecate client option: `#{grouped[name].map { |g| g.values_at(0, 2) }}`", uplevel: 0)
+              warn("Duplicate client option: `#{grouped[name].map { |g| g.values_at(0, 2) }}`", uplevel: 0)
             end
           end
           buffer.uniq! { |b| b[0] }
