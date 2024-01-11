@@ -137,11 +137,11 @@ module AwsSdkCodeGenerator
           # Find duplicated key
           grouped = buffer.group_by { |name, _| name }
           grouped.transform_values(&:count).find_all { |_, c| 1 < c }.each do |name,|
-            # :endpoint is duprecated in all client
             case name
-            when :endpoint, :endpoint_provider
+            when :endpoint, :endpoint_provider, :retry_limit, :disable_s3_express_session_auth
+              # ok
             else
-              warn("Duplicate client option: `#{grouped[name].map { |g| g.values_at(0, 2) }}`", uplevel: 0)
+              warn("Duplicate client option in #{@service_name}: `#{grouped[name].map { |g| g.values_at(0, 2) }}`", uplevel: 0)
             end
           end
           buffer.uniq! { |b| b[0] }
