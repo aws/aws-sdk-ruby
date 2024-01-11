@@ -53,13 +53,18 @@ module AwsSdkCodeGenerator
         end
 
         def initialize_signature
-          po = @identifiers.map { |id| "#{id.type} #{id.name}" }.join(', ')
-          kw = @identifiers.map { |id| "#{id.name}: #{id.type}" }.join(', ')
-          initialize_overloads = [
-            "(#{po}, Hash[Symbol, untyped] options) -> void",
-            "(#{kw}, ?client: Client) -> void",
-            "(Hash[Symbol, untyped]) -> void"
-          ]
+          initialize_overloads =
+            if @identifiers.empty?
+              []
+            else
+              positional = @identifiers.map { |id| "#{id.type} #{id.name}" } << "Hash[Symbol, untyped] options"
+              keyword = @identifiers.map { |id| "#{id.name}: #{id.type}" } << "?client: Client"
+              [
+                "(#{positional.join(', ')}) -> void",
+                "(#{keyword.join(', ')}) -> void"
+              ]
+            end
+          initialize_overloads << "(Hash[Symbol, untyped] args) -> void"
           "def initialize: #{initialize_overloads.join("\n                    | ")}"
         end
 
