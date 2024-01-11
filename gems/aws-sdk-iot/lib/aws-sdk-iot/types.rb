@@ -2902,10 +2902,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobRequest < Struct.new(
@@ -3019,10 +3026,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobTemplateRequest < Struct.new(
@@ -5739,10 +5753,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class DescribeJobTemplateResponse < Struct.new(
@@ -8403,10 +8424,19 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].The package version must be in either the Published or
+    #   Deprecated state when the job deploys. For more information, see
+    #   [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class Job < Struct.new(

@@ -1902,10 +1902,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2060,10 +2066,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15063,7 +15075,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

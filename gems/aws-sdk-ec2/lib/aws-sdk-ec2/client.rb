@@ -3069,6 +3069,8 @@ module Aws::EC2
     #   * {Types::VolumeAttachment#state #state} => String
     #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
+    #   * {Types::VolumeAttachment#associated_resource #associated_resource} => String
+    #   * {Types::VolumeAttachment#instance_owning_service #instance_owning_service} => String
     #
     #
     # @example Example: To attach a volume to an instance
@@ -3107,6 +3109,8 @@ module Aws::EC2
     #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
+    #   resp.associated_resource #=> String
+    #   resp.instance_owning_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolume AWS API Documentation
     #
@@ -14260,6 +14264,8 @@ module Aws::EC2
     #   resp.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.attachments[0].volume_id #=> String
     #   resp.attachments[0].delete_on_termination #=> Boolean
+    #   resp.attachments[0].associated_resource #=> String
+    #   resp.attachments[0].instance_owning_service #=> String
     #   resp.availability_zone #=> String
     #   resp.create_time #=> Time
     #   resp.encrypted #=> Boolean
@@ -20160,11 +20166,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeCapacityBlockOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20219,11 +20227,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -20318,11 +20328,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -23924,6 +23936,8 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.block_device_mappings[0].ebs.status #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.block_device_mappings[0].ebs.volume_id #=> String
+    #   resp.block_device_mappings[0].ebs.associated_resource #=> String
+    #   resp.block_device_mappings[0].ebs.volume_owner_id #=> String
     #   resp.disable_api_termination.value #=> Boolean
     #   resp.ena_support.value #=> Boolean
     #   resp.enclave_options.enabled #=> Boolean
@@ -25672,6 +25686,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.status #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.volume_id #=> String
+    #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.associated_resource #=> String
+    #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.volume_owner_id #=> String
     #   resp.reservations[0].instances[0].client_token #=> String
     #   resp.reservations[0].instances[0].ebs_optimized #=> Boolean
     #   resp.reservations[0].instances[0].ena_support #=> Boolean
@@ -35949,6 +35965,8 @@ module Aws::EC2
     #   resp.volumes[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volumes[0].attachments[0].volume_id #=> String
     #   resp.volumes[0].attachments[0].delete_on_termination #=> Boolean
+    #   resp.volumes[0].attachments[0].associated_resource #=> String
+    #   resp.volumes[0].attachments[0].instance_owning_service #=> String
     #   resp.volumes[0].availability_zone #=> String
     #   resp.volumes[0].create_time #=> Time
     #   resp.volumes[0].encrypted #=> Boolean
@@ -37716,6 +37734,11 @@ module Aws::EC2
     # detached from an instance, the product code is no longer associated
     # with the instance.
     #
+    # You can't detach or force detach volumes that are attached to Amazon
+    # ECS or Fargate tasks. Attempting to do this results in the
+    # `UnsupportedOperationException` exception with the `Unable to detach
+    # volume attached to ECS tasks` error message.
+    #
     # For more information, see [Detach an Amazon EBS volume][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
@@ -37757,6 +37780,8 @@ module Aws::EC2
     #   * {Types::VolumeAttachment#state #state} => String
     #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
+    #   * {Types::VolumeAttachment#associated_resource #associated_resource} => String
+    #   * {Types::VolumeAttachment#instance_owning_service #instance_owning_service} => String
     #
     #
     # @example Example: To detach a volume from an instance
@@ -37794,6 +37819,8 @@ module Aws::EC2
     #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
+    #   resp.associated_resource #=> String
+    #   resp.instance_owning_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolume AWS API Documentation
     #
@@ -39961,6 +39988,9 @@ module Aws::EC2
     #     request new public sharing. However, snapshots that are already
     #     publicly shared, remain publicly available.
     #
+    #   `unblocked` is not a valid value for
+    #   **EnableSnapshotBlockPublicAccess**.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -40668,13 +40698,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
-    #   Valid range: Minimum value of 1. Maximum value of 1000.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -41135,11 +41165,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -43240,8 +43272,6 @@ module Aws::EC2
     #
     # @option params [String] :target_capacity_unit_type
     #   The unit for the target capacity.
-    #
-    #   Default: `units` (translates to number of instances)
     #
     # @option params [Boolean] :single_availability_zone
     #   Specify `true` so that the response returns a list of scored
@@ -46501,7 +46531,9 @@ module Aws::EC2
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
     #   value is specified for `DeleteOnTermination`, the default is `true`
-    #   and the volume is deleted when the instance is terminated.
+    #   and the volume is deleted when the instance is terminated. You can't
+    #   modify the `DeleteOnTermination` attribute for volumes that are
+    #   attached to Fargate tasks.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
@@ -47037,23 +47069,22 @@ module Aws::EC2
     #   The ID of the instance.
     #
     # @option params [String] :http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the IMDSv1
-    #     role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role credentials
-    #     are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session token
-    #     with any instance metadata retrieval requests. In this state,
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
     #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #
     # @option params [Integer] :http_put_response_hop_limit
     #   The desired HTTP PUT response hop limit for instance metadata
@@ -56074,6 +56105,8 @@ module Aws::EC2
     #   resp.instances[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.instances[0].block_device_mappings[0].ebs.status #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.instances[0].block_device_mappings[0].ebs.volume_id #=> String
+    #   resp.instances[0].block_device_mappings[0].ebs.associated_resource #=> String
+    #   resp.instances[0].block_device_mappings[0].ebs.volume_owner_id #=> String
     #   resp.instances[0].client_token #=> String
     #   resp.instances[0].ebs_optimized #=> Boolean
     #   resp.instances[0].ena_support #=> Boolean
@@ -58675,7 +58708,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.432.0'
+      context[:gem_version] = '1.433.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

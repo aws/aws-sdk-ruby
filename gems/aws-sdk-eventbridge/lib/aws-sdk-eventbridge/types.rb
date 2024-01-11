@@ -78,6 +78,29 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # Contains the GraphQL operation to be parsed and executed, if the event
+    # target is an AppSync API.
+    #
+    # @!attribute [rw] graph_ql_operation
+    #   The GraphQL operation; that is, the query, mutation, or subscription
+    #   to be parsed and executed by the GraphQL service.
+    #
+    #   For more information, see [Operations][1] in the *AppSync User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appsync/latest/devguide/graphql-architecture.html#graphql-operations
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/AppSyncParameters AWS API Documentation
+    #
+    class AppSyncParameters < Struct.new(
+      :graph_ql_operation)
+      SENSITIVE = [:graph_ql_operation]
+      include Aws::Structure
+    end
+
     # An `Archive` object that contains details about an archive.
     #
     # @!attribute [rw] archive_name
@@ -3706,40 +3729,7 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the rule.
-    #
-    #   Valid values include:
-    #
-    #   * `DISABLED`: The rule is disabled. EventBridge does not match any
-    #     events against the rule.
-    #
-    #   * `ENABLED`: The rule is enabled. EventBridge matches events against
-    #     the rule, *except* for Amazon Web Services management events
-    #     delivered through CloudTrail.
-    #
-    #   * `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is
-    #     enabled for all events, including Amazon Web Services management
-    #     events delivered through CloudTrail.
-    #
-    #     Management events provide visibility into management operations
-    #     that are performed on resources in your Amazon Web Services
-    #     account. These are also known as control plane operations. For
-    #     more information, see [Logging management events][1] in the
-    #     *CloudTrail User Guide*, and [Filtering management events from
-    #     Amazon Web Services services][2] in the *Amazon EventBridge User
-    #     Guide*.
-    #
-    #     This value is only valid for rules on the [default][3] event bus
-    #     or [custom event buses][4]. It does not apply to [partner event
-    #     buses][5].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events
-    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail
-    #   [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses
-    #   [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html
-    #   [5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html
+    #   Indicates whether the rule is enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4181,39 +4171,6 @@ module Aws::EventBridge
     #
     # @!attribute [rw] state
     #   The state of the rule.
-    #
-    #   Valid values include:
-    #
-    #   * `DISABLED`: The rule is disabled. EventBridge does not match any
-    #     events against the rule.
-    #
-    #   * `ENABLED`: The rule is enabled. EventBridge matches events against
-    #     the rule, *except* for Amazon Web Services management events
-    #     delivered through CloudTrail.
-    #
-    #   * `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is
-    #     enabled for all events, including Amazon Web Services management
-    #     events delivered through CloudTrail.
-    #
-    #     Management events provide visibility into management operations
-    #     that are performed on resources in your Amazon Web Services
-    #     account. These are also known as control plane operations. For
-    #     more information, see [Logging management events][1] in the
-    #     *CloudTrail User Guide*, and [Filtering management events from
-    #     Amazon Web Services services][2] in the *Amazon EventBridge User
-    #     Guide*.
-    #
-    #     This value is only valid for rules on the [default][3] event bus
-    #     or [custom event buses][4]. It does not apply to [partner event
-    #     buses][5].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events
-    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail
-    #   [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses
-    #   [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html
-    #   [5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4627,6 +4584,11 @@ module Aws::EventBridge
     #   configuration to use for the dead-letter queue.
     #   @return [Types::RetryPolicy]
     #
+    # @!attribute [rw] app_sync_parameters
+    #   Contains the GraphQL operation to be parsed and executed, if the
+    #   event target is an AppSync API.
+    #   @return [Types::AppSyncParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
@@ -4645,7 +4607,8 @@ module Aws::EventBridge
       :redshift_data_parameters,
       :sage_maker_pipeline_parameters,
       :dead_letter_config,
-      :retry_policy)
+      :retry_policy,
+      :app_sync_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
