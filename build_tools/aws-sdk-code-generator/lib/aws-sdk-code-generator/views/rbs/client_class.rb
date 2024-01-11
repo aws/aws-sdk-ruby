@@ -5,12 +5,12 @@ module AwsSdkCodeGenerator
     module RBS
       class ClientClass < View
         SKIP_MEMBERS = Set.new(%w[
-          Context
-          Data
-          Error
-          ChecksumValidated
-          On
-          OnSuccess
+          context
+          data
+          error
+          checksum_validated
+          on
+          on_success
         ])
 
         def initialize(options)
@@ -72,9 +72,10 @@ module AwsSdkCodeGenerator
               interface = empty_interface = "::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]"
             end
             returns_members = output_shape&.[]("members")&.inject([]) do |a, (member_name, member_ref)|
-              next a if SKIP_MEMBERS.include?(member_name)
+              member_name_underscore = Underscore.underscore(member_name)
+              next a if SKIP_MEMBERS.include?(member_name_underscore)
               a << {
-                method_name: Underscore.underscore(member_name),
+                method_name: member_name_underscore,
                 returns: AwsSdkCodeGenerator::RBS.to_type(member_ref, @api),
               }
             end
