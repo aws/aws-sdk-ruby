@@ -15,6 +15,7 @@ module Aws::MWAA
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AirflowConfigurationOptions = Shapes::MapShape.new(name: 'AirflowConfigurationOptions')
+    AirflowIdentity = Shapes::StringShape.new(name: 'AirflowIdentity')
     AirflowVersion = Shapes::StringShape.new(name: 'AirflowVersion')
     CeleryExecutorQueue = Shapes::StringShape.new(name: 'CeleryExecutorQueue')
     CloudWatchLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogGroupArn')
@@ -44,6 +45,7 @@ module Aws::MWAA
     GetEnvironmentInput = Shapes::StructureShape.new(name: 'GetEnvironmentInput')
     GetEnvironmentOutput = Shapes::StructureShape.new(name: 'GetEnvironmentOutput')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
+    IamIdentity = Shapes::StringShape.new(name: 'IamIdentity')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -147,6 +149,8 @@ module Aws::MWAA
     CreateWebLoginTokenRequest.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
     CreateWebLoginTokenRequest.struct_class = Types::CreateWebLoginTokenRequest
 
+    CreateWebLoginTokenResponse.add_member(:airflow_identity, Shapes::ShapeRef.new(shape: AirflowIdentity, location_name: "AirflowIdentity"))
+    CreateWebLoginTokenResponse.add_member(:iam_identity, Shapes::ShapeRef.new(shape: IamIdentity, location_name: "IamIdentity"))
     CreateWebLoginTokenResponse.add_member(:web_server_hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
     CreateWebLoginTokenResponse.add_member(:web_token, Shapes::ShapeRef.new(shape: Token, location_name: "WebToken"))
     CreateWebLoginTokenResponse.struct_class = Types::CreateWebLoginTokenResponse

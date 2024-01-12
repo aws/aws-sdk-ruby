@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2024-01-12)
+------------------
+
+* Feature - Supervisor Barge for Chat is now supported through the MonitorContact API.
+
 1.147.0 (2024-01-05)
 ------------------
 

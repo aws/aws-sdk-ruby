@@ -6743,6 +6743,14 @@ module Aws::Connect
     #
     # @!attribute [rw] value
     #   The note for an item (section or question) in a contact evaluation.
+    #
+    #   <note markdown="1"> Even though a note in an evaluation can have up to 3072 chars, there
+    #   is also a limit on the total number of chars for all the notes in
+    #   the evaluation combined. Assuming there are N questions in the
+    #   evaluation being submitted, then the max char limit for all notes
+    #   combined is N x 1024.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationNote AWS API Documentation
@@ -7056,10 +7064,15 @@ module Aws::Connect
     #
     #   * Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
     #
+    #   * RoutingStepExpressions: 50
+    #
     #   Metric data is retrieved only for the resources associated with the
     #   queues or routing profiles, and by any channels included in the
     #   filter. (You cannot filter by both queue AND routing profile.) You
     #   can include both resource IDs and resource ARNs in the same request.
+    #
+    #   When using `RoutingStepExpression`, you need to pass exactly one
+    #   `QueueId`.
     #
     #   Currently tagging is only supported on the resources that are passed
     #   in the filter.
@@ -7080,6 +7093,9 @@ module Aws::Connect
     #
     #   * If no `Grouping` is included in the request, a summary of metrics
     #     is returned.
+    #
+    #   * When using the `RoutingStepExpression` filter, group by
+    #     `ROUTING_STEP_EXPRESSION` is required.
     #   @return [Array<String>]
     #
     # @!attribute [rw] current_metrics
@@ -7163,6 +7179,12 @@ module Aws::Connect
     #     \}, "Value": 24113.0 `\\}
     #
     #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
+    #
+    #     When the filter `RoutingStepExpression` is used, this metric is
+    #     still calculated from enqueue time. For example, if a contact that
+    #     has been queued under `<Expression 1>` for 10 seconds has expired
+    #     and `<Expression 2>` becomes active, then `OLDEST_CONTACT_AGE` for
+    #     this queue will be counted starting from 10, not 0.
     #
     #     Name in real-time metrics report: [Oldest][11]
     #
@@ -7475,6 +7497,9 @@ module Aws::Connect
     #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
     #   TASK channels are supported.
     #
+    #   RoutingStepExpression is not a valid filter for GetMetricData and we
+    #   recommend switching to GetMetricDataV2 for more up-to-date features.
+    #
     #   <note markdown="1"> To filter by `Queues`, enter the queue ID/ARN, not the name of the
     #   queue.
     #
@@ -7489,6 +7514,9 @@ module Aws::Connect
     #
     #   If no grouping is specified, a summary of metrics for all queues is
     #   returned.
+    #
+    #   RoutingStepExpression is not a valid filter for GetMetricData and we
+    #   recommend switching to GetMetricDataV2 for more up-to-date features.
     #   @return [Array<String>]
     #
     # @!attribute [rw] historical_metrics
@@ -7786,6 +7814,8 @@ module Aws::Connect
     #
     #   * Feature
     #
+    #   * Routing step expression
+    #
     #   At least one filter must be passed from queues, routing profiles,
     #   agents, or user hierarchy groups.
     #
@@ -7799,7 +7829,8 @@ module Aws::Connect
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
-    #     `FEATURE` \| `contact/segmentAttributes/connect:Subtype`
+    #     `FEATURE` \| `contact/segmentAttributes/connect:Subtype` \|
+    #     `ROUTING_STEP_EXPRESSION`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in
     #     a single request. VOICE, CHAT, and TASK are valid `filterValue`
@@ -7815,6 +7846,9 @@ module Aws::Connect
     #     `connect:Chat`, `connect:SMS`, `connect:Telephony`, and
     #     `connect:WebRTC` are valid `filterValue` examples (not exhaustive)
     #     for the `contact/segmentAttributes/connect:Subtype filter` key.
+    #
+    #     ROUTING\_STEP\_EXPRESSION is a valid filter key with a filter
+    #     value up to 3000 length.
     #
     #
     #
@@ -7833,7 +7867,8 @@ module Aws::Connect
     #   `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`,
-    #   `contact/segmentAttributes/connect:Subtype`
+    #   `contact/segmentAttributes/connect:Subtype` \|
+    #   `ROUTING_STEP_EXPRESSION`
     #   @return [Array<String>]
     #
     # @!attribute [rw] metrics
@@ -8006,7 +8041,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, RoutingStepExpression
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -8146,7 +8181,8 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression
     #
     #   CONTACTS\_CREATED
     #
@@ -8169,7 +8205,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, RoutingStepExpression
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -8268,6 +8304,18 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #   PERCENT\_CONTACTS\_STEP\_EXPIRED
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
+    #   PERCENT\_CONTACTS\_STEP\_JOINED
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
     #   PERCENT\_NON\_TALK\_TIME
     #
     #   : This metric is available only for contacts analyzed by Contact
@@ -8319,6 +8367,12 @@ module Aws::Connect
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
+    #
+    #   STEP\_CONTACTS\_QUEUED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
     #
     #   SUM\_AFTER\_CONTACT\_WORK\_TIME
     #
@@ -12573,7 +12627,8 @@ module Aws::Connect
     # @!attribute [rw] allowed_monitor_capabilities
     #   Specify which monitoring actions the user is allowed to take. For
     #   example, whether the user is allowed to escalate from silent
-    #   monitoring to barge.
+    #   monitoring to barge. AllowedMonitorCapabilities is required if barge
+    #   is enabled.
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token

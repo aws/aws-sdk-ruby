@@ -470,6 +470,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Snow Device Management                            | Aws::SnowDeviceManagement                | aws-sdk-snowdevicemanagement                | 2021-08-04  |
 | AWS Step Functions                                    | Aws::States                              | aws-sdk-states                              | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                      | aws-sdk-storagegateway                      | 2013-06-30  |
+| AWS Supply Chain                                      | Aws::SupplyChain                         | aws-sdk-supplychain                         | 2024-01-01  |
 | AWS Support                                           | Aws::Support                             | aws-sdk-support                             | 2013-04-15  |
 | AWS Support App                                       | Aws::SupportApp                          | aws-sdk-supportapp                          | 2021-08-20  |
 | AWS Systems Manager Incident Manager                  | Aws::SSMIncidents                        | aws-sdk-ssmincidents                        | 2018-05-10  |
