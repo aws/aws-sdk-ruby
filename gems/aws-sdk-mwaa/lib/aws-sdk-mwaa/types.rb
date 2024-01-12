@@ -368,6 +368,17 @@ module Aws::MWAA
       include Aws::Structure
     end
 
+    # @!attribute [rw] airflow_identity
+    #   The user name of the Apache Airflow identity creating the web login
+    #   token.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_identity
+    #   The name of the IAM identity creating the web login token. This
+    #   might be an IAM user, or an assumed or federated identity. For
+    #   example, `assumed-role/Admin/your-name`.
+    #   @return [String]
+    #
     # @!attribute [rw] web_server_hostname
     #   The Airflow web server hostname for the environment.
     #   @return [String]
@@ -379,6 +390,8 @@ module Aws::MWAA
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateWebLoginTokenResponse AWS API Documentation
     #
     class CreateWebLoginTokenResponse < Struct.new(
+      :airflow_identity,
+      :iam_identity,
       :web_server_hostname,
       :web_token)
       SENSITIVE = [:web_token]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-01-12)
+------------------
+
+* Feature - S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls.
+
 1.75.0 (2023-12-20)
 ------------------
 

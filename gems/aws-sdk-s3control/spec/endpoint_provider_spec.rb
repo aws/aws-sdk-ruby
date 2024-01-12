@@ -856,42 +856,161 @@ module Aws::S3Control
       end
     end
 
-    context 'outpost access points do not support dualstack@us-west-2' do
+    context 'outpost access points support dualstack@us-west-2' do
       let(:expected) do
-        {"error"=>"Invalid configuration: Outpost Access Points do not support dual-stack"}
+        {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_access_point' do
+        client = Client.new(
+          region: 'us-west-2',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        resp = client.get_access_point(
+          name: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
+      end
+
+      it 'produces the correct output from the client when calling delete_access_point' do
+        client = Client.new(
+          region: 'us-west-2',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        resp = client.delete_access_point(
+          name: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
       end
     end
 
-    context 'outpost access points do not support dualstack@cn-north-1' do
+    context 'outpost access points support dualstack@af-south-1' do
       let(:expected) do
-        {"error"=>"Invalid configuration: Outpost Access Points do not support dual-stack"}
+        {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.af-south-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_access_point' do
+        client = Client.new(
+          region: 'af-south-1',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
+        resp = client.get_access_point(
+          name: 'arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
+      end
+
+      it 'produces the correct output from the client when calling delete_access_point' do
+        client = Client.new(
+          region: 'af-south-1',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
+        resp = client.delete_access_point(
+          name: 'arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
       end
     end
 
-    context 'outpost access points do not support dualstack@af-south-1' do
+    context 'outpost access points support fips + dualstack@af-south-1' do
       let(:expected) do
-        {"error"=>"Invalid configuration: Outpost Access Points do not support dual-stack"}
+        {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.af-south-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_access_point' do
+        client = Client.new(
+          region: 'af-south-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
+        resp = client.get_access_point(
+          name: 'arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
+      end
+
+      it 'produces the correct output from the client when calling delete_access_point' do
+        client = Client.new(
+          region: 'af-south-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true})
+        resp = client.delete_access_point(
+          name: 'arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
       end
     end
 
@@ -1208,6 +1327,38 @@ module Aws::S3Control
       end
     end
 
+    context 'ListRegionalBucket + OutpostId + fips + dualstack@us-east-2' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_regional_buckets' do
+        client = Client.new(
+          region: 'us-east-2',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
+        resp = client.list_regional_buckets(
+          account_id: '123456789012',
+          outpost_id: 'op-123',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
     context 'CreateBucket + OutpostId endpoint url@us-east-2' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
@@ -1242,24 +1393,11 @@ module Aws::S3Control
 
     context 'dualstack cannot be used with outposts when an endpoint URL is set@us-west-2.' do
       let(:expected) do
-        {"error"=>"Invalid configuration: Outpost Access Points do not support dual-stack"}
+        {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
-    context 'Dual-stack cannot be used with outposts@us-west-2' do
-      let(:expected) do
-        {"error"=>"Invalid configuration: Outposts do not support dual-stack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"bucketname", :endpoint=>"https://beta.example.com", :outpost_id=>"op-123", :region=>"us-west-2", :requires_account_id=>false, :use_dual_stack=>true, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://s3-outposts.us-west-2.api.aws", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -1429,16 +1567,37 @@ module Aws::S3Control
       end
     end
 
-    context 'Outposts do not support dualstack@us-west-2' do
+    context 'bucket ARN in aws partition with fips + dualstack@us-east-2' do
       let(:expected) do
-        {"error"=>"Invalid configuration: Outpost buckets do not support dual-stack"}
+        {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_bucket' do
+        client = Client.new(
+          region: 'us-east-2',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
+        resp = client.get_bucket(
+          bucket: 'arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
       end
     end
 
@@ -1605,16 +1764,36 @@ module Aws::S3Control
       end
     end
 
-    context 'Outposts do not support dualstack@us-west-2' do
+    context 'Outposts support dualstack @us-west-2' do
       let(:expected) do
-        {"error"=>"Invalid configuration: Outpost buckets do not support dual-stack"}
+        {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_bucket' do
+        client = Client.new(
+          region: 'us-west-2',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        resp = client.get_bucket(
+          bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
+        expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
       end
     end
 
@@ -1778,19 +1957,6 @@ module Aws::S3Control
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
         expect(resp.context.http_request.headers['x-amz-account-id']).to eq('123456789012')
         expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq('op-01234567890123456')
-      end
-    end
-
-    context 'Outposts do not support dualstack@us-west-2' do
-      let(:expected) do
-        {"error"=>"Invalid configuration: Outpost buckets do not support dual-stack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2431,13 +2597,13 @@ module Aws::S3Control
       end
     end
 
-    context 'get bucket with endpoint_url and dualstack is not supported@us-west-2' do
+    context 'get bucket with custom endpoint and dualstack is not supported@us-west-2' do
       let(:expected) do
-        {"error"=>"Invalid configuration: Outpost buckets do not support dual-stack"}
+        {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://s3-outposts.us-west-2.api.aws", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2447,7 +2613,7 @@ module Aws::S3Control
         client = Client.new(
           region: 'us-west-2',
           use_dualstack_endpoint: true,
-          endpoint: 'https://beta.example.com',
+          endpoint: 'https://s3-outposts.us-west-2.api.aws',
           stub_responses: true
         )
         expect do

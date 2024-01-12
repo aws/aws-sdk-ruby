@@ -1159,6 +1159,9 @@
   "StorageGateway": {
     "models": "storagegateway/2013-06-30"
   },
+  "SupplyChain": {
+    "models": "supplychain/2024-01-01"
+  },
   "Support": {
     "models": "support/2013-04-15"
   },

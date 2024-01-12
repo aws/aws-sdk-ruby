@@ -250,6 +250,8 @@ module Aws::Transfer
     SendWorkflowStepStateResponse = Shapes::StructureShape.new(name: 'SendWorkflowStepStateResponse')
     ServerId = Shapes::StringShape.new(name: 'ServerId')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
+    ServiceManagedEgressIpAddress = Shapes::StringShape.new(name: 'ServiceManagedEgressIpAddress')
+    ServiceManagedEgressIpAddresses = Shapes::ListShape.new(name: 'ServiceManagedEgressIpAddresses')
     ServiceMetadata = Shapes::StructureShape.new(name: 'ServiceMetadata')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
@@ -619,6 +621,7 @@ module Aws::Transfer
     DescribedConnector.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     DescribedConnector.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedConnector.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
+    DescribedConnector.add_member(:service_managed_egress_ip_addresses, Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddresses, location_name: "ServiceManagedEgressIpAddresses"))
     DescribedConnector.struct_class = Types::DescribedConnector
 
     DescribedExecution.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "ExecutionId"))
@@ -677,6 +680,7 @@ module Aws::Transfer
     DescribedServer.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     DescribedServer.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     DescribedServer.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
+    DescribedServer.add_member(:as_2_service_managed_egress_ip_addresses, Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddresses, location_name: "As2ServiceManagedEgressIpAddresses"))
     DescribedServer.struct_class = Types::DescribedServer
 
     DescribedUser.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -1057,6 +1061,8 @@ module Aws::Transfer
     SendWorkflowStepStateRequest.struct_class = Types::SendWorkflowStepStateRequest
 
     SendWorkflowStepStateResponse.struct_class = Types::SendWorkflowStepStateResponse
+
+    ServiceManagedEgressIpAddresses.member = Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddress)
 
     ServiceMetadata.add_member(:user_details, Shapes::ShapeRef.new(shape: UserDetails, required: true, location_name: "UserDetails"))
     ServiceMetadata.struct_class = Types::ServiceMetadata

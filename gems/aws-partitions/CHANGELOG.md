@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.880.0 (2024-01-12)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SupplyChain`.
+
 1.879.0 (2024-01-11)
 ------------------
 
