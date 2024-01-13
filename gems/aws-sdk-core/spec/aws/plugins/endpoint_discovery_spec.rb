@@ -277,7 +277,7 @@ module Aws
         )
         c.operation_not_required(foo: 'foo')
         sleep(0.1)
-        expect(c.api_requests.size).to eq(3)
+        expect(c.co.size).to eq(3)
         c.operation_not_required(foo: 'foo')
         expect(c.api_requests.size).to eq(4)
       end

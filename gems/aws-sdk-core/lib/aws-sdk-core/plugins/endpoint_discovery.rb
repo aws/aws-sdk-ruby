@@ -123,10 +123,13 @@ the background every 60 secs (default). Defaults to `false`.
           elsif ctx.config.endpoint_discovery
             # not required for the operation
             # but enabled
+            puts "Checking cache key: #{key}"
             if cache.key?(key)
+              puts "We have it, returning"
               cache[key]
             elsif ctx.config.active_endpoint_cache
               # enabled active cache pull
+              puts "Active cache"
               interval = ctx.config.endpoint_cache_poll_interval
               if key.include?('_')
                 # identifier related, kill the previous polling thread by key
@@ -136,8 +139,10 @@ the background every 60 secs (default). Defaults to `false`.
 
               # start a thread for polling endpoints when non-exist
               unless cache.threads_key?(key)
+                puts "Starting a new thread, interval: #{interval}"
                 thread = Thread.new do
                   while !cache.key?(key) do
+                    puts "polling cahce for update for #{key}"
                     cache.update(key, ctx)
                     sleep(interval)
                   end
