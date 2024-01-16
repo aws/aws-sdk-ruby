@@ -264,6 +264,34 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # Parameter information for key material export using asymmetric RSA
+    # wrap and unwrap key exchange method.
+    #
+    # @!attribute [rw] certificate_authority_public_key_identifier
+    #   The `KeyARN` of the certificate chain that signs the wrapping key
+    #   certificate during RSA wrap and unwrap key export.
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapping_key_certificate
+    #   The wrapping key certificate in PEM format (base64 encoded). Amazon
+    #   Web Services Payment Cryptography uses this certificate to wrap the
+    #   key under export.
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapping_spec
+    #   The wrapping spec for the key under export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyCryptogram AWS API Documentation
+    #
+    class ExportKeyCryptogram < Struct.new(
+      :certificate_authority_public_key_identifier,
+      :wrapping_key_certificate,
+      :wrapping_spec)
+      SENSITIVE = [:wrapping_key_certificate]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] export_attributes
     #   The attributes for IPEK generation during export.
     #   @return [Types::ExportAttributes]
@@ -289,9 +317,15 @@ module Aws::PaymentCryptography
     end
 
     # Parameter information for key material export from Amazon Web Services
-    # Payment Cryptography using TR-31 or TR-34 key exchange method.
+    # Payment Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key
+    # exchange method.
     #
     # @note ExportKeyMaterial is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] key_cryptogram
+    #   Parameter information for key material export using asymmetric RSA
+    #   wrap and unwrap key exchange method
+    #   @return [Types::ExportKeyCryptogram]
     #
     # @!attribute [rw] tr_31_key_block
     #   Parameter information for key material export using symmetric TR-31
@@ -306,6 +340,7 @@ module Aws::PaymentCryptography
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyMaterial AWS API Documentation
     #
     class ExportKeyMaterial < Struct.new(
+      :key_cryptogram,
       :tr_31_key_block,
       :tr_34_key_block,
       :unknown)
@@ -313,6 +348,7 @@ module Aws::PaymentCryptography
       include Aws::Structure
       include Aws::Structure::Union
 
+      class KeyCryptogram < ExportKeyMaterial; end
       class Tr31KeyBlock < ExportKeyMaterial; end
       class Tr34KeyBlock < ExportKeyMaterial; end
       class Unknown < ExportKeyMaterial; end
@@ -320,7 +356,7 @@ module Aws::PaymentCryptography
 
     # @!attribute [rw] wrapped_key
     #   The key material under export as a TR-34 WrappedKeyBlock or a TR-31
-    #   WrappedKeyBlock.
+    #   WrappedKeyBlock. or a RSA WrappedKeyCryptogram.
     #   @return [Types::WrappedKey]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyOutput AWS API Documentation
@@ -506,7 +542,8 @@ module Aws::PaymentCryptography
 
     # @!attribute [rw] key_material_type
     #   The method to use for key material import. Import token is only
-    #   required for TR-34 WrappedKeyBlock (`TR34_KEY_BLOCK`).
+    #   required for TR-34 WrappedKeyBlock (`TR34_KEY_BLOCK`) and RSA
+    #   WrappedKeyCryptogram (`KEY_CRYPTOGRAM`).
     #
     #   Import token is not required for TR-31, root public key cerificate
     #   or trusted public key certificate.
@@ -516,8 +553,10 @@ module Aws::PaymentCryptography
     #   The wrapping key algorithm to generate a wrapping key certificate.
     #   This certificate wraps the key under import.
     #
-    #   At this time, `RSA_2048`, `RSA_3072`, `RSA_4096` are the only
-    #   allowed algorithms for TR-34 WrappedKeyBlock import.
+    #   At this time, `RSA_2048` is the allowed algorithm for TR-34
+    #   WrappedKeyBlock import. Additionally, `RSA_2048`, `RSA_3072`,
+    #   `RSA_4096` are the allowed algorithms for RSA WrappedKeyCryptogram
+    #   import.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetParametersForImportInput AWS API Documentation
@@ -542,7 +581,7 @@ module Aws::PaymentCryptography
     #
     # @!attribute [rw] wrapping_key_algorithm
     #   The algorithm of the wrapping key for use within TR-34
-    #   WrappedKeyBlock.
+    #   WrappedKeyBlock or RSA WrappedKeyCryptogram.
     #   @return [String]
     #
     # @!attribute [rw] wrapping_key_certificate
@@ -599,6 +638,46 @@ module Aws::PaymentCryptography
       :key_certificate,
       :key_certificate_chain)
       SENSITIVE = [:key_certificate, :key_certificate_chain]
+      include Aws::Structure
+    end
+
+    # Parameter information for key material import using asymmetric RSA
+    # wrap and unwrap key exchange method.
+    #
+    # @!attribute [rw] exportable
+    #   Specifies whether the key is exportable from the service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] import_token
+    #   The import token that initiates key import using the asymmetric RSA
+    #   wrap and unwrap key exchange method into AWS Payment Cryptography.
+    #   It expires after 7 days. You can use the same import token to import
+    #   multiple keys to the same service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_attributes
+    #   The role of the key, the algorithm it supports, and the
+    #   cryptographic operations allowed with the key. This data is
+    #   immutable after the key is created.
+    #   @return [Types::KeyAttributes]
+    #
+    # @!attribute [rw] wrapped_key_cryptogram
+    #   The RSA wrapped key cryptogram under import.
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapping_spec
+    #   The wrapping spec for the wrapped key cryptogram.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyCryptogram AWS API Documentation
+    #
+    class ImportKeyCryptogram < Struct.new(
+      :exportable,
+      :import_token,
+      :key_attributes,
+      :wrapped_key_cryptogram,
+      :wrapping_spec)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -660,9 +739,15 @@ module Aws::PaymentCryptography
     end
 
     # Parameter information for key material import into Amazon Web Services
-    # Payment Cryptography using TR-31 or TR-34 key exchange method.
+    # Payment Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key
+    # exchange method.
     #
     # @note ImportKeyMaterial is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] key_cryptogram
+    #   Parameter information for key material import using asymmetric RSA
+    #   wrap and unwrap key exchange method.
+    #   @return [Types::ImportKeyCryptogram]
     #
     # @!attribute [rw] root_certificate_public_key
     #   Parameter information for root public key certificate import.
@@ -685,6 +770,7 @@ module Aws::PaymentCryptography
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyMaterial AWS API Documentation
     #
     class ImportKeyMaterial < Struct.new(
+      :key_cryptogram,
       :root_certificate_public_key,
       :tr_31_key_block,
       :tr_34_key_block,
@@ -694,6 +780,7 @@ module Aws::PaymentCryptography
       include Aws::Structure
       include Aws::Structure::Union
 
+      class KeyCryptogram < ImportKeyMaterial; end
       class RootCertificatePublicKey < ImportKeyMaterial; end
       class Tr31KeyBlock < ImportKeyMaterial; end
       class Tr34KeyBlock < ImportKeyMaterial; end

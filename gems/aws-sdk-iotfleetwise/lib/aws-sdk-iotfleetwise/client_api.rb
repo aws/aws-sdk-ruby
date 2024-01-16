@@ -200,6 +200,7 @@ module Aws::IoTFleetWise
     SignalDecoders = Shapes::ListShape.new(name: 'SignalDecoders')
     SignalInformation = Shapes::StructureShape.new(name: 'SignalInformation')
     SignalInformationList = Shapes::ListShape.new(name: 'SignalInformationList')
+    SignalNodeType = Shapes::StringShape.new(name: 'SignalNodeType')
     SpoolingMode = Shapes::StringShape.new(name: 'SpoolingMode')
     StorageCompressionFormat = Shapes::StringShape.new(name: 'StorageCompressionFormat')
     String = Shapes::StringShape.new(name: 'String')
@@ -868,6 +869,7 @@ module Aws::IoTFleetWise
     ListSignalCatalogNodesRequest.add_member(:name, Shapes::ShapeRef.new(shape: resourceName, required: true, location_name: "name"))
     ListSignalCatalogNodesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     ListSignalCatalogNodesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
+    ListSignalCatalogNodesRequest.add_member(:signal_node_type, Shapes::ShapeRef.new(shape: SignalNodeType, location_name: "signalNodeType"))
     ListSignalCatalogNodesRequest.struct_class = Types::ListSignalCatalogNodesRequest
 
     ListSignalCatalogNodesResponse.add_member(:nodes, Shapes::ShapeRef.new(shape: Nodes, location_name: "nodes"))
@@ -1251,6 +1253,7 @@ module Aws::IoTFleetWise
     VehicleSummary.add_member(:decoder_manifest_arn, Shapes::ShapeRef.new(shape: arn, required: true, location_name: "decoderManifestArn"))
     VehicleSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "creationTime"))
     VehicleSummary.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
+    VehicleSummary.add_member(:attributes, Shapes::ShapeRef.new(shape: attributesMap, location_name: "attributes"))
     VehicleSummary.struct_class = Types::VehicleSummary
 
     attributesMap.key = Shapes::ShapeRef.new(shape: attributeName)

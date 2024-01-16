@@ -1177,7 +1177,7 @@ module Aws::Macie2
     #   resp.buckets[0].replication_details.replication_accounts[0] #=> String
     #   resp.buckets[0].sensitivity_score #=> Integer
     #   resp.buckets[0].server_side_encryption.kms_master_key_id #=> String
-    #   resp.buckets[0].server_side_encryption.type #=> String, one of "NONE", "AES256", "aws:kms"
+    #   resp.buckets[0].server_side_encryption.type #=> String, one of "NONE", "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.buckets[0].shared_access #=> String, one of "EXTERNAL", "INTERNAL", "NOT_SHARED", "UNKNOWN"
     #   resp.buckets[0].size_in_bytes #=> Integer
     #   resp.buckets[0].size_in_bytes_compressed #=> Integer
@@ -2001,7 +2001,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_bucket.allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_bucket.arn #=> String
     #   resp.findings[0].resources_affected.s3_bucket.created_at #=> Time
-    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
+    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN", "aws:kms:dsse"
     #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_bucket.name #=> String
     #   resp.findings[0].resources_affected.s3_bucket.owner.display_name #=> String
@@ -2029,7 +2029,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_object.last_modified #=> Time
     #   resp.findings[0].resources_affected.s3_object.path #=> String
     #   resp.findings[0].resources_affected.s3_object.public_access #=> Boolean
-    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
+    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN", "aws:kms:dsse"
     #   resp.findings[0].resources_affected.s3_object.server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_object.size #=> Integer
     #   resp.findings[0].resources_affected.s3_object.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "ONEZONE_IA", "GLACIER", "GLACIER_IR", "OUTPOSTS"
@@ -3771,16 +3771,16 @@ module Aws::Macie2
     # @option params [Types::UpdateRetrievalConfiguration] :retrieval_configuration
     #   Specifies the access method and settings to use when retrieving
     #   occurrences of sensitive data reported by findings. If your request
-    #   specifies an Identity and Access Management (IAM) role to assume when
-    #   retrieving the sensitive data, Amazon Macie verifies that the role
-    #   exists and the attached policies are configured correctly. If there's
-    #   an issue, Macie returns an error. For information about addressing the
-    #   issue, see [Retrieving sensitive data samples with findings][1] in the
-    #   *Amazon Macie User Guide*.
+    #   specifies an Identity and Access Management (IAM) role to assume,
+    #   Amazon Macie verifies that the role exists and the attached policies
+    #   are configured correctly. If there's an issue, Macie returns an
+    #   error. For information about addressing the issue, see [Configuration
+    #   options and requirements for retrieving sensitive data samples][1] in
+    #   the *Amazon Macie User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html
     #
     # @return [Types::UpdateRevealConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3887,7 +3887,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

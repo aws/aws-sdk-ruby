@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2024-01-16)
+------------------
+
+* Feature - Revert release of LogTargetTypes
+
 1.117.0 (2024-01-11)
 ------------------
 

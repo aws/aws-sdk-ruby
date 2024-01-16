@@ -161,7 +161,7 @@ module Aws::PersonalizeRuntime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRankingRequest AWS API Documentation
@@ -285,8 +285,8 @@ module Aws::PersonalizeRuntime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html
-    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/create-recommender-return-metadata.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation

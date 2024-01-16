@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-01-16)
+------------------
+
+* Feature - Documentation updates for Amazon Personalize
+
 1.45.0 (2023-11-28)
 ------------------
 

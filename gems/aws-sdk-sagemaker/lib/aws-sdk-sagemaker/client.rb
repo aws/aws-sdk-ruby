@@ -618,7 +618,7 @@ module Aws::SageMaker
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework_version #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].nearest_model_name #=> String
-    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types #=> Array
@@ -849,7 +849,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       additional_s3_data_source: {
-    #         s3_data_type: "S3Object", # required, accepts S3Object
+    #         s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #         s3_uri: "S3Uri", # required
     #         compression_type: "None", # accepts None, Gzip
     #       },
@@ -872,7 +872,7 @@ module Aws::SageMaker
     #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
     #           additional_s3_data_source: {
-    #             s3_data_type: "S3Object", # required, accepts S3Object
+    #             s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #             s3_uri: "S3Uri", # required
     #             compression_type: "None", # accepts None, Gzip
     #           },
@@ -1049,7 +1049,7 @@ module Aws::SageMaker
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
     #     space_name: "SpaceName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #     app_name: "AppName", # required
     #     tags: [
     #       {
@@ -6082,7 +6082,7 @@ module Aws::SageMaker
     #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
     #           additional_s3_data_source: {
-    #             s3_data_type: "S3Object", # required, accepts S3Object
+    #             s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #             s3_uri: "S3Uri", # required
     #             compression_type: "None", # accepts None, Gzip
     #           },
@@ -6286,7 +6286,7 @@ module Aws::SageMaker
     #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #             additional_s3_data_source: {
-    #               s3_data_type: "S3Object", # required, accepts S3Object
+    #               s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #               s3_uri: "S3Uri", # required
     #               compression_type: "None", # accepts None, Gzip
     #             },
@@ -7571,7 +7571,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
-    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       space_storage_settings: {
     #         ebs_storage_settings: {
     #           ebs_volume_size_in_gb: 1, # required
@@ -7634,7 +7634,7 @@ module Aws::SageMaker
     #   resp = client.create_studio_lifecycle_config({
     #     studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
     #     studio_lifecycle_config_content: "StudioLifecycleConfigContent", # required
-    #     studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, VSCode, Savitur, CodeEditor, JupyterLab
+    #     studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, CodeEditor, JupyterLab
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -9088,7 +9088,7 @@ module Aws::SageMaker
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
     #     space_name: "SpaceName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #     app_name: "AppName", # required
     #   })
     #
@@ -10538,7 +10538,7 @@ module Aws::SageMaker
     #   resp.training_specification.supported_tuning_job_objective_metrics #=> Array
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].type #=> String, one of "Maximize", "Minimize"
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].metric_name #=> String
-    #   resp.training_specification.additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.training_specification.additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.training_specification.additional_s3_data_source.s3_uri #=> String
     #   resp.training_specification.additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.containers #=> Array
@@ -10553,7 +10553,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].framework #=> String
     #   resp.inference_specification.containers[0].framework_version #=> String
     #   resp.inference_specification.containers[0].nearest_model_name #=> String
-    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.supported_transform_instance_types #=> Array
@@ -10680,14 +10680,14 @@ module Aws::SageMaker
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
     #     space_name: "SpaceName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #     app_name: "AppName", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.app_arn #=> String
-    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.app_name #=> String
     #   resp.domain_id #=> String
     #   resp.user_profile_name #=> String
@@ -13977,7 +13977,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].framework #=> String
     #   resp.inference_specification.containers[0].framework_version #=> String
     #   resp.inference_specification.containers[0].nearest_model_name #=> String
-    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.supported_transform_instance_types #=> Array
@@ -14111,7 +14111,7 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].containers[0].framework #=> String
     #   resp.additional_inference_specifications[0].containers[0].framework_version #=> String
     #   resp.additional_inference_specifications[0].containers[0].nearest_model_name #=> String
-    #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.additional_inference_specifications[0].supported_transform_instance_types #=> Array
@@ -14930,7 +14930,7 @@ module Aws::SageMaker
     #   resp.space_settings.jupyter_lab_app_settings.default_resource_spec.lifecycle_config_arn #=> String
     #   resp.space_settings.jupyter_lab_app_settings.code_repositories #=> Array
     #   resp.space_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
-    #   resp.space_settings.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.space_settings.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.space_settings.space_storage_settings.ebs_storage_settings.ebs_volume_size_in_gb #=> Integer
     #   resp.space_settings.custom_file_systems #=> Array
     #   resp.space_settings.custom_file_systems[0].efs_file_system.file_system_id #=> String
@@ -14976,7 +14976,7 @@ module Aws::SageMaker
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.studio_lifecycle_config_content #=> String
-    #   resp.studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "VSCode", "Savitur", "CodeEditor", "JupyterLab"
+    #   resp.studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "CodeEditor", "JupyterLab"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeStudioLifecycleConfig AWS API Documentation
     #
@@ -16495,7 +16495,7 @@ module Aws::SageMaker
     #   resp.apps[0].domain_id #=> String
     #   resp.apps[0].user_profile_name #=> String
     #   resp.apps[0].space_name #=> String
-    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.apps[0].app_name #=> String
     #   resp.apps[0].status #=> String, one of "Deleted", "Deleting", "Failed", "InService", "Pending"
     #   resp.apps[0].creation_time #=> Time
@@ -21026,7 +21026,7 @@ module Aws::SageMaker
     #   resp.spaces[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
     #   resp.spaces[0].creation_time #=> Time
     #   resp.spaces[0].last_modified_time #=> Time
-    #   resp.spaces[0].space_settings_summary.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.spaces[0].space_settings_summary.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.spaces[0].space_settings_summary.space_storage_settings.ebs_storage_settings.ebs_volume_size_in_gb #=> Integer
     #   resp.spaces[0].space_sharing_settings_summary.sharing_type #=> String, one of "Private", "Shared"
     #   resp.spaces[0].ownership_settings_summary.owner_user_profile_name #=> String
@@ -21161,7 +21161,7 @@ module Aws::SageMaker
     #     max_results: 1,
     #     next_token: "NextToken",
     #     name_contains: "StudioLifecycleConfigName",
-    #     app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway, VSCode, Savitur, CodeEditor, JupyterLab
+    #     app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway, CodeEditor, JupyterLab
     #     creation_time_before: Time.now,
     #     creation_time_after: Time.now,
     #     modified_time_before: Time.now,
@@ -21178,7 +21178,7 @@ module Aws::SageMaker
     #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_name #=> String
     #   resp.studio_lifecycle_configs[0].creation_time #=> Time
     #   resp.studio_lifecycle_configs[0].last_modified_time #=> Time
-    #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "VSCode", "Savitur", "CodeEditor", "JupyterLab"
+    #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "CodeEditor", "JupyterLab"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStudioLifecycleConfigs AWS API Documentation
     #
@@ -24564,7 +24564,7 @@ module Aws::SageMaker
     #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #             additional_s3_data_source: {
-    #               s3_data_type: "S3Object", # required, accepts S3Object
+    #               s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #               s3_uri: "S3Uri", # required
     #               compression_type: "None", # accepts None, Gzip
     #             },
@@ -25231,7 +25231,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
-    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       space_storage_settings: {
     #         ebs_storage_settings: {
     #           ebs_volume_size_in_gb: 1, # required
@@ -25896,7 +25896,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.228.0'
+      context[:gem_version] = '1.229.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
