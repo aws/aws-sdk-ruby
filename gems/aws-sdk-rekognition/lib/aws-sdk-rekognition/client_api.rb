@@ -64,6 +64,8 @@ module Aws::Rekognition
     ContentModerationDetection = Shapes::StructureShape.new(name: 'ContentModerationDetection')
     ContentModerationDetections = Shapes::ListShape.new(name: 'ContentModerationDetections')
     ContentModerationSortBy = Shapes::StringShape.new(name: 'ContentModerationSortBy')
+    ContentType = Shapes::StructureShape.new(name: 'ContentType')
+    ContentTypes = Shapes::ListShape.new(name: 'ContentTypes')
     CopyProjectVersionRequest = Shapes::StructureShape.new(name: 'CopyProjectVersionRequest')
     CopyProjectVersionResponse = Shapes::StructureShape.new(name: 'CopyProjectVersionResponse')
     CoversBodyPart = Shapes::StructureShape.new(name: 'CoversBodyPart')
@@ -331,6 +333,7 @@ module Aws::Rekognition
     MediaAnalysisJobName = Shapes::StringShape.new(name: 'MediaAnalysisJobName')
     MediaAnalysisJobStatus = Shapes::StringShape.new(name: 'MediaAnalysisJobStatus')
     MediaAnalysisManifestSummary = Shapes::StructureShape.new(name: 'MediaAnalysisManifestSummary')
+    MediaAnalysisModelVersions = Shapes::StructureShape.new(name: 'MediaAnalysisModelVersions')
     MediaAnalysisOperationsConfig = Shapes::StructureShape.new(name: 'MediaAnalysisOperationsConfig')
     MediaAnalysisOutputConfig = Shapes::StructureShape.new(name: 'MediaAnalysisOutputConfig')
     MediaAnalysisResults = Shapes::StructureShape.new(name: 'MediaAnalysisResults')
@@ -695,6 +698,12 @@ module Aws::Rekognition
 
     ContentModerationDetections.member = Shapes::ShapeRef.new(shape: ContentModerationDetection)
 
+    ContentType.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    ContentType.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ContentType.struct_class = Types::ContentType
+
+    ContentTypes.member = Shapes::ShapeRef.new(shape: ContentType)
+
     CopyProjectVersionRequest.add_member(:source_project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "SourceProjectArn"))
     CopyProjectVersionRequest.add_member(:source_project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "SourceProjectVersionArn"))
     CopyProjectVersionRequest.add_member(:destination_project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "DestinationProjectArn"))
@@ -1017,6 +1026,7 @@ module Aws::Rekognition
     DetectModerationLabelsResponse.add_member(:moderation_model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModerationModelVersion"))
     DetectModerationLabelsResponse.add_member(:human_loop_activation_output, Shapes::ShapeRef.new(shape: HumanLoopActivationOutput, location_name: "HumanLoopActivationOutput"))
     DetectModerationLabelsResponse.add_member(:project_version, Shapes::ShapeRef.new(shape: ProjectVersionId, location_name: "ProjectVersion"))
+    DetectModerationLabelsResponse.add_member(:content_types, Shapes::ShapeRef.new(shape: ContentTypes, location_name: "ContentTypes"))
     DetectModerationLabelsResponse.struct_class = Types::DetectModerationLabelsResponse
 
     DetectProtectiveEquipmentRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
@@ -1617,6 +1627,9 @@ module Aws::Rekognition
     MediaAnalysisManifestSummary.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     MediaAnalysisManifestSummary.struct_class = Types::MediaAnalysisManifestSummary
 
+    MediaAnalysisModelVersions.add_member(:moderation, Shapes::ShapeRef.new(shape: String, location_name: "Moderation"))
+    MediaAnalysisModelVersions.struct_class = Types::MediaAnalysisModelVersions
+
     MediaAnalysisOperationsConfig.add_member(:detect_moderation_labels, Shapes::ShapeRef.new(shape: MediaAnalysisDetectModerationLabelsConfig, location_name: "DetectModerationLabels"))
     MediaAnalysisOperationsConfig.struct_class = Types::MediaAnalysisOperationsConfig
 
@@ -1625,11 +1638,13 @@ module Aws::Rekognition
     MediaAnalysisOutputConfig.struct_class = Types::MediaAnalysisOutputConfig
 
     MediaAnalysisResults.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
+    MediaAnalysisResults.add_member(:model_versions, Shapes::ShapeRef.new(shape: MediaAnalysisModelVersions, location_name: "ModelVersions"))
     MediaAnalysisResults.struct_class = Types::MediaAnalysisResults
 
     ModerationLabel.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     ModerationLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ModerationLabel.add_member(:parent_name, Shapes::ShapeRef.new(shape: String, location_name: "ParentName"))
+    ModerationLabel.add_member(:taxonomy_level, Shapes::ShapeRef.new(shape: UInteger, location_name: "TaxonomyLevel"))
     ModerationLabel.struct_class = Types::ModerationLabel
 
     ModerationLabels.member = Shapes::ShapeRef.new(shape: ModerationLabel)

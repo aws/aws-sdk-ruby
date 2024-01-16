@@ -2457,6 +2457,9 @@ module Aws::IoTFleetWise
     # @option params [Integer] :max_results
     #   The maximum number of items to return, between 1 and 100, inclusive.
     #
+    # @option params [String] :signal_node_type
+    #   The type of node in the signal catalog.
+    #
     # @return [Types::ListSignalCatalogNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSignalCatalogNodesResponse#nodes #nodes} => Array&lt;Types::Node&gt;
@@ -2470,6 +2473,7 @@ module Aws::IoTFleetWise
     #     name: "resourceName", # required
     #     next_token: "nextToken",
     #     max_results: 1,
+    #     signal_node_type: "SENSOR", # accepts SENSOR, ACTUATOR, ATTRIBUTE, BRANCH, CUSTOM_STRUCT, CUSTOM_PROPERTY
     #   })
     #
     # @example Response structure
@@ -2663,6 +2667,8 @@ module Aws::IoTFleetWise
     #   resp.vehicle_summaries[0].decoder_manifest_arn #=> String
     #   resp.vehicle_summaries[0].creation_time #=> Time
     #   resp.vehicle_summaries[0].last_modification_time #=> Time
+    #   resp.vehicle_summaries[0].attributes #=> Hash
+    #   resp.vehicle_summaries[0].attributes["attributeName"] #=> String
     #   resp.next_token #=> String
     #
     # @overload list_vehicles(params = {})
@@ -3537,7 +3543,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
