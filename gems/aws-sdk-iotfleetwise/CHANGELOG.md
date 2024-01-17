@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-01-16)
+------------------
+
+* Feature - Updated APIs: SignalNodeType query parameter has been added to ListSignalCatalogNodesRequest and ListVehiclesResponse has been extended with attributes field.
+
+1.19.0 (2024-01-11)
+------------------
+
+* Feature - The following dataTypes have been removed: CUSTOMER_DECODED_INTERFACE in NetworkInterfaceType; CUSTOMER_DECODED_SIGNAL_INFO_IS_NULL in SignalDecoderFailureReason; CUSTOMER_DECODED_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL in NetworkInterfaceFailureReason; CUSTOMER_DECODED_SIGNAL in SignalDecoderType
+
 1.18.0 (2023-11-28)
 ------------------
 

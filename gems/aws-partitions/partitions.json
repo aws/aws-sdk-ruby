@@ -12585,6 +12585,12 @@
             },
             "hostname" : "oidc.il-central-1.amazonaws.com"
           },
+          "me-central-1" : {
+            "credentialScope" : {
+              "region" : "me-central-1"
+            },
+            "hostname" : "oidc.me-central-1.amazonaws.com"
+          },
           "me-south-1" : {
             "credentialScope" : {
               "region" : "me-south-1"
@@ -20717,6 +20723,23 @@
           "cn-north-1" : { }
         }
       },
+      "iottwinmaker" : {
+        "endpoints" : {
+          "api-cn-north-1" : {
+            "credentialScope" : {
+              "region" : "cn-north-1"
+            },
+            "hostname" : "api.iottwinmaker.cn-north-1.amazonaws.com.cn"
+          },
+          "cn-north-1" : { },
+          "data-cn-north-1" : {
+            "credentialScope" : {
+              "region" : "cn-north-1"
+            },
+            "hostname" : "data.iottwinmaker.cn-north-1.amazonaws.com.cn"
+          }
+        }
+      },
       "kafka" : {
         "endpoints" : {
           "cn-north-1" : { },
@@ -26546,6 +26569,15 @@
         "endpoints" : {
           "us-iso-east-1" : { }
         }
+      },
+      "guardduty" : {
+        "defaults" : {
+          "protocols" : [ "https" ]
+        },
+        "endpoints" : {
+          "us-iso-east-1" : { }
+        },
+        "isRegionalized" : true
       },
       "health" : {
         "endpoints" : {

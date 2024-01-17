@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2024-01-17)
+------------------
+
+* Feature - Updating note for enabling streams for UpdateTable.
+
 1.98.0 (2023-11-28)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2024-01-11)
+------------------
+
+* Feature - This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+
 1.136.0 (2024-01-04)
 ------------------
 

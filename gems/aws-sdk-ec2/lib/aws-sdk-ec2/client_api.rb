@@ -8201,6 +8201,8 @@ module Aws::EC2
     EbsInstanceBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     EbsInstanceBlockDevice.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "status"))
     EbsInstanceBlockDevice.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
+    EbsInstanceBlockDevice.add_member(:associated_resource, Shapes::ShapeRef.new(shape: String, location_name: "associatedResource"))
+    EbsInstanceBlockDevice.add_member(:volume_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeOwnerId"))
     EbsInstanceBlockDevice.struct_class = Types::EbsInstanceBlockDevice
 
     EbsInstanceBlockDeviceSpecification.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
@@ -15216,6 +15218,8 @@ module Aws::EC2
     VolumeAttachment.add_member(:state, Shapes::ShapeRef.new(shape: VolumeAttachmentState, location_name: "status"))
     VolumeAttachment.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     VolumeAttachment.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
+    VolumeAttachment.add_member(:associated_resource, Shapes::ShapeRef.new(shape: String, location_name: "associatedResource"))
+    VolumeAttachment.add_member(:instance_owning_service, Shapes::ShapeRef.new(shape: String, location_name: "instanceOwningService"))
     VolumeAttachment.struct_class = Types::VolumeAttachment
 
     VolumeAttachmentList.member = Shapes::ShapeRef.new(shape: VolumeAttachment, location_name: "item")

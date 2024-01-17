@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-01-11)
+------------------
+
+* Feature - Adding AppSync as an EventBridge Target
+
 1.55.0 (2023-12-20)
 ------------------
 

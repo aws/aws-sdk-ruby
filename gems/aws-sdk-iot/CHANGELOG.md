@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2024-01-16)
+------------------
+
+* Feature - Revert release of LogTargetTypes
+
+1.117.0 (2024-01-11)
+------------------
+
+* Feature - Add ConflictException to Update APIs of AWS IoT Software Package Catalog
+
 1.116.0 (2023-12-14)
 ------------------
 

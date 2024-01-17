@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.185.0 (2024-01-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-supplychain` gem.
+
 3.184.0 (2023-12-22)
 ------------------
 

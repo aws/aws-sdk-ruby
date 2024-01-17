@@ -772,7 +772,7 @@ module Aws::IoTFleetWise
     #     signal_decoders: [
     #       {
     #         fully_qualified_name: "FullyQualifiedName", # required
-    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL, CUSTOMER_DECODED_SIGNAL
+    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL
     #         interface_id: "InterfaceId", # required
     #         can_signal: {
     #           message_id: 1, # required
@@ -829,7 +829,7 @@ module Aws::IoTFleetWise
     #     network_interfaces: [
     #       {
     #         interface_id: "InterfaceId", # required
-    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE, CUSTOMER_DECODED_INTERFACE
+    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE
     #         can_interface: {
     #           name: "CanInterfaceName", # required
     #           protocol_name: "ProtocolName",
@@ -2012,7 +2012,7 @@ module Aws::IoTFleetWise
     #
     #   resp.network_interfaces #=> Array
     #   resp.network_interfaces[0].interface_id #=> String
-    #   resp.network_interfaces[0].type #=> String, one of "CAN_INTERFACE", "OBD_INTERFACE", "VEHICLE_MIDDLEWARE", "CUSTOMER_DECODED_INTERFACE"
+    #   resp.network_interfaces[0].type #=> String, one of "CAN_INTERFACE", "OBD_INTERFACE", "VEHICLE_MIDDLEWARE"
     #   resp.network_interfaces[0].can_interface.name #=> String
     #   resp.network_interfaces[0].can_interface.protocol_name #=> String
     #   resp.network_interfaces[0].can_interface.protocol_version #=> String
@@ -2076,7 +2076,7 @@ module Aws::IoTFleetWise
     #
     #   resp.signal_decoders #=> Array
     #   resp.signal_decoders[0].fully_qualified_name #=> String
-    #   resp.signal_decoders[0].type #=> String, one of "CAN_SIGNAL", "OBD_SIGNAL", "MESSAGE_SIGNAL", "CUSTOMER_DECODED_SIGNAL"
+    #   resp.signal_decoders[0].type #=> String, one of "CAN_SIGNAL", "OBD_SIGNAL", "MESSAGE_SIGNAL"
     #   resp.signal_decoders[0].interface_id #=> String
     #   resp.signal_decoders[0].can_signal.message_id #=> Integer
     #   resp.signal_decoders[0].can_signal.is_big_endian #=> Boolean
@@ -2457,6 +2457,9 @@ module Aws::IoTFleetWise
     # @option params [Integer] :max_results
     #   The maximum number of items to return, between 1 and 100, inclusive.
     #
+    # @option params [String] :signal_node_type
+    #   The type of node in the signal catalog.
+    #
     # @return [Types::ListSignalCatalogNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSignalCatalogNodesResponse#nodes #nodes} => Array&lt;Types::Node&gt;
@@ -2470,6 +2473,7 @@ module Aws::IoTFleetWise
     #     name: "resourceName", # required
     #     next_token: "nextToken",
     #     max_results: 1,
+    #     signal_node_type: "SENSOR", # accepts SENSOR, ACTUATOR, ATTRIBUTE, BRANCH, CUSTOM_STRUCT, CUSTOM_PROPERTY
     #   })
     #
     # @example Response structure
@@ -2663,6 +2667,8 @@ module Aws::IoTFleetWise
     #   resp.vehicle_summaries[0].decoder_manifest_arn #=> String
     #   resp.vehicle_summaries[0].creation_time #=> Time
     #   resp.vehicle_summaries[0].last_modification_time #=> Time
+    #   resp.vehicle_summaries[0].attributes #=> Hash
+    #   resp.vehicle_summaries[0].attributes["attributeName"] #=> String
     #   resp.next_token #=> String
     #
     # @overload list_vehicles(params = {})
@@ -3039,7 +3045,7 @@ module Aws::IoTFleetWise
     #     signal_decoders_to_add: [
     #       {
     #         fully_qualified_name: "FullyQualifiedName", # required
-    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL, CUSTOMER_DECODED_SIGNAL
+    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL
     #         interface_id: "InterfaceId", # required
     #         can_signal: {
     #           message_id: 1, # required
@@ -3096,7 +3102,7 @@ module Aws::IoTFleetWise
     #     signal_decoders_to_update: [
     #       {
     #         fully_qualified_name: "FullyQualifiedName", # required
-    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL, CUSTOMER_DECODED_SIGNAL
+    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL
     #         interface_id: "InterfaceId", # required
     #         can_signal: {
     #           message_id: 1, # required
@@ -3154,7 +3160,7 @@ module Aws::IoTFleetWise
     #     network_interfaces_to_add: [
     #       {
     #         interface_id: "InterfaceId", # required
-    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE, CUSTOMER_DECODED_INTERFACE
+    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE
     #         can_interface: {
     #           name: "CanInterfaceName", # required
     #           protocol_name: "ProtocolName",
@@ -3178,7 +3184,7 @@ module Aws::IoTFleetWise
     #     network_interfaces_to_update: [
     #       {
     #         interface_id: "InterfaceId", # required
-    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE, CUSTOMER_DECODED_INTERFACE
+    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE
     #         can_interface: {
     #           name: "CanInterfaceName", # required
     #           protocol_name: "ProtocolName",
@@ -3537,7 +3543,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

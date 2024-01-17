@@ -1,10 +1,5 @@
 Before("@{{var_name}}") do
-{{#client_endpoint}}
-  @service = {{module_name}}::Resource.new(endpoint: '{{client_endpoint}}')
-{{/client_endpoint}}
-{{^client_endpoint}}
   @service = {{module_name}}::Resource.new
-{{/client_endpoint}}
   @client = @service.client
 end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2024-01-12)
+------------------
+
+* Feature - Introduce new Supervisor participant role
+
 1.38.0 (2023-11-28)
 ------------------
 

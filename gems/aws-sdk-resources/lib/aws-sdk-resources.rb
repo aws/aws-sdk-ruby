@@ -356,6 +356,7 @@ module Aws
   autoload :SsmSap, 'aws-sdk-ssmsap'
   autoload :States, 'aws-sdk-states'
   autoload :StorageGateway, 'aws-sdk-storagegateway'
+  autoload :SupplyChain, 'aws-sdk-supplychain'
   autoload :Support, 'aws-sdk-support'
   autoload :SupportApp, 'aws-sdk-supportapp'
   autoload :Synthetics, 'aws-sdk-synthetics'

@@ -1902,10 +1902,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2060,10 +2066,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5060,7 +5072,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_v2_logging_level({
-    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #     target_name: "LogTargetName", # required
     #   })
     #
@@ -11502,7 +11514,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_v2_logging_levels({
-    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -11510,7 +11522,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.log_target_configurations #=> Array
-    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID", "EVENT_TYPE", "DEVICE_DEFENDER"
+    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID"
     #   resp.log_target_configurations[0].log_target.target_name #=> String
     #   resp.log_target_configurations[0].log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
     #   resp.next_token #=> String
@@ -12691,7 +12703,7 @@ module Aws::IoT
     #
     #   resp = client.set_v2_logging_level({
     #     log_target: { # required
-    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #       target_name: "LogTargetName",
     #     },
     #     log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
@@ -15063,7 +15075,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

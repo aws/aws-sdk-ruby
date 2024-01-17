@@ -1092,17 +1092,11 @@ module Aws::WorkSpaces
     # * You don't need to specify the `PCOIP` protocol for Linux bundles
     #   because `WSP` is the default protocol for those bundles.
     #
-    # * Ensure you review your running mode to ensure you are using a
-    #   running mode that is optimal for your needs and budget. For more
-    #   information on switching running modes, see [ Can I switch between
-    #   hourly and monthly billing?][2]
-    #
     #  </note>
     #
     #
     #
     # [1]: http://aws.amazon.com/workspaces/core/
-    # [2]: https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F
     #
     # @option params [required, Array<Types::WorkspaceRequest>] :workspaces
     #   The WorkSpaces to create. You can specify up to 25 WorkSpaces.
@@ -3382,8 +3376,10 @@ module Aws::WorkSpaces
 
     # Reboots the specified WorkSpaces.
     #
-    # You cannot reboot a WorkSpace unless its state is `AVAILABLE` or
-    # `UNHEALTHY`.
+    # You cannot reboot a WorkSpace unless its state is `AVAILABLE`,
+    # `UNHEALTHY`, or `REBOOTING`. Reboot a WorkSpace in the `REBOOTING`
+    # state only if your WorkSpace has been stuck in the `REBOOTING` state
+    # for over 20 minutes.
     #
     # This operation is asynchronous and returns before the WorkSpaces have
     # rebooted.
@@ -3993,7 +3989,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-01-12)
+------------------
+
+* Feature - AWS Transfer Family now supports static IP addresses for SFTP & AS2 connectors and for async MDNs on AS2 servers.
+
 1.86.0 (2023-11-28)
 ------------------
 

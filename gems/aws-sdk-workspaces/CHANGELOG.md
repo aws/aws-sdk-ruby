@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2024-01-11)
+------------------
+
+* Feature - Added AWS Workspaces RebootWorkspaces API - Extended Reboot documentation update
+
 1.95.0 (2023-12-14)
 ------------------
 

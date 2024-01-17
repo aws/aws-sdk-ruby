@@ -6646,16 +6646,16 @@ module Aws::Macie2
 
     # Specifies the access method and settings to use when retrieving
     # occurrences of sensitive data reported by findings. If your request
-    # specifies an Identity and Access Management (IAM) role to assume when
-    # retrieving the sensitive data, Amazon Macie verifies that the role
-    # exists and the attached policies are configured correctly. If there's
-    # an issue, Macie returns an error. For information about addressing the
-    # issue, see [Retrieving sensitive data samples with findings][1] in the
-    # *Amazon Macie User Guide*.
+    # specifies an Identity and Access Management (IAM) role to assume,
+    # Amazon Macie verifies that the role exists and the attached policies
+    # are configured correctly. If there's an issue, Macie returns an
+    # error. For information about addressing the issue, see [Configuration
+    # options and requirements for retrieving sensitive data samples][1] in
+    # the *Amazon Macie User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html
     #
     # @!attribute [rw] retrieval_mode
     #   The access method to use when retrieving occurrences of sensitive
@@ -6677,12 +6677,12 @@ module Aws::Macie2
     # Specifies configuration settings for retrieving occurrences of
     # sensitive data reported by findings, and the status of the
     # configuration for an Amazon Macie account. If you don't specify
-    # retrievalConfiguration values for an existing configuration, Macie
+    # retrievalConfiguration settings for an existing configuration, Macie
     # sets the access method to CALLER\_CREDENTIALS. If your current access
     # method is ASSUME\_ROLE, Macie also deletes the external ID and role
     # name currently specified for the configuration. To keep these settings
-    # for an existing configuration, specify the current
-    # retrievalConfiguration values in your request.
+    # for an existing configuration, specify your current
+    # retrievalConfiguration settings in your request.
     #
     # @!attribute [rw] configuration
     #   Specifies the status of the Amazon Macie configuration for
@@ -6696,16 +6696,16 @@ module Aws::Macie2
     # @!attribute [rw] retrieval_configuration
     #   Specifies the access method and settings to use when retrieving
     #   occurrences of sensitive data reported by findings. If your request
-    #   specifies an Identity and Access Management (IAM) role to assume
-    #   when retrieving the sensitive data, Amazon Macie verifies that the
-    #   role exists and the attached policies are configured correctly. If
-    #   there's an issue, Macie returns an error. For information about
-    #   addressing the issue, see [Retrieving sensitive data samples with
-    #   findings][1] in the *Amazon Macie User Guide*.
+    #   specifies an Identity and Access Management (IAM) role to assume,
+    #   Amazon Macie verifies that the role exists and the attached policies
+    #   are configured correctly. If there's an issue, Macie returns an
+    #   error. For information about addressing the issue, see
+    #   [Configuration options and requirements for retrieving sensitive
+    #   data samples][1] in the *Amazon Macie User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd.html
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html
     #   @return [Types::UpdateRetrievalConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfigurationRequest AWS API Documentation

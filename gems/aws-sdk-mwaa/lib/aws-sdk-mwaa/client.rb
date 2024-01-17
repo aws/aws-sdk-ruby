@@ -732,6 +732,8 @@ module Aws::MWAA
     #
     # @return [Types::CreateWebLoginTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateWebLoginTokenResponse#airflow_identity #airflow_identity} => String
+    #   * {Types::CreateWebLoginTokenResponse#iam_identity #iam_identity} => String
     #   * {Types::CreateWebLoginTokenResponse#web_server_hostname #web_server_hostname} => String
     #   * {Types::CreateWebLoginTokenResponse#web_token #web_token} => String
     #
@@ -743,6 +745,8 @@ module Aws::MWAA
     #
     # @example Response structure
     #
+    #   resp.airflow_identity #=> String
+    #   resp.iam_identity #=> String
     #   resp.web_server_hostname #=> String
     #   resp.web_token #=> String
     #
@@ -1324,7 +1328,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.881.0 (2024-01-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.880.0 (2024-01-12)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SupplyChain`.
+
+1.879.0 (2024-01-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.878.0 (2024-01-10)
 ------------------
 

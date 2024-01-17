@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2024-01-16)
+------------------
+
+* Feature - This release adds ContentType and TaxonomyLevel attributes to DetectModerationLabels and GetMediaAnalysisJob API responses.
+
 1.91.0 (2023-11-28)
 ------------------
 

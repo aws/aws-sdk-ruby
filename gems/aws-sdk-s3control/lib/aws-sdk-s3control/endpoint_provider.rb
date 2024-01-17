@@ -46,15 +46,21 @@ module Aws::S3Control
             if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.valid_host_label?(outpost_id, false))
               raise ArgumentError, "OutpostId must only contain a-z, A-Z, 0-9 and `-`."
             end
+            if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+              raise ArgumentError, "Invalid Configuration: DualStack and custom endpoint are not supported"
+            end
             if Aws::Endpoints::Matchers.valid_host_label?(region, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-                raise ArgumentError, "Invalid configuration: Outposts do not support dual-stack"
-              end
               if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
                 return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
               end
+              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
+              end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
                 return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
+              end
+              if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
               end
               return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
             end
@@ -64,11 +70,11 @@ module Aws::S3Control
         if Aws::Endpoints::Matchers.set?(access_point_name) && (access_point_arn = Aws::Endpoints::Matchers.aws_parse_arn(access_point_name))
           if (arn_type = Aws::Endpoints::Matchers.attr(access_point_arn, "resourceId[0]")) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(arn_type, ""))
             if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(access_point_arn, "service"), "s3-outposts")
-              if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-                raise ArgumentError, "Invalid configuration: Outpost Access Points do not support dual-stack"
-              end
               if (outpost_id = Aws::Endpoints::Matchers.attr(access_point_arn, "resourceId[1]"))
                 if Aws::Endpoints::Matchers.valid_host_label?(outpost_id, false)
+                  if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                    raise ArgumentError, "Invalid Configuration: DualStack and custom endpoint are not supported"
+                  end
                   if Aws::Endpoints::Matchers.set?(use_arn_region) && Aws::Endpoints::Matchers.boolean_equals?(use_arn_region, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(access_point_arn, "region"), "#{region}"))
                     raise ArgumentError, "Invalid configuration: region from ARN `#{access_point_arn['region']}` does not match client region `#{region}` and UseArnRegion is `false`"
                   end
@@ -84,8 +90,14 @@ module Aws::S3Control
                               if (outpost_type = Aws::Endpoints::Matchers.attr(access_point_arn, "resourceId[2]"))
                                 if (access_point_name = Aws::Endpoints::Matchers.attr(access_point_arn, "resourceId[3]"))
                                   if Aws::Endpoints::Matchers.string_equals?(outpost_type, "accesspoint")
+                                    if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{access_point_arn['region']}.#{arn_partition['dualStackDnsSuffix']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{access_point_arn['region']}"}]})
+                                    end
                                     if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
                                       return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{access_point_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{access_point_arn['region']}"}]})
+                                    end
+                                    if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{access_point_arn['region']}.#{arn_partition['dualStackDnsSuffix']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{access_point_arn['region']}"}]})
                                     end
                                     if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
                                       return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {"x-amz-account-id"=>["#{access_point_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{access_point_arn['region']}"}]})
@@ -118,11 +130,11 @@ module Aws::S3Control
         if Aws::Endpoints::Matchers.set?(bucket) && (bucket_arn = Aws::Endpoints::Matchers.aws_parse_arn(bucket))
           if (arn_type = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[0]")) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(arn_type, ""))
             if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(bucket_arn, "service"), "s3-outposts")
-              if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-                raise ArgumentError, "Invalid configuration: Outpost buckets do not support dual-stack"
-              end
               if (outpost_id = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[1]"))
                 if Aws::Endpoints::Matchers.valid_host_label?(outpost_id, false)
+                  if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                    raise ArgumentError, "Invalid Configuration: DualStack and custom endpoint are not supported"
+                  end
                   if Aws::Endpoints::Matchers.set?(use_arn_region) && Aws::Endpoints::Matchers.boolean_equals?(use_arn_region, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(bucket_arn, "region"), "#{region}"))
                     raise ArgumentError, "Invalid configuration: region from ARN `#{bucket_arn['region']}` does not match client region `#{region}` and UseArnRegion is `false`"
                   end
@@ -138,8 +150,14 @@ module Aws::S3Control
                               if (outpost_type = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[2]"))
                                 if (bucket_name = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[3]"))
                                   if Aws::Endpoints::Matchers.string_equals?(outpost_type, "bucket")
+                                    if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{bucket_arn['region']}.#{arn_partition['dualStackDnsSuffix']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})
+                                    end
                                     if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
                                       return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts-fips.#{bucket_arn['region']}.#{arn_partition['dnsSuffix']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})
+                                    end
+                                    if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+                                      return Aws::Endpoints::Endpoint.new(url: "https://s3-outposts.#{bucket_arn['region']}.#{arn_partition['dualStackDnsSuffix']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})
                                     end
                                     if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
                                       return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {"x-amz-account-id"=>["#{bucket_arn['accountId']}"], "x-amz-outpost-id"=>["#{outpost_id}"]}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})

@@ -14152,12 +14152,27 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] compatible_runtimes
-    #   The layer's compatible runtimes. Maximum number of five items.
+    #   The layer's compatible [function runtimes][1].
     #
-    #   Valid values: `nodejs10.x` \| `nodejs12.x` \| `java8` \| `java11` \|
-    #   `python2.7` \| `python3.6` \| `python3.7` \| `python3.8` \|
-    #   `dotnetcore1.0` \| `dotnetcore2.1` \| `go1.x` \| `ruby2.5` \|
-    #   `provided`
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][2] in the *Lambda
+    #   Developer Guide*.
+    #
+    #   Array Members: Maximum number of 5 items.
+    #
+    #   Valid Values: `nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 |
+    #   nodejs10.x | nodejs12.x | nodejs14.x | nodejs16.x | java8 |
+    #   java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 |
+    #   python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 |
+    #   dotnetcore3.1 | dotnet6 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7
+    #   | provided | provided.al2 | nodejs18.x | python3.10 | java17 |
+    #   ruby3.2 | python3.11 | nodejs20.x | provided.al2023 | python3.12 |
+    #   java21`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_date

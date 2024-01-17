@@ -630,14 +630,17 @@ module Aws::Personalize
     #   Whether metadata with recommendations is enabled for the campaign.
     #   If enabled, you can specify the columns from your Items dataset in
     #   your request for recommendations. Amazon Personalize returns this
-    #   data for each item in the recommendation response.
+    #   data for each item in the recommendation response. For information
+    #   about enabling metadata for a campaign, see [Enabling metadata in
+    #   recommendations for a campaign][1].
     #
     #   If you enable metadata in recommendations, you will incur additional
-    #   costs. For more information, see [Amazon Personalize pricing][1].
+    #   costs. For more information, see [Amazon Personalize pricing][2].
     #
     #
     #
-    #   [1]: https://aws.amazon.com/personalize/pricing/
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #   [2]: https://aws.amazon.com/personalize/pricing/
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignConfig AWS API Documentation
@@ -1534,7 +1537,7 @@ module Aws::Personalize
     # @!attribute [rw] perform_auto_ml
     #   We don't recommend enabling automated machine learning. Instead,
     #   match your use case to the available Amazon Personalize recipes. For
-    #   more information, see [Determining your use case.][1]
+    #   more information, see [Choosing a recipe][1].
     #
     #   Whether to perform automated machine learning (AutoML). The default
     #   is `false`. For this case, you must specify `recipeArn`.
@@ -1548,12 +1551,18 @@ module Aws::Personalize
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #   @return [Boolean]
     #
     # @!attribute [rw] recipe_arn
-    #   The ARN of the recipe to use for model training. This is required
-    #   when `performAutoML` is false.
+    #   The Amazon Resource Name (ARN) of the recipe to use for model
+    #   training. This is required when `performAutoML` is false. For
+    #   information about different Amazon Personalize recipes and their
+    #   ARNs, see [Choosing a recipe][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #   @return [String]
     #
     # @!attribute [rw] dataset_group_arn
@@ -4645,14 +4654,17 @@ module Aws::Personalize
     #   Whether metadata with recommendations is enabled for the
     #   recommender. If enabled, you can specify the columns from your Items
     #   dataset in your request for recommendations. Amazon Personalize
-    #   returns this data for each item in the recommendation response.
+    #   returns this data for each item in the recommendation response. For
+    #   information about enabling metadata for a recommender, see [Enabling
+    #   metadata in recommendations for a recommender][1].
     #
     #   If you enable metadata in recommendations, you will incur additional
-    #   costs. For more information, see [Amazon Personalize pricing][1].
+    #   costs. For more information, see [Amazon Personalize pricing][2].
     #
     #
     #
-    #   [1]: https://aws.amazon.com/personalize/pricing/
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata
+    #   [2]: https://aws.amazon.com/personalize/pricing/
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/RecommenderConfig AWS API Documentation

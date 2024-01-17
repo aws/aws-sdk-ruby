@@ -89,8 +89,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] associated_faces
-    #   An array of AssociatedFace objects containing FaceIDs that are
-    #   successfully associated with the UserID is returned. Returned if the
+    #   An array of AssociatedFace objects containing FaceIDs that have been
+    #   successfully associated with the UserID. Returned if the
     #   AssociateFaces action is successful.
     #   @return [Array<Types::AssociatedFace>]
     #
@@ -726,6 +726,24 @@ module Aws::Rekognition
       :start_timestamp_millis,
       :end_timestamp_millis,
       :duration_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information regarding the confidence and name of a detected
+    # content type.
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level of the label given
+    #   @return [Float]
+    #
+    # @!attribute [rw] name
+    #   The name of the label
+    #   @return [String]
+    #
+    class ContentType < Struct.new(
+      :confidence,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2389,11 +2407,18 @@ module Aws::Rekognition
     #   version was used.
     #   @return [String]
     #
+    # @!attribute [rw] content_types
+    #   A list of predicted results for the type of content an image
+    #   contains. For example, the image content might be from animation,
+    #   sports, or a video game.
+    #   @return [Array<Types::ContentType>]
+    #
     class DetectModerationLabelsResponse < Struct.new(
       :moderation_labels,
       :moderation_model_version,
       :human_loop_activation_output,
-      :project_version)
+      :project_version,
+      :content_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5385,6 +5410,19 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Object containing information about the model versions of selected
+    # features in a given job.
+    #
+    # @!attribute [rw] moderation
+    #   The Moderation base model version.
+    #   @return [String]
+    #
+    class MediaAnalysisModelVersions < Struct.new(
+      :moderation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration options for a media analysis job. Configuration is
     # operation-specific.
     #
@@ -5432,8 +5470,14 @@ module Aws::Rekognition
     #   Developer Guide.
     #   @return [Types::S3Object]
     #
+    # @!attribute [rw] model_versions
+    #   Information about the model versions for the features selected in a
+    #   given job.
+    #   @return [Types::MediaAnalysisModelVersions]
+    #
     class MediaAnalysisResults < Struct.new(
-      :s3_object)
+      :s3_object,
+      :model_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5462,10 +5506,16 @@ module Aws::Rekognition
     #   hierarchy have the parent label `""`.
     #   @return [String]
     #
+    # @!attribute [rw] taxonomy_level
+    #   The level of the moderation label with regard to its taxonomy, from
+    #   1 to 3.
+    #   @return [Integer]
+    #
     class ModerationLabel < Struct.new(
       :confidence,
       :name,
-      :parent_name)
+      :parent_name,
+      :taxonomy_level)
       SENSITIVE = []
       include Aws::Structure
     end

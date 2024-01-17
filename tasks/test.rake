@@ -42,9 +42,55 @@ task 'test:spec' do
 end
 
 ##
-## feature / integration tests
+## integration / smoke tests
 ##
 
+desc 'Executes smoke tests for a single gem'
+rule /^test:smoke:.+$/ do |task|
+  dir = "gems/#{task.name.split(':').last}/features"
+  tags = "-t '@smoke'"
+  ENV.fetch('AWS_SMOKE_TEST_SKIP_TAGS', '').split(',').each do |tag|
+    tags += " -t 'not @#{tag}'"
+  end
+  sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet")
+end
+
+desc 'Executes all smoke tests'
+rule 'test:smoke' do
+  failures = []
+  Dir.glob('gems/*/features').each do |dir|
+    next unless File.exist?(File.join(dir, 'smoke.feature'))
+
+    gem_name = dir.match(%r{gems/(.*)/features})[1]
+    sh("bundle exec rake test:smoke:#{gem_name}") do |ok, _|
+      failures << File.basename(File.dirname(dir)) unless ok
+    end
+  end
+  abort('one or more test suites failed: %s' % [failures.join(', ')]) unless failures.empty?
+end
+
+desc 'Executes integration tests for a single gem'
+rule /^test:integration:.+$/ do |task|
+  dir = "gems/#{task.name.split(':').last}/features"
+  tags = "-t 'not @smoke' -t 'not @veryslow'"
+  sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet")
+end
+
+desc 'Executes all integration tests'
+task 'test:integration' do
+  failures = []
+  Dir.glob('gems/*/features').each do |dir|
+    next unless Dir.glob(File.join(dir, '**', '*.feature')).any?
+
+    gem_name = dir.match(%r{gems/(.*)/features})[1]
+    sh("bundle exec rake test:integration:#{gem_name}") do |ok, _|
+      failures << File.basename(File.dirname(dir)) unless ok
+    end
+  end
+  abort('one or more test suites failed: %s' % [failures.join(', ')]) unless failures.empty?
+end
+
+desc 'Executes feature tests for a single gem'
 rule /^test:features:.+$/ do |task|
   dir = "gems/#{task.name.split(':').last}/features"
   # Exclude support smoke tests as these require account settings
@@ -54,12 +100,14 @@ rule /^test:features:.+$/ do |task|
   sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet")
 end
 
-desc 'Executes integration tests.'
+desc 'Executes all feature tests'
 task 'test:features' do
   failures = []
   Dir.glob('gems/*/features').each do |dir|
-    tags = "-t 'not @veryslow' -t 'not @support or not @smoke'"
-    sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet") do |ok, _|
+    next unless Dir.glob(File.join(dir, '**', '*.feature')).any?
+
+    gem_name = dir.match(%r{gems/(.*)/features})[1]
+    sh("bundle exec rake test:features:#{gem_name}") do |ok, _|
       failures << File.basename(File.dirname(dir)) unless ok
     end
   end

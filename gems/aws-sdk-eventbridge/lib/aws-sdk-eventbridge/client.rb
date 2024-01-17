@@ -2484,6 +2484,7 @@ module Aws::EventBridge
     #   resp.targets[0].dead_letter_config.arn #=> String
     #   resp.targets[0].retry_policy.maximum_retry_attempts #=> Integer
     #   resp.targets[0].retry_policy.maximum_event_age_in_seconds #=> Integer
+    #   resp.targets[0].app_sync_parameters.graph_ql_operation #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -2816,39 +2817,7 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
     #
     # @option params [String] :state
-    #   The state of the rule.
-    #
-    #   Valid values include:
-    #
-    #   * `DISABLED`: The rule is disabled. EventBridge does not match any
-    #     events against the rule.
-    #
-    #   * `ENABLED`: The rule is enabled. EventBridge matches events against
-    #     the rule, *except* for Amazon Web Services management events
-    #     delivered through CloudTrail.
-    #
-    #   * `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is enabled
-    #     for all events, including Amazon Web Services management events
-    #     delivered through CloudTrail.
-    #
-    #     Management events provide visibility into management operations that
-    #     are performed on resources in your Amazon Web Services account.
-    #     These are also known as control plane operations. For more
-    #     information, see [Logging management events][1] in the *CloudTrail
-    #     User Guide*, and [Filtering management events from Amazon Web
-    #     Services services][2] in the *Amazon EventBridge User Guide*.
-    #
-    #     This value is only valid for rules on the [default][3] event bus or
-    #     [custom event buses][4]. It does not apply to [partner event
-    #     buses][5].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events
-    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail
-    #   [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses
-    #   [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html
-    #   [5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html
+    #   Indicates whether the rule is enabled or disabled.
     #
     # @option params [String] :description
     #   A description of the rule.
@@ -3156,6 +3125,9 @@ module Aws::EventBridge
     #         retry_policy: {
     #           maximum_retry_attempts: 1,
     #           maximum_event_age_in_seconds: 1,
+    #         },
+    #         app_sync_parameters: {
+    #           graph_ql_operation: "GraphQLOperation",
     #         },
     #       },
     #     ],
@@ -3806,7 +3778,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-01-11)
+------------------
+
+* Feature - Doc only update for Secrets Manager
+
 1.88.0 (2023-12-22)
 ------------------
 

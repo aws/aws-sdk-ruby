@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-01-17)
+------------------
+
+* Feature - This release adds support for Multi-Region Replication with provisioned tables, and Keyspaces auto scaling APIs
+
 1.15.0 (2023-11-28)
 ------------------
 
