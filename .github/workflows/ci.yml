@@ -26,18 +26,18 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-        run: |
-          gem update --system 3.2.3
 
       - uses: actions/checkout@v4
 
       - name: Setup environment
-        run: echo "${{ matrix.env }}=1" >> $GITHUB_ENV
+        run: |
+          echo "${{ matrix.env }}=1" >> $GITHUB_ENV
 
       - name: Install gems
         run: |
-          echo KITCHEN_SINK=$KITCHEN_SINK CRT=$CRT
-          bundle install --without docs repl development
+          gem update --system 3.2.3
+          bundle config set --local without 'docs repl development'
+          bundle install
 
       - name: SDK Build
         run: bundle exec rake build
