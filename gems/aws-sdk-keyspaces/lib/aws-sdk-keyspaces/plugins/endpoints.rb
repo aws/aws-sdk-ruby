@@ -69,6 +69,8 @@ module Aws::Keyspaces
             Aws::Keyspaces::Endpoints::GetKeyspace.build(context)
           when :get_table
             Aws::Keyspaces::Endpoints::GetTable.build(context)
+          when :get_table_auto_scaling_settings
+            Aws::Keyspaces::Endpoints::GetTableAutoScalingSettings.build(context)
           when :list_keyspaces
             Aws::Keyspaces::Endpoints::ListKeyspaces.build(context)
           when :list_tables
