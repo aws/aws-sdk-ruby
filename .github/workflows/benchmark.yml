@@ -35,7 +35,6 @@ jobs:
 
       - name: Install gems
         run: |
-          gem update --system 3.2.3
           bundle config set --local without 'docs repl development'
           bundle install
 
