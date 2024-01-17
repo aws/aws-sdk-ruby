@@ -26,6 +26,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+        run: |
+          gem update --system 3.2.3
 
       - uses: actions/checkout@v4
 
