@@ -818,6 +818,10 @@ module Aws::Firehose
     #   source for a delivery stream.
     #   @return [Types::MSKSourceConfiguration]
     #
+    # @!attribute [rw] snowflake_destination_configuration
+    #   Configure Snowflake destination
+    #   @return [Types::SnowflakeDestinationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
     #
     class CreateDeliveryStreamInput < Struct.new(
@@ -834,7 +838,8 @@ module Aws::Firehose
       :http_endpoint_destination_configuration,
       :tags,
       :amazon_open_search_serverless_destination_configuration,
-      :msk_source_configuration)
+      :msk_source_configuration,
+      :snowflake_destination_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1237,6 +1242,10 @@ module Aws::Firehose
     #   Describes the specified HTTP endpoint destination.
     #   @return [Types::HttpEndpointDestinationDescription]
     #
+    # @!attribute [rw] snowflake_destination_description
+    #   Optional description for the destination
+    #   @return [Types::SnowflakeDestinationDescription]
+    #
     # @!attribute [rw] amazon_open_search_serverless_destination_description
     #   The destination in the Serverless offering for Amazon OpenSearch
     #   Service.
@@ -1253,6 +1262,7 @@ module Aws::Firehose
       :amazonopensearchservice_destination_description,
       :splunk_destination_description,
       :http_endpoint_destination_description,
+      :snowflake_destination_description,
       :amazon_open_search_serverless_destination_description)
       SENSITIVE = []
       include Aws::Structure
@@ -3826,6 +3836,454 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Configure Snowflake destination
+    #
+    # @!attribute [rw] account_url
+    #   URL for accessing your Snowflake account. This URL must include your
+    #   [account identifier][1]. Note that the protocol (https://) and port
+    #   number are optional.
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   The private key used to encrypt your Snowflake client. For
+    #   information, see [Using Key Pair Authentication &amp; Key
+    #   Rotation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
+    #   @return [String]
+    #
+    # @!attribute [rw] key_passphrase
+    #   Passphrase to decrypt the private key when the key is encrypted. For
+    #   information, see [Using Key Pair Authentication &amp; Key
+    #   Rotation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   User login name for the Snowflake account.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   All data in Snowflake is maintained in databases.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   Each database consists of one or more schemas, which are logical
+    #   groupings of database objects, such as tables and views
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   All data in Snowflake is stored in database tables, logically
+    #   structured as collections of columns and rows.
+    #   @return [String]
+    #
+    # @!attribute [rw] snowflake_role_configuration
+    #   Optionally configure a Snowflake role. Otherwise the default user
+    #   role will be used.
+    #   @return [Types::SnowflakeRoleConfiguration]
+    #
+    # @!attribute [rw] data_loading_option
+    #   Choose to load JSON keys mapped to table column names or choose to
+    #   split the JSON payload where content is mapped to a record content
+    #   column and source metadata is mapped to a record metadata column.
+    #   @return [String]
+    #
+    # @!attribute [rw] meta_data_column_name
+    #   The name of the record metadata column
+    #   @return [String]
+    #
+    # @!attribute [rw] content_column_name
+    #   The name of the record content column
+    #   @return [String]
+    #
+    # @!attribute [rw] snowflake_vpc_configuration
+    #   The VPCE ID for Firehose to privately connect with Snowflake. The ID
+    #   format is com.amazonaws.vpce.\[region\].vpce-svc-&lt;\[id\]&gt;. For
+    #   more information, see [Amazon PrivateLink &amp; Snowflake][1]
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink
+    #   @return [Types::SnowflakeVpcConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Snowflake role
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   The time period where Kinesis Data Firehose will retry sending data
+    #   to the chosen HTTP endpoint.
+    #   @return [Types::SnowflakeRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Choose an S3 backup mode
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_configuration
+    #   Describes the configuration of a destination in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationConfiguration AWS API Documentation
+    #
+    class SnowflakeDestinationConfiguration < Struct.new(
+      :account_url,
+      :private_key,
+      :key_passphrase,
+      :user,
+      :database,
+      :schema,
+      :table,
+      :snowflake_role_configuration,
+      :data_loading_option,
+      :meta_data_column_name,
+      :content_column_name,
+      :snowflake_vpc_configuration,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :role_arn,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_configuration)
+      SENSITIVE = [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
+      include Aws::Structure
+    end
+
+    # Optional Snowflake destination description
+    #
+    # @!attribute [rw] account_url
+    #   URL for accessing your Snowflake account. This URL must include your
+    #   [account identifier][1]. Note that the protocol (https://) and port
+    #   number are optional.
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   User login name for the Snowflake account.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   All data in Snowflake is maintained in databases.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   Each database consists of one or more schemas, which are logical
+    #   groupings of database objects, such as tables and views
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   All data in Snowflake is stored in database tables, logically
+    #   structured as collections of columns and rows.
+    #   @return [String]
+    #
+    # @!attribute [rw] snowflake_role_configuration
+    #   Optionally configure a Snowflake role. Otherwise the default user
+    #   role will be used.
+    #   @return [Types::SnowflakeRoleConfiguration]
+    #
+    # @!attribute [rw] data_loading_option
+    #   Choose to load JSON keys mapped to table column names or choose to
+    #   split the JSON payload where content is mapped to a record content
+    #   column and source metadata is mapped to a record metadata column.
+    #   @return [String]
+    #
+    # @!attribute [rw] meta_data_column_name
+    #   The name of the record metadata column
+    #   @return [String]
+    #
+    # @!attribute [rw] content_column_name
+    #   The name of the record content column
+    #   @return [String]
+    #
+    # @!attribute [rw] snowflake_vpc_configuration
+    #   The VPCE ID for Firehose to privately connect with Snowflake. The ID
+    #   format is com.amazonaws.vpce.\[region\].vpce-svc-&lt;\[id\]&gt;. For
+    #   more information, see [Amazon PrivateLink &amp; Snowflake][1]
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink
+    #   @return [Types::SnowflakeVpcConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Snowflake role
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   The time period where Kinesis Data Firehose will retry sending data
+    #   to the chosen HTTP endpoint.
+    #   @return [Types::SnowflakeRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Choose an S3 backup mode
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination_description
+    #   Describes a destination in Amazon S3.
+    #   @return [Types::S3DestinationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationDescription AWS API Documentation
+    #
+    class SnowflakeDestinationDescription < Struct.new(
+      :account_url,
+      :user,
+      :database,
+      :schema,
+      :table,
+      :snowflake_role_configuration,
+      :data_loading_option,
+      :meta_data_column_name,
+      :content_column_name,
+      :snowflake_vpc_configuration,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :role_arn,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_destination_description)
+      SENSITIVE = [:account_url, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
+      include Aws::Structure
+    end
+
+    # Update to configuration settings
+    #
+    # @!attribute [rw] account_url
+    #   URL for accessing your Snowflake account. This URL must include your
+    #   [account identifier][1]. Note that the protocol (https://) and port
+    #   number are optional.
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   The private key used to encrypt your Snowflake client. For
+    #   information, see [Using Key Pair Authentication &amp; Key
+    #   Rotation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
+    #   @return [String]
+    #
+    # @!attribute [rw] key_passphrase
+    #   Passphrase to decrypt the private key when the key is encrypted. For
+    #   information, see [Using Key Pair Authentication &amp; Key
+    #   Rotation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-configuration#using-key-pair-authentication-key-rotation
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   User login name for the Snowflake account.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   All data in Snowflake is maintained in databases.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   Each database consists of one or more schemas, which are logical
+    #   groupings of database objects, such as tables and views
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   All data in Snowflake is stored in database tables, logically
+    #   structured as collections of columns and rows.
+    #   @return [String]
+    #
+    # @!attribute [rw] snowflake_role_configuration
+    #   Optionally configure a Snowflake role. Otherwise the default user
+    #   role will be used.
+    #   @return [Types::SnowflakeRoleConfiguration]
+    #
+    # @!attribute [rw] data_loading_option
+    #   JSON keys mapped to table column names or choose to split the JSON
+    #   payload where content is mapped to a record content column and
+    #   source metadata is mapped to a record metadata column.
+    #   @return [String]
+    #
+    # @!attribute [rw] meta_data_column_name
+    #   The name of the record metadata column
+    #   @return [String]
+    #
+    # @!attribute [rw] content_column_name
+    #   The name of the content metadata column
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Snowflake role
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   Specify how long Kinesis Data Firehose retries sending data to the
+    #   New Relic HTTP endpoint. After sending data, Kinesis Data Firehose
+    #   first waits for an acknowledgment from the HTTP endpoint. If an
+    #   error occurs or the acknowledgment doesn’t arrive within the
+    #   acknowledgment timeout period, Kinesis Data Firehose starts the
+    #   retry duration counter. It keeps retrying until the retry duration
+    #   expires. After that, Kinesis Data Firehose considers it a data
+    #   delivery failure and backs up the data to your Amazon S3 bucket.
+    #   Every time that Kinesis Data Firehose sends data to the HTTP
+    #   endpoint (either the initial attempt or a retry), it restarts the
+    #   acknowledgement timeout counter and waits for an acknowledgement
+    #   from the HTTP endpoint. Even if the retry duration expires, Kinesis
+    #   Data Firehose still waits for the acknowledgment until it receives
+    #   it or the acknowledgement timeout period is reached. If the
+    #   acknowledgment times out, Kinesis Data Firehose determines whether
+    #   there's time left in the retry counter. If there is time left, it
+    #   retries again and repeats the logic until it receives an
+    #   acknowledgment or determines that the retry time has expired. If you
+    #   don't want Kinesis Data Firehose to retry sending data, set this
+    #   value to 0.
+    #   @return [Types::SnowflakeRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Choose an S3 backup mode
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_update
+    #   Describes an update for a destination in Amazon S3.
+    #   @return [Types::S3DestinationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationUpdate AWS API Documentation
+    #
+    class SnowflakeDestinationUpdate < Struct.new(
+      :account_url,
+      :private_key,
+      :key_passphrase,
+      :user,
+      :database,
+      :schema,
+      :table,
+      :snowflake_role_configuration,
+      :data_loading_option,
+      :meta_data_column_name,
+      :content_column_name,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :role_arn,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_update)
+      SENSITIVE = [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
+      include Aws::Structure
+    end
+
+    # Specify how long Kinesis Data Firehose retries sending data to the New
+    # Relic HTTP endpoint. After sending data, Kinesis Data Firehose first
+    # waits for an acknowledgment from the HTTP endpoint. If an error occurs
+    # or the acknowledgment doesn’t arrive within the acknowledgment timeout
+    # period, Kinesis Data Firehose starts the retry duration counter. It
+    # keeps retrying until the retry duration expires. After that, Kinesis
+    # Data Firehose considers it a data delivery failure and backs up the
+    # data to your Amazon S3 bucket. Every time that Kinesis Data Firehose
+    # sends data to the HTTP endpoint (either the initial attempt or a
+    # retry), it restarts the acknowledgement timeout counter and waits for
+    # an acknowledgement from the HTTP endpoint. Even if the retry duration
+    # expires, Kinesis Data Firehose still waits for the acknowledgment
+    # until it receives it or the acknowledgement timeout period is reached.
+    # If the acknowledgment times out, Kinesis Data Firehose determines
+    # whether there's time left in the retry counter. If there is time
+    # left, it retries again and repeats the logic until it receives an
+    # acknowledgment or determines that the retry time has expired. If you
+    # don't want Kinesis Data Firehose to retry sending data, set this
+    # value to 0.
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   the time period where Kinesis Data Firehose will retry sending data
+    #   to the chosen HTTP endpoint.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeRetryOptions AWS API Documentation
+    #
+    class SnowflakeRetryOptions < Struct.new(
+      :duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optionally configure a Snowflake role. Otherwise the default user role
+    # will be used.
+    #
+    # @!attribute [rw] enabled
+    #   Enable Snowflake role
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] snowflake_role
+    #   The Snowflake role you wish to configure
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeRoleConfiguration AWS API Documentation
+    #
+    class SnowflakeRoleConfiguration < Struct.new(
+      :enabled,
+      :snowflake_role)
+      SENSITIVE = [:snowflake_role]
+      include Aws::Structure
+    end
+
+    # Configure a Snowflake VPC
+    #
+    # @!attribute [rw] private_link_vpce_id
+    #   The VPCE ID for Firehose to privately connect with Snowflake. The ID
+    #   format is com.amazonaws.vpce.\[region\].vpce-svc-&lt;\[id\]&gt;. For
+    #   more information, see [Amazon PrivateLink &amp; Snowflake][1]
+    #
+    #
+    #
+    #   [1]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeVpcConfiguration AWS API Documentation
+    #
+    class SnowflakeVpcConfiguration < Struct.new(
+      :private_link_vpce_id)
+      SENSITIVE = [:private_link_vpce_id]
+      include Aws::Structure
+    end
+
     # Details about a Kinesis data stream used as the source for a Kinesis
     # Data Firehose delivery stream.
     #
@@ -4273,6 +4731,10 @@ module Aws::Firehose
     #   Amazon OpenSearch Service.
     #   @return [Types::AmazonOpenSearchServerlessDestinationUpdate]
     #
+    # @!attribute [rw] snowflake_destination_update
+    #   Update to the Snowflake destination condiguration settings
+    #   @return [Types::SnowflakeDestinationUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation
     #
     class UpdateDestinationInput < Struct.new(
@@ -4286,7 +4748,8 @@ module Aws::Firehose
       :amazonopensearchservice_destination_update,
       :splunk_destination_update,
       :http_endpoint_destination_update,
-      :amazon_open_search_serverless_destination_update)
+      :amazon_open_search_serverless_destination_update,
+      :snowflake_destination_update)
       SENSITIVE = []
       include Aws::Structure
     end

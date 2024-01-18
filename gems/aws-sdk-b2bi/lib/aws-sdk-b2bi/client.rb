@@ -438,6 +438,80 @@ module Aws::B2bi
     #   * {Types::CreateCapabilityResponse#instructions_documents #instructions_documents} => Array&lt;Types::S3Location&gt;
     #   * {Types::CreateCapabilityResponse#created_at #created_at} => Time
     #
+    #
+    # @example Example: Sample CreateCapability call
+    #
+    #   resp = client.create_capability({
+    #     name: "b2biexample", 
+    #     type: "edi", 
+    #     client_token: "foo", 
+    #     configuration: {
+    #       edi: {
+    #         type: {
+    #           x12_details: {
+    #             version: "VERSION_4010", 
+    #             transaction_set: "X12_110", 
+    #           }, 
+    #         }, 
+    #         input_location: {
+    #           key: "input/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         output_location: {
+    #           key: "output/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         transformer_id: "tr-9a893cf536df4658b", 
+    #       }, 
+    #     }, 
+    #     instructions_documents: [
+    #       {
+    #         key: "instructiondoc.txt", 
+    #         bucket_name: "test-bucket", 
+    #       }, 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "capabilityKey1", 
+    #         value: "capabilityValue1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "b2biexample", 
+    #     type: "edi", 
+    #     capability_arn: "arn:aws:b2bi:us-west-2:123456789012:capability/ca-963a8121e4fc4e348", 
+    #     capability_id: "ca-963a8121e4fc4e348", 
+    #     configuration: {
+    #       edi: {
+    #         type: {
+    #           x12_details: {
+    #             version: "VERSION_4010", 
+    #             transaction_set: "X12_110", 
+    #           }, 
+    #         }, 
+    #         input_location: {
+    #           key: "input/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         output_location: {
+    #           key: "output/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         transformer_id: "tr-9a893cf536df4658b", 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     instructions_documents: [
+    #       {
+    #         key: "instructiondoc.txt", 
+    #         bucket_name: "test-bucket", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_capability({
@@ -548,6 +622,41 @@ module Aws::B2bi
     #   * {Types::CreatePartnershipResponse#trading_partner_id #trading_partner_id} => String
     #   * {Types::CreatePartnershipResponse#created_at #created_at} => Time
     #
+    #
+    # @example Example: Sample CreatePartnership call
+    #
+    #   resp = client.create_partnership({
+    #     name: "b2bipartner", 
+    #     capabilities: [
+    #       "ca-963a8121e4fc4e348", 
+    #     ], 
+    #     client_token: "foo", 
+    #     email: "john@example.com", 
+    #     phone: "5555555555", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #     tags: [
+    #       {
+    #         key: "sampleKey1", 
+    #         value: "sampleValue1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "b2bipartner", 
+    #     capabilities: [
+    #       "ca-963a8121e4fc4e348", 
+    #     ], 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     email: "john@example.com", 
+    #     partnership_arn: "arn:aws:b2bi:us-west-2:123456789012:partnership/ps-60fbc37c87f04fce9", 
+    #     partnership_id: "ps-219fa02f5b4242af8", 
+    #     phone: "5555555555", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #     trading_partner_id: "tp-2a17ca447f6f4a8a8", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_partnership({
@@ -628,6 +737,37 @@ module Aws::B2bi
     #   * {Types::CreateProfileResponse#logging #logging} => String
     #   * {Types::CreateProfileResponse#log_group_name #log_group_name} => String
     #   * {Types::CreateProfileResponse#created_at #created_at} => Time
+    #
+    #
+    # @example Example: Sample CreateProfile call
+    #
+    #   resp = client.create_profile({
+    #     name: "Shipping Profile", 
+    #     business_name: "John's Shipping", 
+    #     client_token: "foo", 
+    #     email: "john@example.com", 
+    #     logging: "ENABLED", 
+    #     phone: "5555555555", 
+    #     tags: [
+    #       {
+    #         key: "sampleKey", 
+    #         value: "sampleValue", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "Shipping Profile", 
+    #     business_name: "John's Trucking", 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     email: "john@example.com", 
+    #     log_group_name: "b2bi/p-60fbc37c87f04fce9-Logs", 
+    #     logging: "ENABLED", 
+    #     phone: "5555555555", 
+    #     profile_arn: "arn:aws:b2bi:us-west-2:123456789012:profile/p-60fbc37c87f04fce9", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -716,6 +856,47 @@ module Aws::B2bi
     #   * {Types::CreateTransformerResponse#sample_document #sample_document} => String
     #   * {Types::CreateTransformerResponse#created_at #created_at} => Time
     #
+    #
+    # @example Example: Sample CreateTransformer call
+    #
+    #   resp = client.create_transformer({
+    #     name: "transformJSON", 
+    #     client_token: "foo", 
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     mapping_template: "{}", 
+    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     tags: [
+    #       {
+    #         key: "sampleKey", 
+    #         value: "sampleValue", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "transformJSON", 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     mapping_template: "$", 
+    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     status: "inactive", 
+    #     transformer_arn: "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9", 
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_transformer({
@@ -769,6 +950,13 @@ module Aws::B2bi
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Sample DeleteCapabilty call
+    #
+    #   resp = client.delete_capability({
+    #     capability_id: "ca-963a8121e4fc4e348", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_capability({
@@ -793,6 +981,13 @@ module Aws::B2bi
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Sample DeletePartnership call
+    #
+    #   resp = client.delete_partnership({
+    #     partnership_id: "ps-219fa02f5b4242af8", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_partnership({
@@ -815,6 +1010,13 @@ module Aws::B2bi
     #   Specifies the unique, system-generated identifier for the profile.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Sample DeleteProfile call
+    #
+    #   resp = client.delete_profile({
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -839,6 +1041,13 @@ module Aws::B2bi
     #   Specifies the system-assigned unique identifier for the transformer.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Sample DeleteTransformer call
+    #
+    #   resp = client.delete_transformer({
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -872,6 +1081,48 @@ module Aws::B2bi
     #   * {Types::GetCapabilityResponse#instructions_documents #instructions_documents} => Array&lt;Types::S3Location&gt;
     #   * {Types::GetCapabilityResponse#created_at #created_at} => Time
     #   * {Types::GetCapabilityResponse#modified_at #modified_at} => Time
+    #
+    #
+    # @example Example: Sample GetCapabilty call
+    #
+    #   resp = client.get_capability({
+    #     capability_id: "ca-963a8121e4fc4e348", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "b2biexample", 
+    #     type: "edi", 
+    #     capability_arn: "arn:aws:b2bi:us-west-2:123456789012:capability/ca-963a8121e4fc4e348", 
+    #     capability_id: "ca-963a8121e4fc4e348", 
+    #     configuration: {
+    #       edi: {
+    #         type: {
+    #           x12_details: {
+    #             version: "VERSION_4010", 
+    #             transaction_set: "X12_110", 
+    #           }, 
+    #         }, 
+    #         input_location: {
+    #           key: "input/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         output_location: {
+    #           key: "output/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         transformer_id: "tr-9a893cf536df4658b", 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     instructions_documents: [
+    #       {
+    #         key: "instructiondoc.txt", 
+    #         bucket_name: "test-bucket", 
+    #       }, 
+    #     ], 
+    #     modified_at: Time.parse("2023-11-02T21:51:05.504Z"), 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -928,6 +1179,29 @@ module Aws::B2bi
     #   * {Types::GetPartnershipResponse#created_at #created_at} => Time
     #   * {Types::GetPartnershipResponse#modified_at #modified_at} => Time
     #
+    #
+    # @example Example: Sample GetPartnership call
+    #
+    #   resp = client.get_partnership({
+    #     partnership_id: "ps-219fa02f5b4242af8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "b2bipartner", 
+    #     capabilities: [
+    #       "ca-963a8121e4fc4e348", 
+    #     ], 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     email: "john@example.com", 
+    #     modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     partnership_arn: "arn:aws:b2bi:us-west-2:123456789012:partnership/ps-219fa02f5b4242af8", 
+    #     partnership_id: "ps-219fa02f5b4242af8", 
+    #     phone: "5555555555", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #     trading_partner_id: "tp-2a17ca447f6f4a8a8", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_partnership({
@@ -977,6 +1251,26 @@ module Aws::B2bi
     #   * {Types::GetProfileResponse#created_at #created_at} => Time
     #   * {Types::GetProfileResponse#modified_at #modified_at} => Time
     #
+    #
+    # @example Example: Sample GetProfile call
+    #
+    #   resp = client.get_profile({
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "Shipping Profile", 
+    #     business_name: "John's Trucking", 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     email: "john@example.com", 
+    #     log_group_name: "b2bi/p-60fbc37c87f04fce9-Logs", 
+    #     logging: "ENABLED", 
+    #     phone: "5555555555", 
+    #     profile_arn: "arn:aws:b2bi:us-west-2:123456789012:profile/p-60fbc37c87f04fce9", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_profile({
@@ -1025,6 +1319,32 @@ module Aws::B2bi
     #   * {Types::GetTransformerResponse#created_at #created_at} => Time
     #   * {Types::GetTransformerResponse#modified_at #modified_at} => Time
     #
+    #
+    # @example Example: Sample GetTransformer call
+    #
+    #   resp = client.get_transformer({
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "transformJSON", 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     mapping_template: "$", 
+    #     modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     status: "inactive", 
+    #     transformer_arn: "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9", 
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transformer({
@@ -1070,6 +1390,26 @@ module Aws::B2bi
     #   * {Types::GetTransformerJobResponse#output_files #output_files} => Array&lt;Types::S3Location&gt;
     #   * {Types::GetTransformerJobResponse#message #message} => String
     #
+    #
+    # @example Example: Sample GetTransformerJob call
+    #
+    #   resp = client.get_transformer_job({
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #     transformer_job_id: "tj-vpYxfV7yQOqjMSYllEslLw", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message: "Transformed, writing output", 
+    #     output_files: [
+    #       {
+    #         key: "output/sample-214.edi.2023-11-01T10:44:03.353Z.json", 
+    #         bucket_name: "gt-edi-test", 
+    #       }, 
+    #     ], 
+    #     status: "succeeded", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transformer_job({
@@ -1114,6 +1454,28 @@ module Aws::B2bi
     #   * {Types::ListCapabilitiesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListCapabilities call
+    #
+    #   resp = client.list_capabilities({
+    #     max_results: 50, 
+    #     next_token: "foo", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     capabilities: [
+    #       {
+    #         name: "b2biexample", 
+    #         type: "edi", 
+    #         capability_id: "ca-963a8121e4fc4e348", 
+    #         created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #         modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #       }, 
+    #     ], 
+    #     next_token: "foo", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1166,6 +1528,33 @@ module Aws::B2bi
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Sample ListPartnerships call
+    #
+    #   resp = client.list_partnerships({
+    #     max_results: 50, 
+    #     next_token: "foo", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "string", 
+    #     partnerships: [
+    #       {
+    #         name: "b2bipartner", 
+    #         capabilities: [
+    #           "ca-963a8121e4fc4e348", 
+    #         ], 
+    #         created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #         modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #         partnership_id: "ps-219fa02f5b4242af8", 
+    #         profile_id: "p-60fbc37c87f04fce9", 
+    #         trading_partner_id: "tp-2a17ca447f6f4a8a8", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_partnerships({
@@ -1216,6 +1605,29 @@ module Aws::B2bi
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Sample ListProfiles call
+    #
+    #   resp = client.list_profiles({
+    #     max_results: 50, 
+    #     next_token: "foo", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "foo", 
+    #     profiles: [
+    #       {
+    #         name: "Shipping Profile", 
+    #         business_name: "John's Trucking", 
+    #         created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #         log_group_name: "b2bi/p-60fbc37c87f04fce9-Logs", 
+    #         logging: "ENABLED", 
+    #         profile_id: "p-60fbc37c87f04fce9", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_profiles({
@@ -1257,6 +1669,23 @@ module Aws::B2bi
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: Sample ListTagsForResources call
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:b2bi:us-west-2:123456789012:profile/p-60fbc37c87f04fce9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "sampleKey", 
+    #         value: "SampleValue", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
@@ -1297,6 +1726,37 @@ module Aws::B2bi
     #   * {Types::ListTransformersResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListTransformers call
+    #
+    #   resp = client.list_transformers({
+    #     max_results: 50, 
+    #     next_token: "foo", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "foo", 
+    #     transformers: [
+    #       {
+    #         name: "transformJSON", 
+    #         created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #         edi_type: {
+    #           x12_details: {
+    #             version: "VERSION_4010", 
+    #             transaction_set: "X12_110", 
+    #           }, 
+    #         }, 
+    #         file_format: "JSON", 
+    #         mapping_template: "$", 
+    #         modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #         sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #         status: "inactive", 
+    #         transformer_id: "tr-974c129999f84d8c9", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1359,6 +1819,27 @@ module Aws::B2bi
     #
     #   * {Types::StartTransformerJobResponse#transformer_job_id #transformer_job_id} => String
     #
+    #
+    # @example Example: Sample StartTransformerJob call
+    #
+    #   resp = client.start_transformer_job({
+    #     client_token: "foo", 
+    #     input_file: {
+    #       key: "input/inputFile.txt", 
+    #       bucket_name: "test-bucket", 
+    #     }, 
+    #     output_location: {
+    #       key: "output/", 
+    #       bucket_name: "test-bucket", 
+    #     }, 
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     transformer_job_id: "tj-vpYxfV7yQOqjMSYllEslLw", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_transformer_job({
@@ -1405,6 +1886,19 @@ module Aws::B2bi
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Sample TagResource call
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:b2bi:us-west-2:123456789012:profile/p-60fbc37c87f04fce9", 
+    #     tags: [
+    #       {
+    #         key: "sampleKey", 
+    #         value: "SampleValue", 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
@@ -1448,6 +1942,20 @@ module Aws::B2bi
     #
     #   * {Types::TestMappingResponse#mapped_file_content #mapped_file_content} => String
     #
+    #
+    # @example Example: Sample TestMapping call
+    #
+    #   resp = client.test_mapping({
+    #     file_format: "JSON", 
+    #     input_file_content: "Sample file content", 
+    #     mapping_template: "$", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     mapped_file_content: "Sample file content", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.test_mapping({
@@ -1469,7 +1977,8 @@ module Aws::B2bi
       req.send_request(options)
     end
 
-    # Parses the input EDI (electronic data interchange) file.
+    # Parses the input EDI (electronic data interchange) file. The input
+    # file has a file size limit of 250 KB.
     #
     # @option params [required, Types::S3Location] :input_file
     #   Specifies an `S3Location` object, which contains the Amazon S3 bucket
@@ -1488,6 +1997,28 @@ module Aws::B2bi
     # @return [Types::TestParsingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TestParsingResponse#parsed_file_content #parsed_file_content} => String
+    #
+    #
+    # @example Example: Sample TestParsing call
+    #
+    #   resp = client.test_parsing({
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     input_file: {
+    #       key: "sampleFile.txt", 
+    #       bucket_name: "test-bucket", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     parsed_file_content: "Sample parsed file content", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1534,6 +2065,16 @@ module Aws::B2bi
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Sample UntagResource call
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:b2bi:us-west-2:123456789012:profile/p-60fbc37c87f04fce9", 
+    #     tag_keys: [
+    #       "sampleKey", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
@@ -1578,6 +2119,74 @@ module Aws::B2bi
     #   * {Types::UpdateCapabilityResponse#instructions_documents #instructions_documents} => Array&lt;Types::S3Location&gt;
     #   * {Types::UpdateCapabilityResponse#created_at #created_at} => Time
     #   * {Types::UpdateCapabilityResponse#modified_at #modified_at} => Time
+    #
+    #
+    # @example Example: Sample UpdateCapability call
+    #
+    #   resp = client.update_capability({
+    #     name: "b2biexample", 
+    #     capability_id: "ca-963a8121e4fc4e348", 
+    #     configuration: {
+    #       edi: {
+    #         type: {
+    #           x12_details: {
+    #             version: "VERSION_4010", 
+    #             transaction_set: "X12_110", 
+    #           }, 
+    #         }, 
+    #         input_location: {
+    #           key: "input/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         output_location: {
+    #           key: "output/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         transformer_id: "tr-9a893cf536df4658b", 
+    #       }, 
+    #     }, 
+    #     instructions_documents: [
+    #       {
+    #         key: "instructiondoc.txt", 
+    #         bucket_name: "test-bucket", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "b2biexample", 
+    #     type: "edi", 
+    #     capability_arn: "arn:aws:b2bi:us-west-2:123456789012:capability/ca-963a8121e4fc4e348", 
+    #     capability_id: "ca-963a8121e4fc4e348", 
+    #     configuration: {
+    #       edi: {
+    #         type: {
+    #           x12_details: {
+    #             version: "VERSION_4010", 
+    #             transaction_set: "X12_110", 
+    #           }, 
+    #         }, 
+    #         input_location: {
+    #           key: "input/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         output_location: {
+    #           key: "output/", 
+    #           bucket_name: "test-bucket", 
+    #         }, 
+    #         transformer_id: "tr-9a893cf536df4658b", 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     instructions_documents: [
+    #       {
+    #         key: "instructiondoc.txt", 
+    #         bucket_name: "test-bucket", 
+    #       }, 
+    #     ], 
+    #     modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1666,6 +2275,33 @@ module Aws::B2bi
     #   * {Types::UpdatePartnershipResponse#created_at #created_at} => Time
     #   * {Types::UpdatePartnershipResponse#modified_at #modified_at} => Time
     #
+    #
+    # @example Example: Sample UpdatePartnership call
+    #
+    #   resp = client.update_partnership({
+    #     name: "b2bipartner", 
+    #     capabilities: [
+    #       "ca-963a8121e4fc4e348", 
+    #     ], 
+    #     partnership_id: "ps-219fa02f5b4242af8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "b2bipartner", 
+    #     capabilities: [
+    #       "ca-963a8121e4fc4e348", 
+    #     ], 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     email: "john@example.com", 
+    #     modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     partnership_arn: "arn:aws:b2bi:us-west-2:123456789012:partnership/ps-60fbc37c87f04fce9", 
+    #     partnership_id: "ps-219fa02f5b4242af8", 
+    #     phone: "5555555555", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #     trading_partner_id: "tp-2a17ca447f6f4a8a8", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_partnership({
@@ -1727,6 +2363,31 @@ module Aws::B2bi
     #   * {Types::UpdateProfileResponse#log_group_name #log_group_name} => String
     #   * {Types::UpdateProfileResponse#created_at #created_at} => Time
     #   * {Types::UpdateProfileResponse#modified_at #modified_at} => Time
+    #
+    #
+    # @example Example: Sample UpdateProfile call
+    #
+    #   resp = client.update_profile({
+    #     name: "Shipping Profile", 
+    #     business_name: "John's Shipping", 
+    #     email: "john@example.com", 
+    #     phone: "5555555555", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "Shipping Profile", 
+    #     business_name: "John's Trucking", 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     email: "john@example.com", 
+    #     log_group_name: "b2bi/p-60fbc37c87f04fce9-Logs", 
+    #     logging: "ENABLED", 
+    #     modified_at: Time.parse("2023-11-02T21:51:05.504Z"), 
+    #     phone: "5555555555", 
+    #     profile_arn: "arn:aws:b2bi:us-west-2:123456789012:profile/p-60fbc37c87f04fce9", 
+    #     profile_id: "p-60fbc37c87f04fce9", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1806,6 +2467,43 @@ module Aws::B2bi
     #   * {Types::UpdateTransformerResponse#created_at #created_at} => Time
     #   * {Types::UpdateTransformerResponse#modified_at #modified_at} => Time
     #
+    #
+    # @example Example: Sample UpdateTransformer call
+    #
+    #   resp = client.update_transformer({
+    #     name: "transformJSON", 
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     mapping_template: "{}", 
+    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     status: "inactive", 
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "transformJSON", 
+    #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     edi_type: {
+    #       x12_details: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #     file_format: "JSON", 
+    #     mapping_template: "$", 
+    #     modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
+    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     status: "inactive", 
+    #     transformer_arn: "arn:aws:b2bi:us-west-2:607686414464:transformer/tr-974c129999f84d8c9", 
+    #     transformer_id: "tr-974c129999f84d8c9", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_transformer({
@@ -1859,7 +2557,7 @@ module Aws::B2bi
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-b2bi'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

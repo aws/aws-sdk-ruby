@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2024-01-18)
+------------------
+
+* Feature - GetMetricDataV2 now supports 3 groupings
+
 1.148.0 (2024-01-12)
 ------------------
 
