@@ -127,17 +127,20 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] field
     #   A field in a CloudTrail event record on which to filter events to be
-    #   logged. For event data stores for Config configuration items, Audit
-    #   Manager evidence, or non-Amazon Web Services events, the field is
-    #   used only for selecting events as filtering is not supported.
+    #   logged. For event data stores for CloudTrail Insights events, Config
+    #   configuration items, Audit Manager evidence, or events outside of
+    #   Amazon Web Services, the field is used only for selecting events as
+    #   filtering is not supported.
     #
-    #   For CloudTrail event records, supported fields include `readOnly`,
-    #   `eventCategory`, `eventSource` (for management events), `eventName`,
-    #   `resources.type`, and `resources.ARN`.
+    #   For CloudTrail management events, supported fields include
+    #   `readOnly`, `eventCategory`, and `eventSource`.
     #
-    #   For event data stores for Config configuration items, Audit Manager
-    #   evidence, or non-Amazon Web Services events, the only supported
-    #   field is `eventCategory`.
+    #   For CloudTrail data events, supported fields include `readOnly`,
+    #   `eventCategory`, `eventName`, `resources.type`, and `resources.ARN`.
+    #
+    #   For event data stores for CloudTrail Insights events, Config
+    #   configuration items, Audit Manager evidence, or events outside of
+    #   Amazon Web Services, the only supported field is `eventCategory`.
     #
     #   * <b> <code>readOnly</code> </b> - Optional. Can be set to `Equals`
     #     a value of `true` or `false`. If you do not add this field,
@@ -157,11 +160,14 @@ module Aws::CloudTrail
     #   * <b> <code>eventCategory</code> </b> - This is required and must be
     #     set to `Equals`.
     #
-    #     * For CloudTrail event records, the value must be `Management` or
-    #       `Data`.
+    #     * For CloudTrail management events, the value must be
+    #       `Management`.
     #
-    #     * For CloudTrail Insights event records, the value must be
-    #       `Insight`.
+    #     * For CloudTrail data events, the value must be `Data`.
+    #
+    #     The following are used only for event data stores:
+    #
+    #     * For CloudTrail Insights events, the value must be `Insight`.
     #
     #     * For Config configuration items, the value must be
     #       `ConfigurationItem`.
@@ -180,6 +186,16 @@ module Aws::CloudTrail
     #     * `AWS::Lambda::Function`
     #
     #     * `AWS::S3::Object`
+    #
+    #     * `AWS::B2BI::Transformer`
+    #
+    #     * `AWS::Bedrock::AgentAlias`
+    #
+    #     * `AWS::Bedrock::KnowledgeBase`
+    #
+    #     * `AWS::Cassandra::Table`
+    #
+    #     * `AWS::CloudFront::KeyValueStore`
     #
     #     * `AWS::CloudTrail::Channel`
     #
@@ -201,6 +217,10 @@ module Aws::CloudTrail
     #
     #     * `AWS::GuardDuty::Detector`
     #
+    #     * `AWS::IoTTwinMaker::Entity`
+    #
+    #     * `AWS::IoTTwinMaker::Workspace`
+    #
     #     * `AWS::KendraRanking::ExecutionPlan`
     #
     #     * `AWS::KinesisVideo::Stream`
@@ -211,7 +231,19 @@ module Aws::CloudTrail
     #
     #     * `AWS::MedicalImaging::Datastore`
     #
+    #     * `AWS::NeptuneGraph::Graph`
+    #
     #     * `AWS::PCAConnectorAD::Connector`
+    #
+    #     * `AWS::QBusiness::Application`
+    #
+    #     * `AWS::QBusiness::DataSource`
+    #
+    #     * `AWS::QBusiness::Index`
+    #
+    #     * `AWS::QBusiness::WebExperience`
+    #
+    #     * `AWS::RDS::DBCluster`
     #
     #     * `AWS::SageMaker::Endpoint`
     #
@@ -219,9 +251,17 @@ module Aws::CloudTrail
     #
     #     * `AWS::SageMaker::FeatureGroup`
     #
+    #     * `AWS::ServiceDiscovery::Namespace `
+    #
+    #     * `AWS::ServiceDiscovery::Service`
+    #
+    #     * `AWS::SCN::Instance`
+    #
     #     * `AWS::SNS::PlatformEndpoint`
     #
     #     * `AWS::SNS::Topic`
+    #
+    #     * `AWS::SQS::Queue`
     #
     #     * `AWS::S3::AccessPoint`
     #
@@ -230,6 +270,10 @@ module Aws::CloudTrail
     #     * `AWS::S3Outposts::Object`
     #
     #     * `AWS::SSMMessages::ControlChannel`
+    #
+    #     * `AWS::ThinClient::Device`
+    #
+    #     * `AWS::ThinClient::Environment`
     #
     #     * `AWS::Timestream::Database`
     #
@@ -270,6 +314,46 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:lambda:<region>:<account_ID>:function:<function_name>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::B2BI::Transformer`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:b2bi:<region>:<account_ID>:transformer/<transformer_ID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::Bedrock::AgentAlias`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:bedrock:<region>:<account_ID>:agent-alias/<agent_ID>/<alias_ID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::Bedrock::KnowledgeBase`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:bedrock:<region>:<account_ID>:knowledge-base/<knowledge_base_ID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::Cassandra::Table`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:cassandra:<region>:<account_ID>:/keyspace/<keyspace_name>/table/<table_name>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::CloudFront::KeyValueStore`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:cloudfront:<region>:<account_ID>:key-value-store/<KVS_name>`
     #
     #     ^
     #
@@ -325,7 +409,7 @@ module Aws::CloudTrail
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:<partition>:emrwal:<region>::workspace/<workspace_name>`
+    #     * `arn:<partition>:emrwal:<region>:<account_ID>:workspace/<workspace_name>`
     #
     #     ^
     #
@@ -353,6 +437,22 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::IoTTwinMaker::Entity`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:iottwinmaker:<region>:<account_ID>:workspace/<workspace_ID>/entity/<entity_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::IoTTwinMaker::Workspace`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:iottwinmaker:<region>:<account_ID>:workspace/<workspace_ID>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::KendraRanking::ExecutionPlan`,
     #     and the operator is set to `Equals` or `NotEquals`, the ARN must
     #     be in the following format:
@@ -365,7 +465,7 @@ module Aws::CloudTrail
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:<partition>:kinesisvideo:<region>:<account_ID>:stream/<stream_name/<creation_time>`
+    #     * `arn:<partition>:kinesisvideo:<region>:<account_ID>:stream/<stream_name>/<creation_time>`
     #
     #     ^
     #
@@ -393,11 +493,59 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::NeptuneGraph::Graph`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:neptune-graph:<region>:<account_ID>:graph/<graph_ID>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::PCAConnectorAD::Connector`, and
     #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
     #     the following format:
     #
     #     * `arn:<partition>:pca-connector-ad:<region>:<account_ID>:connector/<connector_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::Application`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::DataSource`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>/index/<index_ID>/data-source/<datasource_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::Index`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>/index/<index_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::WebExperience`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>/web-experience/<web_experience_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::RDS::DBCluster`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:rds:<region>:<account_ID>:cluster/<cluster_name>`
     #
     #     ^
     #
@@ -426,6 +574,30 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::SCN::Instance`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:scn:<region>:<account_ID>:instance/<instance_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ServiceDiscovery::Namespace`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:servicediscovery:<region>:<account_ID>:namespace/<namespace_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ServiceDiscovery::Service`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:servicediscovery:<region>:<account_ID>:service/<service_ID>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::SNS::PlatformEndpoint`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
@@ -439,6 +611,14 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:sns:<region>:<account_ID>:<topic_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SQS::Queue`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:sqs:<region>:<account_ID>:<queue_name>`
     #
     #     ^
     #
@@ -474,6 +654,22 @@ module Aws::CloudTrail
     #     be in the following format:
     #
     #     * `arn:<partition>:ssmmessages:<region>:<account_ID>:control-channel/<channel_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ThinClient::Device`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:thinclient:<region>:<account_ID>:device/<device_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ThinClient::Environment`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:thinclient:<region>:<account_ID>:environment/<environment_ID>`
     #
     #     ^
     #
@@ -1106,11 +1302,6 @@ module Aws::CloudTrail
     #   account.
     #
     #   Not required unless you specify `CloudWatchLogsRoleArn`.
-    #
-    #   <note markdown="1"> Only the management account can configure a CloudWatch Logs log
-    #   group for an organization trail.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
@@ -1339,67 +1530,9 @@ module Aws::CloudTrail
     #
     #   * `AWS::S3::Object`
     #
-    #   The following resource types are also available through *advanced*
-    #   event selectors. Basic event selector resource types are valid in
-    #   advanced event selectors, but advanced event selector resource types
-    #   are not valid in basic event selectors. For more information, see
-    #   [AdvancedFieldSelector][1].
-    #
-    #   * `AWS::CloudTrail::Channel`
-    #
-    #   * `AWS::CodeWhisperer::Customization`
-    #
-    #   * `AWS::CodeWhisperer::Profile`
-    #
-    #   * `AWS::Cognito::IdentityPool`
-    #
-    #   * `AWS::DynamoDB::Stream`
-    #
-    #   * `AWS::EC2::Snapshot`
-    #
-    #   * `AWS::EMRWAL::Workspace`
-    #
-    #   * `AWS::FinSpace::Environment`
-    #
-    #   * `AWS::Glue::Table`
-    #
-    #   * `AWS::GuardDuty::Detector`
-    #
-    #   * `AWS::KendraRanking::ExecutionPlan`
-    #
-    #   * `AWS::KinesisVideo::Stream`
-    #
-    #   * `AWS::ManagedBlockchain::Network`
-    #
-    #   * `AWS::ManagedBlockchain::Node`
-    #
-    #   * `AWS::MedicalImaging::Datastore`
-    #
-    #   * `AWS::PCAConnectorAD::Connector`
-    #
-    #   * `AWS::SageMaker::Endpoint`
-    #
-    #   * `AWS::SageMaker::ExperimentTrialComponent`
-    #
-    #   * `AWS::SageMaker::FeatureGroup`
-    #
-    #   * `AWS::SNS::PlatformEndpoint`
-    #
-    #   * `AWS::SNS::Topic`
-    #
-    #   * `AWS::S3::AccessPoint`
-    #
-    #   * `AWS::S3ObjectLambda::AccessPoint`
-    #
-    #   * `AWS::S3Outposts::Object`
-    #
-    #   * `AWS::SSMMessages::ControlChannel`
-    #
-    #   * `AWS::Timestream::Database`
-    #
-    #   * `AWS::Timestream::Table`
-    #
-    #   * `AWS::VerifiedPermissions::PolicyStore`
+    #   Additional resource types are available through *advanced* event
+    #   selectors. For more information about these additional resource
+    #   types, see [AdvancedFieldSelector][1].
     #
     #
     #
@@ -1712,7 +1845,7 @@ module Aws::CloudTrail
     # @!attribute [rw] type
     #   The type of destination for events arriving from a channel. For
     #   channels used for a CloudTrail Lake integration, the value is
-    #   `EventDataStore`. For service-linked channels, the value is
+    #   `EVENT_DATA_STORE`. For service-linked channels, the value is
     #   `AWS_SERVICE`.
     #   @return [String]
     #
@@ -3366,6 +3499,148 @@ module Aws::CloudTrail
     #
     class ListImportsResponse < Struct.new(
       :imports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_source
+    #   The Amazon Web Services service to which the request was made, such
+    #   as `iam.amazonaws.com` or `s3.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_name
+    #   The name of the event, typically the Amazon Web Services API on
+    #   which unusual levels of activity were recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_type
+    #   The type of CloudTrail Insights event, which is either
+    #   `ApiCallRateInsight` or `ApiErrorRateInsight`. The
+    #   `ApiCallRateInsight` Insights type analyzes write-only management
+    #   API calls that are aggregated per minute against a baseline API call
+    #   volume. The `ApiErrorRateInsight` Insights type analyzes management
+    #   API calls that result in error codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Conditionally required if the `InsightType` parameter is set to
+    #   `ApiErrorRateInsight`.
+    #
+    #   If returning metrics for the `ApiErrorRateInsight` Insights type,
+    #   this is the error to retrieve data for. For example, `AccessDenied`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Specifies, in UTC, the start time for time-series data. The value
+    #   specified is inclusive; results include data points with the
+    #   specified time stamp.
+    #
+    #   The default is 90 days before the time of request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Specifies, in UTC, the end time for time-series data. The value
+    #   specified is exclusive; results include data points up to the
+    #   specified time stamp.
+    #
+    #   The default is the time of request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] period
+    #   Granularity of data to retrieve, in seconds. Valid values are `60`,
+    #   `300`, and `3600`. If you specify any other value, you will get an
+    #   error. The default is 3600 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_type
+    #   Type of datapoints to return. Valid values are `NonZeroData` and
+    #   `FillWithZeros`. The default is `NonZeroData`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of datapoints to return. Valid values are
+    #   integers from 1 to 21600. The default value is 21600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Returned if all datapoints can't be returned in a single call. For
+    #   example, due to reaching `MaxResults`.
+    #
+    #   Add this parameter to the request to continue retrieving results
+    #   starting from the last evaluated point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListInsightsMetricDataRequest AWS API Documentation
+    #
+    class ListInsightsMetricDataRequest < Struct.new(
+      :event_source,
+      :event_name,
+      :insight_type,
+      :error_code,
+      :start_time,
+      :end_time,
+      :period,
+      :data_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_source
+    #   The Amazon Web Services service to which the request was made, such
+    #   as `iam.amazonaws.com` or `s3.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_name
+    #   The name of the event, typically the Amazon Web Services API on
+    #   which unusual levels of activity were recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_type
+    #   The type of CloudTrail Insights event, which is either
+    #   `ApiCallRateInsight` or `ApiErrorRateInsight`. The
+    #   `ApiCallRateInsight` Insights type analyzes write-only management
+    #   API calls that are aggregated per minute against a baseline API call
+    #   volume. The `ApiErrorRateInsight` Insights type analyzes management
+    #   API calls that result in error codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Only returned if `InsightType` parameter was set to
+    #   `ApiErrorRateInsight`.
+    #
+    #   If returning metrics for the `ApiErrorRateInsight` Insights type,
+    #   this is the error to retrieve data for. For example, `AccessDenied`.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamps
+    #   List of timestamps at intervals corresponding to the specified time
+    #   period.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] values
+    #   List of values representing the API call rate or error rate at each
+    #   timestamp. The number of values is equal to the number of
+    #   timestamps.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] next_token
+    #   Only returned if the full results could not be returned in a single
+    #   query. You can set the `NextToken` parameter in the next request to
+    #   this value to continue retrieval.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListInsightsMetricDataResponse AWS API Documentation
+    #
+    class ListInsightsMetricDataResponse < Struct.new(
+      :event_source,
+      :event_name,
+      :insight_type,
+      :error_code,
+      :timestamps,
+      :values,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5248,11 +5523,6 @@ module Aws::CloudTrail
     #   account.
     #
     #   Not required unless you specify `CloudWatchLogsRoleArn`.
-    #
-    #   <note markdown="1"> Only the management account can configure a CloudWatch Logs log
-    #   group for an organization trail.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn

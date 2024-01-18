@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2024-01-18)
+------------------
+
+* Feature - This release adds a new API ListInsightsMetricData to retrieve metric data from CloudTrail Insights.
+
 1.74.0 (2023-11-28)
 ------------------
 

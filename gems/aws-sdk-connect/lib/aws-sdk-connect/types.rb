@@ -7071,8 +7071,10 @@ module Aws::Connect
     #   filter. (You cannot filter by both queue AND routing profile.) You
     #   can include both resource IDs and resource ARNs in the same request.
     #
-    #   When using `RoutingStepExpression`, you need to pass exactly one
-    #   `QueueId`.
+    #   When using the `RoutingStepExpression` filter, you need to pass
+    #   exactly one `QueueId`. The filter is also case sensitive so when
+    #   using the `RoutingStepExpression` filter, grouping by
+    #   `ROUTING_STEP_EXPRESSION` is required.
     #
     #   Currently tagging is only supported on the resources that are passed
     #   in the filter.
@@ -7847,8 +7849,10 @@ module Aws::Connect
     #     `connect:WebRTC` are valid `filterValue` examples (not exhaustive)
     #     for the `contact/segmentAttributes/connect:Subtype filter` key.
     #
-    #     ROUTING\_STEP\_EXPRESSION is a valid filter key with a filter
-    #     value up to 3000 length.
+    #     `ROUTING_STEP_EXPRESSION` is a valid filter key with a filter
+    #     value up to 3000 length. This filter is case and order sensitive.
+    #     JSON string fields must be sorted in ascending order and JSON
+    #     array order should be kept as is.
     #
     #
     #
@@ -8211,6 +8215,15 @@ module Aws::Connect
     #
     #      </note>
     #
+    #   CONTACTS\_HANDLED\_BY\_CONNECTED\_TO\_AGENT
+    #
+    #   : Unit: Count
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
+    #     Valid groupings and filters: Queue, Channel, Agent, Agent
+    #     Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
     #   CONTACTS\_HOLD\_ABANDONS
     #
     #   : Unit: Count
@@ -8259,6 +8272,13 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   CONTACTS\_QUEUED\_BY\_ENQUEUE
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Agent, Agent
+    #     Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -8715,7 +8735,10 @@ module Aws::Connect
     end
 
     # @!attribute [rw] id
-    #   The identifier of the traffic distribution group.
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistributionRequest AWS API Documentation

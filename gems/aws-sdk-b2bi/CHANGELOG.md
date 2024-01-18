@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2024-01-18)
+------------------
+
+* Feature - Increasing TestMapping inputFileContent file size limit to 5MB and adding file size limit 250KB for TestParsing input file. This release also includes exposing InternalServerException for Tag APIs.
+
 1.2.0 (2023-12-14)
 ------------------
 

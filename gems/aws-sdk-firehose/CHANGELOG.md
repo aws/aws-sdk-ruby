@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2024-01-18)
+------------------
+
+* Feature - Allow support for Snowflake as a Kinesis Data Firehose delivery destination.
+
 1.61.0 (2023-12-14)
 ------------------
 

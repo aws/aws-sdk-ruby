@@ -111,6 +111,8 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::ListImportFailures.build(context)
           when :list_imports
             Aws::CloudTrail::Endpoints::ListImports.build(context)
+          when :list_insights_metric_data
+            Aws::CloudTrail::Endpoints::ListInsightsMetricData.build(context)
           when :list_public_keys
             Aws::CloudTrail::Endpoints::ListPublicKeys.build(context)
           when :list_queries
