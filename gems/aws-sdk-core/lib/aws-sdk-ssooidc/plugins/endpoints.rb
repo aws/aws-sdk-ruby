@@ -14,7 +14,6 @@ module Aws::SSOOIDC
       option(
         :endpoint_provider,
         doc_type: 'Aws::SSOOIDC::EndpointProvider',
-        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
