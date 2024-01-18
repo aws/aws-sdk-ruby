@@ -18,7 +18,6 @@ When `true`, S3 Express session authentication is disabled.
 
         option(:express_credentials_provider,
           doc_type: 'Aws::S3::ExpressCredentialsProvider',
-          rbs_type: 'untyped',
           docstring: <<-DOCS) do |_cfg|
 Credential Provider for S3 Express endpoints. Manages credentials
 for different buckets.
