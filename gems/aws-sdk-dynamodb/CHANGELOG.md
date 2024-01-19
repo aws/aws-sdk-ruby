@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-01-19)
+------------------
+
+* Feature - This release adds support for including ApproximateCreationDateTimePrecision configurations in EnableKinesisStreamingDestination API, adds the same as an optional field in the response of DescribeKinesisStreamingDestination, and adds support for a new UpdateKinesisStreamingDestination API.
+
 1.99.0 (2024-01-17)
 ------------------
 

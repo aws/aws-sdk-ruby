@@ -2935,6 +2935,21 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Enables setting the configuration for Kinesis Streaming.
+    #
+    # @!attribute [rw] approximate_creation_date_time_precision
+    #   Toggle for the precision of Kinesis data stream timestamp. The
+    #   values are either `MILLISECOND` or `MICROSECOND`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/EnableKinesisStreamingConfiguration AWS API Documentation
+    #
+    class EnableKinesisStreamingConfiguration < Struct.new(
+      :approximate_creation_date_time_precision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An endpoint information details.
     #
     # @!attribute [rw] address
@@ -4930,12 +4945,18 @@ module Aws::DynamoDB
     #   The human-readable string that corresponds to the replica status.
     #   @return [String]
     #
+    # @!attribute [rw] approximate_creation_date_time_precision
+    #   The precision of the Kinesis data stream timestamp. The values are
+    #   either `MILLISECOND` or `MICROSECOND`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisDataStreamDestination AWS API Documentation
     #
     class KinesisDataStreamDestination < Struct.new(
       :stream_arn,
       :destination_status,
-      :destination_status_description)
+      :destination_status_description,
+      :approximate_creation_date_time_precision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4948,11 +4969,17 @@ module Aws::DynamoDB
     #   The ARN for a Kinesis data stream.
     #   @return [String]
     #
+    # @!attribute [rw] enable_kinesis_streaming_configuration
+    #   The source for the Kinesis streaming information that is being
+    #   enabled.
+    #   @return [Types::EnableKinesisStreamingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisStreamingDestinationInput AWS API Documentation
     #
     class KinesisStreamingDestinationInput < Struct.new(
       :table_name,
-      :stream_arn)
+      :stream_arn,
+      :enable_kinesis_streaming_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4969,12 +4996,18 @@ module Aws::DynamoDB
     #   The current status of the replication.
     #   @return [String]
     #
+    # @!attribute [rw] enable_kinesis_streaming_configuration
+    #   The destination for the Kinesis streaming information that is being
+    #   enabled.
+    #   @return [Types::EnableKinesisStreamingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisStreamingDestinationOutput AWS API Documentation
     #
     class KinesisStreamingDestinationOutput < Struct.new(
       :table_name,
       :stream_arn,
-      :destination_status)
+      :destination_status,
+      :enable_kinesis_streaming_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5511,10 +5544,10 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents a PartiQL statment that uses parameters.
+    # Represents a PartiQL statement that uses parameters.
     #
     # @!attribute [rw] statement
-    #   A PartiQL statment that uses parameters.
+    #   A PartiQL statement that uses parameters.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -9763,6 +9796,71 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Enables updating the configuration for Kinesis Streaming.
+    #
+    # @!attribute [rw] approximate_creation_date_time_precision
+    #   Enables updating the precision of Kinesis data stream timestamp.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateKinesisStreamingConfiguration AWS API Documentation
+    #
+    class UpdateKinesisStreamingConfiguration < Struct.new(
+      :approximate_creation_date_time_precision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The table name for the Kinesis streaming destination input.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for the Kinesis stream input.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_kinesis_streaming_configuration
+    #   The command to update the Kinesis stream configuration.
+    #   @return [Types::UpdateKinesisStreamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateKinesisStreamingDestinationInput AWS API Documentation
+    #
+    class UpdateKinesisStreamingDestinationInput < Struct.new(
+      :table_name,
+      :stream_arn,
+      :update_kinesis_streaming_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The table name for the Kinesis streaming destination output.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for the Kinesis stream input.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_status
+    #   The status of the attempt to update the Kinesis streaming
+    #   destination output.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_kinesis_streaming_configuration
+    #   The command to update the Kinesis streaming destination
+    #   configuration.
+    #   @return [Types::UpdateKinesisStreamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateKinesisStreamingDestinationOutput AWS API Documentation
+    #
+    class UpdateKinesisStreamingDestinationOutput < Struct.new(
+      :table_name,
+      :stream_arn,
+      :destination_status,
+      :update_kinesis_streaming_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a replica to be modified.
     #
     # @!attribute [rw] region_name
@@ -9868,9 +9966,9 @@ module Aws::DynamoDB
     # @!attribute [rw] stream_specification
     #   Represents the DynamoDB Streams configuration for the table.
     #
-    #   <note markdown="1"> You receive a `ValidationException` if you try to enable a stream on
-    #   a table that already has a stream, or if you try to disable a stream
-    #   on a table that doesn't have a stream.
+    #   <note markdown="1"> You receive a `ResourceInUseException` if you try to enable a stream
+    #   on a table that already has a stream, or if you try to disable a
+    #   stream on a table that doesn't have a stream.
     #
     #    </note>
     #   @return [Types::StreamSpecification]

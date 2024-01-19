@@ -13,6 +13,7 @@ module Aws::DynamoDB
 
     include Seahorse::Model
 
+    ApproximateCreationDateTimePrecision = Shapes::StringShape.new(name: 'ApproximateCreationDateTimePrecision')
     ArchivalReason = Shapes::StringShape.new(name: 'ArchivalReason')
     ArchivalSummary = Shapes::StructureShape.new(name: 'ArchivalSummary')
     AttributeAction = Shapes::StringShape.new(name: 'AttributeAction')
@@ -150,6 +151,7 @@ module Aws::DynamoDB
     DestinationStatus = Shapes::StringShape.new(name: 'DestinationStatus')
     DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
     DuplicateItemException = Shapes::StructureShape.new(name: 'DuplicateItemException')
+    EnableKinesisStreamingConfiguration = Shapes::StructureShape.new(name: 'EnableKinesisStreamingConfiguration')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorCount = Shapes::IntegerShape.new(name: 'ErrorCount')
@@ -455,6 +457,9 @@ module Aws::DynamoDB
     UpdateGlobalTableSettingsOutput = Shapes::StructureShape.new(name: 'UpdateGlobalTableSettingsOutput')
     UpdateItemInput = Shapes::StructureShape.new(name: 'UpdateItemInput')
     UpdateItemOutput = Shapes::StructureShape.new(name: 'UpdateItemOutput')
+    UpdateKinesisStreamingConfiguration = Shapes::StructureShape.new(name: 'UpdateKinesisStreamingConfiguration')
+    UpdateKinesisStreamingDestinationInput = Shapes::StructureShape.new(name: 'UpdateKinesisStreamingDestinationInput')
+    UpdateKinesisStreamingDestinationOutput = Shapes::StructureShape.new(name: 'UpdateKinesisStreamingDestinationOutput')
     UpdateReplicationGroupMemberAction = Shapes::StructureShape.new(name: 'UpdateReplicationGroupMemberAction')
     UpdateTableInput = Shapes::StructureShape.new(name: 'UpdateTableInput')
     UpdateTableOutput = Shapes::StructureShape.new(name: 'UpdateTableOutput')
@@ -878,6 +883,9 @@ module Aws::DynamoDB
     DuplicateItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     DuplicateItemException.struct_class = Types::DuplicateItemException
 
+    EnableKinesisStreamingConfiguration.add_member(:approximate_creation_date_time_precision, Shapes::ShapeRef.new(shape: ApproximateCreationDateTimePrecision, location_name: "ApproximateCreationDateTimePrecision"))
+    EnableKinesisStreamingConfiguration.struct_class = Types::EnableKinesisStreamingConfiguration
+
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Address"))
     Endpoint.add_member(:cache_period_in_minutes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "CachePeriodInMinutes"))
     Endpoint.struct_class = Types::Endpoint
@@ -1190,17 +1198,20 @@ module Aws::DynamoDB
     KinesisDataStreamDestination.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, location_name: "StreamArn"))
     KinesisDataStreamDestination.add_member(:destination_status, Shapes::ShapeRef.new(shape: DestinationStatus, location_name: "DestinationStatus"))
     KinesisDataStreamDestination.add_member(:destination_status_description, Shapes::ShapeRef.new(shape: String, location_name: "DestinationStatusDescription"))
+    KinesisDataStreamDestination.add_member(:approximate_creation_date_time_precision, Shapes::ShapeRef.new(shape: ApproximateCreationDateTimePrecision, location_name: "ApproximateCreationDateTimePrecision"))
     KinesisDataStreamDestination.struct_class = Types::KinesisDataStreamDestination
 
     KinesisDataStreamDestinations.member = Shapes::ShapeRef.new(shape: KinesisDataStreamDestination)
 
     KinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
     KinesisStreamingDestinationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
+    KinesisStreamingDestinationInput.add_member(:enable_kinesis_streaming_configuration, Shapes::ShapeRef.new(shape: EnableKinesisStreamingConfiguration, location_name: "EnableKinesisStreamingConfiguration"))
     KinesisStreamingDestinationInput.struct_class = Types::KinesisStreamingDestinationInput
 
     KinesisStreamingDestinationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
     KinesisStreamingDestinationOutput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, location_name: "StreamArn"))
     KinesisStreamingDestinationOutput.add_member(:destination_status, Shapes::ShapeRef.new(shape: DestinationStatus, location_name: "DestinationStatus"))
+    KinesisStreamingDestinationOutput.add_member(:enable_kinesis_streaming_configuration, Shapes::ShapeRef.new(shape: EnableKinesisStreamingConfiguration, location_name: "EnableKinesisStreamingConfiguration"))
     KinesisStreamingDestinationOutput.struct_class = Types::KinesisStreamingDestinationOutput
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1821,6 +1832,20 @@ module Aws::DynamoDB
     UpdateItemOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "ConsumedCapacity"))
     UpdateItemOutput.add_member(:item_collection_metrics, Shapes::ShapeRef.new(shape: ItemCollectionMetrics, location_name: "ItemCollectionMetrics"))
     UpdateItemOutput.struct_class = Types::UpdateItemOutput
+
+    UpdateKinesisStreamingConfiguration.add_member(:approximate_creation_date_time_precision, Shapes::ShapeRef.new(shape: ApproximateCreationDateTimePrecision, location_name: "ApproximateCreationDateTimePrecision"))
+    UpdateKinesisStreamingConfiguration.struct_class = Types::UpdateKinesisStreamingConfiguration
+
+    UpdateKinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    UpdateKinesisStreamingDestinationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
+    UpdateKinesisStreamingDestinationInput.add_member(:update_kinesis_streaming_configuration, Shapes::ShapeRef.new(shape: UpdateKinesisStreamingConfiguration, location_name: "UpdateKinesisStreamingConfiguration"))
+    UpdateKinesisStreamingDestinationInput.struct_class = Types::UpdateKinesisStreamingDestinationInput
+
+    UpdateKinesisStreamingDestinationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    UpdateKinesisStreamingDestinationOutput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, location_name: "StreamArn"))
+    UpdateKinesisStreamingDestinationOutput.add_member(:destination_status, Shapes::ShapeRef.new(shape: DestinationStatus, location_name: "DestinationStatus"))
+    UpdateKinesisStreamingDestinationOutput.add_member(:update_kinesis_streaming_configuration, Shapes::ShapeRef.new(shape: UpdateKinesisStreamingConfiguration, location_name: "UpdateKinesisStreamingConfiguration"))
+    UpdateKinesisStreamingDestinationOutput.struct_class = Types::UpdateKinesisStreamingDestinationOutput
 
     UpdateReplicationGroupMemberAction.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     UpdateReplicationGroupMemberAction.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
@@ -2577,6 +2602,20 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: TransactionConflictException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_kinesis_streaming_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKinesisStreamingDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateKinesisStreamingDestinationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKinesisStreamingDestinationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_table, Seahorse::Model::Operation.new.tap do |o|

@@ -752,8 +752,9 @@ module Aws::Athena
 
     ImportNotebookInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     ImportNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "Name"))
-    ImportNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, required: true, location_name: "Payload"))
+    ImportNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
     ImportNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, required: true, location_name: "Type"))
+    ImportNotebookInput.add_member(:notebook_s3_location_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "NotebookS3LocationUri"))
     ImportNotebookInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     ImportNotebookInput.struct_class = Types::ImportNotebookInput
 

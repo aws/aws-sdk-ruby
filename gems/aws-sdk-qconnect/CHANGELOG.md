@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2024-01-19)
+------------------
+
+* Feature - Increased Quick Response name max length to 100
+
 1.3.0 (2024-01-10)
 ------------------
 

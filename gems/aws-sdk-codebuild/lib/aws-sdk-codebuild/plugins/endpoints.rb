@@ -63,12 +63,16 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::BatchGetBuildBatches.build(context)
           when :batch_get_builds
             Aws::CodeBuild::Endpoints::BatchGetBuilds.build(context)
+          when :batch_get_fleets
+            Aws::CodeBuild::Endpoints::BatchGetFleets.build(context)
           when :batch_get_projects
             Aws::CodeBuild::Endpoints::BatchGetProjects.build(context)
           when :batch_get_report_groups
             Aws::CodeBuild::Endpoints::BatchGetReportGroups.build(context)
           when :batch_get_reports
             Aws::CodeBuild::Endpoints::BatchGetReports.build(context)
+          when :create_fleet
+            Aws::CodeBuild::Endpoints::CreateFleet.build(context)
           when :create_project
             Aws::CodeBuild::Endpoints::CreateProject.build(context)
           when :create_report_group
@@ -77,6 +81,8 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::CreateWebhook.build(context)
           when :delete_build_batch
             Aws::CodeBuild::Endpoints::DeleteBuildBatch.build(context)
+          when :delete_fleet
+            Aws::CodeBuild::Endpoints::DeleteFleet.build(context)
           when :delete_project
             Aws::CodeBuild::Endpoints::DeleteProject.build(context)
           when :delete_report
@@ -111,6 +117,8 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::ListBuildsForProject.build(context)
           when :list_curated_environment_images
             Aws::CodeBuild::Endpoints::ListCuratedEnvironmentImages.build(context)
+          when :list_fleets
+            Aws::CodeBuild::Endpoints::ListFleets.build(context)
           when :list_projects
             Aws::CodeBuild::Endpoints::ListProjects.build(context)
           when :list_report_groups
@@ -139,6 +147,8 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::StopBuild.build(context)
           when :stop_build_batch
             Aws::CodeBuild::Endpoints::StopBuildBatch.build(context)
+          when :update_fleet
+            Aws::CodeBuild::Endpoints::UpdateFleet.build(context)
           when :update_project
             Aws::CodeBuild::Endpoints::UpdateProject.build(context)
           when :update_project_visibility
