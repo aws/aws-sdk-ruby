@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2024-01-22)
+------------------
+
+* Feature - This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services.
+
 1.137.0 (2024-01-11)
 ------------------
 

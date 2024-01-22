@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-01-22)
+------------------
+
+* Feature - Doc only update for quota increase change
+
 1.83.0 (2023-11-28)
 ------------------
 

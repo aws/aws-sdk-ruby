@@ -443,20 +443,13 @@ module Aws::Cloud9
     #   Web Services CloudFormation. This change will only affect direct API
     #   consumers, and not Cloud9 console users.
     #
-    #   From January 22, 2024, Amazon Linux (AL1) will be removed from the
-    #   list of available image IDs for Cloud9. This is necessary as AL1 will
-    #   reach the end of maintenance support in December 2023, and as a result
-    #   will no longer receive security updates. We recommend using Amazon
-    #   Linux 2023 as the AMI to create your environment as it is fully
-    #   supported. This change will only affect direct API consumers, and not
-    #   Cloud9 console users.
+    #   We recommend using Amazon Linux 2023 as the AMI to create your
+    #   environment as it is fully supported.
     #
     #   Since Ubuntu 18.04 has ended standard support as of May 31, 2023, we
     #   recommend you choose Ubuntu 22.04.
     #
     #   <b>AMI aliases </b>
-    #
-    #   * Amazon Linux: `amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2: `amazonlinux-2-x86_64`
     #
@@ -467,9 +460,6 @@ module Aws::Cloud9
     #   * Ubuntu 22.04: `ubuntu-22.04-x86_64`
     #
     #   **SSM paths**
-    #
-    #   * Amazon Linux:
-    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64`
     #
     #   * Amazon Linux 2:
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
@@ -1271,7 +1261,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

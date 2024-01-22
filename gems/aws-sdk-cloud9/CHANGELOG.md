@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2024-01-22)
+------------------
+
+* Feature - Doc-only update around removing AL1 from list of available AMIs for Cloud9
+
 1.65.0 (2023-12-15)
 ------------------
 

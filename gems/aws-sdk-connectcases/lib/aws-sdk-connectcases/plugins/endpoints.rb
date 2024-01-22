@@ -77,6 +77,8 @@ module Aws::ConnectCases
             Aws::ConnectCases::Endpoints::DeleteDomain.build(context)
           when :get_case
             Aws::ConnectCases::Endpoints::GetCase.build(context)
+          when :get_case_audit_events
+            Aws::ConnectCases::Endpoints::GetCaseAuditEvents.build(context)
           when :get_case_event_configuration
             Aws::ConnectCases::Endpoints::GetCaseEventConfiguration.build(context)
           when :get_domain

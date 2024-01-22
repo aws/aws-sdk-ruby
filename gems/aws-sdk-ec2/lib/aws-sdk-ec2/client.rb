@@ -19791,11 +19791,11 @@ module Aws::EC2
     #   * `opt-in-status` - The opt-in status (`opted-in` \| `not-opted-in` \|
     #     `opt-in-not-required`).
     #
-    #   * `parent-zoneID` - The ID of the zone that handles some of the Local
+    #   * `parent-zone-id` - The ID of the zone that handles some of the Local
     #     Zone and Wavelength Zone control plane operations, such as API
     #     calls.
     #
-    #   * `parent-zoneName` - The ID of the zone that handles some of the
+    #   * `parent-zone-name` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as API
     #     calls.
     #
@@ -21568,6 +21568,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes the Elastic Graphics accelerator associated with your
     # instances. For more information about Elastic Graphics, see [Amazon
     # Elastic Graphics][1].
@@ -30962,6 +30968,9 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
+    #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.
     #
@@ -39406,12 +39415,16 @@ module Aws::EC2
     # Enables Infrastructure Performance subscriptions.
     #
     # @option params [String] :source
-    #   The source Region or Availability Zone that the metric subscription is
-    #   enabled for. For example, `us-east-1`.
+    #   The source Region (like `us-east-1`) or Availability Zone ID (like
+    #   `use1-az1`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #
     # @option params [String] :destination
-    #   The target Region or Availability Zone that the metric subscription is
-    #   enabled for. For example, `eu-west-1`.
+    #   The target Region (like `us-east-2`) or Availability Zone ID (like
+    #   `use2-az2`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #
     # @option params [String] :metric
     #   The metric used for the enabled subscription.
@@ -42082,9 +42095,9 @@ module Aws::EC2
     # information. Depending on your instance configuration, you may need to
     # allow the following actions in your IAM policy:
     # `DescribeSpotInstanceRequests`,
-    # `DescribeInstanceCreditSpecifications`, `DescribeVolumes`,
-    # `DescribeInstanceAttribute`, and `DescribeElasticGpus`. Or, you can
-    # allow `describe*` depending on your instance requirements.
+    # `DescribeInstanceCreditSpecifications`, `DescribeVolumes`, and
+    # `DescribeInstanceAttribute`. Or, you can allow `describe*` depending
+    # on your instance requirements.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -48650,6 +48663,15 @@ module Aws::EC2
     #   Specify `true` to indicate that network interfaces attached to
     #   instances created in the specified subnet should be assigned a public
     #   IPv4 address.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for all
+    #   public IPv4 addresses, including public IPv4 addresses associated with
+    #   running instances and Elastic IP addresses. For more information, see
+    #   the *Public IPv4 Address* tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
@@ -55646,14 +55668,13 @@ module Aws::EC2
     #   the same request.
     #
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
-    #   resource that you can attach to your Windows instance to accelerate
-    #   the graphics performance of your applications. For more information,
-    #   see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2 User Guide*.
+    #   Deprecated.
     #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    #    </note>
     #
     # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
@@ -55684,8 +55705,6 @@ module Aws::EC2
     #   * Instances
     #
     #   * Volumes
-    #
-    #   * Elastic graphics
     #
     #   * Spot Instance requests
     #
@@ -56709,7 +56728,7 @@ module Aws::EC2
     # as its root device returns an error.
     #
     # If you attempt to start a T3 instance with `host` tenancy and the
-    # `unlimted` CPU credit option, the request fails. The `unlimited` CPU
+    # `unlimited` CPU credit option, the request fails. The `unlimited` CPU
     # credit option is not supported on Dedicated Hosts. Before you start
     # the instance, either change its CPU credit option to `standard`, or
     # change its tenancy to `default` or `dedicated`.
@@ -58708,7 +58727,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.433.0'
+      context[:gem_version] = '1.434.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -137,6 +137,7 @@ module Aws::ECS
     DockerLabelsMap = Shapes::MapShape.new(name: 'DockerLabelsMap')
     DockerVolumeConfiguration = Shapes::StructureShape.new(name: 'DockerVolumeConfiguration')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Duration = Shapes::IntegerShape.new(name: 'Duration')
     EBSKMSKeyId = Shapes::StringShape.new(name: 'EBSKMSKeyId')
     EBSResourceType = Shapes::StringShape.new(name: 'EBSResourceType')
     EBSSnapshotId = Shapes::StringShape.new(name: 'EBSSnapshotId')
@@ -302,6 +303,8 @@ module Aws::ECS
     ServiceConnectServiceList = Shapes::ListShape.new(name: 'ServiceConnectServiceList')
     ServiceConnectServiceResource = Shapes::StructureShape.new(name: 'ServiceConnectServiceResource')
     ServiceConnectServiceResourceList = Shapes::ListShape.new(name: 'ServiceConnectServiceResourceList')
+    ServiceConnectTlsCertificateAuthority = Shapes::StructureShape.new(name: 'ServiceConnectTlsCertificateAuthority')
+    ServiceConnectTlsConfiguration = Shapes::StructureShape.new(name: 'ServiceConnectTlsConfiguration')
     ServiceEvent = Shapes::StructureShape.new(name: 'ServiceEvent')
     ServiceEvents = Shapes::ListShape.new(name: 'ServiceEvents')
     ServiceField = Shapes::StringShape.new(name: 'ServiceField')
@@ -372,6 +375,7 @@ module Aws::ECS
     TaskVolumeConfiguration = Shapes::StructureShape.new(name: 'TaskVolumeConfiguration')
     TaskVolumeConfigurations = Shapes::ListShape.new(name: 'TaskVolumeConfigurations')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
+    TimeoutConfiguration = Shapes::StructureShape.new(name: 'TimeoutConfiguration')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
     TmpfsList = Shapes::ListShape.new(name: 'TmpfsList')
@@ -1466,6 +1470,8 @@ module Aws::ECS
     ServiceConnectService.add_member(:discovery_name, Shapes::ShapeRef.new(shape: String, location_name: "discoveryName"))
     ServiceConnectService.add_member(:client_aliases, Shapes::ShapeRef.new(shape: ServiceConnectClientAliasList, location_name: "clientAliases"))
     ServiceConnectService.add_member(:ingress_port_override, Shapes::ShapeRef.new(shape: PortNumber, location_name: "ingressPortOverride"))
+    ServiceConnectService.add_member(:timeout, Shapes::ShapeRef.new(shape: TimeoutConfiguration, location_name: "timeout"))
+    ServiceConnectService.add_member(:tls, Shapes::ShapeRef.new(shape: ServiceConnectTlsConfiguration, location_name: "tls"))
     ServiceConnectService.struct_class = Types::ServiceConnectService
 
     ServiceConnectServiceList.member = Shapes::ShapeRef.new(shape: ServiceConnectService)
@@ -1475,6 +1481,14 @@ module Aws::ECS
     ServiceConnectServiceResource.struct_class = Types::ServiceConnectServiceResource
 
     ServiceConnectServiceResourceList.member = Shapes::ShapeRef.new(shape: ServiceConnectServiceResource)
+
+    ServiceConnectTlsCertificateAuthority.add_member(:aws_pca_authority_arn, Shapes::ShapeRef.new(shape: String, location_name: "awsPcaAuthorityArn"))
+    ServiceConnectTlsCertificateAuthority.struct_class = Types::ServiceConnectTlsCertificateAuthority
+
+    ServiceConnectTlsConfiguration.add_member(:issuer_certificate_authority, Shapes::ShapeRef.new(shape: ServiceConnectTlsCertificateAuthority, required: true, location_name: "issuerCertificateAuthority"))
+    ServiceConnectTlsConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: String, location_name: "kmsKey"))
+    ServiceConnectTlsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
+    ServiceConnectTlsConfiguration.struct_class = Types::ServiceConnectTlsConfiguration
 
     ServiceEvent.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     ServiceEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
@@ -1763,6 +1777,10 @@ module Aws::ECS
     TaskVolumeConfigurations.member = Shapes::ShapeRef.new(shape: TaskVolumeConfiguration)
 
     Tasks.member = Shapes::ShapeRef.new(shape: Task)
+
+    TimeoutConfiguration.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: Duration, location_name: "idleTimeoutSeconds"))
+    TimeoutConfiguration.add_member(:per_request_timeout_seconds, Shapes::ShapeRef.new(shape: Duration, location_name: "perRequestTimeoutSeconds"))
+    TimeoutConfiguration.struct_class = Types::TimeoutConfiguration
 
     Tmpfs.add_member(:container_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerPath"))
     Tmpfs.add_member(:size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "size"))

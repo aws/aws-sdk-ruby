@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.212.0 (2024-01-22)
+------------------
+
+* Feature - Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS CreateDBCluster API method. This provides enhanced error handling, ensuring a more robust experience when creating database clusters with insufficient instance capacity.
+
 1.211.0 (2023-12-21)
 ------------------
 

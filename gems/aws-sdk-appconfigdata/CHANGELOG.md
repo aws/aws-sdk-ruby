@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-01-22)
+------------------
+
+* Feature - Fix FIPS Endpoints in aws-us-gov.
+
 1.17.0 (2023-11-28)
 ------------------
 

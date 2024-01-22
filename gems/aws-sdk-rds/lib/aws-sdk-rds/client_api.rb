@@ -4411,6 +4411,7 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: CreateDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
