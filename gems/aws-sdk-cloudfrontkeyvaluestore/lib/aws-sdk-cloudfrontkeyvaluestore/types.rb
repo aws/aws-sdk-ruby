@@ -140,6 +140,14 @@ module Aws::CloudFrontKeyValueStore
     #   last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] status
+    #   The current status of the Key Value Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for Key Value Store creation failure.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/DescribeKeyValueStoreResponse AWS API Documentation
     #
     class DescribeKeyValueStoreResponse < Struct.new(
@@ -148,7 +156,9 @@ module Aws::CloudFrontKeyValueStore
       :kvs_arn,
       :created,
       :etag,
-      :last_modified)
+      :last_modified,
+      :status,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end

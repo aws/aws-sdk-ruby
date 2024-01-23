@@ -16477,11 +16477,11 @@ module Aws::EC2
     #   * `opt-in-status` - The opt-in status (`opted-in` \| `not-opted-in`
     #     \| `opt-in-not-required`).
     #
-    #   * `parent-zoneID` - The ID of the zone that handles some of the
+    #   * `parent-zone-id` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as
     #     API calls.
     #
-    #   * `parent-zoneName` - The ID of the zone that handles some of the
+    #   * `parent-zone-name` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as
     #     API calls.
     #
@@ -23742,6 +23742,9 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
+    #
     #   * `association.route-table-association-id` - The ID of an
     #     association ID for the route table.
     #
@@ -30301,6 +30304,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes the association between an instance and an Elastic Graphics
     # accelerator.
     #
@@ -30333,6 +30342,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes the status of an Elastic Graphics accelerator.
     #
     # @!attribute [rw] status
@@ -30347,6 +30362,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # A specification for an Elastic Graphics accelerator.
     #
     # @!attribute [rw] type
@@ -30368,10 +30389,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an elastic GPU.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
     #
     # @!attribute [rw] type
-    #   The elastic GPU type.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse AWS API Documentation
@@ -30382,6 +30415,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes an Elastic Graphics accelerator.
     #
     # @!attribute [rw] elastic_gpu_id
@@ -30614,13 +30653,17 @@ module Aws::EC2
     end
 
     # @!attribute [rw] source
-    #   The source Region or Availability Zone that the metric subscription
-    #   is enabled for. For example, `us-east-1`.
+    #   The source Region (like `us-east-1`) or Availability Zone ID (like
+    #   `use1-az1`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The target Region or Availability Zone that the metric subscription
-    #   is enabled for. For example, `eu-west-1`.
+    #   The target Region (like `us-east-2`) or Availability Zone ID (like
+    #   `use2-az2`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #   @return [String]
     #
     # @!attribute [rw] metric
@@ -38476,7 +38519,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_associations
-    #   The Elastic GPU associated with the instance.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuAssociation>]
     #
     # @!attribute [rw] elastic_inference_accelerator_associations
@@ -45064,10 +45113,9 @@ module Aws::EC2
     #   Valid Values lists all resource types for Amazon EC2 that can be
     #   tagged. When you create a launch template, you can specify tags for
     #   the following resource types only: `instance` \| `volume` \|
-    #   `elastic-gpu` \| `network-interface` \| `spot-instances-request`. If
-    #   the instance does not include the resource type that you specify,
-    #   the instance launch fails. For example, not all instance types
-    #   include an Elastic GPU.
+    #   `network-interface` \| `spot-instances-request`. If the instance
+    #   does not include the resource type that you specify, the instance
+    #   launch fails. For example, not all instance types include a volume.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #
@@ -48517,6 +48565,16 @@ module Aws::EC2
     #   Specify `true` to indicate that network interfaces attached to
     #   instances created in the specified subnet should be assigned a
     #   public IPv4 address.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] subnet_id
@@ -50489,7 +50547,7 @@ module Aws::EC2
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
-    #   Default: `540`
+    #   Default: `270`
     #   @return [Integer]
     #
     # @!attribute [rw] rekey_fuzz_percentage
@@ -55698,7 +55756,13 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
-    #   An elastic GPU to associate with the instance.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -57150,7 +57214,13 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateTagSpecification>]
     #
     # @!attribute [rw] elastic_gpu_specifications
-    #   The elastic GPU specification.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -58342,15 +58412,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
-    #   An elastic GPU to associate with the instance. An Elastic GPU is a
-    #   GPU resource that you can attach to your Windows instance to
-    #   accelerate the graphics performance of your applications. For more
-    #   information, see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2
-    #   User Guide*.
+    #   Deprecated.
     #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -58384,8 +58452,6 @@ module Aws::EC2
     #   * Instances
     #
     #   * Volumes
-    #
-    #   * Elastic graphics
     #
     #   * Spot Instance requests
     #
@@ -62502,6 +62568,16 @@ module Aws::EC2
     # @!attribute [rw] map_public_ip_on_launch
     #   Indicates whether instances launched in this subnet receive a public
     #   IPv4 address.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] map_customer_owned_ip_on_launch
@@ -68043,7 +68119,7 @@ module Aws::EC2
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
-    #   Default: `540`
+    #   Default: `270`
     #   @return [Integer]
     #
     # @!attribute [rw] rekey_fuzz_percentage

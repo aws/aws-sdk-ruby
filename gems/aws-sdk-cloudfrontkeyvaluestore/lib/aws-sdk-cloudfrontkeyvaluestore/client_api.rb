@@ -77,6 +77,8 @@ module Aws::CloudFrontKeyValueStore
     DescribeKeyValueStoreResponse.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Created"))
     DescribeKeyValueStoreResponse.add_member(:etag, Shapes::ShapeRef.new(shape: Etag, required: true, location: "header", location_name: "ETag"))
     DescribeKeyValueStoreResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
+    DescribeKeyValueStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    DescribeKeyValueStoreResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
     DescribeKeyValueStoreResponse.struct_class = Types::DescribeKeyValueStoreResponse
 
     GetKeyRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam"=>{"name"=>"KvsARN"}}))

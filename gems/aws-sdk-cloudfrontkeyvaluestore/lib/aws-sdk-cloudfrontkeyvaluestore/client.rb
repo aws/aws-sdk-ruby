@@ -442,6 +442,8 @@ module Aws::CloudFrontKeyValueStore
     #   * {Types::DescribeKeyValueStoreResponse#created #created} => Time
     #   * {Types::DescribeKeyValueStoreResponse#etag #etag} => String
     #   * {Types::DescribeKeyValueStoreResponse#last_modified #last_modified} => Time
+    #   * {Types::DescribeKeyValueStoreResponse#status #status} => String
+    #   * {Types::DescribeKeyValueStoreResponse#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -457,6 +459,8 @@ module Aws::CloudFrontKeyValueStore
     #   resp.created #=> Time
     #   resp.etag #=> String
     #   resp.last_modified #=> Time
+    #   resp.status #=> String
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-keyvaluestore-2022-07-26/DescribeKeyValueStore AWS API Documentation
     #
@@ -663,7 +667,7 @@ module Aws::CloudFrontKeyValueStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfrontkeyvaluestore'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

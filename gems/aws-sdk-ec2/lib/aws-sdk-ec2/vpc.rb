@@ -1894,6 +1894,9 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
+    #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.
     #

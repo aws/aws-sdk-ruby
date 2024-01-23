@@ -9222,13 +9222,24 @@ module Aws::ECS
     #   ephemeral port of the Service Connect proxy.
     #   @return [Integer]
     #
+    # @!attribute [rw] timeout
+    #   A reference to an object that represents the configured timeouts for
+    #   Service Connect.
+    #   @return [Types::TimeoutConfiguration]
+    #
+    # @!attribute [rw] tls
+    #   An object that represents the configuration for Service Connect TLS.
+    #   @return [Types::ServiceConnectTlsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectService AWS API Documentation
     #
     class ServiceConnectService < Struct.new(
       :port_name,
       :discovery_name,
       :client_aliases,
-      :ingress_port_override)
+      :ingress_port_override,
+      :timeout,
+      :tls)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9270,6 +9281,47 @@ module Aws::ECS
     class ServiceConnectServiceResource < Struct.new(
       :discovery_name,
       :discovery_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the Amazon Web Services Private Certificate
+    # Authority certificate.
+    #
+    # @!attribute [rw] aws_pca_authority_arn
+    #   The ARN of the Amazon Web Services Private Certificate Authority
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTlsCertificateAuthority AWS API Documentation
+    #
+    class ServiceConnectTlsCertificateAuthority < Struct.new(
+      :aws_pca_authority_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the configuration for Service Connect TLS.
+    #
+    # @!attribute [rw] issuer_certificate_authority
+    #   The signer certificate authority.
+    #   @return [Types::ServiceConnectTlsCertificateAuthority]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Web Services Key Management Service key.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that's associated
+    #   with the Service Connect TLS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectTlsConfiguration AWS API Documentation
+    #
+    class ServiceConnectTlsConfiguration < Struct.new(
+      :issuer_certificate_authority,
+      :kms_key,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11599,6 +11651,41 @@ module Aws::ECS
     class TaskVolumeConfiguration < Struct.new(
       :name,
       :managed_ebs_volume)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the timeout configurations for Service
+    # Connect.
+    #
+    # <note markdown="1"> If `idleTimeout` is set to a time that is less than
+    # `perRequestTimeout`, the connection will close when the `idleTimeout`
+    # is reached and not the `perRequestTimeout`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] idle_timeout_seconds
+    #   The amount of time in seconds a connection will stay active while
+    #   idle. A value of `0` can be set to disable `idleTimeout`.
+    #
+    #   The `idleTimeout` default for `HTTP`/`HTTP2`/`GRPC` is 5 minutes.
+    #
+    #   The `idleTimeout` default for `TCP` is 1 hour.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] per_request_timeout_seconds
+    #   The amount of time waiting for the upstream to respond with a
+    #   complete response per request. A value of `0` can be set to disable
+    #   `perRequestTimeout`. `perRequestTimeout` can only be set if Service
+    #   Connect `appProtocol` isn't `TCP`. Only `idleTimeout` is allowed
+    #   for `TCP` `appProtocol`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TimeoutConfiguration AWS API Documentation
+    #
+    class TimeoutConfiguration < Struct.new(
+      :idle_timeout_seconds,
+      :per_request_timeout_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

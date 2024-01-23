@@ -221,7 +221,13 @@ module Aws::EC2
       data[:instance_lifecycle]
     end
 
-    # The Elastic GPU associated with the instance.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
     # @return [Array<Types::ElasticGpuAssociation>]
     def elastic_gpu_associations
       data[:elastic_gpu_associations]

@@ -1450,6 +1450,17 @@ module Aws::ECS
     #             },
     #           ],
     #           ingress_port_override: 1,
+    #           timeout: {
+    #             idle_timeout_seconds: 1,
+    #             per_request_timeout_seconds: 1,
+    #           },
+    #           tls: {
+    #             issuer_certificate_authority: { # required
+    #               aws_pca_authority_arn: "String",
+    #             },
+    #             kms_key: "String",
+    #             role_arn: "String",
+    #           },
     #         },
     #       ],
     #       log_configuration: {
@@ -1606,6 +1617,11 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -2374,6 +2390,11 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -3713,6 +3734,11 @@ module Aws::ECS
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -9535,6 +9561,17 @@ module Aws::ECS
     #             },
     #           ],
     #           ingress_port_override: 1,
+    #           timeout: {
+    #             idle_timeout_seconds: 1,
+    #             per_request_timeout_seconds: 1,
+    #           },
+    #           tls: {
+    #             issuer_certificate_authority: { # required
+    #               aws_pca_authority_arn: "String",
+    #             },
+    #             kms_key: "String",
+    #             role_arn: "String",
+    #           },
     #         },
     #       ],
     #       log_configuration: {
@@ -9691,6 +9728,11 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -10123,7 +10165,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
