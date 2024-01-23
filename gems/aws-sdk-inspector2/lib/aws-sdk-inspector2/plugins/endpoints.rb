@@ -75,12 +75,16 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::CancelFindingsReport.build(context)
           when :cancel_sbom_export
             Aws::Inspector2::Endpoints::CancelSbomExport.build(context)
+          when :create_cis_scan_configuration
+            Aws::Inspector2::Endpoints::CreateCisScanConfiguration.build(context)
           when :create_filter
             Aws::Inspector2::Endpoints::CreateFilter.build(context)
           when :create_findings_report
             Aws::Inspector2::Endpoints::CreateFindingsReport.build(context)
           when :create_sbom_export
             Aws::Inspector2::Endpoints::CreateSbomExport.build(context)
+          when :delete_cis_scan_configuration
+            Aws::Inspector2::Endpoints::DeleteCisScanConfiguration.build(context)
           when :delete_filter
             Aws::Inspector2::Endpoints::DeleteFilter.build(context)
           when :describe_organization_configuration
@@ -95,6 +99,10 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::Enable.build(context)
           when :enable_delegated_admin_account
             Aws::Inspector2::Endpoints::EnableDelegatedAdminAccount.build(context)
+          when :get_cis_scan_report
+            Aws::Inspector2::Endpoints::GetCisScanReport.build(context)
+          when :get_cis_scan_result_details
+            Aws::Inspector2::Endpoints::GetCisScanResultDetails.build(context)
           when :get_configuration
             Aws::Inspector2::Endpoints::GetConfiguration.build(context)
           when :get_delegated_admin_account
@@ -111,6 +119,14 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::GetSbomExport.build(context)
           when :list_account_permissions
             Aws::Inspector2::Endpoints::ListAccountPermissions.build(context)
+          when :list_cis_scan_configurations
+            Aws::Inspector2::Endpoints::ListCisScanConfigurations.build(context)
+          when :list_cis_scan_results_aggregated_by_checks
+            Aws::Inspector2::Endpoints::ListCisScanResultsAggregatedByChecks.build(context)
+          when :list_cis_scan_results_aggregated_by_target_resource
+            Aws::Inspector2::Endpoints::ListCisScanResultsAggregatedByTargetResource.build(context)
+          when :list_cis_scans
+            Aws::Inspector2::Endpoints::ListCisScans.build(context)
           when :list_coverage
             Aws::Inspector2::Endpoints::ListCoverage.build(context)
           when :list_coverage_statistics
@@ -133,10 +149,20 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::ResetEncryptionKey.build(context)
           when :search_vulnerabilities
             Aws::Inspector2::Endpoints::SearchVulnerabilities.build(context)
+          when :send_cis_session_health
+            Aws::Inspector2::Endpoints::SendCisSessionHealth.build(context)
+          when :send_cis_session_telemetry
+            Aws::Inspector2::Endpoints::SendCisSessionTelemetry.build(context)
+          when :start_cis_session
+            Aws::Inspector2::Endpoints::StartCisSession.build(context)
+          when :stop_cis_session
+            Aws::Inspector2::Endpoints::StopCisSession.build(context)
           when :tag_resource
             Aws::Inspector2::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::Inspector2::Endpoints::UntagResource.build(context)
+          when :update_cis_scan_configuration
+            Aws::Inspector2::Endpoints::UpdateCisScanConfiguration.build(context)
           when :update_configuration
             Aws::Inspector2::Endpoints::UpdateConfiguration.build(context)
           when :update_ec2_deep_inspection_configuration
