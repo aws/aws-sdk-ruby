@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2024-01-24)
+------------------
+
+* Feature - Add DeprecationDate and SoftwareVersion to response of ListGateways.
+
 1.80.0 (2023-11-28)
 ------------------
 

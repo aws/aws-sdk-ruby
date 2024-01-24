@@ -1784,6 +1784,13 @@ module Aws::RDS
     # @!attribute [rw] target_db_instance_class
     #   Specify the DB instance class for the databases in the green
     #   environment.
+    #
+    #   This parameter only applies to RDS DB instances, because DB
+    #   instances within an Aurora DB cluster can have multiple different
+    #   instance classes. If you're creating a blue/green deployment from
+    #   an Aurora DB cluster, don't specify this parameter. After the green
+    #   environment is created, you can individually modify the instance
+    #   classes of the DB instances within the green DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] upgrade_target_storage_config
@@ -2797,6 +2804,13 @@ module Aws::RDS
     #   Amazon RDS issues an error.
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must
+    #   enable Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
     # @!attribute [rw] serverless_v2_scaling_configuration
     #   Contains the scaling configuration of an Aurora Serverless v2 DB
     #   cluster.
@@ -2943,6 +2957,7 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
+      :enable_limitless_database,
       :serverless_v2_scaling_configuration,
       :network_type,
       :db_system_id,
@@ -5627,6 +5642,83 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The name of the primary DB cluster for the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_redundancy
+    #   Specifies whether to create standby instances for the DB shard
+    #   group. Valid values are the following:
+    #
+    #   * 0 - Creates a single, primary DB instance for each physical shard.
+    #     This is the default value, and the only one supported for the
+    #     preview.
+    #
+    #   * 1 - Creates a primary DB instance and a standby instance in a
+    #     different Availability Zone (AZ) for each physical shard.
+    #
+    #   * 2 - Creates a primary DB instance and two standby instances in
+    #     different AZs for each physical shard.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Specifies whether the DB shard group is publicly accessible.
+    #
+    #   When the DB shard group is publicly accessible, its Domain Name
+    #   System (DNS) endpoint resolves to the private IP address from within
+    #   the DB shard group's virtual private cloud (VPC). It resolves to
+    #   the public IP address from outside of the DB shard group's VPC.
+    #   Access to the DB shard group is ultimately controlled by the
+    #   security group it uses. That public access is not permitted if the
+    #   security group assigned to the DB shard group doesn't permit it.
+    #
+    #   When the DB shard group isn't publicly accessible, it is an
+    #   internal DB shard group with a DNS name that resolves to a private
+    #   IP address.
+    #
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
+    #
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
+    #
+    #   * If the default VPC in the target Region doesn’t have an internet
+    #     gateway attached to it, the DB shard group is private.
+    #
+    #   * If the default VPC in the target Region has an internet gateway
+    #     attached to it, the DB shard group is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an internet
+    #     gateway attached to it, the DB shard group is private.
+    #
+    #   * If the subnets are part of a VPC that has an internet gateway
+    #     attached to it, the DB shard group is public.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBShardGroupMessage AWS API Documentation
+    #
+    class CreateDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier,
+      :db_cluster_identifier,
+      :compute_redundancy,
+      :max_acu,
+      :publicly_accessible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot.
     #
@@ -5750,8 +5842,19 @@ module Aws::RDS
     #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic created for event
-    #   notification. The ARN is created by Amazon SNS when you create a
+    #   notification. SNS automatically creates the ARN when you create a
     #   topic and subscribe to it.
+    #
+    #   <note markdown="1"> RDS doesn't support FIFO (first in, first out) topics. For more
+    #   information, see [Message ordering and deduplication (FIFO
+    #   topics)][1] in the *Amazon Simple Notification Service Developer
+    #   Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -6761,6 +6864,10 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] limitless_database
+    #   The details for Aurora Limitless Database.
+    #   @return [Types::LimitlessDatabase]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6839,7 +6946,8 @@ module Aws::RDS
       :master_user_secret,
       :io_optimized_next_allowed_modification_time,
       :local_write_forwarding_status,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :limitless_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10039,6 +10147,95 @@ module Aws::RDS
     #
     class DBSecurityGroupQuotaExceededFault < Aws::EmptyStructure; end
 
+    # @!attribute [rw] db_shard_group_resource_id
+    #   The Amazon Web Services Region-unique, immutable identifier for the
+    #   DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The name of the primary DB cluster for the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
+    # @!attribute [rw] compute_redundancy
+    #   Specifies whether to create standby instances for the DB shard
+    #   group. Valid values are the following:
+    #
+    #   * 0 - Creates a single, primary DB instance for each physical shard.
+    #     This is the default value, and the only one supported for the
+    #     preview.
+    #
+    #   * 1 - Creates a primary DB instance and a standby instance in a
+    #     different Availability Zone (AZ) for each physical shard.
+    #
+    #   * 2 - Creates a primary DB instance and two standby instances in
+    #     different AZs for each physical shard.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Indicates whether the DB shard group is publicly accessible.
+    #
+    #   When the DB shard group is publicly accessible, its Domain Name
+    #   System (DNS) endpoint resolves to the private IP address from within
+    #   the DB shard group's virtual private cloud (VPC). It resolves to
+    #   the public IP address from outside of the DB shard group's VPC.
+    #   Access to the DB shard group is ultimately controlled by the
+    #   security group it uses. That public access isn't permitted if the
+    #   security group assigned to the DB shard group doesn't permit it.
+    #
+    #   When the DB shard group isn't publicly accessible, it is an
+    #   internal DB shard group with a DNS name that resolves to a private
+    #   IP address.
+    #
+    #   For more information, see CreateDBShardGroup.
+    #
+    #   This setting is only for Aurora Limitless Database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint
+    #   The connection endpoint for the DB shard group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroup AWS API Documentation
+    #
+    class DBShardGroup < Struct.new(
+      :db_shard_group_resource_id,
+      :db_shard_group_identifier,
+      :db_cluster_identifier,
+      :max_acu,
+      :compute_redundancy,
+      :status,
+      :publicly_accessible,
+      :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified DB shard group name must be unique in your Amazon Web
+    # Services account in the specified Amazon Web Services Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBShardGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified DB shard group name wasn't found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroupNotFoundFault AWS API Documentation
+    #
+    class DBShardGroupNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the details of an Amazon RDS DB snapshot.
     #
     # This data type is used as a response element in the
@@ -11097,6 +11294,18 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_shard_group_identifier
+    #   Teh name of the DB shard group to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBShardGroupMessage AWS API Documentation
+    #
+    class DeleteDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_snapshot_identifier
     #   The DB snapshot identifier.
     #
@@ -11972,7 +12181,7 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints: Minimum 20, maximum 100
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -12904,6 +13113,70 @@ module Aws::RDS
       :db_security_group_name,
       :filters,
       :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_shard_group_identifier
+    #   The user-supplied DB shard group identifier or the Amazon Resource
+    #   Name (ARN) of the DB shard group. If this parameter is specified,
+    #   information for only the specific DB shard group is returned. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match an existing DB shard group identifier.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more DB shard groups to describe.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBShardGroups` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBShardGroupsMessage AWS API Documentation
+    #
+    class DescribeDBShardGroupsMessage < Struct.new(
+      :db_shard_group_identifier,
+      :filters,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_shard_groups
+    #   Contains a list of DB shard groups for the user.
+    #   @return [Array<Types::DBShardGroup>]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a later `DescribeDBClusters`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBShardGroupsResponse AWS API Documentation
+    #
+    class DescribeDBShardGroupsResponse < Struct.new(
+      :db_shard_groups,
       :marker)
       SENSITIVE = []
       include Aws::Structure
@@ -15766,6 +16039,12 @@ module Aws::RDS
     #
     class InvalidDBSecurityGroupStateFault < Aws::EmptyStructure; end
 
+    # The DB shard group must be in the available state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBShardGroupStateFault AWS API Documentation
+    #
+    class InvalidDBShardGroupStateFault < Aws::EmptyStructure; end
+
     # The state of the DB snapshot doesn't allow deletion.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSnapshotStateFault AWS API Documentation
@@ -15831,6 +16110,13 @@ module Aws::RDS
     #
     class InvalidIntegrationStateFault < Aws::EmptyStructure; end
 
+    # The maximum capacity of the DB shard group must be 48-7168 Aurora
+    # capacity units (ACUs).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidMaxAcuFault AWS API Documentation
+    #
+    class InvalidMaxAcuFault < Aws::EmptyStructure; end
+
     # The option group isn't in the *available* state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidOptionGroupStateFault AWS API Documentation
@@ -15894,6 +16180,26 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/KMSKeyNotAccessibleFault AWS API Documentation
     #
     class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
+
+    # Contains details for Aurora Limitless Database.
+    #
+    # @!attribute [rw] status
+    #   The status of Aurora Limitless Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_required_acu
+    #   The minimum required capacity for Aurora Limitless Database in
+    #   Aurora capacity units (ACUs).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/LimitlessDatabase AWS API Documentation
+    #
+    class LimitlessDatabase < Struct.new(
+      :status,
+      :min_required_acu)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] resource_name
     #   The Amazon RDS resource with tags to be listed. This value is an
@@ -15973,6 +16279,13 @@ module Aws::RDS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The maximum number of DB shard groups for your Amazon Web Services
+    # account in the specified Amazon Web Services Region has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MaxDBShardGroupLimitReached AWS API Documentation
+    #
+    class MaxDBShardGroupLimitReached < Aws::EmptyStructure; end
 
     # The representation of a metric.
     #
@@ -17026,6 +17339,13 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must
+    #   enable Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -17071,7 +17391,8 @@ module Aws::RDS
       :engine_mode,
       :allow_engine_mode_change,
       :enable_local_write_forwarding,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :enable_limitless_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18688,6 +19009,24 @@ module Aws::RDS
       :locale,
       :status,
       :recommended_action_updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBShardGroupMessage AWS API Documentation
+    #
+    class ModifyDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier,
+      :max_acu)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20821,6 +21160,18 @@ module Aws::RDS
     #
     class RebootDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group to reboot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBShardGroupMessage AWS API Documentation
+    #
+    class RebootDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26360,6 +26711,13 @@ module Aws::RDS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The specified DB engine version isn't supported for Aurora Limitless
+    # Database.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UnsupportedDBEngineVersionFault AWS API Documentation
+    #
+    class UnsupportedDBEngineVersionFault < Aws::EmptyStructure; end
 
     # The version of the database engine that a DB instance can be upgraded
     # to.

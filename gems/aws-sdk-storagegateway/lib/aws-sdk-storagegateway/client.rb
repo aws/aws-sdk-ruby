@@ -4115,10 +4115,18 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Returns a description of the specified Amazon Resource Name (ARN) of
-    # virtual tapes. If a `TapeARN` is not specified, returns a description
-    # of all virtual tapes associated with the specified gateway. This
-    # operation is only supported in the tape gateway type.
+    # Returns a description of virtual tapes that correspond to the
+    # specified Amazon Resource Names (ARNs). If `TapeARN` is not specified,
+    # returns a description of the virtual tapes associated with the
+    # specified gateway. This operation is only supported for the tape
+    # gateway type.
+    #
+    # The operation supports pagination. By default, the operation returns a
+    # maximum of up to 100 tapes. You can optionally specify the `Limit`
+    # field in the body to limit the number of tapes in the response. If the
+    # number of tapes returned in the response is truncated, the response
+    # includes a `Marker` field. You can use this `Marker` value in your
+    # subsequent request to retrieve the next set of tapes.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -4943,6 +4951,8 @@ module Aws::StorageGateway
     #   resp.gateways[0].ec2_instance_region #=> String
     #   resp.gateways[0].host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER", "SNOWBALL"
     #   resp.gateways[0].host_environment_id #=> String
+    #   resp.gateways[0].deprecation_date #=> String
+    #   resp.gateways[0].software_version #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways AWS API Documentation
@@ -5433,7 +5443,7 @@ module Aws::StorageGateway
     end
 
     # Sends you notification through CloudWatch Events when all files
-    # written to your file share have been uploaded to S3. Amazon S3.
+    # written to your file share have been uploaded to Amazon S3.
     #
     # Storage Gateway can send a notification through Amazon CloudWatch
     # Events when all files written to your file share up to that point in
@@ -5491,7 +5501,7 @@ module Aws::StorageGateway
     #
     # You can subscribe to be notified through an Amazon CloudWatch event
     # when your `RefreshCache` operation completes. For more information,
-    # see [Getting notified about file operations][1] in the *Storage
+    # see [Getting notified about file operations][1] in the *Amazon S3 File
     # Gateway User Guide*. This operation is Only supported for S3 File
     # Gateways.
     #
@@ -5507,7 +5517,7 @@ module Aws::StorageGateway
     # no more than two refreshes at any time. We recommend using the
     # refresh-complete CloudWatch event notification before issuing
     # additional requests. For more information, see [Getting notified about
-    # file operations][1] in the *Storage Gateway User Guide*.
+    # file operations][1] in the *Amazon S3 File Gateway User Guide*.
     #
     # * Wait at least 60 seconds between consecutive RefreshCache API
     #   requests.
@@ -5523,11 +5533,11 @@ module Aws::StorageGateway
     #  </note>
     #
     # For more information, see [Getting notified about file operations][1]
-    # in the *Storage Gateway User Guide*.
+    # in the *Amazon S3 File Gateway User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification
+    # [1]: https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share you want to refresh.
@@ -5900,8 +5910,14 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Shuts down a gateway. To specify which gateway to shut down, use the
-    # Amazon Resource Name (ARN) of the gateway in the body of your request.
+    # Shuts down a Tape Gateway or Volume Gateway. To specify which gateway
+    # to shut down, use the Amazon Resource Name (ARN) of the gateway in the
+    # body of your request.
+    #
+    # <note markdown="1"> This API action cannot be used to shut down S3 File Gateway or FSx
+    # File Gateway.
+    #
+    #  </note>
     #
     # The operation shuts down the gateway service component running in the
     # gateway's virtual machine (VM) and not the host VM.
@@ -7271,7 +7287,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -7608,7 +7608,7 @@ module Aws::EC2
 
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #
@@ -9334,7 +9334,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   Constraint: Maximum 64 ASCII characters.
@@ -9534,12 +9534,26 @@ module Aws::EC2
     #   The tags to assign to the network ACL.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclRequest AWS API Documentation
     #
     class CreateNetworkAclRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      :tag_specifications)
+      :tag_specifications,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9548,10 +9562,17 @@ module Aws::EC2
     #   Information about the network ACL.
     #   @return [Types::NetworkAcl]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclResult AWS API Documentation
     #
     class CreateNetworkAclResult < Struct.new(
-      :network_acl)
+      :network_acl,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10369,12 +10390,26 @@ module Aws::EC2
     #   The tags to assign to the route table.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableRequest AWS API Documentation
     #
     class CreateRouteTableRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      :tag_specifications)
+      :tag_specifications,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10383,10 +10418,17 @@ module Aws::EC2
     #   Information about the route table.
     #   @return [Types::RouteTable]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableResult AWS API Documentation
     #
     class CreateRouteTableResult < Struct.new(
-      :route_table)
+      :route_table,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

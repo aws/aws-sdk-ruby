@@ -78,6 +78,8 @@ module Aws::RDS
   # * {DBSecurityGroupNotFoundFault}
   # * {DBSecurityGroupNotSupportedFault}
   # * {DBSecurityGroupQuotaExceededFault}
+  # * {DBShardGroupAlreadyExistsFault}
+  # * {DBShardGroupNotFoundFault}
   # * {DBSnapshotAlreadyExistsFault}
   # * {DBSnapshotNotFoundFault}
   # * {DBSnapshotTenantDatabaseNotFoundFault}
@@ -120,6 +122,7 @@ module Aws::RDS
   # * {InvalidDBProxyEndpointStateFault}
   # * {InvalidDBProxyStateFault}
   # * {InvalidDBSecurityGroupStateFault}
+  # * {InvalidDBShardGroupStateFault}
   # * {InvalidDBSnapshotStateFault}
   # * {InvalidDBSubnetGroupFault}
   # * {InvalidDBSubnetGroupStateFault}
@@ -130,6 +133,7 @@ module Aws::RDS
   # * {InvalidExportTaskStateFault}
   # * {InvalidGlobalClusterStateFault}
   # * {InvalidIntegrationStateFault}
+  # * {InvalidMaxAcuFault}
   # * {InvalidOptionGroupStateFault}
   # * {InvalidResourceStateFault}
   # * {InvalidRestoreFault}
@@ -137,6 +141,7 @@ module Aws::RDS
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
   # * {KMSKeyNotAccessibleFault}
+  # * {MaxDBShardGroupLimitReached}
   # * {NetworkTypeNotSupported}
   # * {OptionGroupAlreadyExistsFault}
   # * {OptionGroupNotFoundFault}
@@ -166,6 +171,7 @@ module Aws::RDS
   # * {TenantDatabaseAlreadyExistsFault}
   # * {TenantDatabaseNotFoundFault}
   # * {TenantDatabaseQuotaExceededFault}
+  # * {UnsupportedDBEngineVersionFault}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -683,6 +689,26 @@ module Aws::RDS
       end
     end
 
+    class DBShardGroupAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBShardGroupAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBShardGroupNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBShardGroupNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class DBSnapshotAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1103,6 +1129,16 @@ module Aws::RDS
       end
     end
 
+    class InvalidDBShardGroupStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidDBShardGroupStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidDBSnapshotStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1203,6 +1239,16 @@ module Aws::RDS
       end
     end
 
+    class InvalidMaxAcuFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidMaxAcuFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidOptionGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1268,6 +1314,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::KMSKeyNotAccessibleFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class MaxDBShardGroupLimitReached < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::MaxDBShardGroupLimitReached] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1558,6 +1614,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::TenantDatabaseQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UnsupportedDBEngineVersionFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::UnsupportedDBEngineVersionFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

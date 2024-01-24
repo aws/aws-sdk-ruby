@@ -4070,6 +4070,15 @@ module Aws::StorageGateway
     #   environments, and its format depends on the host environment type.
     #   @return [String]
     #
+    # @!attribute [rw] deprecation_date
+    #   Date after which this gateway will not receive software updates for
+    #   new features and bug fixes.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_version
+    #   The version number of the software running on the gateway appliance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/GatewayInfo AWS API Documentation
     #
     class GatewayInfo < Struct.new(
@@ -4081,7 +4090,9 @@ module Aws::StorageGateway
       :ec2_instance_id,
       :ec2_instance_region,
       :host_environment,
-      :host_environment_id)
+      :host_environment_id,
+      :deprecation_date,
+      :software_version)
       SENSITIVE = []
       include Aws::Structure
     end

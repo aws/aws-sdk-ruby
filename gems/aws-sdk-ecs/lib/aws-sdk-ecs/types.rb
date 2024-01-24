@@ -236,6 +236,8 @@ module Aws::ECS
     end
 
     # An object representing the networking details for a task or service.
+    # For example
+    # `awsvpcConfiguration=\{subnets=["subnet-12344321"],securityGroups=["sg-12344321"]\}`
     #
     # @!attribute [rw] subnets
     #   The IDs of the subnets associated with the task or service. There's
@@ -1773,7 +1775,7 @@ module Aws::ECS
     #   `nofile` resource limit parameter which Fargate overrides. The
     #   `nofile` resource limit sets a restriction on the number of open
     #   files that a container can use. The default `nofile` soft limit is
-    #   `1024` and the default hard limit is `4096`.
+    #   `1024` and the default hard limit is `65535`.
     #
     #   This parameter requires version 1.18 of the Docker Remote API or
     #   greater on your container instance. To check the Docker Remote API
@@ -2023,10 +2025,15 @@ module Aws::ECS
     #
     #  </note>
     #
+    # For more information about how to create a container dependency, see
+    # [Container dependency][3] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency
     #
     # @!attribute [rw] container_name
     #   The name of a container.
@@ -3828,8 +3835,8 @@ module Aws::ECS
     #     amount of time the service scheduler can wait for is determined by
     #     the container health check settings.
     #
-    #   For services are that *do* use a load balancer, the following should
-    #   be noted:
+    #   For services that *do* use a load balancer, the following should be
+    #   noted:
     #
     #   * If a task has no essential containers with a health check defined,
     #     the service scheduler will wait for the load balancer target group
@@ -9228,7 +9235,8 @@ module Aws::ECS
     #   @return [Types::TimeoutConfiguration]
     #
     # @!attribute [rw] tls
-    #   An object that represents the configuration for Service Connect TLS.
+    #   A reference to an object that represents a Transport Layer Security
+    #   (TLS) configuration.
     #   @return [Types::ServiceConnectTlsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectService AWS API Documentation
@@ -9887,8 +9895,7 @@ module Aws::ECS
     #   An optional message specified when a task is stopped. For example,
     #   if you're using a custom scheduler, you can use this parameter to
     #   specify the reason for stopping the task here, and the message
-    #   appears in subsequent DescribeTasks API operations on this task. Up
-    #   to 255 characters are allowed in this message.
+    #   appears in subsequent DescribeTasks API operations on this task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskRequest AWS API Documentation
@@ -10504,20 +10511,6 @@ module Aws::ECS
     #
     #   For more information about stop code, see [Stopped tasks error
     #   codes][1] in the *Amazon ECS User Guide*.
-    #
-    #   The following are valid values:
-    #
-    #   * `TaskFailedToStart`
-    #
-    #   * `EssentialContainerExited`
-    #
-    #   * `UserInitiated`
-    #
-    #   * `TerminationNotice`
-    #
-    #   * `ServiceSchedulerInitiated`
-    #
-    #   * `SpotInterruption`
     #
     #
     #
@@ -11729,7 +11722,7 @@ module Aws::ECS
     # resource limit parameter which Fargate overrides. The `nofile`
     # resource limit sets a restriction on the number of open files that a
     # container can use. The default `nofile` soft limit is `1024` and the
-    # default hard limit is `4096`.
+    # default hard limit is `65535`.
     #
     # You can specify the `ulimit` settings for a container in a task
     # definition.

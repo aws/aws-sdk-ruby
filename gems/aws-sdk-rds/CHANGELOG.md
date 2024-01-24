@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.213.0 (2024-01-24)
+------------------
+
+* Feature - This release adds support for Aurora Limitless Database.
+
 1.212.0 (2024-01-22)
 ------------------
 

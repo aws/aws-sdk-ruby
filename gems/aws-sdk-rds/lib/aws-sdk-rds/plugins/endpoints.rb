@@ -107,6 +107,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::CreateDBProxyEndpoint.build(context)
           when :create_db_security_group
             Aws::RDS::Endpoints::CreateDBSecurityGroup.build(context)
+          when :create_db_shard_group
+            Aws::RDS::Endpoints::CreateDBShardGroup.build(context)
           when :create_db_snapshot
             Aws::RDS::Endpoints::CreateDBSnapshot.build(context)
           when :create_db_subnet_group
@@ -147,6 +149,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DeleteDBProxyEndpoint.build(context)
           when :delete_db_security_group
             Aws::RDS::Endpoints::DeleteDBSecurityGroup.build(context)
+          when :delete_db_shard_group
+            Aws::RDS::Endpoints::DeleteDBShardGroup.build(context)
           when :delete_db_snapshot
             Aws::RDS::Endpoints::DeleteDBSnapshot.build(context)
           when :delete_db_subnet_group
@@ -209,6 +213,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeDBRecommendations.build(context)
           when :describe_db_security_groups
             Aws::RDS::Endpoints::DescribeDBSecurityGroups.build(context)
+          when :describe_db_shard_groups
+            Aws::RDS::Endpoints::DescribeDBShardGroups.build(context)
           when :describe_db_snapshot_attributes
             Aws::RDS::Endpoints::DescribeDBSnapshotAttributes.build(context)
           when :describe_db_snapshot_tenant_databases
@@ -291,6 +297,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::ModifyDBProxyTargetGroup.build(context)
           when :modify_db_recommendation
             Aws::RDS::Endpoints::ModifyDBRecommendation.build(context)
+          when :modify_db_shard_group
+            Aws::RDS::Endpoints::ModifyDBShardGroup.build(context)
           when :modify_db_snapshot
             Aws::RDS::Endpoints::ModifyDBSnapshot.build(context)
           when :modify_db_snapshot_attribute
@@ -315,6 +323,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::RebootDBCluster.build(context)
           when :reboot_db_instance
             Aws::RDS::Endpoints::RebootDBInstance.build(context)
+          when :reboot_db_shard_group
+            Aws::RDS::Endpoints::RebootDBShardGroup.build(context)
           when :register_db_proxy_targets
             Aws::RDS::Endpoints::RegisterDBProxyTargets.build(context)
           when :remove_from_global_cluster

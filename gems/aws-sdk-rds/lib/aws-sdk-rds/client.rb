@@ -2043,6 +2043,13 @@ module Aws::RDS
     #   Specify the DB instance class for the databases in the green
     #   environment.
     #
+    #   This parameter only applies to RDS DB instances, because DB instances
+    #   within an Aurora DB cluster can have multiple different instance
+    #   classes. If you're creating a blue/green deployment from an Aurora DB
+    #   cluster, don't specify this parameter. After the green environment is
+    #   created, you can individually modify the instance classes of the DB
+    #   instances within the green DB cluster.
+    #
     # @option params [Boolean] :upgrade_target_storage_config
     #   Whether to upgrade the storage file system configuration on the green
     #   database. This option migrates the green DB instance from the older
@@ -3217,6 +3224,12 @@ module Aws::RDS
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
     #
+    # @option params [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
     #   Contains the scaling configuration of an Aurora Serverless v2 DB
     #   cluster.
@@ -3504,6 +3517,7 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     enable_limitless_database: false,
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
@@ -3647,6 +3661,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -7083,6 +7099,111 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Creates a new DB shard group for Aurora Limitless Database. You must
+    # enable Aurora Limitless Database to create a DB shard group.
+    #
+    # Valid for: Aurora DB clusters only
+    #
+    # @option params [required, String] :db_shard_group_identifier
+    #   The name of the DB shard group.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The name of the primary DB cluster for the DB shard group.
+    #
+    # @option params [Integer] :compute_redundancy
+    #   Specifies whether to create standby instances for the DB shard group.
+    #   Valid values are the following:
+    #
+    #   * 0 - Creates a single, primary DB instance for each physical shard.
+    #     This is the default value, and the only one supported for the
+    #     preview.
+    #
+    #   * 1 - Creates a primary DB instance and a standby instance in a
+    #     different Availability Zone (AZ) for each physical shard.
+    #
+    #   * 2 - Creates a primary DB instance and two standby instances in
+    #     different AZs for each physical shard.
+    #
+    # @option params [required, Float] :max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies whether the DB shard group is publicly accessible.
+    #
+    #   When the DB shard group is publicly accessible, its Domain Name System
+    #   (DNS) endpoint resolves to the private IP address from within the DB
+    #   shard group's virtual private cloud (VPC). It resolves to the public
+    #   IP address from outside of the DB shard group's VPC. Access to the DB
+    #   shard group is ultimately controlled by the security group it uses.
+    #   That public access is not permitted if the security group assigned to
+    #   the DB shard group doesn't permit it.
+    #
+    #   When the DB shard group isn't publicly accessible, it is an internal
+    #   DB shard group with a DNS name that resolves to a private IP address.
+    #
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
+    #
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
+    #
+    #   * If the default VPC in the target Region doesn’t have an internet
+    #     gateway attached to it, the DB shard group is private.
+    #
+    #   * If the default VPC in the target Region has an internet gateway
+    #     attached to it, the DB shard group is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an internet
+    #     gateway attached to it, the DB shard group is private.
+    #
+    #   * If the subnets are part of a VPC that has an internet gateway
+    #     attached to it, the DB shard group is public.
+    #
+    # @return [Types::DBShardGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBShardGroup#db_shard_group_resource_id #db_shard_group_resource_id} => String
+    #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
+    #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
+    #   * {Types::DBShardGroup#status #status} => String
+    #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_shard_group({
+    #     db_shard_group_identifier: "String", # required
+    #     db_cluster_identifier: "String", # required
+    #     compute_redundancy: 1,
+    #     max_acu: 1.0, # required
+    #     publicly_accessible: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_shard_group_resource_id #=> String
+    #   resp.db_shard_group_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.max_acu #=> Float
+    #   resp.compute_redundancy #=> Integer
+    #   resp.status #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBShardGroup AWS API Documentation
+    #
+    # @overload create_db_shard_group(params = {})
+    # @param [Hash] params ({})
+    def create_db_shard_group(params = {}, options = {})
+      req = build_request(:create_db_shard_group, params)
+      req.send_request(options)
+    end
+
     # Creates a snapshot of a DB instance. The source DB instance must be in
     # the `available` or `storage-optimization` state.
     #
@@ -7389,8 +7510,18 @@ module Aws::RDS
     #
     # @option params [required, String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic created for event
-    #   notification. The ARN is created by Amazon SNS when you create a topic
-    #   and subscribe to it.
+    #   notification. SNS automatically creates the ARN when you create a
+    #   topic and subscribe to it.
+    #
+    #   <note markdown="1"> RDS doesn't support FIFO (first in, first out) topics. For more
+    #   information, see [Message ordering and deduplication (FIFO topics)][1]
+    #   in the *Amazon Simple Notification Service Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #
     # @option params [String] :source_type
     #   The type of source that is generating the events. For example, if you
@@ -7754,6 +7885,29 @@ module Aws::RDS
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Integration#create_time #create_time} => Time
     #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #
+    #
+    # @example Example: To create a zero-ETL integration
+    #
+    #   # The following example creates a zero-ETL integration with Amazon Redshift.
+    #
+    #   resp = client.create_integration({
+    #     integration_name: "my-integration", 
+    #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
+    #     target_arn: "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     integration_name: "my-integration", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
+    #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
+    #     status: "creating", 
+    #     tags: [
+    #     ], 
+    #     target_arn: "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8648,6 +8802,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -9563,6 +9719,48 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Deletes an Aurora Limitless Database DB shard group.
+    #
+    # @option params [required, String] :db_shard_group_identifier
+    #   Teh name of the DB shard group to delete.
+    #
+    # @return [Types::DBShardGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBShardGroup#db_shard_group_resource_id #db_shard_group_resource_id} => String
+    #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
+    #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
+    #   * {Types::DBShardGroup#status #status} => String
+    #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_shard_group({
+    #     db_shard_group_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_shard_group_resource_id #=> String
+    #   resp.db_shard_group_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.max_acu #=> Float
+    #   resp.compute_redundancy #=> Integer
+    #   resp.status #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBShardGroup AWS API Documentation
+    #
+    # @overload delete_db_shard_group(params = {})
+    # @param [Hash] params ({})
+    def delete_db_shard_group(params = {}, options = {})
+      req = build_request(:delete_db_shard_group, params)
+      req.send_request(options)
+    end
+
     # Deletes a DB snapshot. If the snapshot is being copied, the copy
     # operation is terminated.
     #
@@ -9887,6 +10085,27 @@ module Aws::RDS
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Integration#create_time #create_time} => Time
     #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #
+    #
+    # @example Example: To delete a zero-ETL integration
+    #
+    #   # The following example deletes a zero-ETL integration with Amazon Redshift.
+    #
+    #   resp = client.delete_integration({
+    #     integration_identifier: "5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     integration_name: "my-integration", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
+    #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
+    #     status: "deleting", 
+    #     tags: [
+    #     ], 
+    #     target_arn: "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -11733,7 +11952,7 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints: Minimum 20, maximum 100
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
@@ -11998,6 +12217,8 @@ module Aws::RDS
     #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_clusters[0].local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_clusters[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_clusters[0].limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_clusters[0].limitless_database.min_required_acu #=> Float
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13729,6 +13950,80 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describes existing Aurora Limitless Database DB shard groups.
+    #
+    # @option params [String] :db_shard_group_identifier
+    #   The user-supplied DB shard group identifier or the Amazon Resource
+    #   Name (ARN) of the DB shard group. If this parameter is specified,
+    #   information for only the specific DB shard group is returned. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match an existing DB shard group identifier.
+    #
+    #   ^
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more DB shard groups to describe.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBShardGroups` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100
+    #
+    # @return [Types::DescribeDBShardGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDBShardGroupsResponse#db_shard_groups #db_shard_groups} => Array&lt;Types::DBShardGroup&gt;
+    #   * {Types::DescribeDBShardGroupsResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_shard_groups({
+    #     db_shard_group_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_shard_groups #=> Array
+    #   resp.db_shard_groups[0].db_shard_group_resource_id #=> String
+    #   resp.db_shard_groups[0].db_shard_group_identifier #=> String
+    #   resp.db_shard_groups[0].db_cluster_identifier #=> String
+    #   resp.db_shard_groups[0].max_acu #=> Float
+    #   resp.db_shard_groups[0].compute_redundancy #=> Integer
+    #   resp.db_shard_groups[0].status #=> String
+    #   resp.db_shard_groups[0].publicly_accessible #=> Boolean
+    #   resp.db_shard_groups[0].endpoint #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBShardGroups AWS API Documentation
+    #
+    # @overload describe_db_shard_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_db_shard_groups(params = {}, options = {})
+      req = build_request(:describe_db_shard_groups, params)
+      req.send_request(options)
+    end
+
     # Returns a list of DB snapshot attribute names and values for a manual
     # DB snapshot.
     #
@@ -15352,6 +15647,31 @@ module Aws::RDS
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To describe a zero-ETL integration
+    #
+    #   # The following example retrieves information about a zero-ETL integration with Amazon Redshift.
+    #
+    #   resp = client.describe_integrations({
+    #     integration_identifier: "5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     integrations: [
+    #       {
+    #         create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #         integration_name: "my-integration", 
+    #         kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
+    #         source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
+    #         status: "active", 
+    #         tags: [
+    #         ], 
+    #         target_arn: "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_integrations({
@@ -16960,9 +17280,11 @@ module Aws::RDS
     # the Aurora Replicas (read-only instances) in the DB cluster to be the
     # primary DB instance (the cluster writer).
     #
-    # For a Multi-AZ DB cluster, failover for a DB cluster promotes one of
-    # the readable standby DB instances (read-only instances) in the DB
-    # cluster to be the primary DB instance (the cluster writer).
+    # For a Multi-AZ DB cluster, after RDS terminates the primary DB
+    # instance, the internal monitoring system detects that the primary DB
+    # instance is unhealthy and promotes a readable standby (read-only
+    # instances) in the DB cluster to be the primary DB instance (the
+    # cluster writer). Failover times are typically less than 35 seconds.
     #
     # An Amazon Aurora DB cluster automatically fails over to an Aurora
     # Replica, if one exists, when the primary DB instance fails. A Multi-AZ
@@ -17163,6 +17485,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -18535,6 +18859,12 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
     #   Services Backup.
     #
+    # @option params [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -18673,6 +19003,7 @@ module Aws::RDS
     #     allow_engine_mode_change: false,
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
+    #     enable_limitless_database: false,
     #   })
     #
     # @example Response structure
@@ -18806,6 +19137,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -20988,6 +21321,55 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Modifies the settings of an Aurora Limitless Database DB shard group.
+    # You can change one or more settings by specifying these parameters and
+    # the new values in the request.
+    #
+    # @option params [required, String] :db_shard_group_identifier
+    #   The name of the DB shard group to modify.
+    #
+    # @option params [Float] :max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #
+    # @return [Types::DBShardGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBShardGroup#db_shard_group_resource_id #db_shard_group_resource_id} => String
+    #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
+    #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
+    #   * {Types::DBShardGroup#status #status} => String
+    #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_shard_group({
+    #     db_shard_group_identifier: "String", # required
+    #     max_acu: 1.0,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_shard_group_resource_id #=> String
+    #   resp.db_shard_group_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.max_acu #=> Float
+    #   resp.compute_redundancy #=> Integer
+    #   resp.status #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBShardGroup AWS API Documentation
+    #
+    # @overload modify_db_shard_group(params = {})
+    # @param [Hash] params ({})
+    def modify_db_shard_group(params = {}, options = {})
+      req = build_request(:modify_db_shard_group, params)
+      req.send_request(options)
+    end
+
     # Updates a manual DB snapshot with a new engine version. The snapshot
     # can be encrypted or unencrypted, but not shared or public.
     #
@@ -22320,6 +22702,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -22608,6 +22992,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -22860,6 +23246,53 @@ module Aws::RDS
     # @param [Hash] params ({})
     def reboot_db_instance(params = {}, options = {})
       req = build_request(:reboot_db_instance, params)
+      req.send_request(options)
+    end
+
+    # You might need to reboot your DB shard group, usually for maintenance
+    # reasons. For example, if you make certain modifications, reboot the DB
+    # shard group for the changes to take effect.
+    #
+    # This operation applies only to Aurora Limitless Database DBb shard
+    # groups.
+    #
+    # @option params [required, String] :db_shard_group_identifier
+    #   The name of the DB shard group to reboot.
+    #
+    # @return [Types::DBShardGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBShardGroup#db_shard_group_resource_id #db_shard_group_resource_id} => String
+    #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
+    #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
+    #   * {Types::DBShardGroup#status #status} => String
+    #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_db_shard_group({
+    #     db_shard_group_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_shard_group_resource_id #=> String
+    #   resp.db_shard_group_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.max_acu #=> Float
+    #   resp.compute_redundancy #=> Integer
+    #   resp.status #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBShardGroup AWS API Documentation
+    #
+    # @overload reboot_db_shard_group(params = {})
+    # @param [Hash] params ({})
+    def reboot_db_shard_group(params = {}, options = {})
+      req = build_request(:reboot_db_shard_group, params)
       req.send_request(options)
     end
 
@@ -24082,6 +24515,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -24794,6 +25229,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -25481,6 +25918,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -28289,6 +28728,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -29123,6 +29564,8 @@ module Aws::RDS
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
+    #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -29970,7 +30413,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.212.0'
+      context[:gem_version] = '1.213.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

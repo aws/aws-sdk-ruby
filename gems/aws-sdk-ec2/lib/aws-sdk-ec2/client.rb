@@ -5892,7 +5892,7 @@ module Aws::EC2
     #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnet.customer_owned_ipv_4_pool #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available"
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
     #   resp.subnet.owner_id #=> String
@@ -6140,7 +6140,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #
@@ -9398,7 +9398,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   Constraint: Maximum 64 ASCII characters.
@@ -9577,9 +9577,22 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
     #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
     # @return [Types::CreateNetworkAclResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkAclResult#network_acl #network_acl} => Types::NetworkAcl
+    #   * {Types::CreateNetworkAclResult#client_token #client_token} => String
     #
     #
     # @example Example: To create a network ACL
@@ -9635,6 +9648,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     #
     # @example Response structure
@@ -9661,6 +9675,7 @@ module Aws::EC2
     #   resp.network_acl.tags[0].value #=> String
     #   resp.network_acl.vpc_id #=> String
     #   resp.network_acl.owner_id #=> String
+    #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAcl AWS API Documentation
     #
@@ -11202,9 +11217,22 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
     #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
     # @return [Types::CreateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRouteTableResult#route_table #route_table} => Types::RouteTable
+    #   * {Types::CreateRouteTableResult#client_token #client_token} => String
     #
     #
     # @example Example: To create a route table
@@ -11252,6 +11280,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     #
     # @example Response structure
@@ -11289,6 +11318,7 @@ module Aws::EC2
     #   resp.route_table.tags[0].value #=> String
     #   resp.route_table.vpc_id #=> String
     #   resp.route_table.owner_id #=> String
+    #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTable AWS API Documentation
     #
@@ -12017,7 +12047,7 @@ module Aws::EC2
     #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnet.customer_owned_ipv_4_pool #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available"
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
     #   resp.subnet.owner_id #=> String
@@ -19901,7 +19931,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.availability_zones #=> Array
-    #   resp.availability_zones[0].state #=> String, one of "available", "information", "impaired", "unavailable"
+    #   resp.availability_zones[0].state #=> String, one of "available", "information", "impaired", "unavailable", "constrained"
     #   resp.availability_zones[0].opt_in_status #=> String, one of "opt-in-not-required", "opted-in", "not-opted-in"
     #   resp.availability_zones[0].messages #=> Array
     #   resp.availability_zones[0].messages[0].message #=> String
@@ -33701,7 +33731,7 @@ module Aws::EC2
     #   resp.subnets[0].map_public_ip_on_launch #=> Boolean
     #   resp.subnets[0].map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnets[0].customer_owned_ipv_4_pool #=> String
-    #   resp.subnets[0].state #=> String, one of "pending", "available"
+    #   resp.subnets[0].state #=> String, one of "pending", "available", "unavailable"
     #   resp.subnets[0].subnet_id #=> String
     #   resp.subnets[0].vpc_id #=> String
     #   resp.subnets[0].owner_id #=> String
@@ -58727,7 +58757,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.434.0'
+      context[:gem_version] = '1.435.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

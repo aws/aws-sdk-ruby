@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.435.0 (2024-01-24)
+------------------
+
+* Feature - Introduced a new clientToken request parameter on CreateNetworkAcl and CreateRouteTable APIs. The clientToken parameter allows idempotent operations on the APIs.
+
 1.434.0 (2024-01-22)
 ------------------
 

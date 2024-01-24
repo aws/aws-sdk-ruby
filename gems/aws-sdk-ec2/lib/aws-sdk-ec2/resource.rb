@@ -766,7 +766,7 @@ module Aws::EC2
     #   disassociate it.
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   Constraint: Maximum 64 ASCII characters.
@@ -842,6 +842,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -853,6 +854,14 @@ module Aws::EC2
     #   The ID of the VPC.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do
@@ -1111,6 +1120,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -1122,6 +1132,14 @@ module Aws::EC2
     #   The ID of the VPC.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do

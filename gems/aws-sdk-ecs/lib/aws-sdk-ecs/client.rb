@@ -1690,11 +1690,14 @@ module Aws::ECS
     # more information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
-    # You can create a maximum of 5 tasks sets for a deployment.
+    # For information about the maximum number of task sets and otther
+    # quotas, see [Amazon ECS service quotas][2] in the *Amazon Elastic
+    # Container Service Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
     #
     # @option params [required, String] :service
     #   The short name or full Amazon Resource Name (ARN) of the service to
@@ -8085,8 +8088,7 @@ module Aws::ECS
     #   An optional message specified when a task is stopped. For example, if
     #   you're using a custom scheduler, you can use this parameter to
     #   specify the reason for stopping the task here, and the message appears
-    #   in subsequent DescribeTasks API operations on this task. Up to 255
-    #   characters are allowed in this message.
+    #   in subsequent DescribeTasks API operations on this task.
     #
     # @return [Types::StopTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10165,7 +10167,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
