@@ -1,0 +1,17 @@
+{{generated_src_warning}}
+module Aws
+  module {{service_name}}
+    module Waiters
+      {{#waiters}}
+
+      class {{class_name}}
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: {{{waiter_overload_keyword_argument}}}
+                | {{{waiter_overload_positional_argument}}}
+      end
+      {{/waiters}}
+    end
+  end
+end

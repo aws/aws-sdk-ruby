@@ -10,10 +10,10 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.188.0"
+    MINIMUM_CORE_VERSION = "3.191.0"
 
     # Minimum `aws-sdk-core` version for new S3 gem builds
-    MINIMUM_CORE_VERSION_S3 = "3.189.0"
+    MINIMUM_CORE_VERSION_S3 = "3.191.0"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
@@ -79,7 +79,7 @@ module BuildTools
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || [],
-        deprecated: config['deprecated']
+        deprecated: config['deprecated'],
       )
     end
 
@@ -176,7 +176,6 @@ module BuildTools
       end
       false
     end
-
   end
 
   Services = ServiceEnumerator.new

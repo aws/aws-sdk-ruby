@@ -12,7 +12,7 @@ module Aws
     class ServiceError < RuntimeError
 
       # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
+      # @param [String, nil] message
       # @param [Aws::Structure] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         @code = self.class.code
@@ -34,7 +34,7 @@ module Aws
 
       class << self
 
-        # @return [String]
+        # @return [String, nil]
         attr_accessor :code
 
       end

@@ -1,0 +1,37 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+module {{module_name}}
+  module Types
+    {{#structures}}
+
+    {{> documentation}}
+    {{#empty?}}
+    class {{class_name}} < Aws::EmptyStructure
+    end
+    {{/empty?}}
+    {{^empty?}}
+    class {{class_name}}
+      {{#members}}
+      attr_accessor {{member_name}}: {{{returns}}}
+      {{/members}}
+      SENSITIVE: {{sensitive_params}}
+      {{#union?}}
+
+      {{#members}}
+      class {{member_class_name}} < {{class_name}}
+      end
+      {{/members}}
+      {{/union?}}
+    end
+    {{/empty?}}
+    {{/structures}}
+    {{#eventstreams}}
+
+    {{> documentation}}
+    class {{class_name}} < Enumerator[untyped, untyped]
+      def event_types: () -> {{#empty?}}[]{{/empty?}}{{^empty?}}[{{#types}}:{{member_name}}{{^last}}, {{/last}}{{/types}}]{{/empty?}}
+    end
+    {{/eventstreams}}
+  end
+end

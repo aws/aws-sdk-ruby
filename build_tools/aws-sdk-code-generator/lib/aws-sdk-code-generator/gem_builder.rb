@@ -36,6 +36,9 @@ module AwsSdkCodeGenerator
         code.spec_files.each do |path, code|
           y.yield("spec/#{path}", code)
         end
+        code.rbs_files.each do |path, code|
+          y.yield("sig/#{path}", code)
+        end
       end.each(&block)
     end
 

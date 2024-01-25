@@ -73,6 +73,7 @@ is only used in the `legacy` retry mode.
         :retry_jitter,
         default: :none,
         doc_type: Symbol,
+        rbs_type: '(:none | :equal | :full | ^(Integer) -> Integer)',
         docstring: <<-DOCS)
 A delay randomiser function used by the default backoff function.
 Some predefined functions can be referenced by name - :none, :equal, :full,
@@ -97,6 +98,7 @@ This option is only used in the `legacy` retry mode.
         :retry_mode,
         default: 'legacy',
         doc_type: String,
+        rbs_type: '("legacy" | "standard" | "adaptive")',
         docstring: <<-DOCS) do |cfg|
 Specifies which retry algorithm to use. Values are:
 

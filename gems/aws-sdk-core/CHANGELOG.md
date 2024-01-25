@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add RBS signature files to support static type checking.
+
 3.190.3 (2024-01-16)
 ------------------
 

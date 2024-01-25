@@ -17,7 +17,7 @@ module Aws
           expect(client.config.compute_checksums).to be(false)
         end
 
-        it 'retries invalid content MD5s' do
+        it 'retries invalid content MD5s', rbs_test: :skip do
           stub_request(
             :put,
             'https://test.s3.us-west-2.amazonaws.com/test'
