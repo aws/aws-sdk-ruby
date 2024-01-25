@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2024-01-25)
+------------------
+
+* Feature - This release adds support for IPv6-only instance plans.
+
 1.85.0 (2024-01-04)
 ------------------
 

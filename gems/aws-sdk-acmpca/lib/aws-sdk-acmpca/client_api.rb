@@ -51,6 +51,7 @@ module Aws::ACMPCA
     CreateCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'CreateCertificateAuthorityResponse')
     CreatePermissionRequest = Shapes::StructureShape.new(name: 'CreatePermissionRequest')
     CrlConfiguration = Shapes::StructureShape.new(name: 'CrlConfiguration')
+    CrlDistributionPointExtensionConfiguration = Shapes::StructureShape.new(name: 'CrlDistributionPointExtensionConfiguration')
     CsrBlob = Shapes::BlobShape.new(name: 'CsrBlob')
     CsrBody = Shapes::StringShape.new(name: 'CsrBody')
     CsrExtensions = Shapes::StructureShape.new(name: 'CsrExtensions')
@@ -258,7 +259,11 @@ module Aws::ACMPCA
     CrlConfiguration.add_member(:custom_cname, Shapes::ShapeRef.new(shape: CnameString, location_name: "CustomCname"))
     CrlConfiguration.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName3To255, location_name: "S3BucketName"))
     CrlConfiguration.add_member(:s3_object_acl, Shapes::ShapeRef.new(shape: S3ObjectAcl, location_name: "S3ObjectAcl"))
+    CrlConfiguration.add_member(:crl_distribution_point_extension_configuration, Shapes::ShapeRef.new(shape: CrlDistributionPointExtensionConfiguration, location_name: "CrlDistributionPointExtensionConfiguration"))
     CrlConfiguration.struct_class = Types::CrlConfiguration
+
+    CrlDistributionPointExtensionConfiguration.add_member(:omit_extension, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "OmitExtension", metadata: {"box"=>true}))
+    CrlDistributionPointExtensionConfiguration.struct_class = Types::CrlDistributionPointExtensionConfiguration
 
     CsrExtensions.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsage, location_name: "KeyUsage"))
     CsrExtensions.add_member(:subject_information_access, Shapes::ShapeRef.new(shape: AccessDescriptionList, location_name: "SubjectInformationAccess"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-01-25)
+------------------
+
+* Feature - AWS Private CA now supports an option to omit the CDP extension from issued certificates, when CRL revocation is enabled.
+
 1.63.0 (2023-11-28)
 ------------------
 

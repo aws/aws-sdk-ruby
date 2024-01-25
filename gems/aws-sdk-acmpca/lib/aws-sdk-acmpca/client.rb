@@ -622,6 +622,9 @@ module Aws::ACMPCA
     #         custom_cname: "CnameString",
     #         s3_bucket_name: "S3BucketName3To255",
     #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
+    #         crl_distribution_point_extension_configuration: {
+    #           omit_extension: false, # required
+    #         },
     #       },
     #       ocsp_configuration: {
     #         enabled: false, # required
@@ -1138,6 +1141,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.certificate_authority.revocation_configuration.crl_configuration.crl_distribution_point_extension_configuration.omit_extension #=> Boolean
     #   resp.certificate_authority.revocation_configuration.ocsp_configuration.enabled #=> Boolean
     #   resp.certificate_authority.revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authority.restorable_until #=> Time
@@ -1886,6 +1890,9 @@ module Aws::ACMPCA
     #   sent in the response. Use this `NextToken` value in a subsequent
     #   request to retrieve additional items.
     #
+    #   Although the maximum value is 1000, the action only returns a maximum
+    #   of 100 items.
+    #
     # @option params [String] :resource_owner
     #   Use this parameter to filter the returned set of certificate
     #   authorities based on their owner. The default is SELF.
@@ -1980,6 +1987,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.crl_distribution_point_extension_configuration.omit_extension #=> Boolean
     #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.enabled #=> Boolean
     #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authorities[0].restorable_until #=> Time
@@ -2555,6 +2563,9 @@ module Aws::ACMPCA
     #         custom_cname: "CnameString",
     #         s3_bucket_name: "S3BucketName3To255",
     #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
+    #         crl_distribution_point_extension_configuration: {
+    #           omit_extension: false, # required
+    #         },
     #       },
     #       ocsp_configuration: {
     #         enabled: false, # required
@@ -2586,7 +2597,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2656,7 +2667,7 @@ module Aws::ACMPCA
     # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
     # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
     # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
-    # | certificate_issued                | {Client#get_certificate}                             | 3        | 60            |
+    # | certificate_issued                | {Client#get_certificate}                             | 1        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -1368,6 +1368,11 @@ module Aws::Lightsail
     #   This parameter only applies to Lightsail for Research resources.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] public_ipv_4_address_count
+    #   An integer that indicates the public ipv4 address count included in
+    #   the bundle, the value is either 0 or 1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bundle AWS API Documentation
     #
     class Bundle < Struct.new(
@@ -1382,7 +1387,8 @@ module Aws::Lightsail
       :ram_size_in_gb,
       :transfer_per_month_in_gb,
       :supported_platforms,
-      :supported_app_categories)
+      :supported_app_categories,
+      :public_ipv_4_address_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9957,6 +9963,10 @@ module Aws::Lightsail
     #   The public IP address of the Amazon Lightsail instance.
     #   @return [String]
     #
+    # @!attribute [rw] ipv6_addresses
+    #   The IPv6 address of the Amazon Lightsail instance.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] password
     #   For RDP access, the password for your Amazon Lightsail instance.
     #   Password will be an empty string if the password for your new
@@ -10011,6 +10021,7 @@ module Aws::Lightsail
       :cert_key,
       :expires_at,
       :ip_address,
+      :ipv6_addresses,
       :password,
       :password_data,
       :private_key,

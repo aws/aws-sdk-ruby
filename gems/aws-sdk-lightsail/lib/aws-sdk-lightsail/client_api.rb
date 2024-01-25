@@ -898,6 +898,7 @@ module Aws::Lightsail
     Bundle.add_member(:transfer_per_month_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "transferPerMonthInGb"))
     Bundle.add_member(:supported_platforms, Shapes::ShapeRef.new(shape: InstancePlatformList, location_name: "supportedPlatforms"))
     Bundle.add_member(:supported_app_categories, Shapes::ShapeRef.new(shape: AppCategoryList, location_name: "supportedAppCategories"))
+    Bundle.add_member(:public_ipv_4_address_count, Shapes::ShapeRef.new(shape: integer, location_name: "publicIpv4AddressCount"))
     Bundle.struct_class = Types::Bundle
 
     BundleList.member = Shapes::ShapeRef.new(shape: Bundle)
@@ -2268,6 +2269,7 @@ module Aws::Lightsail
     InstanceAccessDetails.add_member(:cert_key, Shapes::ShapeRef.new(shape: string, location_name: "certKey"))
     InstanceAccessDetails.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     InstanceAccessDetails.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "ipAddress"))
+    InstanceAccessDetails.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
     InstanceAccessDetails.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
     InstanceAccessDetails.add_member(:password_data, Shapes::ShapeRef.new(shape: PasswordData, location_name: "passwordData"))
     InstanceAccessDetails.add_member(:private_key, Shapes::ShapeRef.new(shape: string, location_name: "privateKey"))
